@@ -1,6 +1,4 @@
-## Dobrodošli na Wiki stranicu projektnog zadatka Obračun plate
-###Softver Inžinjering 2014/2015, Tim 11
-
+## Repozitorij SI2014Tim11 - Tema: Obačun plata
 
 ### Članovi tima:
 
