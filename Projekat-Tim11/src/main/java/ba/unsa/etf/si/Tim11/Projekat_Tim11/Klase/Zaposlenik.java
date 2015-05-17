@@ -14,13 +14,21 @@ public class Zaposlenik extends Osoba implements Serializable{
 	 */
 	private static final long serialVersionUID = 9221881616260285723L;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "zaposlenik")
+	private List<Plata> plate;
+	
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "firma")
+	private Firma firma;
+	
 
+	public Firma getFirma() {
+		return firma;
+	}
 
-	
-	  @OneToMany(cascade = CascadeType.ALL, mappedBy = "zaposlenik")
-	  private List<Plata> plate;
-	
-	
+	public void setFirma(Firma firma) {
+		this.firma = firma;
+	}
 
 	public List<Plata> getPlate() {
 		 return this.plate;

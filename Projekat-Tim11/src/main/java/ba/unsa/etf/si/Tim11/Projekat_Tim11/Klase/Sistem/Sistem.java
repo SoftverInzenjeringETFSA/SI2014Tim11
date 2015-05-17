@@ -134,6 +134,159 @@ public final class Sistem {
 	}
 	
 	
+	public static class Operateri{
+		
+		public static Long dodaj(Operater o){
+			openSession();
+			
+			Long id= (Long) s.save(o);
+			t.commit();
+			
+			closeSession();
+			return id;	
+		}
+		
+		public static Operater nadji(int id){
+			openSession();
+			Operater o = (Operater) s.get(Operater.class,new Long(id));
+			t.commit();
+			
+			closeSession();
+			return o;
+		}
+		
+		public static void izbrisi(int id){
+			openSession();
+			Object instance = s.load(Operater.class, new Long(id));
+			if (instance != null)
+				s.delete(instance);
+			
+			t.commit();
+			closeSession();
+		}
+		
+		public static Operater izmijeni(Operater o){
+			openSession();
+			s.update(o);
+			t.commit();
+			closeSession();
+			long l=o.getId();
+			int id=(int) l;
+			return nadji(id);
+		}
+		
+		public static List<Operater> lista(){
+			openSession();
+			List<Operater> operateri=s.createCriteria(Operater.class).list();
+			t.commit();
+			return operateri;
+		}
+	}
+	
+	public static class Firme{
+		
+		public static Long dodaj(Firma o){
+			openSession();
+			
+			Long id= (Long) s.save(o);
+			t.commit();
+			
+			closeSession();
+			return id;	
+		}
+		
+		public static Firma nadji(int id){
+			openSession();
+			Firma o = (Firma) s.get(Firma.class,new Long(id));
+			t.commit();
+			
+			closeSession();
+			return o;
+		}
+		
+		public static void izbrisi(int id){
+			openSession();
+			Object instance = s.load(Firma.class, new Long(id));
+			if (instance != null)
+				s.delete(instance);
+			
+			t.commit();
+			closeSession();
+		}
+		
+		public static Firma izmijeni(Firma o){
+			openSession();
+			s.update(o);
+			t.commit();
+			closeSession();
+			long l=o.getId();
+			int id=(int) l;
+			return nadji(id);
+		}
+		
+		public static List<Firma> lista(){
+			openSession();
+			List<Firma> firme=s.createCriteria(Firma.class).list();
+			t.commit();
+			return firme;
+		}
+
+	}
+	
+	
+	public static class Admini{
+			
+		public static Long dodaj(Admin o){
+			openSession();
+			
+			Long id= (Long) s.save(o);
+			t.commit();
+			
+			closeSession();
+			return id;	
+		}
+			
+		public static Admin nadji(int id){
+		openSession();
+		Admin o = (Admin) s.get(Admin.class,new Long(id));
+		t.commit();
+			
+		closeSession();
+		return o;
+		}
+		
+		public static void izbrisi(int id){
+			openSession();
+			Object instance = s.load(Admin.class, new Long(id));
+			if (instance != null)
+				s.delete(instance);
+			
+			t.commit();
+			closeSession();
+		}
+		
+		public static Admin izmijeni(Admin o){
+			openSession();
+			s.update(o);
+			t.commit();
+			closeSession();
+			long l=o.getId();
+			int id=(int) l;
+			return nadji(id);
+		}
+		
+		public static List<Admin> lista(){
+			openSession();
+			List<Admin> admini=s.createCriteria(Admin.class).list();
+			t.commit();
+			return admini;
+		}
+
+	}
+	
 	
 
+	
 }
+	
+	

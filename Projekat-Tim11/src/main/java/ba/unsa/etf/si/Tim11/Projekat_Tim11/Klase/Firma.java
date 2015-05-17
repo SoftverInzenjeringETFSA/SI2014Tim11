@@ -1,15 +1,39 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Firma {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
+@Entity
+public class Firma implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8423658855400776683L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
 	private String ime;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "firma")
 	private List<Zaposlenik> zaposlenici;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "firma")
 	private List<Operater> operateri;
 	
-	public Firma(){}
+	public Firma(){
+		zaposlenici=new ArrayList<Zaposlenik>();
+		operateri=new ArrayList<Operater>();
+	}
 
 	public long getId() {
 		return id;

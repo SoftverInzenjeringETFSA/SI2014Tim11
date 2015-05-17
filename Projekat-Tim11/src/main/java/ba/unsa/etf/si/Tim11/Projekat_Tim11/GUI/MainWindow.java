@@ -51,11 +51,25 @@ public class MainWindow {
 	Zaposlenik _z;
 	Plata _p=new Plata();
 	private void initialize() {
+		final Operater _op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+		final Admin _ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+		
+		_op.setPassword("123");
+		_op.setUsername("user");	
 		_z=new Zaposlenik("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
-
-		_p.setOsnovica(100);
-		_p.setZaposlenik(_z);
-		_z.getPlate().add(_p);
+		final Plata p=new Plata();
+		p.setOsnovica(100);
+		p.setZaposlenik(_z);
+		_z.getPlate().add(p);
+		final Firma f=new Firma();
+		
+		_op.setFirma(f);
+		_z.setFirma(f);
+		
+		f.getZaposlenici().add(_z);
+		f.getOperateri().add(_op);
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,9 +82,8 @@ public class MainWindow {
 		final JButton btn_ime = new JButton("Prikaži ime");
 		btn_ime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(_z.getPlate().size());
-				Sistem.Zaposlenici.dodaj(_z);	
-				lbl_ime.setText("ID: "+_z.getId());
+				Long id=Sistem.Firme.dodaj(f);	
+				lbl_ime.setText("ID: "+id);
 				btn_ime.setVisible(false);
 			}
 		});

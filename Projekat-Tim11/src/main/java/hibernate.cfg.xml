@@ -11,6 +11,9 @@
   <property name="hibernate.hbm2ddl.auto">update</property>
   <mapping class="ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Osoba"/>
   <mapping class="ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Zaposlenik"/>
+  <mapping class="ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Operater"/>
   <mapping class="ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Plata"/>
+  <mapping class="ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Firma"/>
+  <mapping class="ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Admin"/>
  </session-factory>
 </hibernate-configuration>
