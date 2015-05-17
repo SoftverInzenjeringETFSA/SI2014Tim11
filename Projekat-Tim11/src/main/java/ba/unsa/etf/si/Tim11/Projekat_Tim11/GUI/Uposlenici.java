@@ -11,6 +11,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Uposlenici {
 
@@ -96,6 +98,11 @@ public class Uposlenici {
 		frame.getContentPane().add(btnBrisanje);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
+		btnIzlaz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
 		btnIzlaz.setBounds(355, 258, 124, 23);
 		frame.getContentPane().add(btnIzlaz);
 	}
