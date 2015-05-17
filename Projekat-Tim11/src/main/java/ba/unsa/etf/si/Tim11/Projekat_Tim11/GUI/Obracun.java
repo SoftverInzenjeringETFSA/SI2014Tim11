@@ -70,9 +70,8 @@ public class Obracun {
 		btnIzmjeneObracuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				JFrame frejm = new JFrame();
-				frejm.setBounds(100, 100, 450, 300);
-				frejm.setVisible(true);
+				IzmjenaObracuna io = new IzmjenaObracuna();
+				io.main(null);
 			}
 		});
 		btnIzmjeneObracuna.setBounds(119, 213, 148, 23);

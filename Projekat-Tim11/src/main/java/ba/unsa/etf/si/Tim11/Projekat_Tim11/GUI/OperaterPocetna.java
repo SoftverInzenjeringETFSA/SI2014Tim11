@@ -8,6 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class OperaterPocetna {
 
@@ -62,23 +64,24 @@ public class OperaterPocetna {
 		frame.getContentPane().add(btnMojRacun);
 		
 		JButton btnObracun = new JButton("Obračun");
-		btnObracun.setActionCommand("Open");
 		btnObracun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String cmd = e.getActionCommand();
-		        if(cmd.equals("Open"))
-		        {
-		            frame.dispose();
-		            JFrame frejm = new JFrame();
-		            frejm.setBounds(100, 100, 450, 300);
-		            frejm.setVisible(true);
-		        }
+				frame.dispose();
+				Obracun o = new Obracun();
+				o.main(null);
 			}
 		});
 		btnObracun.setBounds(263, 57, 113, 23);
 		frame.getContentPane().add(btnObracun);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
+		btnIzvjestaji.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				Izvjestaji i = new Izvjestaji();
+				i.main(null);
+			}
+		});
 		btnIzvjestaji.setBounds(263, 94, 113, 23);
 		frame.getContentPane().add(btnIzvjestaji);
 		
@@ -94,5 +97,6 @@ public class OperaterPocetna {
 		});
 		btnIzlaz.setBounds(263, 212, 113, 23);
 		frame.getContentPane().add(btnIzlaz);
+		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnMojRacun, btnObracun, btnIzvjestaji, btnKorisnickiRacuni, btnIzlaz, frame.getContentPane(), lblDobrodosli, lblSlika}));
 	}
 }
