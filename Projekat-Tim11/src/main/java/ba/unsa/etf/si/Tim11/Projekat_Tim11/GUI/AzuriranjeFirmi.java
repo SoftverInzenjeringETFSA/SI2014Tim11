@@ -9,13 +9,19 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
 public class AzuriranjeFirmi {
 
 	private JFrame frame;
+
 	private JTextField textUnosID;
+	private JTable table;
+
 
 	/**
 	 * Launch the application.
@@ -86,23 +92,21 @@ public class AzuriranjeFirmi {
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.setBounds(298, 179, 126, 20);
 		frame.getContentPane().add(btnIzlaz);
+		
+	
+		
 
-
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Naziv", "Vrsta", "Sjedište"
+			}
+		));
+		table.setBounds(10, 194, 452, -182);
+	
+		
 		
 	}
-	
-	/*private Image ScaledImage(String string, int w, int h){
-	BufferedImage resizedImage=new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
-	Graphics2D g2=resizedImage.createGraphics();
-	g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-	g2.drawImage(string,0,0,w,h,null);	
-	g2.dispose();
-	return resizedImage;
-	}*/
-	
-
-
-	
-	
-	
 }
