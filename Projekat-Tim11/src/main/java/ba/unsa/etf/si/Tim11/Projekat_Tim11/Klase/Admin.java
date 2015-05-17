@@ -1,6 +1,6 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
-public class Admin extends Osoba {
+public class Admin extends Osoba implements Account {
 	
 	public String getUsername() {
 		return username;
@@ -22,5 +22,9 @@ public class Admin extends Osoba {
 	String password;
 	
 	public Admin(){}
+	
+	public boolean ispravanPassword(String pass){
+		return this.password==pass;
+	}
 
 }

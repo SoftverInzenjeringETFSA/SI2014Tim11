@@ -1,9 +1,20 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Plata  {
+import javax.persistence.*;
+
+@Entity
+public class Plata implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2627822191389243415L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private Date datum;
 	private double dnevniTopliObrok;
@@ -16,8 +27,22 @@ public class Plata  {
 	private int godineStaza;
 	private int godisnjiOdmor;
 	
+
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "zaposlenik")
+	private Zaposlenik zaposlenik;
 	
 	public Plata(){}
+
+
+	public Zaposlenik getZaposlenik() {
+		return zaposlenik;
+	}
+
+
+	public void setZaposlenik(Zaposlenik zaposlenik) {
+		this.zaposlenik = zaposlenik;
+	}
 
 
 	public long getId() {

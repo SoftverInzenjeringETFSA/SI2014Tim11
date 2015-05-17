@@ -4,9 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import java.util.*;
+
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Util.*;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -42,8 +48,14 @@ public class MainWindow {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	Zaposlenik _z;
+	Plata _p=new Plata();
 	private void initialize() {
-		_o=new Osoba("John","Doe");
+		_z=new Zaposlenik("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+
+		_p.setOsnovica(100);
+		_p.setZaposlenik(_z);
+		_z.getPlate().add(_p);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,7 +68,9 @@ public class MainWindow {
 		final JButton btn_ime = new JButton("Prikaži ime");
 		btn_ime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lbl_ime.setText(lbl_ime.getText() + _o.getIme() + " " + _o.getPrezime());
+				System.out.println(_z.getPlate().size());
+				Sistem.Zaposlenici.dodaj(_z);	
+				lbl_ime.setText("ID: "+_z.getId());
 				btn_ime.setVisible(false);
 			}
 		});

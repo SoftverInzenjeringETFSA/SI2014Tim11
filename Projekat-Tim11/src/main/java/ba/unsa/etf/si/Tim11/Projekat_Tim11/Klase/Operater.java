@@ -1,6 +1,6 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
-public class Operater extends Osoba{
+public class Operater extends Osoba implements Account{
 	
 	private String username;
 	private String password;
@@ -30,6 +30,10 @@ public class Operater extends Osoba{
 
 	public void setPrivilegije(String privilegije) {
 		this.privilegije = privilegije;
+	}
+	
+	public boolean ispravanPassword(String pass){
+		return this.password==pass;
 	}
 
 }

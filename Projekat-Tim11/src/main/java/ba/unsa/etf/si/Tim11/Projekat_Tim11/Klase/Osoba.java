@@ -1,10 +1,22 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Osoba {
+import javax.persistence.*;
 
-	private long id;
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED) 
+public class Osoba implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4217982052106559220L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String ime;
 	private String prezime;
 	private String jmbg;
@@ -15,6 +27,18 @@ public class Osoba {
 	
 	public Osoba(){	}
 	
+	public Osoba(String ime, String prezime, String jmbg,
+			String adresa, String telefon, Date datumZaposlenja, String pozicija) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+		this.jmbg = jmbg;
+		this.adresa = adresa;
+		this.telefon = telefon;
+		this.datumZaposlenja = datumZaposlenja;
+		this.pozicija = pozicija;
+	}
+
 	public Osoba(String ime, String prezime){
 		this.ime=ime;
 		this.prezime=prezime;
@@ -36,11 +60,11 @@ public class Osoba {
 		this.prezime=prezime;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
