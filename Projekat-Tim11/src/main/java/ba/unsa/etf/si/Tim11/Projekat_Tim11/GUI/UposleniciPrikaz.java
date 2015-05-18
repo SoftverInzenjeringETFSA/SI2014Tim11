@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class UposleniciPrikazPodataka {
+public class UposleniciPrikaz {
 
 	private JFrame frame;
 	private JTextField txtID;
@@ -27,7 +27,7 @@ public class UposleniciPrikazPodataka {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UposleniciPrikazPodataka window = new UposleniciPrikazPodataka();
+					UposleniciPrikaz window = new UposleniciPrikaz();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class UposleniciPrikazPodataka {
 	/**
 	 * Create the application.
 	 */
-	public UposleniciPrikazPodataka() {
+	public UposleniciPrikaz() {
 		initialize();
 	}
 
