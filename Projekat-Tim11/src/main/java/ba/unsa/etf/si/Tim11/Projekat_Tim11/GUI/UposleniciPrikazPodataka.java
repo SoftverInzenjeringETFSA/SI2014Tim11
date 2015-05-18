@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class PrikazFirmi {
+public class UposleniciPrikazPodataka {
 
 	private JFrame frame;
 	private JTextField txtID;
@@ -27,7 +27,7 @@ public class PrikazFirmi {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PrikazFirmi window = new PrikazFirmi();
+					UposleniciPrikazPodataka window = new UposleniciPrikazPodataka();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class PrikazFirmi {
 	/**
 	 * Create the application.
 	 */
-	public PrikazFirmi() {
+	public UposleniciPrikazPodataka() {
 		initialize();
 	}
 
@@ -49,7 +49,7 @@ public class PrikazFirmi {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 505, 330);
-		frame.setTitle("PrikazFirmi");
+		frame.setTitle("Uposlenici");
 		ImageIcon img = new ImageIcon("icons/staff_icon.png");
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

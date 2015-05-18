@@ -15,6 +15,7 @@ public class RadnjeOperateri {
 	private JFrame frame;
 	private JTextField textField;
 	private JTable table;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -89,8 +90,10 @@ public class RadnjeOperateri {
 		frame.getContentPane().add(lblSlika);
 		lblSlika.setIcon(new ImageIcon("icons/search.png"));
 		
-		table = new JTable();
-		table.setBounds(128, 184, 101, -84);
-		frame.getContentPane().add(table);
+		table_1 = new JTable();
+		table_1.setBounds(201, 106, -157, 120);
+		frame.getContentPane().add(table_1);
+		
+	
 	}
 }
