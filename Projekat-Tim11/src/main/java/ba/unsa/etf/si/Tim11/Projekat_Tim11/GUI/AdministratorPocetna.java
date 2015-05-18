@@ -63,7 +63,7 @@ public class AdministratorPocetna {
 		
 		JButton btnAuriranjeFirmi = new JButton("Ažuriranje firmi");
 		btnAuriranjeFirmi.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnAuriranjeFirmi.setBounds(252, 51, 154, 33);
+		btnAuriranjeFirmi.setBounds(252, 63, 154, 33);
 
 		frame.getContentPane().add(btnAuriranjeFirmi);
 		
@@ -74,7 +74,7 @@ public class AdministratorPocetna {
 		
 		JButton btnRaspodjelaOperatera = new JButton("Raspodjela operatera");
 		btnRaspodjelaOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnRaspodjelaOperatera.setBounds(252, 95, 154, 33);
+		btnRaspodjelaOperatera.setBounds(252, 107, 154, 33);
 		frame.getContentPane().add(btnRaspodjelaOperatera);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
