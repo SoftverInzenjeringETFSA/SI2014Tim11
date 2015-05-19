@@ -66,11 +66,11 @@ public class AzuriranjeFirmi {
 		
 		JLabel lblSlika = new JLabel("");
 		lblSlika.setBounds(129, 11, 60, 30);
-		//ImageIcon img = new ImageIcon("icons/search.png");
+		//ImageIcon img = new ImageIcon("icons/search161616.png");
 		
 		frame.getContentPane().add(lblSlika);
 		//frame.setIconImage(img.getImage());
-		lblSlika.setIcon(new ImageIcon("icons/search.png"));
+		lblSlika.setIcon(new ImageIcon("icons/search16.png"));
 		
 		
 

@@ -72,7 +72,7 @@ public class OperateriRaspodjela {
 		JLabel lblSlika = new JLabel("");
 		lblSlika.setBounds(224, 39, 46, 38);
 		frame.getContentPane().add(lblSlika);
-		lblSlika.setIcon(new ImageIcon("icons/search.png"));
+		lblSlika.setIcon(new ImageIcon("icons/search16.png"));
 		
 		
 		
