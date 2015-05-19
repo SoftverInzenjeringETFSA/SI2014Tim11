@@ -5,12 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -86,14 +88,39 @@ public class UposleniciPrikaz {
 		frame.getContentPane().add(tableUposlenici);
 		
 		JButton btnDodavanje = new JButton("Dodavanje");
+		btnDodavanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				PodaciUposlenika pu = new PodaciUposlenika();
+				pu.main(null);
+			}
+		});
 		btnDodavanje.setBounds(355, 126, 124, 23);
 		frame.getContentPane().add(btnDodavanje);
 		
 		JButton btnAzuriranje = new JButton("Ažuriranje");
+		btnAzuriranje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				PodaciUposlenika pu = new PodaciUposlenika();
+				pu.main(null);
+			}
+		});
 		btnAzuriranje.setBounds(355, 160, 124, 23);
 		frame.getContentPane().add(btnAzuriranje);
 		
 		JButton btnBrisanje = new JButton("Brisanje");
+		btnBrisanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
+				if(dialogResult == JOptionPane.YES_OPTION) {
+					
+				}
+				if(dialogResult == JOptionPane.NO_OPTION) {
+					
+				}
+			}
+		});
 		btnBrisanje.setBounds(355, 194, 124, 23);
 		frame.getContentPane().add(btnBrisanje);
 		
