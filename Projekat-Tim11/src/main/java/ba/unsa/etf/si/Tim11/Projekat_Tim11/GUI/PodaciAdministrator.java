@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Font;
 
 public class PodaciAdministrator {
 
@@ -60,6 +61,7 @@ public class PodaciAdministrator {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblIme = new JLabel("Ime:");
+		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblIme.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblIme.setBounds(10, 33, 78, 14);
 		frame.getContentPane().add(lblIme);
@@ -67,12 +69,14 @@ public class PodaciAdministrator {
 		
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
+		lblPrezime.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblPrezime.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPrezime.setBounds(0, 58, 88, 14);
 		frame.getContentPane().add(lblPrezime);
 		
 		
 		JLabel lblJmbg = new JLabel("JMBG:");
+		lblJmbg.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblJmbg.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblJmbg.setBounds(10, 83, 78, 14);
 		frame.getContentPane().add(lblJmbg);
@@ -80,6 +84,7 @@ public class PodaciAdministrator {
 		
 		
 		JLabel lblAdresa = new JLabel("Adresa:");
+		lblAdresa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblAdresa.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblAdresa.setBounds(10, 108, 78, 14);
 		frame.getContentPane().add(lblAdresa);
@@ -87,12 +92,14 @@ public class PodaciAdministrator {
 		
 		
 		JLabel lblPozicija = new JLabel("Pozicija u firmi:");
+		lblPozicija.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblPozicija.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPozicija.setBounds(-22, 158, 114, 14);
 		frame.getContentPane().add(lblPozicija);
 		
 		
 		JLabel lblZaposlen = new JLabel("Zaposlen:");
+		lblZaposlen.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblZaposlen.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblZaposlen.setBounds(10, 183, 78, 14);
 		frame.getContentPane().add(lblZaposlen);
@@ -117,6 +124,7 @@ public class PodaciAdministrator {
 		frame.getContentPane().add(btnIzlaz);
 		
 		JLabel lblKontaktTelefon = new JLabel("Kontakt telefon:");
+		lblKontaktTelefon.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblKontaktTelefon.setBounds(10, 133, 78, 14);
 		frame.getContentPane().add(lblKontaktTelefon);
 		
