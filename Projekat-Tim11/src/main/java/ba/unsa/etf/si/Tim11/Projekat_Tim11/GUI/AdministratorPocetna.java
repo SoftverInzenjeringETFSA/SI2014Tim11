@@ -6,12 +6,28 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.UIManager;
+
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Zaposlenik;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem.Zaposlenici;
+
+
+
+
 
 public class AdministratorPocetna {
 
 	private JFrame frame;
+
+	private static int _id;
+	
+	public String Username;
 
 	/**
 	 * Launch the application.
@@ -20,7 +36,7 @@ public class AdministratorPocetna {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdministratorPocetna window = new AdministratorPocetna();
+					AdministratorPocetna window = new AdministratorPocetna(_id);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,19 +51,32 @@ public class AdministratorPocetna {
 	public AdministratorPocetna() {
 		initialize();
 	}
+	
+	public AdministratorPocetna(int id) {
+		initialize();
+		_id = id;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setTitle("Početna");
 		ImageIcon img = new ImageIcon("icons/login_icon.png");
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         Zaposlenik z=Zaposlenici.nadji(_id);
+         String username=z.getIme();
+ 
 		
-		JLabel lblDobrodoliIme = new JLabel("Dobrodošli, ime");
+	
+
+		
+		JLabel lblDobrodoliIme = new JLabel("Dobrodošli,"+ username);
 		lblDobrodoliIme.setBounds(48, 26, 97, 14);
 		frame.getContentPane().add(lblDobrodoliIme);
 		
@@ -57,6 +86,16 @@ public class AdministratorPocetna {
 		lblSlika.setIcon(new ImageIcon("icons/user_icon.png"));
 		
 		JButton btnMojRaun = new JButton("Moj račun");
+		
+		btnMojRaun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				PodaciAdministrator o = new PodaciAdministrator();
+				o.main(null);
+			}
+		});
+		
+		
 		btnMojRaun.setFont(UIManager.getFont("Button.font"));
 		btnMojRaun.setBounds(35, 214, 137, 23);
 		frame.getContentPane().add(btnMojRaun);
