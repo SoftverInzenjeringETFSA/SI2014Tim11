@@ -2,6 +2,7 @@ package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -39,7 +40,7 @@ public class Firma implements Serializable {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(long id) { // ovo bi trebalo izbrisati? posto u bazi imamo auto increment za id, a i radi konflikta
 		this.id = id;
 	}
 
@@ -47,7 +48,11 @@ public class Firma implements Serializable {
 		return ime;
 	}
 
-	public void setIme(String ime) {
+	public void setIme(String ime) throws Exception {
+		 Pattern pattern = Pattern.compile("[a-zA-Z0-9\\s\\.]{3,}"); //mogu se unijeti mala, velika slova, brojevi, i tacka
+		    if (!pattern.matcher(ime).matches()) 
+		    	throw new Exception("Ime mora imati najmanje 3 karaktera(dozvoljena velika, mala slova brojevi tacka i razmak)");
+		
 		this.ime = ime;
 	}
 
@@ -68,27 +73,59 @@ public class Firma implements Serializable {
 	}
 	
 	public void dodajZaposlenika(Zaposlenik z){
-		
+		zaposlenici.add(z);
 	}
 	
-	public Zaposlenik nadjiZaposlenika(long id){
-		throw new UnsupportedOperationException(); 
+	public Zaposlenik nadjiZaposlenika(long id) throws Exception{
+		
+		for(Zaposlenik z: zaposlenici)
+		{
+			if(z.getId()==id)
+				return z;
+		}
+		throw new Exception("Ne postoji zaposlenik sa ID-em: "+id); 
 	}
 	
 	public Boolean izbrisiZaposlenika(long id){
-		throw new UnsupportedOperationException();
+		
+		for(Zaposlenik z: zaposlenici)
+		{
+			if(z.getId()==id)
+			{
+				zaposlenici.remove(z);
+				return true;
+			}
+				
+		}
+		return false;
 	}
 	
 	public void dodajOperatera(Operater o){
 		
+		operateri.add(o);
 	}
 	
-	public Operater nadjiOperatera(long id){
-		throw new UnsupportedOperationException(); 
+	public Operater nadjiOperatera(long id) throws Exception{
+		for(Operater o: operateri)
+		{
+			if(o.getId()==id)
+				return o;
+		}
+		throw new Exception("Ne postoji operater sa ID-em: "+id); 
+		
 	}
 	
 	public Boolean izbrisiOperatera(long id){
-		throw new UnsupportedOperationException();
+		for(Operater o: operateri)
+		{
+			if(o.getId()==id)
+			{
+				zaposlenici.remove(o);
+				return true;
+			}
+				
+		}
+		return false;
 	}
 	
 	
