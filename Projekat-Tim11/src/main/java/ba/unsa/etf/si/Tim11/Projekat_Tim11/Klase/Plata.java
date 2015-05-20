@@ -104,7 +104,7 @@ public class Plata implements Serializable  {
 
 
 	public void setSatnica(double satnica) throws Exception{
-		if(satnica<0) throw new Exception("satnica ne moze biti manja od 0")
+		if(satnica<0) throw new Exception("satnica ne moze biti manja od 0");
 		this.satnica = satnica;
 	}
 
@@ -126,7 +126,7 @@ public class Plata implements Serializable  {
 	}
 
 
-	public void setBolovanje(int bolovanje) {
+	public void setBolovanje(int bolovanje)throws Exception {
 		if(bolovanje<0 || bolovanje>31) throw new Exception("Bolovanje moze biti izmedju 0 i 31 dana");
 
 		this.bolovanje = bolovanje;

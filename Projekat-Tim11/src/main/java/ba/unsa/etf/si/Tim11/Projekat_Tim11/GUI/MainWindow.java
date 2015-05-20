@@ -65,9 +65,16 @@ public class MainWindow {
 		
 		_z=new Zaposlenik("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
 		final Plata p=new Plata();
+		try{
 		p.setOsnovica(100);
 		p.setZaposlenik(_z);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
 		_z.getPlate().add(p);
+		
 		final Firma f=new Firma();
 		
 		_op.setFirma(f);
