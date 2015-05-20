@@ -54,13 +54,27 @@ public class MainWindow {
 		final Operater _op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
 		final Admin _ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
 		
-		_op.setPassword("123");
-		_op.setUsername("user");	
+		try {
+			
+				_op.setPassword("1234");
+				_op.setUsername("user");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+		    System.out.println(e1);
+		}
+		
 		_z=new Zaposlenik("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
 		final Plata p=new Plata();
+		try{
 		p.setOsnovica(100);
 		p.setZaposlenik(_z);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
 		_z.getPlate().add(p);
+		
 		final Firma f=new Firma();
 		
 		_op.setFirma(f);

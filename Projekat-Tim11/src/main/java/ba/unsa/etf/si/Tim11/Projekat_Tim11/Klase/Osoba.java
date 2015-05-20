@@ -2,6 +2,7 @@ package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import javax.persistence.*;
 
@@ -30,6 +31,7 @@ public class Osoba implements Serializable {
 	public Osoba(String ime, String prezime, String jmbg,
 			String adresa, String telefon, Date datumZaposlenja, String pozicija) {
 		super();
+		//mozda bi ovdje trebalo pozivati setere za svaku kako bi podaci ostali validni
 		this.ime = ime;
 		this.prezime = prezime;
 		this.jmbg = jmbg;
@@ -39,7 +41,11 @@ public class Osoba implements Serializable {
 		this.pozicija = pozicija;
 	}
 
-	public Osoba(String ime, String prezime){
+	public Osoba(String ime, String prezime)throws Exception{
+		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+	    if (!pattern.matcher(ime).matches() || !pattern.matcher(prezime).matches()) {
+	        throw new Exception("Ime i prezime moraju imati minimalno po 3 karaktera(samo velika ili mala slova)");
+	    }
 		this.ime=ime;
 		this.prezime=prezime;
 	}
@@ -48,7 +54,11 @@ public class Osoba implements Serializable {
 		return ime;
 	}
 	
-	public void setIme(String ime){
+	public void setIme(String ime) throws Exception{
+		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+	    if (!pattern.matcher(ime).matches() || !pattern.matcher(prezime).matches()) {
+	        throw new Exception("Ime mora imati minimalno po 3 karaktera(samo velika ili mala slova)");
+	    }
 		this.ime=ime;
 	}
 	
@@ -56,7 +66,11 @@ public class Osoba implements Serializable {
 		return prezime;
 	}
 	
-	public void setPrezime(String prezime){
+	public void setPrezime(String prezime) throws Exception{
+		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+	    if (!pattern.matcher(prezime).matches()) {
+	        throw new Exception("Ime mora imati minimalno po 3 karaktera(samo velika ili mala slova)");
+	    }
 		this.prezime=prezime;
 	}
 
@@ -64,7 +78,7 @@ public class Osoba implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id) { //brisemo i ovo? (kao i u ostalim klasama zbog auto incrementa)
 		this.id = id;
 	}
 
@@ -72,15 +86,24 @@ public class Osoba implements Serializable {
 		return jmbg;
 	}
 
-	public void setJmbg(String jmbg) {
+	public void setJmbg(String jmbg) throws Exception{
+		Pattern pattern = Pattern.compile("[0-9]{13}"); //jmbg mora imati 13 brojeva
+	    if (!pattern.matcher(jmbg).matches()) {
+	        throw new Exception("Jmbg mora imati tacno 13 brojeva");
+	    }
 		this.jmbg = jmbg;
 	}
 
 	public String getAdresa() {
+		
 		return adresa;
 	}
 
-	public void setAdresa(String adresa) {
+	public void setAdresa(String adresa)throws Exception {
+		Pattern pattern = Pattern.compile("[a-zA-Z0-9\\,\\s]{5,}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez i razmake)
+	    if (!pattern.matcher(adresa).matches()) {
+	        throw new Exception("Adresa mora imati minimalno 5 karaktera, bez specijalnih znakova osim zareza i razmaka");
+	    }
 		this.adresa = adresa;
 	}
 
@@ -88,7 +111,11 @@ public class Osoba implements Serializable {
 		return telefon;
 	}
 
-	public void setTelefon(String telefon) {
+	public void setTelefon(String telefon) throws Exception{
+		Pattern pattern = Pattern.compile("(\\+|00)?387\\d{2}\\-?\\d{3,4}-?\\d{3,4}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez i razmake)
+	    if (!pattern.matcher(adresa).matches()) {
+	        throw new Exception("format telefona je: na prvom mjestu dvije nule ili plus(ili nijedno), slijedi 387, pozivni(dvije cifre), slijede dvije grupe po 3 ili 4 broja npr(38762224-555) ");
+	    }
 		this.telefon = telefon;
 	}
 
@@ -105,6 +132,7 @@ public class Osoba implements Serializable {
 	}
 
 	public void setPozicija(String pozicija) {
+		//
 		this.pozicija = pozicija;
 	}
 }

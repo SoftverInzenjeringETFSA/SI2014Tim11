@@ -2,6 +2,7 @@ package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import javax.persistence.*;
 
@@ -37,12 +38,21 @@ public class Operater extends Osoba implements Account,Serializable{
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(String username) throws Exception{
+		 Pattern pattern = Pattern.compile("[a-zA-Z0-9_\\.]{3,}"); //mogu se unijeti velika,mala slova,brojevi,tacka i donja crta(minimalno 3 karaktera)
+		    if (!pattern.matcher(username).matches()) {
+		        throw new Exception("Username mora imati minimalno 3 karaktera(velika i mala slova,brojevi, znakovi(,_)(minimalno tri karaktera)");
+		    }
 		this.username = username;
 	}
 
 
-	public void setPassword(String password) {
+	public void setPassword(String password) throws Exception{
+		
+		Pattern pattern = Pattern.compile("[a-zA-Z0-9]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+	    if (!pattern.matcher(password).matches()) {
+	        throw new Exception("Password mora imati minimalno 3 karaktera(velika i mala slova i brojevi(minimalno 3 karaktera)");
+	    }
 		this.password = password;
 	}
 
@@ -51,11 +61,18 @@ public class Operater extends Osoba implements Account,Serializable{
 	}
 
 	public void setPrivilegije(String privilegije) {
+		
+		//trebamo se dogovoriti nazive za privilegije, npr. obracuni, izvjestaji
+		/*Pattern pattern = Pattern.compile("obračuni|zaposlenici|izvještaji"); //npr moguce privilegije,tj podjela sta moze koji operater radit
+	    if (!pattern.matcher(username).matches()) {
+	        throw new Exception("Password mora imati minimalno 3 karaktera(velika i mala slova i brojevi(minimalno 3 karaktera)");
+	    }*/
+		
 		this.privilegije = privilegije;
 	}
 	
 	public boolean ispravanPassword(String pass){
-		return this.password==pass;
+		return this.password.equals(pass);
 	}
 	
 	
