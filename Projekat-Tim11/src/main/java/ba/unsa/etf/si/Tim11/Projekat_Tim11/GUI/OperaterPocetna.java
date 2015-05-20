@@ -14,6 +14,7 @@ import java.awt.Component;
 public class OperaterPocetna {
 
 	private JFrame frame;
+	private static String _username;
 
 	/**
 	 * Launch the application.
@@ -22,7 +23,7 @@ public class OperaterPocetna {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OperaterPocetna window = new OperaterPocetna();
+					OperaterPocetna window = new OperaterPocetna(_username);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,6 +37,11 @@ public class OperaterPocetna {
 	 */
 	public OperaterPocetna() {
 		initialize();
+	}
+	
+	public OperaterPocetna(String username) {
+		initialize();
+		_username = username;
 	}
 
 	/**
@@ -52,6 +58,7 @@ public class OperaterPocetna {
 		
 		JLabel lblDobrodosli = new JLabel("Dobrodošli,  ");
 		lblDobrodosli.setBounds(48, 11, 200, 35);
+		lblDobrodosli.setText("Dobrodošli, " + _username);
 		frame.getContentPane().add(lblDobrodosli);
 		
 		JLabel lblSlika = new JLabel("");

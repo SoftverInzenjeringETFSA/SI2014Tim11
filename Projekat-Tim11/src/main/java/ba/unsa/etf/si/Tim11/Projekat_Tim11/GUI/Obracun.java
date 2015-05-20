@@ -1,5 +1,8 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.GUI;
 
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
+import java.util.*;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
@@ -10,10 +13,12 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class Obracun {
 
 	private JFrame frame;
+	private List<Zaposlenik> _zaposlenici;
 	private JTable table;
 
 	/**
@@ -50,23 +55,14 @@ public class Obracun {
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		_zaposlenici = Sistem.Zaposlenici.lista();
 		
 		JLabel lblUposlenici = new JLabel("Uposlenici");
 		lblUposlenici.setBounds(10, 11, 200, 50);
 		frame.getContentPane().add(lblUposlenici);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "Ime", "Prezime", "Odjel"
-			}
-		));
-		table.setBounds(10, 192, 414, -143);
-		frame.getContentPane().add(table);
-		
 		JButton btnIzmjeneObracuna = new JButton("Izmjene obračuna");
+		btnIzmjeneObracuna.setBounds(119, 213, 148, 23);
 		btnIzmjeneObracuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -74,16 +70,22 @@ public class Obracun {
 				io.main(null);
 			}
 		});
-		btnIzmjeneObracuna.setBounds(119, 213, 148, 23);
 		frame.getContentPane().add(btnIzmjeneObracuna);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
+		btnIzlaz.setBounds(276, 213, 148, 23);
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 			}
 		});
-		btnIzlaz.setBounds(276, 213, 148, 23);
 		frame.getContentPane().add(btnIzlaz);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 50, 414, 152);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 	}
 }
