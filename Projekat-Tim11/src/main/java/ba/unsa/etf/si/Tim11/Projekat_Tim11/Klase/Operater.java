@@ -72,7 +72,7 @@ public class Operater extends Osoba implements Account,Serializable{
 	}
 	
 	public boolean ispravanPassword(String pass){
-		return this.password==pass;
+		return this.password.equals(pass);
 	}
 	
 	

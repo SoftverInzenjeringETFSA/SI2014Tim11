@@ -87,5 +87,19 @@ public class Obracun {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		String[] kolone = {"ID",
+		        "Ime",
+		        "Prezime",
+		        "Odjel"};
+
+		DefaultTableModel model = new DefaultTableModel();
+		for (Zaposlenik z : _zaposlenici) {
+			  Object[] o = new Object[4];
+			  o[0] = z.getId();
+			  o[1] = z.getIme();
+			  o[2] = z.getPrezime();
+			  o[3] = z.getPozicija();
+			  model.addRow(o);
+		}
 	}
 }

@@ -6,15 +6,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
+
 import java.awt.Component;
 
 public class OperaterPocetna {
 
 	private JFrame frame;
-	private static String _username;
+	private static Long _id;
 
 	/**
 	 * Launch the application.
@@ -23,7 +28,7 @@ public class OperaterPocetna {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OperaterPocetna window = new OperaterPocetna(_username);
+					OperaterPocetna window = new OperaterPocetna(_id);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,9 +44,9 @@ public class OperaterPocetna {
 		initialize();
 	}
 	
-	public OperaterPocetna(String username) {
+	public OperaterPocetna(Long id) {
 		initialize();
-		_username = username;
+		_id = id;
 	}
 
 	/**
@@ -55,6 +60,7 @@ public class OperaterPocetna {
 		ImageIcon img = new ImageIcon("icons/login_icon.png");
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
+		String username = Sistem.Operateri.nadji(_id);
 		
 		JLabel lblDobrodosli = new JLabel("Dobrodošli,  ");
 		lblDobrodosli.setBounds(48, 11, 200, 35);
