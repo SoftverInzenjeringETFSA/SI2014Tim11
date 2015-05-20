@@ -47,15 +47,17 @@ public class Login {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public Login() {
+	public Login() throws Exception {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize() {
+	private void initialize() throws Exception {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,6 +67,9 @@ public class Login {
 		frame.getContentPane().setLayout(null);
 		_operateri = Sistem.Operateri.lista();
 		_administratori = Sistem.Admini.lista();
+		
+	
+		
 		
 		JLabel lblKorisnikoIme = new JLabel("Korisničko ime:");
 		lblKorisnikoIme.setHorizontalAlignment(SwingConstants.RIGHT);

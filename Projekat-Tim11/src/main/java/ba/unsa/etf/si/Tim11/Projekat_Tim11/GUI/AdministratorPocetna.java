@@ -69,14 +69,15 @@ public class AdministratorPocetna {
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         Zaposlenik z=Zaposlenici.nadji(_id);
-         String username=z.getIme();
+      //   Admin a=Admini.nadji(_id);
+        // String username=z.getIme();
+
  
 		
 	
 
 		
-		JLabel lblDobrodoliIme = new JLabel("Dobrodošli,"+ username);
+	JLabel lblDobrodoliIme = new JLabel("Dobrodošli,");
 		lblDobrodoliIme.setBounds(48, 26, 97, 14);
 		frame.getContentPane().add(lblDobrodoliIme);
 		
