@@ -122,7 +122,11 @@ public class Osoba implements Serializable {
 		return datumZaposlenja;
 	}
 
-	public void setDatumZaposlenja(Date datumZaposlenja) {
+	public void setDatumZaposlenja(Date datumZaposlenja) throws Exception {
+		Date trenutni=new Date();
+		if(datumZaposlenja.getYear()>trenutni.getYear()) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
+		else if(datumZaposlenja.getYear()==trenutni.getYear() && datumZaposlenja.getMonth()>trenutni.getMonth()) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
+		else if(datumZaposlenja.getYear()==trenutni.getYear() && datumZaposlenja.getMonth()==trenutni.getMonth() && datumZaposlenja.getDay()>trenutni.getDay()) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
 		this.datumZaposlenja = datumZaposlenja;
 	}
 

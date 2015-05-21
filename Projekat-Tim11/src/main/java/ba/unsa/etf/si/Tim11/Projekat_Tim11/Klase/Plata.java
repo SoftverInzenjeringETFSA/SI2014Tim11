@@ -21,7 +21,6 @@ public class Plata implements Serializable  {
 	private double faktor;			//faktor za licni odbitak(djeca ovo ono :D)
 	private double koeficijent;    //slozenost posla
 	private double osnovica;
-	private double satnica;
 	private int stvarniRad;
 	private int bolovanje;
 	private int brojRadnihDana; 
@@ -43,7 +42,7 @@ public class Plata implements Serializable  {
 		this.setDnevniTopliObrok(dnevniTopliObrok);
 		this.setFaktor(faktor);
 		this.setOsnovica(osnovica);
-		this.setSatnica(satnica);
+		
 		this.setStvarniRad(stvarniRad);
 		this.setBolovanje(bolovanje);
 		this.setBrojRadnihDana(brojRadnihDana);
@@ -125,7 +124,7 @@ public class Plata implements Serializable  {
 	}
 
 
-	public double getSatnica() {
+	/*public double getSatnica() {
 		return satnica;
 	}
 
@@ -133,7 +132,7 @@ public class Plata implements Serializable  {
 	public void setSatnica(double satnica) throws Exception{
 		if(satnica<=0) throw new Exception("satnica ne moze biti manja od 0");
 		this.satnica = satnica;
-	}
+	}*/
 
 
 	public int getStvarniRad() {

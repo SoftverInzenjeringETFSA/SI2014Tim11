@@ -16,7 +16,6 @@ public class Zaposlenik extends Osoba implements Serializable{
 	private double faktor;
 	private double koeficijent;
 	private double osnovica;
-	private double satnica;
 	
 	private static final long serialVersionUID = 9221881616260285723L;
 
@@ -28,7 +27,7 @@ public class Zaposlenik extends Osoba implements Serializable{
 	private Firma firma;
 	public Zaposlenik(Firma firma,String ime, String prezime, String jmbg,
 			String adresa, String telefon, Date datumZaposlenja, String pozicija,
-			double dnevniTopliObrok,double faktor,double koeficijent,double osnovica,double satnica) throws Exception //podaci za obračun plate koji se unose prilikom dodavanja zaposlenika u sistem
+			double dnevniTopliObrok,double faktor,double koeficijent,double osnovica) throws Exception //podaci za obračun plate koji se unose prilikom dodavanja zaposlenika u sistem
 	{																				//baca izuzetak ako 
 		super(ime,prezime,jmbg,adresa,telefon,datumZaposlenja,pozicija);
 		this.plate=new ArrayList<Plata>();
@@ -37,7 +36,7 @@ public class Zaposlenik extends Osoba implements Serializable{
 		this.setFaktor(faktor);
 		this.setKoeficijent(koeficijent);
 		this.setOsnovica(osnovica);
-		this.setSatnica(satnica);
+		
 		
 		
 	}
@@ -84,7 +83,7 @@ public class Zaposlenik extends Osoba implements Serializable{
 		if(osnovica<=0) throw new Exception("Osnovica ne moze biti manja od 0");
 		this.osnovica = osnovica;
 	}
-	public double getSatnica() {
+	/*public double getSatnica() {
 		return satnica;
 	}
 
@@ -92,7 +91,7 @@ public class Zaposlenik extends Osoba implements Serializable{
 	public void setSatnica(double satnica) throws Exception{
 		if(satnica<=0) throw new Exception("satnica ne moze biti manja od 0");
 		this.satnica = satnica;
-	}
+	}*/
 
 	
 
@@ -107,6 +106,11 @@ public class Zaposlenik extends Osoba implements Serializable{
 	public Zaposlenik(){
 		this.plate=new ArrayList<Plata>();
 	}
-	
+	public int radniStaz()
+	{
+		Date trenutni=new Date();
+		//nisam imao zivaca porediti jel prosla citava godina :D (ensar). Za staz se oduzima godina zaposlenja od trenutne godine
+		return trenutni.getYear()-this.getDatumZaposlenja().getYear();
+	}
 	
 }

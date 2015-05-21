@@ -55,12 +55,12 @@ public class MainWindow {
 	Firma f;
 	private void initialize() {
 		try{
-		 _op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
-		_ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+		 _op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(2011,10,5),"zaposlenik");
+		_ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(2011,7,16),"zaposlenik");
 		 f=new Firma();
 		_op.setPassword("1234");
 		_op.setUsername("user");
-		_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1,2.5,300.0,20.0);
+		_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(2011,7,16),"zaposlenik",10.0,1,2.5,300.0);
 		_p=new Plata();
 		_p.setOsnovica(100);
 		_p.setZaposlenik(_z);
