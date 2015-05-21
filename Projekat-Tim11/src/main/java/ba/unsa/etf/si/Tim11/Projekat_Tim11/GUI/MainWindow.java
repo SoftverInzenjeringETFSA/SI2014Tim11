@@ -65,7 +65,7 @@ public class MainWindow {
 				_ad.setPassword("0000");
 				_ad.setUsername("Admin");
 				_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);
-				
+			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 		    System.out.println(e1);
@@ -85,7 +85,7 @@ public class MainWindow {
 		_z.getPlate().add(p);
 		
 		final Firma f=new Firma();
-		
+		f.ime="Company";
 		_op.setFirma(f);
 		_z.setFirma(f);
 		
