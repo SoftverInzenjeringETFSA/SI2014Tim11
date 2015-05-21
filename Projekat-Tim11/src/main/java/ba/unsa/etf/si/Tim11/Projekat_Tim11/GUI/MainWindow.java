@@ -65,7 +65,7 @@ public class MainWindow {
 				_ad.setPassword("0000");
 				_ad.setUsername("Administrator");
 				_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);
-			
+				Sistem.Admini.dodaj(_ad);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 		    System.out.println(e1);
@@ -84,7 +84,7 @@ public class MainWindow {
 		f.getZaposlenici().add(_z);
 		f.getOperateri().add(_op);
 		
-		Sistem.Admini.dodaj(_ad);
+		
 		}
 		catch(Exception e)
 		{
@@ -97,13 +97,9 @@ public class MainWindow {
 		_op.setFirma(f);
 		
 		_z.setFirma(f);
+final Firma _f=new Firma();
 
-		
-		final Firma _f=new Firma();
 
-		
-		
-		
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -117,6 +113,7 @@ public class MainWindow {
 		final JButton btn_ime = new JButton("Prikaži ime");
 		btn_ime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Long id=Sistem.Firme.dodaj(f);	
 				lbl_ime.setText("ID: "+id);
 				btn_ime.setVisible(false);

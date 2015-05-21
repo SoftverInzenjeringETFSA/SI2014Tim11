@@ -26,6 +26,8 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class PrikazFirmi extends JFrame{
 
@@ -33,7 +35,7 @@ public class PrikazFirmi extends JFrame{
 	private JTextField textField;
 	private JTable table;
 	private List<Firma>_firme;
-
+	private static Admin  _a;
 	
 
 	
@@ -45,7 +47,13 @@ public class PrikazFirmi extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PrikazFirmi window = new PrikazFirmi();
+					PrikazFirmi window;
+					if(_a != null) {
+						window = new PrikazFirmi(_a);
+					}
+					else {
+						window = new PrikazFirmi();
+					}
 					window.frmPrikazFirmi.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,12 +62,20 @@ public class PrikazFirmi extends JFrame{
 		});
 	}
 
+
 	/**
 	 * Create the application.
 	 */
 	public PrikazFirmi() {
 		initialize();
 	}
+
+	public PrikazFirmi(Admin _a2) {
+		// TODO Auto-generated constructor stub
+		initialize();
+		_a=_a2;
+	}
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -72,18 +88,18 @@ public class PrikazFirmi extends JFrame{
 		frmPrikazFirmi.getContentPane().setLayout(null);
 		_firme = Sistem.Firme.lista();
 		
-		JLabel lblId = new JLabel("ID");
-		lblId.setBounds(10, 21, 46, 14);
-		frmPrikazFirmi.getContentPane().add(lblId);
+		JLabel lbNaziv = new JLabel("Naziv");
+		lbNaziv.setBounds(10, 21, 46, 14);
+		frmPrikazFirmi.getContentPane().add(lbNaziv);
 		
 		textField = new JTextField();
-		textField.setBounds(30, 18, 86, 20);
+		textField.setBounds(49, 18, 86, 20);
 		frmPrikazFirmi.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblSlika = new JLabel("Pretraži");
 		lblSlika.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblSlika.setBounds(128, 21, 89, 17);
+		lblSlika.setBounds(146, 20, 89, 17);
 		lblSlika.setIcon(new ImageIcon("icons/search16.png"));
 		frmPrikazFirmi.getContentPane().add(lblSlika);
 
@@ -93,33 +109,34 @@ public class PrikazFirmi extends JFrame{
 		frmPrikazFirmi.getContentPane().add(scrollPane);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "Naziv", "Sjedište"
-			}
-		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(29);
-		table.getColumnModel().getColumn(1).setPreferredWidth(91);
-		table.getColumnModel().getColumn(1).setMinWidth(2);
 		scrollPane.setViewportView(table);
-		
-		
-		
-		
-		
+		String[] kolone = {"ID",
+		        "Naziv",
+		        "Sjedište",
+		        };
+
+		DefaultTableModel model = new DefaultTableModel();
+		table.setModel(model);
+		model.setColumnIdentifiers(kolone);
+		for (Firma f : _firme) {
+			  Object[] o = new Object[4];
+			  o[0] = f.getId();
+			  o[1] = f.getIme();
+			  o[2] = f.getSjediste();
+			 
+			  model.addRow(o);
+		}
 		
 		JButton btnDodaj = new JButton("Dodaj");
 		btnDodaj.setBounds(340, 67, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnDodaj);
 		
 		JButton btnUredi = new JButton("Uredi");
-		/*btnUredi.addActionListener(new ActionListener() {
-			/*public void actionPerformed(ActionEvent arg0)  {
+		btnUredi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)  {
 				int selectedRowIndex = table.getSelectedRow();
 				for (Firma f : _firme) {
-				//	if(table.isRowSelected(selectedRowIndex)&& f.getId()==table.getModel().getValueAt(selectedRowIndex, 0)){
+				if(table.isRowSelected(selectedRowIndex)&& f.getId()==table.getModel().getValueAt(selectedRowIndex, 0)){
 							frmPrikazFirmi.dispose();
 						EditovanjeFirma ef = new EditovanjeFirma(f);
 						ef.main(null);
@@ -130,15 +147,61 @@ public class PrikazFirmi extends JFrame{
 					JOptionPane.showMessageDialog(frame, "Morate selektovati firmu");
 				}
 			}
-		});*/
+		});
+		
 		btnUredi.setBounds(340, 102, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnUredi);
+		
+		class ItemChangeListener implements ItemListener{
+		    public void itemStateChanged(ItemEvent event) {
+		       if (event.getStateChange() == ItemEvent.SELECTED) {
+		          Object item = event.getItem();
+		          if(_firme.size() != 0) {
+		        	  for(Firma f : _firme) {
+		        		  if(f != null) {
+		        			  if(f.toString().equals(item)) {
+							 		for(Firma f1 : _firme) {
+							 			if(f1 != null) {
+							 				if(f1.getIme().equals(f)) {
+							 					String[] kolone = {"ID",
+							 					        "Naziv",
+							 					        "Sjediste",
+							 					        };
+							 					
+							 					DefaultTableModel model = new DefaultTableModel();
+							 					table.setModel(model);
+							 					model.setColumnIdentifiers(kolone);
+							 					
+							 					Object[] o = new Object[4];
+							 					  o[0] = f.getId();
+							 					  o[1] = f.getIme();
+							 					  o[2] = f.getSjediste();
+							 					  model.addRow(o);
+							 				}
+							 			}
+							 		}
+				        	  }
+		        		  }
+			          }
+			       }
+		        }		          
+		    }       
+		}
+		
+		
 		
 		JButton btnBrii = new JButton("Briši");
 		btnBrii.setBounds(340, 136, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnBrii);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
+		btnIzlaz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmPrikazFirmi.dispose();
+				AdministratorPocetna ap = new AdministratorPocetna(_a);
+				ap.main(null);
+			}
+		});
 		btnIzlaz.setBounds(335, 208, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnIzlaz);
 		
