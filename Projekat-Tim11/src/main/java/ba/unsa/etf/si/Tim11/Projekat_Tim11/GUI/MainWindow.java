@@ -1,3 +1,4 @@
+
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.GUI;
 
 import java.awt.EventQueue;
@@ -49,38 +50,49 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	Zaposlenik _z;
-	Plata _p;;
+	Plata _p=new Plata();
+	Firma f=new Firma();
 	Operater _op;
 	Admin _ad;
-	Firma f;
 	private void initialize() {
+		
+		
+		try {
+			_op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+			 _ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+				_op.setPassword("1234");
+				_op.setUsername("user");
+				_ad.setPassword("0000");
+				_ad.setUsername("Admin");
+				_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);
+				
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+		    System.out.println(e1);
+		}
+		
+		
+		
+		final Plata p=new Plata();
 		try{
-		 _op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(2011,10,5),"zaposlenik");
-		_ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(2011,7,16),"zaposlenik");
-		 f=new Firma();
-		_op.setPassword("1234");
-		_op.setUsername("user");
-		_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(2011,7,16),"zaposlenik",10.0,1,2.5,300.0);
-		_p=new Plata();
-		_p.setOsnovica(100);
-		_p.setZaposlenik(_z);
+		p.setOsnovica(100);
+		p.setZaposlenik(_z);
 		}
 		catch(Exception e)
 		{
 			System.out.println(e);
 		}
+		_z.getPlate().add(p);
 		
-		
-	
-		_z.getPlate().add(_p);
-		
-		
+		final Firma f=new Firma();
 		
 		_op.setFirma(f);
 		_z.setFirma(f);
 		
 		f.getZaposlenici().add(_z);
 		f.getOperateri().add(_op);
+		
+		Sistem.Admini.dodaj(_ad);
 		
 		
 		frame = new JFrame();
