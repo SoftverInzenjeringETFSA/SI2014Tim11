@@ -47,6 +47,10 @@ public class EditovanjeFirma {
 		initialize();
 	}
 
+	public EditovanjeFirma(Firma f2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -61,12 +65,12 @@ public class EditovanjeFirma {
 	
 		
 		JLabel lblNaziv = new JLabel("Naziv");
-		lblNaziv.setBounds(287, 31, 46, 14);
+		lblNaziv.setBounds(250, 31, 46, 14);
 		
 		frame.getContentPane().add(lblNaziv);
 	
 		JLabel lblDatumDodavanja = new JLabel("Datum dodavanja");
-		lblDatumDodavanja.setBounds(230, 70, 93, 14);
+		lblDatumDodavanja.setBounds(214, 70, 93, 14);
 		frame.getContentPane().add(lblDatumDodavanja);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
@@ -95,7 +99,7 @@ public class EditovanjeFirma {
 		dateChooser.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{dateChooser.getCalendarButton()}));
 		
 		JLabel lblSjediste = new JLabel("Sjediste");
-		lblSjediste.setBounds(264, 118, 46, 14);
+		lblSjediste.setBounds(250, 118, 46, 14);
 		frame.getContentPane().add(lblSjediste);
 		
 		textSjediste = new JTextField();

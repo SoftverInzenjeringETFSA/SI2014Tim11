@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.JButton;
@@ -32,7 +34,7 @@ import java.awt.event.ItemListener;
 public class PrikazFirmi extends JFrame{
 
 	private JFrame frmPrikazFirmi;
-	private JTextField textField;
+	private JTextField txtNaziv;
 	private JTable table;
 	private List<Firma>_firme;
 	private static Admin  _a;
@@ -92,10 +94,64 @@ public class PrikazFirmi extends JFrame{
 		lbNaziv.setBounds(10, 21, 46, 14);
 		frmPrikazFirmi.getContentPane().add(lbNaziv);
 		
-		textField = new JTextField();
-		textField.setBounds(49, 18, 86, 20);
-		frmPrikazFirmi.getContentPane().add(textField);
-		textField.setColumns(10);
+		txtNaziv = new JTextField();
+		txtNaziv.setBounds(49, 18, 86, 20);
+		frmPrikazFirmi.getContentPane().add(txtNaziv);
+		txtNaziv.setColumns(10);
+		txtNaziv.getDocument().addDocumentListener(new DocumentListener() {
+
+		     public void removeUpdate(DocumentEvent e) {
+		    	 String[] kolone = {"ID",
+			 		        "Naziv",
+			 		        "Sjedište",
+			 		     };
+
+			 		DefaultTableModel model = new DefaultTableModel();
+			 		table.setModel(model);
+			 		model.setColumnIdentifiers(kolone);
+			 		for(Firma f : _firme) {
+			 			if(f != null) {
+			 				if(f.getIme().toString().contains(txtNaziv.getText())) {
+			 					Object[] o = new Object[3];
+			 					  o[0] = f.getId();
+			 					  o[1] = f.getIme();
+			 					  o[2] = f.getSjediste();
+			 					 
+			 					  model.addRow(o);
+			 				}
+			 			}
+			 		}
+
+		     }
+
+		     public void insertUpdate(DocumentEvent e) {
+		    	 String[] kolone = {"ID",
+		 		        "Naziv",
+		 		        "Sjediste",
+		 		       };
+
+		 		DefaultTableModel model = new DefaultTableModel();
+		 		table.setModel(model);
+		 		model.setColumnIdentifiers(kolone);
+		 		for(Firma f : _firme) {
+		 			if(f != null) {
+		 				if(f.getIme().toString().contains(txtNaziv.getText())) {
+		 					Object[] o = new Object[3];
+		 					  o[0] = f.getId();
+		 					  o[1] = f.getIme();
+		 					  o[2] =f.getSjediste();
+		 					
+		 					  model.addRow(o);
+		 				}
+		 			}
+		 		}
+		     }
+
+		     public void changedUpdate(DocumentEvent e) {
+		        // TODO add code!
+
+		     }
+		  });
 		
 		JLabel lblSlika = new JLabel("Pretraži");
 		lblSlika.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -128,6 +184,14 @@ public class PrikazFirmi extends JFrame{
 		}
 		
 		JButton btnDodaj = new JButton("Dodaj");
+		btnDodaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+			
+					frmPrikazFirmi.dispose();
+					PodaciOperatera po = new PodaciOperatera();
+					po.main(null);
+				}
+			});
 		btnDodaj.setBounds(340, 67, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnDodaj);
 		
@@ -136,7 +200,7 @@ public class PrikazFirmi extends JFrame{
 			public void actionPerformed(ActionEvent arg0)  {
 				int selectedRowIndex = table.getSelectedRow();
 				for (Firma f : _firme) {
-				if(table.isRowSelected(selectedRowIndex)&& f.getId()==table.getModel().getValueAt(selectedRowIndex, 0)){
+				if(table.isRowSelected(selectedRowIndex)&& f.getId()==(Long)table.getModel().getValueAt(selectedRowIndex, 0)){
 							frmPrikazFirmi.dispose();
 						EditovanjeFirma ef = new EditovanjeFirma(f);
 						ef.main(null);
@@ -144,7 +208,7 @@ public class PrikazFirmi extends JFrame{
 					}
 				}
 				if(table.getSelectedRow() == -1) {
-					JOptionPane.showMessageDialog(frame, "Morate selektovati firmu");
+					JOptionPane.showMessageDialog(frmPrikazFirmi, "Morate selektovati firmu");
 				}
 			}
 		});
@@ -191,6 +255,17 @@ public class PrikazFirmi extends JFrame{
 		
 		
 		JButton btnBrii = new JButton("Briši");
+		btnBrii.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
+				if(dialogResult == JOptionPane.YES_OPTION) {
+					
+				}
+				if(dialogResult == JOptionPane.NO_OPTION) {
+					
+				}
+			}
+		});
 		btnBrii.setBounds(340, 136, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnBrii);
 		
