@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.Ignore;
 
 
-public class PlataTest extends TestCase {
+public class TestPlata extends TestCase {
 
 	
 
@@ -51,7 +51,6 @@ public class PlataTest extends TestCase {
 		        }
 	}
 
-	
 	
 
 	
@@ -148,21 +147,6 @@ public class PlataTest extends TestCase {
 		        	assertTrue(true);
 		        }
 		
-	}
-@Ignore public void testIzracunajStvarniRad() {
-		fail("Not yet implemented");
-	}
-
-@Ignore	public void testIzracunajBolovanje() {
-		fail("Not yet implemented");
-	}
-
-@Ignore	public void testIzracunajTopliObrok() {
-		fail("Not yet implemented");
-	}
-
-@Ignore	public void testIzracunajBrutoPlatu() {
-		fail("Not yet implemented");
 	}
 
 }
