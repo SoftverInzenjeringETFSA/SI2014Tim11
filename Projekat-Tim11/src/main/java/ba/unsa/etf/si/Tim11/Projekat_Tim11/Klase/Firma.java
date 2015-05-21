@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Firma implements Serializable {
+	//nesto sam promijenila sada
 	
 	/**
 	 * 
