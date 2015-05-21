@@ -56,7 +56,7 @@ public class Firma implements Serializable {
 	}
 
 	public void setIme(String ime) throws Exception {
-		 Pattern pattern = Pattern.compile("[a-zA-Z0-9\\s\\.]{3,}"); //mogu se unijeti mala, velika slova, brojevi, i tacka
+		 Pattern pattern = Pattern.compile("[a-zA-Z0-9\\s\\.ĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti mala, velika slova, brojevi, i tacka(i nasa slova: ĐđŠšČčĆćŽž)
 		    if (!pattern.matcher(ime).matches()) 
 		    	throw new Exception("Ime mora imati najmanje 3 karaktera(dozvoljena velika, mala slova brojevi tacka i razmak)");
 		

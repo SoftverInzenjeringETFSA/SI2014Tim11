@@ -44,12 +44,9 @@ public class Osoba implements Serializable {
 	}
 
 	public Osoba(String ime, String prezime)throws Exception{
-		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
-	    if (!pattern.matcher(ime).matches() || !pattern.matcher(prezime).matches()) {
-	        throw new Exception("Ime i prezime moraju imati minimalno po 3 karaktera(samo velika ili mala slova)");
-	    }
-		this.ime=ime;
-		this.prezime=prezime;
+		
+		this.setIme(ime);
+		this.setPrezime(prezime);
 	}
 	
 	public String getIme(){
@@ -57,7 +54,7 @@ public class Osoba implements Serializable {
 	}
 	
 	public void setIme(String ime) throws Exception{
-		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+		Pattern pattern = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
 	    if (!pattern.matcher(ime).matches() || !pattern.matcher(prezime).matches()) {
 	        throw new Exception("Ime mora imati minimalno po 3 karaktera(samo velika ili mala slova)");
 	    }
@@ -69,7 +66,7 @@ public class Osoba implements Serializable {
 	}
 	
 	public void setPrezime(String prezime) throws Exception{
-		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+		Pattern pattern = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
 	    if (!pattern.matcher(prezime).matches()) {
 	        throw new Exception("Ime mora imati minimalno po 3 karaktera(samo velika ili mala slova)");
 	    }
@@ -102,7 +99,7 @@ public class Osoba implements Serializable {
 	}
 
 	public void setAdresa(String adresa)throws Exception {
-		Pattern pattern = Pattern.compile("[a-zA-Z0-9\\,\\s]{5,}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez i razmake)
+		Pattern pattern = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez, razmak i nasa slova: ĐđŠšČčĆćŽž)
 	    if (!pattern.matcher(adresa).matches()) {
 	        throw new Exception("Adresa mora imati minimalno 5 karaktera, bez specijalnih znakova osim zareza i razmaka");
 	    }
