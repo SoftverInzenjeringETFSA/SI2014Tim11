@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
@@ -16,7 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
+
 import java.util.*;
+
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
 
 import com.toedter.calendar.JCalendar;
@@ -27,6 +30,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
+import javax.swing.JScrollPane;
 
 public class IzmjenaObracuna {
 
@@ -38,8 +42,8 @@ public class IzmjenaObracuna {
 	private JTextField txtSatnica_4;
 	private JTextField txtBrojSati;
 	private JTextField txtBrojDana;
-	private JTable table;
 	private static Zaposlenik _z;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -258,16 +262,29 @@ public class IzmjenaObracuna {
 		tabbedPane.addTab("Finalni obračun", panel6);
 		panel6.setLayout(null);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(611, 11, -605, 236);
+		panel6.add(scrollPane);
+		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Iznos osnovice", "Radni dani", "Satnica", "Porez", "Dodaci", "Praznik", "Bolovanje", "Godi\u0161nji", "Neto plata", "Bruto plata"
-			}
-		));
-		table.setBounds(10, 194, 452, -182);
-		panel6.add(table);
+		table.setBounds(610, 10, -605, 235);
+		scrollPane.setViewportView(table);
+		String[] kolone = {"ID",
+		        "Ime",
+		        "Prezime",
+		        "Odjel"};
+
+		DefaultTableModel model = new DefaultTableModel();
+		table.setModel(model);
+		model.setColumnIdentifiers(kolone);
+		/*for (Zaposlenik z : _zaposlenici) {
+			  Object[] o = new Object[4];
+			  o[0] = z.getId();
+			  o[1] = z.getIme();
+			  o[2] = z.getPrezime();
+			  o[3] = z.getPozicija();
+			  model.addRow(o);
+		}*/
 		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.addActionListener(new ActionListener() {
@@ -277,5 +294,13 @@ public class IzmjenaObracuna {
 		});
 		btnIzlaz.setBounds(523, 297, 89, 23);
 		frame.getContentPane().add(btnIzlaz);
+		
+		if(_z != null) {
+			if(_z.getPlate().size() == 0) {
+				for(int i = 1; i < tabbedPane.getTabCount(); i++) {
+					tabbedPane.setEnabledAt(i, false);
+				}
+			}
+		}
 	}
 }
