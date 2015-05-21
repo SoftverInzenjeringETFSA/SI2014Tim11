@@ -2,17 +2,21 @@ package ba.unsa.etf.si.Tim11.Projekat_Tim11.GUI;
 
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
+
 import java.util.*;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JScrollPane;
 
 public class Obracun {
@@ -65,9 +69,18 @@ public class Obracun {
 		btnIzmjeneObracuna.setBounds(119, 213, 148, 23);
 		btnIzmjeneObracuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				IzmjenaObracuna io = new IzmjenaObracuna();
-				io.main(null);
+				int selectedRowIndex = table.getSelectedRow();
+				for (Zaposlenik z : _zaposlenici) {
+					if (table.isRowSelected(selectedRowIndex) && z.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
+						frame.dispose();
+						IzmjenaObracuna io = new IzmjenaObracuna(z);
+						io.main(null);
+						break;
+					}
+				}
+				if(table.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(frame, "Morate selektovati nekog zaposlenika");
+				}
 			}
 		});
 		frame.getContentPane().add(btnIzmjeneObracuna);
@@ -93,6 +106,8 @@ public class Obracun {
 		        "Odjel"};
 
 		DefaultTableModel model = new DefaultTableModel();
+		table.setModel(model);
+		model.setColumnIdentifiers(kolone);
 		for (Zaposlenik z : _zaposlenici) {
 			  Object[] o = new Object[4];
 			  o[0] = z.getId();
