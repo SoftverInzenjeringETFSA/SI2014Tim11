@@ -112,7 +112,7 @@ public class Osoba implements Serializable {
 
 	public void setTelefon(String telefon) throws Exception{
 		Pattern pattern = Pattern.compile("(\\+|00)?387\\d{2}\\-?\\d{3,4}\\-?\\d{3,4}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez i razmake)
-	    if (!pattern.matcher(adresa).matches()) {
+	    if (!pattern.matcher(telefon).matches()) {
 	        throw new Exception("format telefona je: na prvom mjestu dvije nule ili plus(ili nijedno), slijedi 387, pozivni(dvije cifre), slijede dvije grupe po 3 ili 4 broja npr(38762224-555) ");
 	    }
 		this.telefon = telefon;
