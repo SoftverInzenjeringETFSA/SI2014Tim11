@@ -4,9 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
+
+import java.util.*;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
@@ -16,13 +22,17 @@ import javax.swing.table.JTableHeader;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PrikazFirmi extends JFrame{
 
 	private JFrame frmPrikazFirmi;
 	private JTextField textField;
 	private JTable table;
+	private List<Firma>_firme;
 
 	
 
@@ -60,6 +70,7 @@ public class PrikazFirmi extends JFrame{
 		frmPrikazFirmi.setBounds(100, 100, 450, 310);
 		frmPrikazFirmi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrikazFirmi.getContentPane().setLayout(null);
+		_firme = Sistem.Firme.lista();
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setBounds(10, 21, 46, 14);
@@ -104,6 +115,22 @@ public class PrikazFirmi extends JFrame{
 		frmPrikazFirmi.getContentPane().add(btnDodaj);
 		
 		JButton btnUredi = new JButton("Uredi");
+		/*btnUredi.addActionListener(new ActionListener() {
+			/*public void actionPerformed(ActionEvent arg0)  {
+				int selectedRowIndex = table.getSelectedRow();
+				for (Firma f : _firme) {
+				//	if(table.isRowSelected(selectedRowIndex)&& f.getId()==table.getModel().getValueAt(selectedRowIndex, 0)){
+							frmPrikazFirmi.dispose();
+						EditovanjeFirma ef = new EditovanjeFirma(f);
+						ef.main(null);
+						break;
+					}
+				}
+				if(table.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(frame, "Morate selektovati firmu");
+				}
+			}
+		});*/
 		btnUredi.setBounds(340, 102, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnUredi);
 		

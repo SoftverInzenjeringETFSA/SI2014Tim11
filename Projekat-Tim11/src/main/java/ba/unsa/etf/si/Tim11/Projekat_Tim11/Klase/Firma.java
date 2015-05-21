@@ -23,7 +23,7 @@ public class Firma implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
+	private Long id;
 	public String ime;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "firma")
@@ -37,6 +37,14 @@ public class Firma implements Serializable {
 		operateri=new ArrayList<Operater>();
 	}
 
+
+	
+	public Firma(String ime) throws Exception {
+		super();
+	
+	this.setIme(ime);
+	}
+	
 	public long getId() {
 		return id;
 	}
