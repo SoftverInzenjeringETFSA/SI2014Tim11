@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -133,7 +134,7 @@ public class PodaciOperatera {
 		lblZaposlen.setBounds(10, 237, 78, 14);
 		frame.getContentPane().add(lblZaposlen);
 		
-		JCalendar calZaposlen = new JCalendar();
+		final JCalendar calZaposlen = new JCalendar();
 		calZaposlen.setBounds(98, 237, 200, 112);
 		frame.getContentPane().add(calZaposlen);
 		
@@ -141,10 +142,6 @@ public class PodaciOperatera {
 		lblSlika.setBounds(329, 23, 148, 183);
 		frame.getContentPane().add(lblSlika);
 		lblSlika.setIcon(new ImageIcon("icons/uposlenik_icon.png"));
-		
-		JButton btnPotvrdi = new JButton("Potvrdi");
-		btnPotvrdi.setBounds(329, 266, 118, 23);
-		frame.getContentPane().add(btnPotvrdi);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.addActionListener(new ActionListener() {
@@ -170,7 +167,7 @@ public class PodaciOperatera {
 		lblFirma.setBounds(10, 178, 78, 14);
 		frame.getContentPane().add(lblFirma);
 		
-		JComboBox<Firma> comboBox = new JComboBox<Firma>();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(98, 175, 200, 20);
 		frame.getContentPane().add(comboBox);
 		
@@ -185,8 +182,42 @@ public class PodaciOperatera {
 		}
 		if(_firme.size() != 0) {
 			for(Firma f : _firme) {
-				comboBox.addItem(f);
+				comboBox.addItem(f.toString());
 			}
 		}
+		
+		JButton btnPotvrdi = new JButton("Potvrdi");
+		btnPotvrdi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Date datum = calZaposlen.getDate();
+				String firma = (String) comboBox.getSelectedItem();
+				try {
+					if (_o != null) {
+						_o.setIme(txtIme.getText());
+						_o.setPrezime(txtPrezime.getText());
+						_o.setJmbg(txtJmbg.getText());
+						_o.setAdresa(txtAdresa.getText());
+						_o.setTelefon(txtTelefon.getText());
+						_o.setPozicija(txtPozicija.getText());
+						_o.setDatumZaposlenja(datum);
+						for (Firma f : _firme) {
+							if (f.toString().equals(firma)) {
+								_o.setFirma(f);
+							}
+						}
+						JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali podatke");
+						frame.dispose();
+						OperaterPocetna op = new OperaterPocetna(_o);
+						op.main(null);
+					}
+				}
+				catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnPotvrdi.setBounds(329, 266, 118, 23);
+		frame.getContentPane().add(btnPotvrdi);
 	}
 }

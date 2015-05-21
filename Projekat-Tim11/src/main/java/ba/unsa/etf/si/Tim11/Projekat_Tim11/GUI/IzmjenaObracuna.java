@@ -26,6 +26,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField;
 
 public class IzmjenaObracuna {
 

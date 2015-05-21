@@ -99,7 +99,7 @@ public class OperaterPocetna {
 				o.main(null);
 			}
 		});
-		btnObracun.setBounds(263, 57, 113, 23);
+		btnObracun.setBounds(263, 57, 137, 23);
 		frame.getContentPane().add(btnObracun);
 		
 		JButton btnIzvjestaji = new JButton("Izvještaji");
@@ -110,11 +110,11 @@ public class OperaterPocetna {
 				i.main(null);
 			}
 		});
-		btnIzvjestaji.setBounds(263, 94, 113, 23);
+		btnIzvjestaji.setBounds(263, 94, 137, 23);
 		frame.getContentPane().add(btnIzvjestaji);
 		
 		JButton btnKorisnickiRacuni = new JButton("Korisnički računi");
-		btnKorisnickiRacuni.setBounds(263, 128, 113, 23);
+		btnKorisnickiRacuni.setBounds(263, 128, 137, 23);
 		frame.getContentPane().add(btnKorisnickiRacuni);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
@@ -123,7 +123,7 @@ public class OperaterPocetna {
 				frame.dispose();
 			}
 		});
-		btnIzlaz.setBounds(263, 212, 113, 23);
+		btnIzlaz.setBounds(263, 212, 137, 23);
 		frame.getContentPane().add(btnIzlaz);
 		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnMojRacun, btnObracun, btnIzvjestaji, btnKorisnickiRacuni, btnIzlaz, frame.getContentPane(), lblDobrodosli, lblSlika}));
 	}
