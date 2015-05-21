@@ -63,7 +63,12 @@ public class MainWindow {
 		    System.out.println(e1);
 		}
 		
-		_z=new Zaposlenik("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+		try {
+			_z=new Zaposlenik("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10,1,300,20);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			System.out.println(e1);
+		}
 		final Plata p=new Plata();
 		try{
 		p.setOsnovica(100);

@@ -71,7 +71,7 @@ public class Plata implements Serializable  {
 
 
 	public void setDnevniTopliObrok(double dnevniTopliObrok) throws Exception{
-		if(dnevniTopliObrok<0) throw new Exception("Dnevni topli obrok ne moze biti manji od 0");
+		if(dnevniTopliObrok<=0) throw new Exception("Dnevni topli obrok ne moze biti manji od 0");
 		this.dnevniTopliObrok = dnevniTopliObrok;
 	}
 
@@ -82,7 +82,7 @@ public class Plata implements Serializable  {
 
 
 	public void setFaktor(double faktor)throws Exception {
-		if(faktor<0) throw new Exception("Faktor ne moze biti manji od 0");
+		if(faktor<=1) throw new Exception("Faktor ne moze biti manji od 0");
 		this.faktor = faktor;
 	}
 
@@ -93,7 +93,7 @@ public class Plata implements Serializable  {
 
 
 	public void setOsnovica(double osnovica) throws Exception {
-		if(osnovica<0) throw new Exception("Osnovica ne moze biti manja od 0");
+		if(osnovica<=0) throw new Exception("Osnovica ne moze biti manja od 0");
 		this.osnovica = osnovica;
 	}
 
@@ -104,7 +104,7 @@ public class Plata implements Serializable  {
 
 
 	public void setSatnica(double satnica) throws Exception{
-		if(satnica<0) throw new Exception("satnica ne moze biti manja od 0");
+		if(satnica<=0) throw new Exception("satnica ne moze biti manja od 0");
 		this.satnica = satnica;
 	}
 
