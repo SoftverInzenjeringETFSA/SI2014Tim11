@@ -155,6 +155,11 @@ if (!pattern.matcher(sjediste).matches())
 	{
 		return Long.toString(id)+" "+ime;
 	}
+	
+	public Boolean equals(Firma f) {
+		if(this.id == f.getId()) return true;
+		return false;
+	}
 
 
 
