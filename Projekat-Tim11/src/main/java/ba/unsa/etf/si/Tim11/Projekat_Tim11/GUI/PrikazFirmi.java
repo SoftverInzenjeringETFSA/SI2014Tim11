@@ -16,16 +16,14 @@ import javax.swing.table.JTableHeader;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Font;
 
 public class PrikazFirmi extends JFrame{
 
 	private JFrame frmPrikazFirmi;
 	private JTextField textField;
-
-	private	JPanel	Panel;
-
-	private	JScrollPane scrollPane;
 	private JTable table;
+
 	
 
 	
@@ -72,12 +70,30 @@ public class PrikazFirmi extends JFrame{
 		frmPrikazFirmi.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblSlika = new JLabel("");
-		lblSlika.setBounds(128, 21, 46, 17);
+		JLabel lblSlika = new JLabel("Pretraži");
+		lblSlika.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSlika.setBounds(128, 21, 89, 17);
 		lblSlika.setIcon(new ImageIcon("icons/search16.png"));
 		frmPrikazFirmi.getContentPane().add(lblSlika);
 
 
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 67, 302, 193);
+		frmPrikazFirmi.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Naziv", "Sjedište"
+			}
+		));
+		table.getColumnModel().getColumn(0).setPreferredWidth(29);
+		table.getColumnModel().getColumn(1).setPreferredWidth(91);
+		table.getColumnModel().getColumn(1).setMinWidth(2);
+		scrollPane.setViewportView(table);
+		
 		
 		
 		
@@ -99,30 +115,9 @@ public class PrikazFirmi extends JFrame{
 		btnIzlaz.setBounds(335, 208, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnIzlaz);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 81, 315, 150);
-		frmPrikazFirmi.getContentPane().add(panel);
-		
 	
 
-	
-		
-		  String data[][] = {{"005","Naziv","Neka","Sarajevo"},
-				   {"002","Naziv1","ABC","Kanada"},
-				   {"003","naziv2","DEF","India"},
-				   {"004","Naziv3","GH","India"},
-				   {"004","Naziv4","IJK","India"}};
-		  
-				  String col[] = {"ID","Naziv","Vrsta","Sjedište"};
-				  table = new JTable(data,col);
-				  
-				  JScrollPane scrollPane= new JScrollPane(table);
-				  scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-					panel.add(scrollPane);
-					
-					
 					
 				}
-
 		}
 

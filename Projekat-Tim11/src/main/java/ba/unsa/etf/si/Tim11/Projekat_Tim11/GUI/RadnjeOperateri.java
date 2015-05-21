@@ -6,17 +6,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
 
 public class RadnjeOperateri {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTable table;
-	private JTable table_1;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -45,7 +47,7 @@ public class RadnjeOperateri {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 478, 300);
 		frame.setTitle("Uposlenici");
 		ImageIcon img = new ImageIcon("icons/calculator_icon.png");
 		frame.setIconImage(img.getImage());
@@ -70,29 +72,54 @@ public class RadnjeOperateri {
 		textField.setColumns(10);
 		
 		JButton btnDodaj = new JButton("Dodaj");
-		btnDodaj.setBounds(303, 77, 105, 23);
+		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnDodaj.setBounds(303, 73, 132, 23);
 		frame.getContentPane().add(btnDodaj);
 		
 		JButton btnObrii = new JButton("Obriši");
-		btnObrii.setBounds(303, 121, 105, 23);
+		btnObrii.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnObrii.setBounds(303, 119, 132, 23);
 		frame.getContentPane().add(btnObrii);
 		
 		JButton btnDodajPermisiju = new JButton("Dodaj permisiju");
-		btnDodajPermisiju.setBounds(303, 166, 105, 23);
+		btnDodajPermisiju.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnDodajPermisiju.setBounds(303, 166, 132, 23);
 		frame.getContentPane().add(btnDodajPermisiju);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
-		btnIzlaz.setBounds(303, 215, 105, 23);
+		btnIzlaz.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnIzlaz.setBounds(380, 227, 72, 23);
 		frame.getContentPane().add(btnIzlaz);
 		
-		JLabel lblSlika = new JLabel("");
-		lblSlika.setBounds(224, 39, 46, 38);
+		JLabel lblSlika = new JLabel("Pretrazi");
+		lblSlika.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSlika.setBounds(224, 47, 72, 29);
 		frame.getContentPane().add(lblSlika);
 		lblSlika.setIcon(new ImageIcon("icons/search16.png"));
 		
-		table_1 = new JTable();
-		table_1.setBounds(201, 106, -157, 120);
-		frame.getContentPane().add(table_1);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 82, 286, 168);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Ime i prezime", "Adresa"
+			}
+		));
+		table.getColumnModel().getColumn(0).setPreferredWidth(29);
+		table.getColumnModel().getColumn(1).setPreferredWidth(91);
+		table.getColumnModel().getColumn(1).setMinWidth(2);
+		scrollPane.setViewportView(table);
+		
+
+		
+		
+		
+		
+		
 		
 	
 	}
