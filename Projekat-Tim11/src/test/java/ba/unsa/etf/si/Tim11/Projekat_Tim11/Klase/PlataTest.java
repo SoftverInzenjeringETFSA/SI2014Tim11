@@ -52,16 +52,7 @@ public class PlataTest extends TestCase {
 	}
 
 	
-	@Test (expected=Exception.class) public void testSetSatnica() {
-		 try {
-				Plata p=new Plata();
-				p.setSatnica(-0.5);
-				fail("Nije bacen izuzetak");
-		        }
-		        catch(Exception e) {
-		        	assertTrue(true);
-		        }
-	}
+	
 
 	
 
