@@ -25,7 +25,6 @@ public class Firma implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	public String ime;
-	public String sjediste;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "firma")
 	private List<Zaposlenik> zaposlenici;
@@ -40,11 +39,10 @@ public class Firma implements Serializable {
 
 
 	
-	public Firma(String ime, String sjediste) throws Exception {
+	public Firma(String ime) throws Exception {
 		super();
 	
 	this.setIme(ime);
-	this.setSjediste(sjediste);
 	}
 	
 	public long getId() {
@@ -66,20 +64,7 @@ public class Firma implements Serializable {
 		
 		this.ime = ime;
 	}
-	public void setSjediste(String sjediste) throws Exception{
-		 Pattern pattern = Pattern.compile("[a-zA-Z0-9\\s\\.]{3,}"); //mogu se unijeti mala, velika slova, brojevi, i tacka
-if (!pattern.matcher(sjediste).matches()) 
-		    	throw new Exception("Adresa mora imati najmanje 3 karaktera(dozvoljena velika, mala slova brojevi tacka i razmak)");
-		
-		this.sjediste = sjediste;
-	}
-	
-	public String getSjediste() {
-		return sjediste;
-	}
 
-	
-	
 	public List<Zaposlenik> getZaposlenici() {
 		return zaposlenici;
 	}
@@ -155,9 +140,6 @@ if (!pattern.matcher(sjediste).matches())
 	{
 		return Long.toString(id)+" "+ime;
 	}
-
-
-
 	
 	
 
