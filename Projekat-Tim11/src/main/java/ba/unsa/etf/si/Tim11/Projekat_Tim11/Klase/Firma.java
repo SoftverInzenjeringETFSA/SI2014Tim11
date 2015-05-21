@@ -128,6 +128,10 @@ public class Firma implements Serializable {
 		}
 		return false;
 	}
+	public String toString()
+	{
+		return Long.toString(id)+" "+ime;
+	}
 	
 	
 
