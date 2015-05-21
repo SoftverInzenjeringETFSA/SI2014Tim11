@@ -199,11 +199,6 @@ public class UposleniciPrikaz {
 			}
 		});
 		frame.getContentPane().add(btnIzlaz);
-		
-		JButton btnPretraga = new JButton("");
-		btnPretraga.setBounds(428, 28, 35, 34);
-		btnPretraga.setIcon(new ImageIcon("icons/search_icon.png"));
-		frame.getContentPane().add(btnPretraga);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 126, 335, 155);
