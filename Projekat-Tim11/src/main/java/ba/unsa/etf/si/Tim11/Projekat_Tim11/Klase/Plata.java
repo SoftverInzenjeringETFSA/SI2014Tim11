@@ -141,7 +141,7 @@ public class Plata implements Serializable  {
 
 
 	public void setStvarniRad(int stvarniRad)throws Exception {
-		if(stvarniRad<0 || stvarniRad>31) throw new Exception("Stvarni rad moze biti izmedju 0 i 31 dana");
+		if(stvarniRad<0 || stvarniRad>31) throw new Exception(" Stvarni rad moze biti izmedju 0 i 31 dana");
 
 		this.stvarniRad = stvarniRad;
 	}
