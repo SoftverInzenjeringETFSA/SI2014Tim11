@@ -95,7 +95,7 @@ public class OperaterPocetna {
 		btnObracun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Obracun o = new Obracun();
+				Obracun o = new Obracun(_o);
 				o.main(null);
 			}
 		});
@@ -114,6 +114,13 @@ public class OperaterPocetna {
 		frame.getContentPane().add(btnIzvjestaji);
 		
 		JButton btnKorisnickiRacuni = new JButton("Korisnički računi");
+		btnKorisnickiRacuni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				UposleniciPrikaz up = new UposleniciPrikaz(_o);
+				up.main(null);
+			}
+		});
 		btnKorisnickiRacuni.setBounds(263, 128, 137, 23);
 		frame.getContentPane().add(btnKorisnickiRacuni);
 		
@@ -121,6 +128,15 @@ public class OperaterPocetna {
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				Login l;
+				try {
+					l = new Login();
+					l.main(null);
+				}
+				catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnIzlaz.setBounds(263, 212, 137, 23);

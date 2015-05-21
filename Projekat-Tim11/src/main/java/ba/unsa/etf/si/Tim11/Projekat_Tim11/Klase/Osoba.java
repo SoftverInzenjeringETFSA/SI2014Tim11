@@ -31,7 +31,7 @@ public class Osoba implements Serializable {
 	public Osoba(String ime, String prezime, String jmbg,
 			String adresa, String telefon, Date datumZaposlenja, String pozicija)throws Exception {
 		super();
-		//mozda bi ovdje trebalo pozivati setere za svaku kako bi podaci ostali validni
+		
 		
 		this.setIme(ime);
 		this.setPrezime(prezime);
@@ -86,7 +86,7 @@ public class Osoba implements Serializable {
 	}
 
 	public void setJmbg(String jmbg) throws Exception{
-		Pattern pattern = Pattern.compile("[0-9]{13}"); //jmbg mora imati 13 brojeva
+		Pattern pattern = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$"); 
 	    if (!pattern.matcher(jmbg).matches()) {
 	        throw new Exception("Jmbg mora imati tacno 13 brojeva");
 	    }

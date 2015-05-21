@@ -17,15 +17,18 @@ public class Plata implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private Date datum;
+	
 	private double dnevniTopliObrok;
 	private double faktor;			//faktor za licni odbitak(djeca ovo ono :D)
 	private double koeficijent;    //slozenost posla
 	private double osnovica;
+	
+	
 	private int stvarniRad;
-	private int bolovanje;
-	private int brojRadnihDana; 
-	private int godineStaza;
-	private int godisnjiOdmor;
+	private int bolovanje;				//broj dana bolovanja
+	private int brojRadnihDana;      //ovo se odnosi na to koliko u mjesecu ima radnih dana
+	private int godineStaza;		
+	private int godisnjiOdmor;		//broj dana godisnjeg odmora
 	
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -33,7 +36,7 @@ public class Plata implements Serializable  {
 	private Zaposlenik zaposlenik;
 	
 	public Plata(long id,Date datum, double dnevniTopliObrok,
-				double faktor,double koeficijent,double osnovica, double satnica,
+				double faktor,double koeficijent,double osnovica,
 				int stvarniRad, int bolovanje, int brojRadnihDana,
 	           int godineStaza, int godisnjiOdmor) throws Exception
 	{
@@ -124,15 +127,7 @@ public class Plata implements Serializable  {
 	}
 
 
-	/*public double getSatnica() {
-		return satnica;
-	}
-
-
-	public void setSatnica(double satnica) throws Exception{
-		if(satnica<=0) throw new Exception("satnica ne moze biti manja od 0");
-		this.satnica = satnica;
-	}*/
+	
 
 
 	public int getStvarniRad() {
@@ -195,6 +190,8 @@ public class Plata implements Serializable  {
 	//nisam ove jos uradio(Ensar)
 	public double izracunajStvarniRad() {
 		throw new UnsupportedOperationException();
+		
+		
 	}
 	
 	public double izracunajBolovanje() {
