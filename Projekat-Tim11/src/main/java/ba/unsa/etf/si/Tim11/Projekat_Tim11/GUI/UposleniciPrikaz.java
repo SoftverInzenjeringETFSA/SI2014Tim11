@@ -21,6 +21,8 @@ import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
 import java.util.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JScrollPane;
 
@@ -30,6 +32,7 @@ public class UposleniciPrikaz {
 	private JTextField txtID;
 	private static Operater _o;
 	private List<Zaposlenik> _zaposlenici;
+	private List<Firma> _firme;
 	private JTable table;
 
 	/**
@@ -77,6 +80,7 @@ public class UposleniciPrikaz {
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_zaposlenici = Sistem.Zaposlenici.lista();
+		_firme = Sistem.Firme.lista();
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblFirma = new JLabel("Firma:");
@@ -84,9 +88,78 @@ public class UposleniciPrikaz {
 		lblFirma.setHorizontalAlignment(SwingConstants.RIGHT);
 		frame.getContentPane().add(lblFirma);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 126, 335, 155);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		String[] kolone = {"ID",
+		        "Ime",
+		        "Prezime",
+		        "Odjel"};
+
+		DefaultTableModel model = new DefaultTableModel();
+		table.setModel(model);
+		model.setColumnIdentifiers(kolone);
+		for (Zaposlenik z : _zaposlenici) {
+			  Object[] o = new Object[4];
+			  o[0] = z.getId();
+			  o[1] = z.getIme();
+			  o[2] = z.getPrezime();
+			  o[3] = z.getPozicija();
+			  model.addRow(o);
+		}
+		
+		class ItemChangeListener implements ItemListener{
+		    public void itemStateChanged(ItemEvent event) {
+		       if (event.getStateChange() == ItemEvent.SELECTED) {
+		          Object item = event.getItem();
+		          if(_firme.size() != 0) {
+		        	  for(Firma f : _firme) {
+		        		  if(f != null) {
+		        			  if(f.toString().equals(item)) {
+							 		for(Zaposlenik z : _zaposlenici) {
+							 			if(z != null) {
+							 				if(z.getFirma().equals(f)) {
+							 					String[] kolone = {"ID",
+							 					        "Ime",
+							 					        "Prezime",
+							 					        "Odjel"};
+							 					
+							 					DefaultTableModel model = new DefaultTableModel();
+							 					table.setModel(model);
+							 					model.setColumnIdentifiers(kolone);
+							 					
+							 					Object[] o = new Object[4];
+							 					  o[0] = z.getId();
+							 					  o[1] = z.getIme();
+							 					  o[2] = z.getPrezime();
+							 					  o[3] = z.getPozicija();
+							 					  model.addRow(o);
+							 				}
+							 			}
+							 		}
+				        	  }
+		        		  }
+			          }
+			       }
+		        }		          
+		    }       
+		}
+		
 		JComboBox<String> comboFirma = new JComboBox<String>();
 		comboFirma.setBounds(81, 36, 124, 20);
+		comboFirma.addItemListener(new ItemChangeListener());
 		frame.getContentPane().add(comboFirma);
+		
+		if(_firme.size() != 0) {
+			for(Firma f : _firme) {
+				if(f != null) {
+					comboFirma.addItem(f.toString());
+				}
+			}
+		}
 		
 		JLabel lblId = new JLabel("ID:");
 		lblId.setBounds(215, 39, 70, 14);
@@ -199,28 +272,5 @@ public class UposleniciPrikaz {
 			}
 		});
 		frame.getContentPane().add(btnIzlaz);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 126, 335, 155);
-		frame.getContentPane().add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		String[] kolone = {"ID",
-		        "Ime",
-		        "Prezime",
-		        "Odjel"};
-
-		DefaultTableModel model = new DefaultTableModel();
-		table.setModel(model);
-		model.setColumnIdentifiers(kolone);
-		for (Zaposlenik z : _zaposlenici) {
-			  Object[] o = new Object[4];
-			  o[0] = z.getId();
-			  o[1] = z.getIme();
-			  o[2] = z.getPrezime();
-			  o[3] = z.getPozicija();
-			  model.addRow(o);
-		}
 	}
 }
