@@ -29,16 +29,18 @@ public class Osoba implements Serializable {
 	public Osoba(){	}
 	
 	public Osoba(String ime, String prezime, String jmbg,
-			String adresa, String telefon, Date datumZaposlenja, String pozicija) {
+			String adresa, String telefon, Date datumZaposlenja, String pozicija)throws Exception {
 		super();
 		//mozda bi ovdje trebalo pozivati setere za svaku kako bi podaci ostali validni
-		this.ime = ime;
-		this.prezime = prezime;
-		this.jmbg = jmbg;
-		this.adresa = adresa;
-		this.telefon = telefon;
-		this.datumZaposlenja = datumZaposlenja;
-		this.pozicija = pozicija;
+		
+		this.setIme(ime);
+		this.setPrezime(prezime);
+		this.setJmbg(jmbg);
+		this.setAdresa(adresa);
+		this.setTelefon(telefon);
+		this.setDatumZaposlenja(datumZaposlenja);
+		this.setPozicija(pozicija);
+		
 	}
 
 	public Osoba(String ime, String prezime)throws Exception{

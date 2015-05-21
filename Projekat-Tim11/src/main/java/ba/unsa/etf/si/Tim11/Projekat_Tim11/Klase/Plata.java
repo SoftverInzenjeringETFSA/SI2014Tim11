@@ -18,7 +18,8 @@ public class Plata implements Serializable  {
 	private long id;
 	private Date datum;
 	private double dnevniTopliObrok;
-	private double faktor;
+	private double faktor;			//faktor za licni odbitak(djeca ovo ono :D)
+	private double koeficijent;    //slozenost posla
 	private double osnovica;
 	private double satnica;
 	private int stvarniRad;
@@ -32,9 +33,26 @@ public class Plata implements Serializable  {
 	@JoinColumn(name = "zaposlenik")
 	private Zaposlenik zaposlenik;
 	
-	public Plata(){}
+	public Plata(long id,Date datum, double dnevniTopliObrok,
+				double faktor,double koeficijent,double osnovica, double satnica,
+				int stvarniRad, int bolovanje, int brojRadnihDana,
+	           int godineStaza, int godisnjiOdmor) throws Exception
+	{
+		this.setId(id);
+		this.setDatum(datum);
+		this.setDnevniTopliObrok(dnevniTopliObrok);
+		this.setFaktor(faktor);
+		this.setOsnovica(osnovica);
+		this.setSatnica(satnica);
+		this.setStvarniRad(stvarniRad);
+		this.setBolovanje(bolovanje);
+		this.setBrojRadnihDana(brojRadnihDana);
+		this.setGodineStaza(godineStaza);
+		this.setGodisnjiOdmor(godisnjiOdmor);
+		
+	}
 
-
+	public Plata(){};
 	public Zaposlenik getZaposlenik() {
 		return zaposlenik;
 	}
@@ -82,10 +100,19 @@ public class Plata implements Serializable  {
 
 
 	public void setFaktor(double faktor)throws Exception {
-		if(faktor<=1) throw new Exception("Faktor ne moze biti manji od 0");
+		if(faktor<=1) throw new Exception("Faktor ne moze biti manji od 1");
 		this.faktor = faktor;
 	}
-
+	public double getKoeficijent()
+	{
+		return koeficijent;
+	}
+	public void  setKoeficijent(double koeficijent) throws Exception
+	{
+		if(koeficijent<1) throw new Exception("Koeficijent ne moze biti manji od 1");
+		this.koeficijent = koeficijent;
+		
+	}
 
 	public double getOsnovica() {
 		return osnovica;

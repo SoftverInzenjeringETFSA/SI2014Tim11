@@ -44,7 +44,7 @@ public class Admin extends Osoba implements Account, Serializable {
 	
 	
 	public Admin(String ime, String prezime, String jmbg,
-			String adresa, String telefon, Date datumZaposlenja, String pozicija) {
+			String adresa, String telefon, Date datumZaposlenja, String pozicija) throws Exception {
 		super(ime,prezime,jmbg,adresa,telefon,datumZaposlenja,pozicija);
 		
 	}

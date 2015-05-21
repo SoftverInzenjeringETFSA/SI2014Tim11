@@ -30,7 +30,7 @@ public class Operater extends Osoba implements Account,Serializable{
 
 	public Operater(){}
 
-	public Operater(String ime, String prezime, String jmbg,String adresa, String telefon, Date datumZaposlenja, String pozicija) {
+	public Operater(String ime, String prezime, String jmbg,String adresa, String telefon, Date datumZaposlenja, String pozicija) throws Exception {
 		super(ime,prezime,jmbg,adresa,telefon,datumZaposlenja,pozicija);
 
 	}

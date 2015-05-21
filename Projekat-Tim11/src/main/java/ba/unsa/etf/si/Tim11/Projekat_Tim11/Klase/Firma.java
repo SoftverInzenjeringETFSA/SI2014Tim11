@@ -35,6 +35,13 @@ public class Firma implements Serializable {
 		zaposlenici=new ArrayList<Zaposlenik>();
 		operateri=new ArrayList<Operater>();
 	}
+	public Firma(long id, String ime, List<Zaposlenik> zaposlenici, List<Operater> operateri) throws Exception
+	{
+		this.setId(id);
+		this.setIme(ime);
+		this.setZaposlenici(zaposlenici);
+		this.setOperateri(operateri);
+	}
 
 	public long getId() {
 		return id;

@@ -49,38 +49,32 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	Zaposlenik _z;
-	Plata _p=new Plata();
+	Plata _p;;
+	Operater _op;
+	Admin _ad;
+	Firma f;
 	private void initialize() {
-		final Operater _op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
-		final Admin _ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
-		
-		try {
-			
-				_op.setPassword("1234");
-				_op.setUsername("user");
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-		    System.out.println(e1);
-		}
-		
-		try {
-			_z=new Zaposlenik("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10,1,300,20);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			System.out.println(e1);
-		}
-		final Plata p=new Plata();
 		try{
-		p.setOsnovica(100);
-		p.setZaposlenik(_z);
+		 _op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+		_ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+		 f=new Firma();
+		_op.setPassword("1234");
+		_op.setUsername("user");
+		_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1,2.5,300.0,20.0);
+		_p=new Plata();
+		_p.setOsnovica(100);
+		_p.setZaposlenik(_z);
 		}
 		catch(Exception e)
 		{
 			System.out.println(e);
 		}
-		_z.getPlate().add(p);
 		
-		final Firma f=new Firma();
+		
+	
+		_z.getPlate().add(_p);
+		
+		
 		
 		_op.setFirma(f);
 		_z.setFirma(f);
