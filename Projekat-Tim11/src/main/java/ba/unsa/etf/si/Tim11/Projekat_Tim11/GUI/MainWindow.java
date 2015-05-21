@@ -59,11 +59,11 @@ public class MainWindow {
 		
 		try {
 			_op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
-			 _ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
-				_op.setPassword("1234");
+			 _ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"administrator");
+			 _op.setPassword("1234");
 				_op.setUsername("user");
 				_ad.setPassword("0000");
-				_ad.setUsername("Admin");
+				_ad.setUsername("Administrator");
 				_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);
 			
 		} catch (Exception e1) {
@@ -91,15 +91,16 @@ public class MainWindow {
 			System.out.println(e);
 		}
 		
-<<<<<<< HEAD
+
 		final Firma f=new Firma();
 		
 		_op.setFirma(f);
-		_z.setFirma(f);
-=======
 		
-		final Firma f=new Firma();
->>>>>>> origin/master
+		_z.setFirma(f);
+
+		
+		final Firma _f=new Firma();
+
 		
 		
 		
