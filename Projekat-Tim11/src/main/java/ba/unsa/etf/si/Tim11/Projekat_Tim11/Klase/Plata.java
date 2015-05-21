@@ -182,5 +182,8 @@ public class Plata implements Serializable  {
 	public double izracunajBrutoPlatu(){
 		throw new UnsupportedOperationException();
 	}
-
+	public String toString()
+	{
+		return Long.toString(id)+" "+Double.toString(osnovica);
+	}
 }

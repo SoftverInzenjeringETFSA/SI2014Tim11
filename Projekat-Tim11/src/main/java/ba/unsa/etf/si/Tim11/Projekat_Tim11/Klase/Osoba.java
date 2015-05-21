@@ -135,4 +135,8 @@ public class Osoba implements Serializable {
 		//
 		this.pozicija = pozicija;
 	}
+	public String toString()
+	{
+		return id.toString()+" "+ime+" "+prezime; //mozemo jos nesto dodati, stavio sam ovo troje samo da ne bude previse
+	}
 }
