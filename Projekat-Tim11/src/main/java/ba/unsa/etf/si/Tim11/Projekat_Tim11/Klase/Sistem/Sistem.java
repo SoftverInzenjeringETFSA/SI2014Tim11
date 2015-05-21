@@ -195,9 +195,9 @@ public final class Sistem {
 			return id;	
 		}
 		
-		public static Firma nadji(int id){
+		public static Firma nadji(String naziv){
 			openSession();
-			Firma o = (Firma) s.get(Firma.class,new Long(id));
+			Firma o = (Firma) s.get(Firma.class,new String(naziv));
 			t.commit();
 			
 			closeSession();
@@ -219,9 +219,11 @@ public final class Sistem {
 			s.update(o);
 			t.commit();
 			closeSession();
-			long l=o.getId();
-			int id=(int) l;
-			return nadji(id);
+			String s=o.getIme();
+			//long l=o.getId();
+			//int id=(int) l;
+			String ime=(String)s;
+			return nadji(ime);
 		}
 		
 		public static List<Firma> lista(){
