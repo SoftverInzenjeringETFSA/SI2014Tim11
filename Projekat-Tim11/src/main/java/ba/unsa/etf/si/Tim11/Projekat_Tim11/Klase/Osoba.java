@@ -29,25 +29,24 @@ public class Osoba implements Serializable {
 	public Osoba(){	}
 	
 	public Osoba(String ime, String prezime, String jmbg,
-			String adresa, String telefon, Date datumZaposlenja, String pozicija) {
+			String adresa, String telefon, Date datumZaposlenja, String pozicija)throws Exception {
 		super();
 		//mozda bi ovdje trebalo pozivati setere za svaku kako bi podaci ostali validni
-		this.ime = ime;
-		this.prezime = prezime;
-		this.jmbg = jmbg;
-		this.adresa = adresa;
-		this.telefon = telefon;
-		this.datumZaposlenja = datumZaposlenja;
-		this.pozicija = pozicija;
+		
+		this.setIme(ime);
+		this.setPrezime(prezime);
+		this.setJmbg(jmbg);
+		this.setAdresa(adresa);
+		this.setTelefon(telefon);
+		this.setDatumZaposlenja(datumZaposlenja);
+		this.setPozicija(pozicija);
+		
 	}
 
 	public Osoba(String ime, String prezime)throws Exception{
-		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
-	    if (!pattern.matcher(ime).matches() || !pattern.matcher(prezime).matches()) {
-	        throw new Exception("Ime i prezime moraju imati minimalno po 3 karaktera(samo velika ili mala slova)");
-	    }
-		this.ime=ime;
-		this.prezime=prezime;
+		
+		this.setIme(ime);
+		this.setPrezime(prezime);
 	}
 	
 	public String getIme(){
@@ -55,7 +54,7 @@ public class Osoba implements Serializable {
 	}
 	
 	public void setIme(String ime) throws Exception{
-		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+		Pattern pattern = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
 	    if (!pattern.matcher(ime).matches() || !pattern.matcher(prezime).matches()) {
 	        throw new Exception("Ime mora imati minimalno po 3 karaktera(samo velika ili mala slova)");
 	    }
@@ -67,7 +66,7 @@ public class Osoba implements Serializable {
 	}
 	
 	public void setPrezime(String prezime) throws Exception{
-		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+		Pattern pattern = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
 	    if (!pattern.matcher(prezime).matches()) {
 	        throw new Exception("Ime mora imati minimalno po 3 karaktera(samo velika ili mala slova)");
 	    }
@@ -100,7 +99,7 @@ public class Osoba implements Serializable {
 	}
 
 	public void setAdresa(String adresa)throws Exception {
-		Pattern pattern = Pattern.compile("[a-zA-Z0-9\\,\\s]{5,}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez i razmake)
+		Pattern pattern = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez, razmak i nasa slova: ĐđŠšČčĆćŽž)
 	    if (!pattern.matcher(adresa).matches()) {
 	        throw new Exception("Adresa mora imati minimalno 5 karaktera, bez specijalnih znakova osim zareza i razmaka");
 	    }
@@ -112,8 +111,8 @@ public class Osoba implements Serializable {
 	}
 
 	public void setTelefon(String telefon) throws Exception{
-		Pattern pattern = Pattern.compile("(\\+|00)?387\\d{2}\\-?\\d{3,4}-?\\d{3,4}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez i razmake)
-	    if (!pattern.matcher(adresa).matches()) {
+		Pattern pattern = Pattern.compile("(\\+|00)?387\\d{2}\\-?\\d{3,4}\\-?\\d{3,4}"); //Adresa minimalno 5 karaktera(ukljucujuci zarez i razmake)
+	    if (!pattern.matcher(telefon).matches()) {
 	        throw new Exception("format telefona je: na prvom mjestu dvije nule ili plus(ili nijedno), slijedi 387, pozivni(dvije cifre), slijede dvije grupe po 3 ili 4 broja npr(38762224-555) ");
 	    }
 		this.telefon = telefon;
@@ -134,5 +133,9 @@ public class Osoba implements Serializable {
 	public void setPozicija(String pozicija) {
 		//
 		this.pozicija = pozicija;
+	}
+	public String toString()
+	{
+		return id.toString()+" "+ime+" "+prezime; //mozemo jos nesto dodati, stavio sam ovo troje samo da ne bude previse
 	}
 }

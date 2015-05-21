@@ -15,6 +15,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
+import java.util.*;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
+
 import com.toedter.calendar.JCalendar;
 
 import javax.swing.JComboBox;
@@ -22,6 +26,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField;
 
 public class IzmjenaObracuna {
 
@@ -34,6 +39,7 @@ public class IzmjenaObracuna {
 	private JTextField txtBrojSati;
 	private JTextField txtBrojDana;
 	private JTable table;
+	private static Zaposlenik _z;
 
 	/**
 	 * Launch the application.
@@ -42,7 +48,13 @@ public class IzmjenaObracuna {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					IzmjenaObracuna window = new IzmjenaObracuna();
+					IzmjenaObracuna window;
+					if (_z != null) {
+						window = new IzmjenaObracuna(_z);
+					}
+					else {
+						window = new IzmjenaObracuna();
+					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,6 +68,11 @@ public class IzmjenaObracuna {
 	 */
 	public IzmjenaObracuna() {
 		initialize();
+	}
+	
+	public IzmjenaObracuna(Zaposlenik z) {
+		initialize();
+		_z = z;
 	}
 
 	/**
@@ -111,6 +128,11 @@ public class IzmjenaObracuna {
 		panel1.add(calDatumDo);
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
+		btnPotvrdi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnPotvrdi.setBounds(518, 224, 89, 23);
 		panel1.add(btnPotvrdi);
 		JComponent panel2 = new JPanel();

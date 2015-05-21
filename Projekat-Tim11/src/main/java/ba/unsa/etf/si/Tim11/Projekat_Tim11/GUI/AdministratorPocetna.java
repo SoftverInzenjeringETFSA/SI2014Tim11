@@ -152,11 +152,14 @@ public class AdministratorPocetna {
 		btnRaspodjelaOperatera.setBounds(252, 107, 154, 33);
 		frame.getContentPane().add(btnRaspodjelaOperatera);
 		
+		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.setBounds(331, 227, 75, 23);
 		frame.getContentPane().add(btnIzlaz);
 		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnRaspodjelaOperatera, btnAuriranjeOperatera, btnAuriranjeFirmi, btnIzlaz, frame.getContentPane(), lblDobrodoliIme, lblSlika,btnMojRaun}));
 
+		
+		
 		
 	}
 }
