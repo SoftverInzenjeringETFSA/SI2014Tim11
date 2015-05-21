@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 public class Obracun {
 
 	private JFrame frame;
+	private static Operater _o;
 	private List<Zaposlenik> _zaposlenici;
 	private JTable table;
 
@@ -32,7 +33,13 @@ public class Obracun {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Obracun window = new Obracun();
+					Obracun window;
+					if(_o != null) {
+						window = new Obracun(_o);
+					}
+					else {
+						window = new Obracun();
+					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,6 +53,11 @@ public class Obracun {
 	 */
 	public Obracun() {
 		initialize();
+	}
+	
+	public Obracun(Operater o) {
+		initialize();
+		_o = o;
 	}
 
 	/**
@@ -73,7 +85,7 @@ public class Obracun {
 				for (Zaposlenik z : _zaposlenici) {
 					if (table.isRowSelected(selectedRowIndex) && z.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
 						frame.dispose();
-						IzmjenaObracuna io = new IzmjenaObracuna(z);
+						IzmjenaObracuna io = new IzmjenaObracuna(z, _o);
 						io.main(null);
 						break;
 					}
@@ -90,6 +102,8 @@ public class Obracun {
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				OperaterPocetna op = new OperaterPocetna(_o);
+				op.main(null);
 			}
 		});
 		frame.getContentPane().add(btnIzlaz);

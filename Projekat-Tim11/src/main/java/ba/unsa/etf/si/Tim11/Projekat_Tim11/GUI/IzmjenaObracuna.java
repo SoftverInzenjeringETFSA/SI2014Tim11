@@ -43,6 +43,7 @@ public class IzmjenaObracuna {
 	private JTextField txtBrojSati;
 	private JTextField txtBrojDana;
 	private static Zaposlenik _z;
+	private static Operater _o;
 	private JTable table;
 
 	/**
@@ -53,8 +54,8 @@ public class IzmjenaObracuna {
 			public void run() {
 				try {
 					IzmjenaObracuna window;
-					if (_z != null) {
-						window = new IzmjenaObracuna(_z);
+					if (_z != null && _o != null) {
+						window = new IzmjenaObracuna(_z, _o);
 					}
 					else {
 						window = new IzmjenaObracuna();
@@ -74,9 +75,10 @@ public class IzmjenaObracuna {
 		initialize();
 	}
 	
-	public IzmjenaObracuna(Zaposlenik z) {
+	public IzmjenaObracuna(Zaposlenik z, Operater o) {
 		initialize();
 		_z = z;
+		_o = o;
 	}
 
 	/**
@@ -290,6 +292,8 @@ public class IzmjenaObracuna {
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
+				Obracun o = new Obracun(_o);
+				o.main(null);
 			}
 		});
 		btnIzlaz.setBounds(523, 297, 89, 23);

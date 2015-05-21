@@ -147,6 +147,8 @@ public class PodaciOperatera {
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				OperaterPocetna op = new OperaterPocetna(_o);
+				op.main(null);
 			}
 		});
 		btnIzlaz.setBounds(329, 300, 118, 23);
