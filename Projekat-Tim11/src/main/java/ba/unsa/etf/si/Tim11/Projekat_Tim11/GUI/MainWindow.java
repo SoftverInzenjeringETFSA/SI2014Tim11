@@ -77,15 +77,7 @@ public class MainWindow {
 		try{
 		p.setOsnovica(100);
 		p.setZaposlenik(_z);
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}
 		_z.getPlate().add(p);
-		
-		final Firma f=new Firma();
-		
 		_op.setFirma(f);
 		_z.setFirma(f);
 		
@@ -93,6 +85,16 @@ public class MainWindow {
 		f.getOperateri().add(_op);
 		
 		Sistem.Admini.dodaj(_ad);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		
+		final Firma f=new Firma();
+		
+		
 		
 		
 		frame = new JFrame();
