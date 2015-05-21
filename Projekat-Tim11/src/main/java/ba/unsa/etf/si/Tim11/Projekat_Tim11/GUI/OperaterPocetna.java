@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Operater;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
 
 import java.awt.Component;
@@ -19,7 +20,7 @@ import java.awt.Component;
 public class OperaterPocetna {
 
 	private JFrame frame;
-	private static Long _id;
+	private static Operater _o;
 
 	/**
 	 * Launch the application.
@@ -28,7 +29,13 @@ public class OperaterPocetna {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OperaterPocetna window = new OperaterPocetna(_id);
+					OperaterPocetna window;
+					if(_o != null) {
+						window = new OperaterPocetna(_o);
+					}
+					else {
+						window = new OperaterPocetna();
+					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,9 +51,9 @@ public class OperaterPocetna {
 		initialize();
 	}
 	
-	public OperaterPocetna(Long id) {
+	public OperaterPocetna(Operater o) {
 		initialize();
-		_id = id;
+		_o = o;
 	}
 
 	/**
@@ -60,11 +67,12 @@ public class OperaterPocetna {
 		ImageIcon img = new ImageIcon("icons/login_icon.png");
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
-		String username = Sistem.Operateri.nadji(_id);
 		
 		JLabel lblDobrodosli = new JLabel("Dobrodošli,  ");
 		lblDobrodosli.setBounds(48, 11, 200, 35);
-		lblDobrodosli.setText("Dobrodošli, " + _username);
+		if(_o != null) {
+			lblDobrodosli.setText("Dobrodošli, " + _o.getUsername());
+		}
 		frame.getContentPane().add(lblDobrodosli);
 		
 		JLabel lblSlika = new JLabel("");
@@ -73,6 +81,13 @@ public class OperaterPocetna {
 		lblSlika.setIcon(new ImageIcon("icons/user_icon.png"));
 		
 		JButton btnMojRacun = new JButton("Moj račun");
+		btnMojRacun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				PodaciOperatera po = new PodaciOperatera(_o);
+				po.main(null);
+			}
+		});
 		btnMojRacun.setBounds(48, 212, 137, 23);
 		frame.getContentPane().add(btnMojRacun);
 		

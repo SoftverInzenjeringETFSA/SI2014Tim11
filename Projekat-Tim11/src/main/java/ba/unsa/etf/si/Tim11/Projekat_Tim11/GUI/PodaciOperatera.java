@@ -3,6 +3,7 @@ package ba.unsa.etf.si.Tim11.Projekat_Tim11.GUI;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
 
 import com.toedter.calendar.JCalendar;
 
@@ -26,6 +28,8 @@ public class PodaciOperatera {
 	private JTextField txtAdresa;
 	private JTextField txtPozicija;
 	private JTextField txtTelefon;
+	private static Operater _o;
+	private List<Firma> _firme;
 
 	/**
 	 * Launch the application.
@@ -34,7 +38,13 @@ public class PodaciOperatera {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PodaciOperatera window = new PodaciOperatera();
+					PodaciOperatera window;
+					if(_o != null) {
+						window = new PodaciOperatera(_o);
+					}
+					else {
+						window = new PodaciOperatera();
+					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,6 +62,7 @@ public class PodaciOperatera {
 	
 	public PodaciOperatera(Operater o) {
 		initialize();
+		_o = o;
 	}
 
 	/**
@@ -65,6 +76,7 @@ public class PodaciOperatera {
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		_firme = Sistem.Firme.lista();
 		
 		JLabel lblIme = new JLabel("Ime:");
 		lblIme.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -158,8 +170,23 @@ public class PodaciOperatera {
 		lblFirma.setBounds(10, 178, 78, 14);
 		frame.getContentPane().add(lblFirma);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<Firma> comboBox = new JComboBox<Firma>();
 		comboBox.setBounds(98, 175, 200, 20);
 		frame.getContentPane().add(comboBox);
+		
+		if(_o != null) {
+			txtIme.setText(_o.getIme());
+			txtPrezime.setText(_o.getPrezime());
+			txtJmbg.setText(_o.getJmbg());
+			txtAdresa.setText(_o.getAdresa());
+			txtTelefon.setText(_o.getTelefon());
+			txtPozicija.setText(_o.getPozicija());
+			calZaposlen.setDate(_o.getDatumZaposlenja());
+		}
+		if(_firme.size() != 0) {
+			for(Firma f : _firme) {
+				comboBox.addItem(f);
+			}
+		}
 	}
 }

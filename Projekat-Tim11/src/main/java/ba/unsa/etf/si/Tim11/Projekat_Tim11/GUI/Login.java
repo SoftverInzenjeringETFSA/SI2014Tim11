@@ -100,7 +100,7 @@ public class Login {
 				for(Operater o : _operateri) {
 					if(o.getUsername().equals(txtKorisnickoIme.getText()) && o.ispravanPassword(passString)) {
 						frame.dispose();
-						OperaterPocetna op = new OperaterPocetna(o.getId());
+						OperaterPocetna op = new OperaterPocetna(o);
 						op.main(null);
 						jeOperater = true;
 						break;
