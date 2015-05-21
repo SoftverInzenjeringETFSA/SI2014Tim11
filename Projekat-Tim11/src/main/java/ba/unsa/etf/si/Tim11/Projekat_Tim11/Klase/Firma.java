@@ -23,7 +23,7 @@ public class Firma implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
-	private String ime;
+	public String ime;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "firma")
 	private List<Zaposlenik> zaposlenici;

@@ -1,5 +1,6 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.GUI;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
@@ -13,9 +14,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.UIManager;
 
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Admin;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Zaposlenik;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem.Zaposlenici;
+
 
 
 
@@ -28,6 +33,7 @@ public class AdministratorPocetna {
 	private static int _id;
 	
 	public String Username;
+	private static Admin _a;
 
 	/**
 	 * Launch the application.
@@ -36,7 +42,13 @@ public class AdministratorPocetna {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdministratorPocetna window = new AdministratorPocetna(_id);
+					AdministratorPocetna window;
+					if(_a != null) {
+						window = new AdministratorPocetna(_a);
+					}
+					else {
+						window = new AdministratorPocetna();
+					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,9 +64,9 @@ public class AdministratorPocetna {
 		initialize();
 	}
 	
-	public AdministratorPocetna(int id) {
+	public AdministratorPocetna(Admin a) {
 		initialize();
-		_id = id;
+		_a = a;
 	}
 
 	/**
@@ -77,8 +89,12 @@ public class AdministratorPocetna {
 	
 
 		
-	JLabel lblDobrodoliIme = new JLabel("Dobrodošli,");
+	JLabel lblDobrodoliIme = new JLabel("Dobrodošli ,");
 		lblDobrodoliIme.setBounds(48, 26, 97, 14);
+		if(_a != null) {
+			lblDobrodoliIme.setText("Dobrodošli, " + _a.getUsername());
+		}
+		
 		frame.getContentPane().add(lblDobrodoliIme);
 		
 		JLabel lblSlika = new JLabel("");
@@ -91,8 +107,8 @@ public class AdministratorPocetna {
 		btnMojRaun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				PodaciAdministrator o = new PodaciAdministrator();
-				o.main(null);
+				PodaciAdministrator p = new PodaciAdministrator();
+				p.main(null);
 			}
 		});
 		
@@ -102,17 +118,36 @@ public class AdministratorPocetna {
 		frame.getContentPane().add(btnMojRaun);
 		
 		JButton btnAuriranjeFirmi = new JButton("Ažuriranje firmi");
+		btnAuriranjeFirmi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				PrikazFirmi pf = new PrikazFirmi();
+				pf.main(null);
+			}
+		});
 		btnAuriranjeFirmi.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnAuriranjeFirmi.setBounds(252, 63, 154, 33);
 
 		frame.getContentPane().add(btnAuriranjeFirmi);
 		
 		JButton btnAuriranjeOperatera = new JButton("Ažuriranje operatera");
+		btnAuriranjeOperatera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnAuriranjeOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnAuriranjeOperatera.setBounds(252, 151, 154, 33);
 		frame.getContentPane().add(btnAuriranjeOperatera);
 		
 		JButton btnRaspodjelaOperatera = new JButton("Raspodjela operatera");
+		btnRaspodjelaOperatera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				OperateriRaspodjela or = new OperateriRaspodjela();
+				or.main(null);
+				
+			}
+		});
 		btnRaspodjelaOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnRaspodjelaOperatera.setBounds(252, 107, 154, 33);
 		frame.getContentPane().add(btnRaspodjelaOperatera);
@@ -120,6 +155,8 @@ public class AdministratorPocetna {
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.setBounds(331, 227, 75, 23);
 		frame.getContentPane().add(btnIzlaz);
+		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnRaspodjelaOperatera, btnAuriranjeOperatera, btnAuriranjeFirmi, btnIzlaz, frame.getContentPane(), lblDobrodoliIme, lblSlika,btnMojRaun}));
+
 		
 	}
 }

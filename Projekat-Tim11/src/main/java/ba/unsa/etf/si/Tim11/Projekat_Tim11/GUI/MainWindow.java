@@ -58,12 +58,16 @@ public class MainWindow {
 			
 				_op.setPassword("1234");
 				_op.setUsername("user");
+				_ad.setPassword("0000");
+				_ad.setUsername("Admin");
+				
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 		    System.out.println(e1);
 		}
 		
 		_z=new Zaposlenik("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
+		
 		final Plata p=new Plata();
 		try{
 		p.setOsnovica(100);
@@ -82,6 +86,8 @@ public class MainWindow {
 		
 		f.getZaposlenici().add(_z);
 		f.getOperateri().add(_op);
+		
+		Sistem.Admini.dodaj(_ad);
 		
 		
 		frame = new JFrame();
