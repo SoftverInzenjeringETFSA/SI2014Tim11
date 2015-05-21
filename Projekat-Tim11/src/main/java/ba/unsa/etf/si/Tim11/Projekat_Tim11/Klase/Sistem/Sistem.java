@@ -204,6 +204,9 @@ public final class Sistem {
 			return o;
 		}
 		
+		
+		
+		
 		public static void izbrisi(int id){
 			openSession();
 			Object instance = s.load(Firma.class, new Long(id));
