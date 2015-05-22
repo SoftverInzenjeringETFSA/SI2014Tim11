@@ -29,7 +29,7 @@ public class DodavanjeOperatera {
 	private JTextField txtIme;
 	private static Firma _f;
 	private static Operater _o;
-	private static Zaposlenik _z;
+
 
 	/**
 	 * Launch the application.
@@ -39,13 +39,10 @@ public class DodavanjeOperatera {
 			public void run() {
 				try {
 					DodavanjeOperatera window;
-					if(_f != null & _o != null) {
-						if(_z != null) {
-							window = new DodavanjeOperatera(_f, _o, _z);
-						}
-						else {
-							window = new DodavanjeOperatera(_f, _o);
-						}
+					if(_o != null) {
+						
+							window = new DodavanjeOperatera(_f, _o );
+						
 					}
 					else {
 						window = new DodavanjeOperatera();
@@ -65,19 +62,12 @@ public class DodavanjeOperatera {
 		initialize();
 	}
 
-	public DodavanjeOperatera(Firma f, Operater o, Zaposlenik z) {
 	
-		initialize();
-		_f = f;
-		_o = o;
-		_z = z;
-	}
 
 	public DodavanjeOperatera(Firma f, Operater o) {
 		initialize();
 		_f = f;
 		_o = o;
-		_z = null;
 	}
 
 	/**

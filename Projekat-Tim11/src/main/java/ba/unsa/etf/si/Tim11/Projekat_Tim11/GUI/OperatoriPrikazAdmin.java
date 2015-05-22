@@ -26,7 +26,7 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JScrollPane;
 
-public class UposleniciPrikazAdmin {
+public class OperatoriPrikazAdmin {
 
 	private JFrame frame;
 	private JTextField txtID;
@@ -43,12 +43,12 @@ public class UposleniciPrikazAdmin {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UposleniciPrikazAdmin window;
+					OperatoriPrikazAdmin window;
 					if(_o != null) {
-						window = new UposleniciPrikazAdmin(_o);
+						window = new OperatoriPrikazAdmin(_o);
 					}
 					else {
-						window = new UposleniciPrikazAdmin();
+						window = new OperatoriPrikazAdmin();
 					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -61,11 +61,11 @@ public class UposleniciPrikazAdmin {
 	/**
 	 * Create the application.
 	 */
-	public UposleniciPrikazAdmin() {
+	public OperatoriPrikazAdmin() {
 		initialize();
 	}
 	
-	public UposleniciPrikazAdmin(Operater o) {
+	public OperatoriPrikazAdmin(Operater o) {
 		initialize();
 		_o = o;
 	}
