@@ -183,6 +183,15 @@ public class UposleniciPrikaz {
 			 		model.setColumnIdentifiers(kolone);
 			 		for(Zaposlenik z : _zaposlenici) {
 			 			if(z != null) {
+			 				if(txtID.getText().length() == 0) {
+			 					Object[] o = new Object[4];
+			 					  o[0] = z.getId();
+			 					  o[1] = z.getIme();
+			 					  o[2] = z.getPrezime();
+			 					  o[3] = z.getPozicija();
+			 					  model.addRow(o);
+			 					  break;
+			 				}
 			 				if(z.getId().toString().contains(txtID.getText())) {
 			 					Object[] o = new Object[4];
 			 					  o[0] = z.getId();
