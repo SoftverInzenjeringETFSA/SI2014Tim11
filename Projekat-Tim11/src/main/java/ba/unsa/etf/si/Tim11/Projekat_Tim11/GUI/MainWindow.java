@@ -63,7 +63,7 @@ public class MainWindow {
 			_op.setUsername("user");
 			_op.setFirma(f);
 			_ad.setPassword("0000");
-			_ad.setUsername("Administrator");
+			_ad.setUsername("Admin");
 			_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);
 			_z.setFirma(f);
 			f.dodajOperatera(_op);
@@ -88,6 +88,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Long id=Sistem.Firme.dodaj(f);
+				Sistem.Admini.dodaj(_ad);
 				final Zaposlenik temp=Sistem.Zaposlenici.nadji(2);
 				Firma tf=temp.getFirma();
 				lbl_ime.setText("ID: "+tf.getId());

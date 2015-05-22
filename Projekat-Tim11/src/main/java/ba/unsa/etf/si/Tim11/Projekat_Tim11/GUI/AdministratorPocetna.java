@@ -19,7 +19,7 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Admin;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Zaposlenik;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
-import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem.Zaposlenici;
+
 
 
 
@@ -30,9 +30,6 @@ public class AdministratorPocetna {
 
 	private JFrame frame;
 
-	private static int _id;
-	
-	public String Username;
 	private static Admin _a;
 
 	/**
@@ -83,13 +80,8 @@ public class AdministratorPocetna {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   
 
- 
-		
-	
-
-		
-	JLabel lblDobrodoliIme = new JLabel("Dobrodošli ,");
-		lblDobrodoliIme.setBounds(48, 26, 97, 14);
+	JLabel lblDobrodoliIme = new JLabel("Dobrodošli,");
+		lblDobrodoliIme.setBounds(48, 26, 114, 14);
 		if(_a != null) {
 			lblDobrodoliIme.setText("Dobrodošli, " + _a.getUsername());
 		}
