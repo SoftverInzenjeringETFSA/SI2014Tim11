@@ -82,6 +82,10 @@ public class Obracun {
 		btnIzmjeneObracuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRowIndex = table.getSelectedRow();
+				if(table.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(frame, "Morate selektovati nekog zaposlenika");
+					return;
+				}
 				for (Zaposlenik z : _zaposlenici) {
 					if (table.isRowSelected(selectedRowIndex) && z.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
 						frame.dispose();
@@ -89,9 +93,6 @@ public class Obracun {
 						io.main(null);
 						break;
 					}
-				}
-				if(table.getSelectedRow() == -1) {
-					JOptionPane.showMessageDialog(frame, "Morate selektovati nekog zaposlenika");
 				}
 			}
 		});

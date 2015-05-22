@@ -230,7 +230,7 @@ public class UposleniciPrikaz {
 		btnDodavanje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				PodaciUposlenika pu = new PodaciUposlenika();
+				PodaciUposlenika pu = new PodaciUposlenika(_f, _o);
 				pu.main(null);
 			}
 		});
@@ -240,9 +240,19 @@ public class UposleniciPrikaz {
 		btnAzuriranje.setBounds(355, 160, 124, 23);
 		btnAzuriranje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				PodaciUposlenika pu = new PodaciUposlenika();
-				pu.main(null);
+				if(table.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(frame, "Morate selektovati nekog zaposlenika");
+					return;
+				}
+				int selectedRowIndex = table.getSelectedRow();
+				for (Zaposlenik z : _f.getZaposlenici()) {
+					if (table.isRowSelected(selectedRowIndex) && z.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
+						frame.dispose();
+						PodaciUposlenika pu = new PodaciUposlenika(_f, _o, z);
+						pu.main(null);
+						break;
+					}
+				}
 			}
 		});
 		frame.getContentPane().add(btnAzuriranje);
@@ -251,9 +261,20 @@ public class UposleniciPrikaz {
 		btnBrisanje.setBounds(355, 194, 124, 23);
 		btnBrisanje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(table.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(frame, "Morate selektovati nekog zaposlenika");
+					return;
+				}
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
 				if(dialogResult == JOptionPane.YES_OPTION) {
-					
+					int selectedRowIndex = table.getSelectedRow();
+					for (Zaposlenik z : _f.getZaposlenici()) {
+						if (table.isRowSelected(selectedRowIndex) && z.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
+							String ispis = "Uspješno ste obrisali zaposlenika ID: " + z.getId();
+							Sistem.Zaposlenici.izbrisi((int) (long) z.getId());
+							JOptionPane.showMessageDialog(frame, ispis);
+						}
+					}
 				}
 				if(dialogResult == JOptionPane.NO_OPTION) {
 					
