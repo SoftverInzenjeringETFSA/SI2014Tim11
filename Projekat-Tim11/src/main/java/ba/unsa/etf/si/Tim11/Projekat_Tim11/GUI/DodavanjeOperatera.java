@@ -21,14 +21,13 @@ import com.toedter.calendar.JDateChooser;
 public class DodavanjeOperatera {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField txtFirma;
 	private JTextField txtPrezime;
 	private JTextField txtJmbg;
 	private JTextField txtAdresa;
 	private JTextField txtPozicija;
 	private JTextField txtIme;
-	private static Firma _f;
-	private static Operater _o;
+	
 
 
 	/**
@@ -38,15 +37,8 @@ public class DodavanjeOperatera {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DodavanjeOperatera window;
-					if(_o != null) {
-						
-							window = new DodavanjeOperatera(_f, _o );
-						
-					}
-					else {
-						window = new DodavanjeOperatera();
-					}
+					
+					DodavanjeOperatera window = new DodavanjeOperatera();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,26 +46,22 @@ public class DodavanjeOperatera {
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public DodavanjeOperatera() {
+	public DodavanjeOperatera() throws Exception {
 		initialize();
 	}
 
-	
+	Operater _op=new Operater();
 
-	public DodavanjeOperatera(Firma f, Operater o) {
-		initialize();
-		_f = f;
-		_o = o;
-	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize() {
+	private void initialize() throws Exception {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 503, 398);
 		frame.setTitle("Dodavanje operatera");
@@ -91,11 +79,13 @@ public class DodavanjeOperatera {
 		txtIme.setBounds(106, 29, 88, 20);
 		frame.getContentPane().add(txtIme);
 		txtIme.setColumns(10);
+		_op.setIme(txtIme.getText());
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
 		lblPrezime.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPrezime.setBounds(0, 67, 88, 14);
 		frame.getContentPane().add(lblPrezime);
+		
 		
 	
 		JLabel lblJmbg = new JLabel("JMBG:");
@@ -132,7 +122,8 @@ public class DodavanjeOperatera {
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+		
+				frame.dispose();
 			}
 		});
 		btnPotvrdi.setBounds(329, 266, 118, 23);
@@ -151,10 +142,11 @@ public class DodavanjeOperatera {
 		dateChooser.setBounds(106, 237, 91, 20);
 		frame.getContentPane().add(dateChooser);
 		
-		textField = new JTextField();
-		textField.setBounds(106, 267, 86, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		txtFirma = new JTextField();
+		txtFirma.setBounds(106, 267, 86, 20);
+		frame.getContentPane().add(txtFirma);
+		txtFirma.setColumns(10);
+		
 		
 		JLabel lblFirma = new JLabel("Firma");
 		lblFirma.setBounds(49, 270, 46, 14);
@@ -164,21 +156,25 @@ public class DodavanjeOperatera {
 		txtPrezime.setBounds(111, 64, 86, 20);
 		frame.getContentPane().add(txtPrezime);
 		txtPrezime.setColumns(10);
+		_op.setPrezime(txtPrezime.getText());
 		
 		txtJmbg = new JTextField();
 		txtJmbg.setBounds(111, 105, 86, 20);
 		frame.getContentPane().add(txtJmbg);
 		txtJmbg.setColumns(10);
+		_op.setJmbg(txtJmbg.getText());
 		
 		txtAdresa = new JTextField();
 		txtAdresa.setBounds(106, 148, 86, 20);
 		frame.getContentPane().add(txtAdresa);
 		txtAdresa.setColumns(10);
+		_op.setAdresa(txtAdresa.getText());
 		
 		txtPozicija = new JTextField();
 		txtPozicija.setText("Operater");
 		txtPozicija.setBounds(106, 193, 86, 20);
 		frame.getContentPane().add(txtPozicija);
 		txtPozicija.setColumns(10);
+		_op.setPozicija("operater");
 	}
 }
