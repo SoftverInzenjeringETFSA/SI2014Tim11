@@ -104,7 +104,7 @@ if (!pattern.matcher(sjediste).matches())
 		
 		for(Zaposlenik z: zaposlenici)
 		{
-			if(z.getId()==id)
+			if(z.getId().equals(id))
 				return z;
 		}
 		throw new Exception("Ne postoji zaposlenik sa ID-em: "+id); 
@@ -114,7 +114,7 @@ if (!pattern.matcher(sjediste).matches())
 		
 		for(Zaposlenik z: zaposlenici)
 		{
-			if(z.getId()==id)
+			if(z.getId().equals(id))
 			{
 				zaposlenici.remove(z);
 				return true;
@@ -132,7 +132,7 @@ if (!pattern.matcher(sjediste).matches())
 	public Operater nadjiOperatera(long id) throws Exception{
 		for(Operater o: operateri)
 		{
-			if(o.getId()==id)
+			if(o.getId().equals(id))
 				return o;
 		}
 		throw new Exception("Ne postoji operater sa ID-em: "+id); 
@@ -142,7 +142,7 @@ if (!pattern.matcher(sjediste).matches())
 	public Boolean izbrisiOperatera(long id){
 		for(Operater o: operateri)
 		{
-			if(o.getId()==id)
+			if(o.getId().equals(id))
 			{
 				zaposlenici.remove(o);
 				return true;
