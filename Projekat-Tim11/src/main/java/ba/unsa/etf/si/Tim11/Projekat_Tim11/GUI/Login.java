@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -90,7 +92,7 @@ public class Login {
 		passSifra.setBounds(181, 127, 120, 20);
 		frame.getContentPane().add(passSifra);
 		
-		JButton btnOk = new JButton("OK");
+		final JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean jeOperater = true;
@@ -125,5 +127,89 @@ public class Login {
 		});
 		btnOk.setBounds(181, 187, 120, 23);
 		frame.getContentPane().add(btnOk);
+		
+		btnOk.setEnabled(false);
+		
+		txtKorisnickoIme.getDocument().addDocumentListener(new DocumentListener() {
+
+		     public void removeUpdate(DocumentEvent e) {
+		    	 String pass = new String(passSifra.getPassword());
+		    	 if(txtKorisnickoIme.getText().length() != 0 && pass.length() != 0) {
+		    		 btnOk.setEnabled(true);
+		    	 }
+		    	 else {
+		    		 btnOk.setEnabled(false);
+		    	 }
+		    	 passSifra.getDocument().addDocumentListener(new DocumentListener() {
+
+				     public void removeUpdate(DocumentEvent e) {
+				    	 String pass = new String(passSifra.getPassword());
+				    	 if(txtKorisnickoIme.getText().length() != 0 && pass.length() != 0) {
+				    		 btnOk.setEnabled(true);
+				    	 }
+				    	 else {
+				    		 btnOk.setEnabled(false);
+				    	 }
+				     }
+				     
+				     public void insertUpdate(DocumentEvent e) {
+				    	 String pass = new String(passSifra.getPassword());
+				    	 if(txtKorisnickoIme.getText().length() != 0 && pass.length() != 0) {
+				    		 btnOk.setEnabled(true);
+				    	 }
+				    	 else {
+				    		 btnOk.setEnabled(false);
+				    	 }
+				     }
+				     
+				     public void changedUpdate(DocumentEvent e) {
+					        // TODO add code!
+
+					 }
+				});
+		     }
+		     
+		     public void insertUpdate(DocumentEvent e) {
+		    	 String pass = new String(passSifra.getPassword());
+		    	 if(txtKorisnickoIme.getText().length() != 0 && pass.length() != 0) {
+		    		 btnOk.setEnabled(true);
+		    	 }
+		    	 else {
+		    		 btnOk.setEnabled(false);
+		    	 }
+		    	 passSifra.getDocument().addDocumentListener(new DocumentListener() {
+
+				     public void removeUpdate(DocumentEvent e) {
+				    	 String pass = new String(passSifra.getPassword());
+				    	 if(txtKorisnickoIme.getText().length() != 0 && pass.length() != 0) {
+				    		 btnOk.setEnabled(true);
+				    	 }
+				    	 else {
+				    		 btnOk.setEnabled(false);
+				    	 }
+				     }
+				     
+				     public void insertUpdate(DocumentEvent e) {
+				    	 String pass = new String(passSifra.getPassword());
+				    	 if(txtKorisnickoIme.getText().length() != 0 && pass.length() != 0) {
+				    		 btnOk.setEnabled(true);
+				    	 }
+				    	 else {
+				    		 btnOk.setEnabled(false);
+				    	 }
+				     }
+				     
+				     public void changedUpdate(DocumentEvent e) {
+					        // TODO add code!
+
+					 }
+				});
+		     }
+		     
+		     public void changedUpdate(DocumentEvent e) {
+			        // TODO add code!
+
+			 }
+		});
 	}
 }
