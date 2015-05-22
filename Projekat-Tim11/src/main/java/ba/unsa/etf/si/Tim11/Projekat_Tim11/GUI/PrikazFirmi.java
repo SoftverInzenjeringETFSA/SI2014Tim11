@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.JButton;
@@ -94,11 +96,11 @@ public class PrikazFirmi extends JFrame{
 
 		
 		JLabel lbNaziv = new JLabel("Naziv");
-		lbNaziv.setBounds(10, 21, 26, 14);
+		lbNaziv.setBounds(10, 21, 47, 14);
 		frmPrikazFirmi.getContentPane().add(lbNaziv);
 		
 		txtNaziv = new JTextField();
-		txtNaziv.setBounds(46, 21, 86, 20);
+		txtNaziv.setBounds(67, 18, 86, 20);
 		frmPrikazFirmi.getContentPane().add(txtNaziv);
 		txtNaziv.setColumns(10);
 		txtNaziv.getDocument().addDocumentListener(new DocumentListener() {
@@ -158,7 +160,7 @@ public class PrikazFirmi extends JFrame{
 		
 		JLabel lblSlika = new JLabel("Pretraži");
 		lblSlika.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblSlika.setBounds(146, 20, 89, 17);
+		lblSlika.setBounds(163, 20, 89, 17);
 		lblSlika.setIcon(new ImageIcon("icons/search16.png"));
 		frmPrikazFirmi.getContentPane().add(lblSlika);
 
@@ -169,6 +171,8 @@ public class PrikazFirmi extends JFrame{
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		
 		String[] kolone = {"ID",
 		        "Naziv",
 		        "Sjedište",
@@ -191,7 +195,7 @@ public class PrikazFirmi extends JFrame{
 
 				public void actionPerformed(ActionEvent e) {
 					frmPrikazFirmi.dispose();
-			DodavanjeFirmi df= new DodavanjeFirmi(_a);
+			DodavanjeEditovanjeFirmi df= new DodavanjeEditovanjeFirmi(_a);
 					df.main(null);
 				}
 			});
@@ -205,7 +209,7 @@ public class PrikazFirmi extends JFrame{
 				for (Firma f : _firme) {
 				if(table.isRowSelected(selectedRowIndex)&& f.getId()==(Long)table.getModel().getValueAt(selectedRowIndex, 0)){
 							frmPrikazFirmi.dispose();
-						EditovanjeFirma ef = new EditovanjeFirma(f);
+						DodavanjeEditovanjeFirmi ef = new DodavanjeEditovanjeFirmi(f,_a);
 						ef.main(null);
 						break;
 					}
@@ -257,20 +261,27 @@ public class PrikazFirmi extends JFrame{
 		
 		
 		
-		JButton btnBrii = new JButton("Briši");
+		final JButton btnBrii = new JButton("Brisanje");
+		btnBrii.setBounds(340, 136, 89, 23);
 		btnBrii.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
 				if(dialogResult == JOptionPane.YES_OPTION) {
-					
-					
+					int selectedRowIndex = table.getSelectedRow();
+					for (Firma f : _firme) {
+						if (table.isRowSelected(selectedRowIndex) && f.getId() ==(Long) table.getModel().getValueAt(selectedRowIndex, 0)) {
+							String ispis = "Uspješno ste obrisali firmu ID: " + f.getId();
+							
+			Sistem.Firme.izbrisi((int)f.getId());
+							JOptionPane.showMessageDialog(frmPrikazFirmi, ispis);
+						}
+					}
 				}
 				if(dialogResult == JOptionPane.NO_OPTION) {
 					
 				}
 			}
 		});
-		btnBrii.setBounds(340, 136, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnBrii);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
@@ -284,8 +295,7 @@ public class PrikazFirmi extends JFrame{
 		btnIzlaz.setBounds(335, 208, 89, 23);
 		frmPrikazFirmi.getContentPane().add(btnIzlaz);
 		
-	
-
+		
 					
 				}
 		}

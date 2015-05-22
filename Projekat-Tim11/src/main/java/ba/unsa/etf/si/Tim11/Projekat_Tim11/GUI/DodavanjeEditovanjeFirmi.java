@@ -27,7 +27,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DodavanjeFirmi {
+public class DodavanjeEditovanjeFirmi {
 
 	private JFrame frame;
 	private JTextField textNaziv;
@@ -40,18 +40,21 @@ public class DodavanjeFirmi {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run(){
+		EventQueue.invokeLater(new Runnable()  {
+			public void run() {
 				try {
-					DodavanjeFirmi window;
-					if(_a!=null) {
-						
-							window = new DodavanjeFirmi(_a);
+					DodavanjeEditovanjeFirmi window;
+					if( _a != null) {
+						if(_f != null) {
+							window = new DodavanjeEditovanjeFirmi(_f, _a);
 						}
 						else {
-							window = new DodavanjeFirmi();
-							}
-						
+							window = new DodavanjeEditovanjeFirmi(_a);
+						}
+					}
+					else {
+						window = new DodavanjeEditovanjeFirmi();
+					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,19 +62,22 @@ public class DodavanjeFirmi {
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
-	public DodavanjeFirmi() {
+	public DodavanjeEditovanjeFirmi() {
 		initialize();
 	}
 
-	public DodavanjeFirmi(Admin a) {
+	public DodavanjeEditovanjeFirmi(Firma f, Admin a) {
 		_a=a;
+		_f=f;
 	
 	}
 
+	public DodavanjeEditovanjeFirmi(Admin _a2) {
+	_a=_a2;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -112,28 +118,40 @@ public class DodavanjeFirmi {
 		frame.getContentPane().add(btnIzlaz);
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
-		btnPotvrdi.addActionListener(new ActionListener() {
+		btnPotvrdi.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(_f == null) {
 					try {
 						_f = new Firma();
 						_f.setIme(textNaziv.getText());
 						_f.setSjediste(txtSjediste.getText());
-						
-						Sistem.Firme.dodaj(_f);
-					
-						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novu firmu");
+					Sistem.Firme.dodaj(_f);
+				JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novu firmu");
 						frame.dispose();
-						PrikazFirmi pf=new PrikazFirmi(_a);
+						PrikazFirmi pf = new PrikazFirmi(_a);
 						pf.main(null);
 					}
 					catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+				}
+				else {
+					try {
+						_f.setIme(textNaziv.getText());
+						_f.setSjediste(txtSjediste.getText());
+						Sistem.Firme.izmijeni(_f);
 				
-				
-				
+						JOptionPane.showMessageDialog(frame, "Uspješno ste izmijenili firmu");
+						frame.dispose();
+						PrikazFirmi pf = new PrikazFirmi(_a);
+						pf.main(null);
+					}
+					catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		btnPotvrdi.setBounds(109, 228, 77, 19);
@@ -161,9 +179,12 @@ public class DodavanjeFirmi {
 
 		dateChooser.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{dateChooser.getCalendarButton()}));
 		
+		if(_f != null) {
+			textNaziv.setText(_f.getIme());
+			txtSjediste.setText(_f.getSjediste());
 		
 		
 		
 		
 	}
-}
+	}}
