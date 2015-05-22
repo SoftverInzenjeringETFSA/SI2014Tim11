@@ -88,7 +88,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Long id=Sistem.Firme.dodaj(f);
-				final Zaposlenik temp=Sistem.Zaposlenici.nadji(2);
+				final Zaposlenik temp=Sistem.Zaposlenici.nadji(10);
 				Firma tf=temp.getFirma();
 				lbl_ime.setText("ID: "+tf.getId());
 				btn_ime.setVisible(false);
