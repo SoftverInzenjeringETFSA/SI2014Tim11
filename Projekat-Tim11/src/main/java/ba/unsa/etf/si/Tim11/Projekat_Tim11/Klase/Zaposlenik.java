@@ -53,7 +53,7 @@ public class Zaposlenik extends Osoba implements Serializable{
 
 
 	public void setDnevniTopliObrok(double dnevniTopliObrok) throws Exception{
-		if(dnevniTopliObrok<=0) throw new Exception("Dnevni topli obrok ne moze biti manji od 0");
+		if(dnevniTopliObrok<0) throw new Exception("Dnevni topli obrok ne moze biti manji od 0");
 		this.dnevniTopliObrok = dnevniTopliObrok;
 	}
 	public double getFaktor() {
@@ -108,9 +108,10 @@ public class Zaposlenik extends Osoba implements Serializable{
 	}
 	public int radniStaz()
 	{
-		Date trenutni=new Date();
+		Calendar trenutni= Calendar.getInstance();
 		//nisam imao zivaca porediti jel prosla citava godina :D (ensar). Za staz se oduzima godina zaposlenja od trenutne godine
-		return trenutni.getYear()-this.getDatumZaposlenja().getYear();
+		int staz= trenutni.get(Calendar.YEAR)-this.getDatumZaposlenja().getYear();
+		return staz;
 	}
 	
 }

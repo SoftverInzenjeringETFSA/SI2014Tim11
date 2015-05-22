@@ -40,13 +40,14 @@ public class Plata implements Serializable  {
 				int stvarniRad, int bolovanje, int brojRadnihDana,
 	           int godineStaza, int godisnjiOdmor) throws Exception
 	{
-		if((this.stvarniRad+this.bolovanje+this.godisnjiOdmor)>31) throw new Exception("Zbir stvarnog rada, bolovanja i godisnjeg odmora u jednom mjesecu ne moze biti >31");
+		if((stvarniRad+bolovanje+godisnjiOdmor)>brojRadnihDana) throw new Exception("Zbir stvarnog rada, bolovanja i godisnjeg odmora u jednom mjesecu ne moze biti >31");
+		
 		this.setZaposlenik(zaposlenik);
 		this.setDatum(datum);
 		this.setDnevniTopliObrok(dnevniTopliObrok);
 		this.setFaktor(faktor);
+		this.setKoeficijent(koeficijent);
 		this.setOsnovica(osnovica);
-		
 		this.setStvarniRad(stvarniRad);
 		this.setBolovanje(bolovanje);
 		this.setBrojRadnihDana(brojRadnihDana);
@@ -92,7 +93,7 @@ public class Plata implements Serializable  {
 
 
 	public void setDnevniTopliObrok(double dnevniTopliObrok) throws Exception{
-		if(dnevniTopliObrok<=0) throw new Exception("Dnevni topli obrok ne moze biti manji od 0");
+		if(dnevniTopliObrok<0) throw new Exception("Dnevni topli obrok ne moze biti manji od 0");
 		this.dnevniTopliObrok = dnevniTopliObrok;
 	}
 
@@ -103,7 +104,7 @@ public class Plata implements Serializable  {
 
 
 	public void setFaktor(double faktor)throws Exception {
-		if(faktor<=1) throw new Exception("Faktor ne moze biti manji od 1");
+		if(faktor<1) throw new Exception("Faktor ne moze biti manji od 1");
 		this.faktor = faktor;
 	}
 	public double getKoeficijent()
@@ -183,7 +184,7 @@ public class Plata implements Serializable  {
 
 
 	public void setGodisnjiOdmor(int godisnjiOdmor)throws Exception { //nisam imao kad pogledat koliko smije biti dana godisnjeg
-		if(godisnjiOdmor<10 || godisnjiOdmor>30)  throw new Exception("Godisnji odmor mora biti izmedju 10 i 30 dana");
+		if(godisnjiOdmor<0 || godisnjiOdmor>31)  throw new Exception("Godisnji odmor mora biti izmedju 0 i 30 dana");
 		this.godisnjiOdmor = godisnjiOdmor;
 	}
 	
@@ -207,10 +208,12 @@ public class Plata implements Serializable  {
 		double d1=17;          //doprinos za PIO/MIo
 		double d2=12.5;        //doprinos za zdravstveno osiguranje
 		double d3=1.5;         //doprinos za osiguranje od nezaposlenosti
+		/*
 		double d4=6;		   //doprinos za PIO na teret poslodavca
 		double d5=4;           //doprinos za zdravstveno osiguranje na teret poslodavca
 		double d6=0.5;         //doprinos za osiguranje od nezaposlenosti na teret poslodavca
-		double pom= 100-(d1+d2+d3+d4+d5+d6);  //da se mogu promijeniti stope, inace je sad ovo =69
+		*/
+		double pom= 100-(d1+d2+d3);  //da se mogu promijeniti stope, inace je sad ovo =69
 		double stopa= 100/pom;
 		return stopa;
 	}
@@ -235,7 +238,7 @@ public class Plata implements Serializable  {
 			racuna se prvo satnica za taj  mjesec(dohodak/(radni dani u mjesecu)) i mnozi se 
 			sa stvarnim radom(stvarni rad). Od dobijenog iznosa se oduzima porez na dohodak
 		 */
-		double satnica=(this.izracunajDohodak()/brojRadnihDana*8);
+		double satnica=(this.izracunajDohodak())/(this.brojRadnihDana*8);
 		double neto=satnica*(this.stvarniRad*8);   //broj radnih dana * 8=ukupna moguca satnica za jedan mjesec
 		
 		if(this.bolovanje !=0) 

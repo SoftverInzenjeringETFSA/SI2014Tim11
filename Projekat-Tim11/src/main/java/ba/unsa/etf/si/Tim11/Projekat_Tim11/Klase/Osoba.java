@@ -1,7 +1,9 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 
 import javax.persistence.*;
@@ -123,10 +125,12 @@ public class Osoba implements Serializable {
 	}
 
 	public void setDatumZaposlenja(Date datumZaposlenja) throws Exception {
-		Date trenutni=new Date();
-		if(datumZaposlenja.getYear()>trenutni.getYear()) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
-		else if(datumZaposlenja.getYear()==trenutni.getYear() && datumZaposlenja.getMonth()>trenutni.getMonth()) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
-		else if(datumZaposlenja.getYear()==trenutni.getYear() && datumZaposlenja.getMonth()==trenutni.getMonth() && datumZaposlenja.getDay()>trenutni.getDay()) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
+		Calendar trenutni= Calendar.getInstance();
+		trenutni.set(Calendar.MONTH,(trenutni.get(Calendar.MONTH))+1); //posto vraca za broj manje ne znam sto treba provjeriti bolje
+		if(datumZaposlenja.getYear()>trenutni.get(Calendar.YEAR)) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
+		else if(datumZaposlenja.getYear()==trenutni.get(Calendar.YEAR) && datumZaposlenja.getMonth()>trenutni.get(Calendar.MONTH)) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
+		else if(datumZaposlenja.getYear()==trenutni.get(Calendar.YEAR) && datumZaposlenja.getMonth()==trenutni.get(Calendar.MONTH) && datumZaposlenja.getDay()>trenutni.get(Calendar.DAY_OF_MONTH)) throw new Exception("Datum zaposljenja ne moze biti poslije trenutnog datuma");
+		
 		this.datumZaposlenja = datumZaposlenja;
 	}
 

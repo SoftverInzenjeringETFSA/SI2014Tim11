@@ -2,6 +2,7 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.GUI;
 
 import java.awt.EventQueue;
+import java.awt.TexturePaint;
 
 import javax.swing.JFrame;
 
@@ -16,6 +17,14 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.JTextField;
+
+import org.hibernate.internal.util.compare.CalendarComparator;
+import org.hibernate.type.descriptor.java.CalendarTypeDescriptor;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWindow {
 
@@ -54,6 +63,8 @@ public class MainWindow {
 	Firma f=new Firma();
 	Operater _op;
 	Admin _ad;
+	private JTextField textField;
+	Plata plata;
 	private void initialize() {
 		try {
 			f.setIme("name");
@@ -64,10 +75,21 @@ public class MainWindow {
 			_op.setFirma(f);
 			_ad.setPassword("0000");
 			_ad.setUsername("Administrator");
-			_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);
+			
+			
+			_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(2010,10,5),"zaposlenik",0,1.0,2.7,270.0);
+			Calendar trenutni= Calendar.getInstance();
+			
+			Date pom=new Date(trenutni.get(Calendar.YEAR),trenutni.get(Calendar.MONTH)+1,trenutni.get(Calendar.DAY_OF_MONTH));
+			
+			plata=new Plata(_z,pom,_z.getDnevniTopliObrok(),_z.getFaktor(),_z.getKoeficijent(),_z.getOsnovica(),21,0,21,_z.radniStaz(),0);
+			
+			
+			
 			_z.setFirma(f);
 			f.dodajOperatera(_op);
 			f.dodajZaposlenika(_z);
+			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -80,7 +102,7 @@ public class MainWindow {
 		frame.getContentPane().setLayout(null);
 		
 		final JLabel lbl_ime = new JLabel("Ime:  ");
-		lbl_ime.setBounds(118, 82, 243, 73);
+		lbl_ime.setBounds(100, 120, 243, 67);
 		frame.getContentPane().add(lbl_ime);
 		
 		final JButton btn_ime = new JButton("Prikaži ime");
@@ -94,7 +116,27 @@ public class MainWindow {
 				btn_ime.setVisible(false);
 			}
 		});
-		btn_ime.setBounds(164, 166, 113, 52);
+		btn_ime.setBounds(277, 198, 113, 52);
 		frame.getContentPane().add(btn_ime);
+		
+		textField = new JTextField();
+		textField.setBounds(133, 45, 86, 20);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblZaTestiranjePlate = new JLabel("Izračunaj neto");
+		lblZaTestiranjePlate.setBounds(44, 48, 79, 14);
+		frame.getContentPane().add(lblZaTestiranjePlate);
+		
+		JButton btnIzracunaj = new JButton("izracunaj");
+		btnIzracunaj.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				textField.setText(Double.toString(plata.izracunajNetoPlatu()));
+				
+			}
+		});
+		btnIzracunaj.setBounds(241, 44, 89, 23);
+		frame.getContentPane().add(btnIzracunaj);
 	}
 }
