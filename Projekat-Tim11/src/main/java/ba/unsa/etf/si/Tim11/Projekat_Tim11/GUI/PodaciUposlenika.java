@@ -5,11 +5,13 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
+
 import java.util.*;
 
 import com.toedter.calendar.JCalendar;
@@ -147,7 +149,7 @@ public class PodaciUposlenika {
 		lblZaposlen.setBounds(10, 237, 78, 14);
 		frame.getContentPane().add(lblZaposlen);
 		
-		JCalendar calZaposlen = new JCalendar();
+		final JCalendar calZaposlen = new JCalendar();
 		calZaposlen.setBounds(98, 237, 200, 112);
 		frame.getContentPane().add(calZaposlen);
 		
@@ -157,6 +159,49 @@ public class PodaciUposlenika {
 		lblSlika.setIcon(new ImageIcon("icons/uposlenik_icon.png"));
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
+		btnPotvrdi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(_z == null) {
+					try {
+						_z = new Zaposlenik();
+						_z.setIme(txtIme.getText());
+						_z.setPrezime(txtPrezime.getText());
+						_z.setJmbg(txtJmbg.getText());
+						_z.setAdresa(txtAdresa.getText());
+						_z.setPozicija(txtPozicija.getText());
+						_z.setDatumZaposlenja(calZaposlen.getDate());
+						Sistem.Zaposlenici.dodaj(_z);
+						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novog zaposlenika");
+						frame.dispose();
+						UposleniciPrikaz up = new UposleniciPrikaz(_o);
+						up.main(null);
+					}
+					catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else {
+					try {
+						_z.setIme(txtIme.getText());
+						_z.setPrezime(txtPrezime.getText());
+						_z.setJmbg(txtJmbg.getText());
+						_z.setAdresa(txtAdresa.getText());
+						_z.setPozicija(txtPozicija.getText());
+						_z.setDatumZaposlenja(calZaposlen.getDate());
+						Sistem.Zaposlenici.izmijeni(_z);
+						JOptionPane.showMessageDialog(frame, "Uspješno ste izmijenili zaposlenika");
+						frame.dispose();
+						UposleniciPrikaz up = new UposleniciPrikaz(_o);
+						up.main(null);
+					}
+					catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 		btnPotvrdi.setBounds(329, 266, 118, 23);
 		frame.getContentPane().add(btnPotvrdi);
 		
