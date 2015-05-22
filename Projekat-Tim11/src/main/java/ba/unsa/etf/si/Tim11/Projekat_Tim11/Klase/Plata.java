@@ -250,6 +250,7 @@ public class Plata implements Serializable  {
 		double ukupanTopli=this.stvarniRad*this.dnevniTopliObrok; //ukupan topli obrok* broj dana koje je zaposlenik radio
 																  //sto znaci da nam u sustini godisnji odmor znaci 
 		neto+=ukupanTopli;
+		neto-=izracunajPorezNaDohodak();
 		return neto;
 	
 	}			
