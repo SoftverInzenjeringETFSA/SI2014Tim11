@@ -38,6 +38,7 @@ public class PrikazFirmi extends JFrame{
 	private JTable table;
 	private List<Firma>_firme;
 	private static Admin  _a;
+	private static Firma _f;
 	
 
 	
@@ -89,13 +90,15 @@ public class PrikazFirmi extends JFrame{
 		frmPrikazFirmi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrikazFirmi.getContentPane().setLayout(null);
 		_firme = Sistem.Firme.lista();
+
+
 		
 		JLabel lbNaziv = new JLabel("Naziv");
-		lbNaziv.setBounds(10, 21, 46, 14);
+		lbNaziv.setBounds(10, 21, 26, 14);
 		frmPrikazFirmi.getContentPane().add(lbNaziv);
 		
 		txtNaziv = new JTextField();
-		txtNaziv.setBounds(49, 18, 86, 20);
+		txtNaziv.setBounds(46, 21, 86, 20);
 		frmPrikazFirmi.getContentPane().add(txtNaziv);
 		txtNaziv.setColumns(10);
 		txtNaziv.getDocument().addDocumentListener(new DocumentListener() {
@@ -185,11 +188,11 @@ public class PrikazFirmi extends JFrame{
 		
 		JButton btnDodaj = new JButton("Dodaj");
 		btnDodaj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0){
-			
+
+				public void actionPerformed(ActionEvent e) {
 					frmPrikazFirmi.dispose();
-					PodaciOperatera po = new PodaciOperatera();
-					po.main(null);
+			DodavanjeFirmi df= new DodavanjeFirmi(_a);
+					df.main(null);
 				}
 			});
 		btnDodaj.setBounds(340, 67, 89, 23);
@@ -259,6 +262,7 @@ public class PrikazFirmi extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
 				if(dialogResult == JOptionPane.YES_OPTION) {
+					
 					
 				}
 				if(dialogResult == JOptionPane.NO_OPTION) {
