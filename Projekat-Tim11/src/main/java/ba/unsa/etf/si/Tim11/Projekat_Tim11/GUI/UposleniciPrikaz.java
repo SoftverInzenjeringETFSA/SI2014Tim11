@@ -96,7 +96,7 @@ public class UposleniciPrikaz {
 		btnDodavanje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				PodaciUposlenika pu = new PodaciUposlenika();
+				PodaciUposlenika pu = new PodaciUposlenika(_f, _o);
 				pu.main(null);
 			}
 		});
