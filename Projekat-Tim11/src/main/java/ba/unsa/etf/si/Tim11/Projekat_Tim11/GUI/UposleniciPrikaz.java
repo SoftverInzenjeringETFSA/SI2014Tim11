@@ -12,10 +12,6 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
@@ -37,7 +33,6 @@ public class UposleniciPrikaz {
 	private static Operater _o;
 	private List<Zaposlenik> _zaposlenici;
 	private List<Firma> _firme;
-	private Firma _f;
 	private JTable table;
 
 	/**
@@ -93,69 +88,28 @@ public class UposleniciPrikaz {
 		lblFirma.setHorizontalAlignment(SwingConstants.RIGHT);
 		frame.getContentPane().add(lblFirma);
 		
-		JButton btnDodavanje = new JButton("Dodavanje");
-		btnDodavanje.setBounds(355, 126, 124, 23);
-		btnDodavanje.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				PodaciUposlenika pu = new PodaciUposlenika(_f, _o);
-				pu.main(null);
-			}
-		});
-		frame.getContentPane().add(btnDodavanje);
-		
-		final JButton btnAzuriranje = new JButton("Ažuriranje");
-		btnAzuriranje.setBounds(355, 160, 124, 23);
-		btnAzuriranje.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int selectedRowIndex = table.getSelectedRow();
-				for (Zaposlenik z : _f.getZaposlenici()) {
-					if (table.isRowSelected(selectedRowIndex) && z.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
-						frame.dispose();
-						PodaciUposlenika pu = new PodaciUposlenika(_f, _o, z);
-						pu.main(null);
-						break;
-					}
-				}
-			}
-		});
-		frame.getContentPane().add(btnAzuriranje);
-		
-		final JButton btnBrisanje = new JButton("Brisanje");
-		btnBrisanje.setBounds(355, 194, 124, 23);
-		btnBrisanje.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
-				if(dialogResult == JOptionPane.YES_OPTION) {
-					int selectedRowIndex = table.getSelectedRow();
-					for (Zaposlenik z : _f.getZaposlenici()) {
-						if (table.isRowSelected(selectedRowIndex) && z.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
-							String ispis = "Uspješno ste obrisali zaposlenika ID: " + z.getId();
-							Sistem.Zaposlenici.izbrisi((int) (long) z.getId());
-							JOptionPane.showMessageDialog(frame, ispis);
-						}
-					}
-				}
-				if(dialogResult == JOptionPane.NO_OPTION) {
-					
-				}
-			}
-		});
-		frame.getContentPane().add(btnBrisanje);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 126, 335, 155);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-	        public void valueChanged(ListSelectionEvent event) {
-	            btnAzuriranje.setEnabled(true);
-	            btnBrisanje.setEnabled(true);
-	        }
-	    });
+		String[] kolone = {"ID",
+		        "Ime",
+		        "Prezime",
+		        "Odjel"};
+
+		DefaultTableModel model = new DefaultTableModel();
+		table.setModel(model);
+		model.setColumnIdentifiers(kolone);
+		for (Zaposlenik z : _zaposlenici) {
+			  Object[] o = new Object[4];
+			  o[0] = z.getId();
+			  o[1] = z.getIme();
+			  o[2] = z.getPrezime();
+			  o[3] = z.getPozicija();
+			  model.addRow(o);
+		}
 		
 		class ItemChangeListener implements ItemListener{
 		    public void itemStateChanged(ItemEvent event) {
@@ -163,35 +117,54 @@ public class UposleniciPrikaz {
 		          Object item = event.getItem();
 		          if(_firme.size() != 0) {
 		        	  for(Firma f : _firme) {
-		        		  if(f.toString().equals(item)) {
-							 for(Zaposlenik z : _zaposlenici) {
-							 	if(z != null) {
-							 		if(f.equals(z.getFirma())) {
-							 			_f = f;
-							 			String[] kolone = {"ID",
-							 					           "Ime",
-							 					           "Prezime",
-							 					           "Odjel"};
+		        		  if(f != null) {
+		        			  if(f.toString().equals(item)) {
+							 		for(Zaposlenik z : _zaposlenici) {
+							 			if(z != null) {
+							 				if(f.equals(z.getFirma())) {
+							 					String[] kolone = {"ID",
+							 					        "Ime",
+							 					        "Prezime",
+							 					        "Odjel"};
 							 					
-							 			DefaultTableModel model = new DefaultTableModel();
-							 			table.setModel(model);
-							 			model.setColumnIdentifiers(kolone);
+							 					DefaultTableModel model = new DefaultTableModel();
+							 					table.setModel(model);
+							 					model.setColumnIdentifiers(kolone);
 							 					
-							 			Object[] o = new Object[4];
-							 				     o[0] = z.getId();
-							 					 o[1] = z.getIme();
-							 					 o[2] = z.getPrezime();
-							 					 o[3] = z.getPozicija();
-							 			model.addRow(o);
+							 					Object[] o = new Object[4];
+							 					  o[0] = z.getId();
+							 					  o[1] = z.getIme();
+							 					  o[2] = z.getPrezime();
+							 					  o[3] = z.getPozicija();
+							 					  model.addRow(o);
+							 				}
+							 			}
 							 		}
-							 	}
-							 }
-				          }
+				        	  }
+		        		  }
 			          }
 			       }
 		        }		          
 		    }       
 		}
+		
+		JComboBox<String> comboFirma = new JComboBox<String>();
+		comboFirma.setBounds(81, 36, 124, 20);
+		comboFirma.addItemListener(new ItemChangeListener());
+		frame.getContentPane().add(comboFirma);
+		
+		if(_firme.size() != 0) {
+			for(Firma f : _firme) {
+				if(f != null) {
+					comboFirma.addItem(f.toString());
+				}
+			}
+		}
+		
+		JLabel lblId = new JLabel("ID:");
+		lblId.setBounds(215, 39, 70, 14);
+		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
+		frame.getContentPane().add(lblId);
 		
 		txtID = new JTextField();
 		txtID.setBounds(295, 36, 124, 20);
@@ -208,7 +181,7 @@ public class UposleniciPrikaz {
 			 		DefaultTableModel model = new DefaultTableModel();
 			 		table.setModel(model);
 			 		model.setColumnIdentifiers(kolone);
-			 		for(Zaposlenik z : _f.getZaposlenici()) {
+			 		for(Zaposlenik z : _zaposlenici) {
 			 			if(z != null) {
 			 				if(txtID.getText().length() == 0) {
 			 					Object[] o = new Object[4];
@@ -241,7 +214,7 @@ public class UposleniciPrikaz {
 		 		DefaultTableModel model = new DefaultTableModel();
 		 		table.setModel(model);
 		 		model.setColumnIdentifiers(kolone);
-		 		for(Zaposlenik z : _f.getZaposlenici()) {
+		 		for(Zaposlenik z : _zaposlenici) {
 		 			if(z != null) {
 		 				if(z.getId().toString().contains(txtID.getText())) {
 		 					Object[] o = new Object[4];
@@ -261,23 +234,42 @@ public class UposleniciPrikaz {
 		     }
 		  });
 		
-		JComboBox<String> comboFirma = new JComboBox<String>();
-		comboFirma.setBounds(81, 36, 124, 20);
-		comboFirma.addItemListener(new ItemChangeListener());
-		frame.getContentPane().add(comboFirma);
+		JButton btnDodavanje = new JButton("Dodavanje");
+		btnDodavanje.setBounds(355, 126, 124, 23);
+		btnDodavanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				PodaciUposlenika pu = new PodaciUposlenika();
+				pu.main(null);
+			}
+		});
+		frame.getContentPane().add(btnDodavanje);
 		
-		if(_firme.size() != 0) {
-			for(Firma f : _firme) {
-				if(f != null) {
-					comboFirma.addItem(f.toString());
+		JButton btnAzuriranje = new JButton("Ažuriranje");
+		btnAzuriranje.setBounds(355, 160, 124, 23);
+		btnAzuriranje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				PodaciUposlenika pu = new PodaciUposlenika();
+				pu.main(null);
+			}
+		});
+		frame.getContentPane().add(btnAzuriranje);
+		
+		JButton btnBrisanje = new JButton("Brisanje");
+		btnBrisanje.setBounds(355, 194, 124, 23);
+		btnBrisanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
+				if(dialogResult == JOptionPane.YES_OPTION) {
+					
+				}
+				if(dialogResult == JOptionPane.NO_OPTION) {
+					
 				}
 			}
-		}
-		
-		JLabel lblId = new JLabel("ID:");
-		lblId.setBounds(215, 39, 70, 14);
-		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
-		frame.getContentPane().add(lblId);
+		});
+		frame.getContentPane().add(btnBrisanje);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.setBounds(355, 258, 124, 23);
@@ -289,10 +281,5 @@ public class UposleniciPrikaz {
 			}
 		});
 		frame.getContentPane().add(btnIzlaz);
-		
-		if(table.getSelectedRow() == -1) {
-			btnAzuriranje.setEnabled(false);
-			btnBrisanje.setEnabled(false);
-		}
 	}
 }

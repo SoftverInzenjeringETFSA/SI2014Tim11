@@ -67,20 +67,20 @@ public class DodavanjeFirmi {
 	
 		
 		JLabel lblNaziv = new JLabel("Naziv");
-		lblNaziv.setBounds(283, 31, 35, 14);
+		lblNaziv.setBounds(287, 31, 46, 14);
 		
 		frame.getContentPane().add(lblNaziv);
 		
 		JLabel lblId = new JLabel("ID");
-		lblId.setBounds(296, 66, 22, 21);
+		lblId.setBounds(287, 67, 23, 14);
 		frame.getContentPane().add(lblId);
 		
 		JLabel lblAdministrator = new JLabel("Administrator");
-		lblAdministrator.setBounds(232, 98, 86, 14);
+		lblAdministrator.setBounds(249, 98, 84, 14);
 		frame.getContentPane().add(lblAdministrator);
 		
 		JLabel lblDatumDodavanja = new JLabel("Datum dodavanja");
-		lblDatumDodavanja.setBounds(219, 133, 99, 14);
+		lblDatumDodavanja.setBounds(220, 133, 93, 14);
 		frame.getContentPane().add(lblDatumDodavanja);
 		
 		JButton btnIzlaz = new JButton("Izlaz");

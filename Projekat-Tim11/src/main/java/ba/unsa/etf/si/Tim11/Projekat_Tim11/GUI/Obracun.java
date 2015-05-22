@@ -12,8 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ActionListener;
@@ -79,7 +77,7 @@ public class Obracun {
 		lblUposlenici.setBounds(10, 11, 200, 50);
 		frame.getContentPane().add(lblUposlenici);
 		
-		final JButton btnIzmjeneObracuna = new JButton("Izmjene obračuna");
+		JButton btnIzmjeneObracuna = new JButton("Izmjene obračuna");
 		btnIzmjeneObracuna.setBounds(119, 213, 148, 23);
 		btnIzmjeneObracuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,6 +89,9 @@ public class Obracun {
 						io.main(null);
 						break;
 					}
+				}
+				if(table.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(frame, "Morate selektovati nekog zaposlenika");
 				}
 			}
 		});
@@ -113,13 +114,6 @@ public class Obracun {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-	        public void valueChanged(ListSelectionEvent event) {
-	            btnIzmjeneObracuna.setEnabled(true);
-	        }
-	    });
-		
 		String[] kolone = {"ID",
 		        "Ime",
 		        "Prezime",
@@ -135,10 +129,6 @@ public class Obracun {
 			  o[2] = z.getPrezime();
 			  o[3] = z.getPozicija();
 			  model.addRow(o);
-		}
-		
-		if(table.getSelectedRow() == -1) {
-			btnIzmjeneObracuna.setEnabled(false);
 		}
 	}
 }

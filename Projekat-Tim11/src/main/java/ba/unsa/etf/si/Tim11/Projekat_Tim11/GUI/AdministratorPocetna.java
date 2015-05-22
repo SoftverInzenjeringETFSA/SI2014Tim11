@@ -19,6 +19,10 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Admin;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Zaposlenik;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem.Zaposlenici;
+
+
+
 
 
 
@@ -26,6 +30,9 @@ public class AdministratorPocetna {
 
 	private JFrame frame;
 
+	private static int _id;
+	
+	public String Username;
 	private static Admin _a;
 
 	/**
@@ -74,10 +81,16 @@ public class AdministratorPocetna {
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  
+      //   Admin a=Admini.nadji(_id);
+        // String username=z.getIme();
 
-	JLabel lblDobrodoliIme = new JLabel("Dobrodošli,");
-		lblDobrodoliIme.setBounds(48, 26, 114, 14);
+ 
+		
+	
+
+		
+	JLabel lblDobrodoliIme = new JLabel("Dobrodošli ,");
+		lblDobrodoliIme.setBounds(48, 26, 97, 14);
 		if(_a != null) {
 			lblDobrodoliIme.setText("Dobrodošli, " + _a.getUsername());
 		}
@@ -120,9 +133,6 @@ public class AdministratorPocetna {
 		JButton btnAuriranjeOperatera = new JButton("Ažuriranje operatera");
 		btnAuriranjeOperatera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				RadnjeOperateri ro = new RadnjeOperateri();
-				ro.main(null);
 			}
 		});
 		btnAuriranjeOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -144,20 +154,6 @@ public class AdministratorPocetna {
 		
 		
 		JButton btnIzlaz = new JButton("Izlaz");
-		btnIzlaz.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				Login l;
-				try {
-					l = new Login();
-					l.main(null);
-				}
-				catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
 		btnIzlaz.setBounds(331, 227, 75, 23);
 		frame.getContentPane().add(btnIzlaz);
 		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnRaspodjelaOperatera, btnAuriranjeOperatera, btnAuriranjeFirmi, btnIzlaz, frame.getContentPane(), lblDobrodoliIme, lblSlika,btnMojRaun}));
