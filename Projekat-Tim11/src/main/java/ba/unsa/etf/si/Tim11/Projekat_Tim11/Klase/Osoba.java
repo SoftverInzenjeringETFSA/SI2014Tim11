@@ -55,7 +55,7 @@ public class Osoba implements Serializable {
 	
 	public void setIme(String ime) throws Exception{
 		Pattern pattern = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
-	    if (!pattern.matcher(ime).matches() || !pattern.matcher(prezime).matches()) {
+	    if (!pattern.matcher(ime).matches()) {
 	        throw new Exception("Ime mora imati minimalno po 3 karaktera(samo velika ili mala slova)");
 	    }
 		this.ime=ime;

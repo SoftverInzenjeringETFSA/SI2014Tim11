@@ -31,7 +31,7 @@ public class Admin extends Osoba implements Account, Serializable {
 
 	public void setPassword(String password) throws Exception{
 		Pattern pattern = Pattern.compile("[a-zA-Z0-9]{3,}"); //mogu se unijeti velika,mala slova,brojevi
-	    if (!pattern.matcher(username).matches()) {
+	    if (!pattern.matcher(password).matches()) {
 	        throw new Exception("Password mora imati minimalno 3 karaktera(velika i mala slova i brojevi(minimalno 3 karaktera)");
 	    }
 		this.password = password;

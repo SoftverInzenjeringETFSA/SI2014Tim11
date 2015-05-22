@@ -55,50 +55,23 @@ public class MainWindow {
 	Operater _op;
 	Admin _ad;
 	private void initialize() {
-		
-		
 		try {
+			f.setIme("name");
 			_op=new Operater("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik");
-			 _ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"administrator");
-			 _op.setPassword("1234");
-				_op.setUsername("user");
-				_ad.setPassword("0000");
-				_ad.setUsername("Administrator");
-				_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);
-				Sistem.Admini.dodaj(_ad);
+			_ad=new Admin("Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"administrator");
+			_op.setPassword("1234");
+			_op.setUsername("user");
+			_op.setFirma(f);
+			_ad.setPassword("0000");
+			_ad.setUsername("Administrator");
+			_z=new Zaposlenik(f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);
+			_z.setFirma(f);
+			f.dodajOperatera(_op);
+			f.dodajZaposlenika(_z);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-		    System.out.println(e1);
+			e1.printStackTrace();
 		}
-		
-		
-		
-		final Plata p=new Plata();
-		try{
-		p.setOsnovica(100);
-		p.setZaposlenik(_z);
-		_z.getPlate().add(p);
-		_op.setFirma(f);
-		_z.setFirma(f);
-		
-		f.getZaposlenici().add(_z);
-		f.getOperateri().add(_op);
-		
-		
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}
-		
-
-		final Firma f=new Firma();
-		
-		_op.setFirma(f);
-		
-		_z.setFirma(f);
-final Firma _f=new Firma();
-
 
 		
 		frame = new JFrame();
@@ -114,8 +87,10 @@ final Firma _f=new Firma();
 		btn_ime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Long id=Sistem.Firme.dodaj(f);	
-				lbl_ime.setText("ID: "+id);
+				//Long id=Sistem.Firme.dodaj(f);
+				final Zaposlenik temp=Sistem.Zaposlenici.nadji(2);
+				Firma tf=temp.getFirma();
+				lbl_ime.setText("ID: "+tf.getId());
 				btn_ime.setVisible(false);
 			}
 		});
