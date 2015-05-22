@@ -22,10 +22,6 @@ import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
 
 
 
-
-
-
-
 public class AdministratorPocetna {
 
 	private JFrame frame;

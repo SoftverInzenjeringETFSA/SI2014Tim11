@@ -11,6 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Firma;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Operater;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Zaposlenik;
+
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
@@ -23,6 +27,9 @@ public class DodavanjeOperatera {
 	private JTextField txtAdresa;
 	private JTextField txtPozicija;
 	private JTextField txtIme;
+	private static Firma _f;
+	private static Operater _o;
+	private static Zaposlenik _z;
 
 	/**
 	 * Launch the application.
@@ -31,7 +38,18 @@ public class DodavanjeOperatera {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DodavanjeOperatera window = new DodavanjeOperatera();
+					DodavanjeOperatera window;
+					if(_f != null & _o != null) {
+						if(_z != null) {
+							window = new DodavanjeOperatera(_f, _o, _z);
+						}
+						else {
+							window = new DodavanjeOperatera(_f, _o);
+						}
+					}
+					else {
+						window = new DodavanjeOperatera();
+					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,6 +63,21 @@ public class DodavanjeOperatera {
 	 */
 	public DodavanjeOperatera() {
 		initialize();
+	}
+
+	public DodavanjeOperatera(Firma f, Operater o, Zaposlenik z) {
+	
+		initialize();
+		_f = f;
+		_o = o;
+		_z = z;
+	}
+
+	public DodavanjeOperatera(Firma f, Operater o) {
+		initialize();
+		_f = f;
+		_o = o;
+		_z = null;
 	}
 
 	/**
@@ -107,6 +140,11 @@ public class DodavanjeOperatera {
 		lblSlika.setIcon(new ImageIcon("icons/uposlenik_icon.png"));
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
+		btnPotvrdi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnPotvrdi.setBounds(329, 266, 118, 23);
 		frame.getContentPane().add(btnPotvrdi);
 		
@@ -148,6 +186,7 @@ public class DodavanjeOperatera {
 		txtAdresa.setColumns(10);
 		
 		txtPozicija = new JTextField();
+		txtPozicija.setText("Operater");
 		txtPozicija.setBounds(106, 193, 86, 20);
 		frame.getContentPane().add(txtPozicija);
 		txtPozicija.setColumns(10);
