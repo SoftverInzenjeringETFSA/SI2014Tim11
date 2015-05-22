@@ -1,6 +1,5 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
-import static org.junit.Assert.*;
 
 import java.util.Date;
 
