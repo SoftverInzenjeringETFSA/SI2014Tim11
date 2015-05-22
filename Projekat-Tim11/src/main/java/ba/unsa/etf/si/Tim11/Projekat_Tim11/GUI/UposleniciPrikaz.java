@@ -121,8 +121,7 @@ public class UposleniciPrikaz {
 		        			  if(f.toString().equals(item)) {
 							 		for(Zaposlenik z : _zaposlenici) {
 							 			if(z != null) {
-							 				if(Sistem.Firme.nadji(3) == f) {
-							 					JOptionPane.showMessageDialog(frame, f.getId());
+							 				if(f.equals(z.getFirma())) {
 							 					String[] kolone = {"ID",
 							 					        "Ime",
 							 					        "Prezime",
