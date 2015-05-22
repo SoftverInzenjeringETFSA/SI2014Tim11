@@ -35,12 +35,13 @@ public class Plata implements Serializable  {
 	@JoinColumn(name = "zaposlenik")
 	private Zaposlenik zaposlenik;
 	
-	public Plata(Date datum, double dnevniTopliObrok,
+	public Plata(Zaposlenik zaposlenik,Date datum, double dnevniTopliObrok,
 				double faktor,double koeficijent,double osnovica,
 				int stvarniRad, int bolovanje, int brojRadnihDana,
 	           int godineStaza, int godisnjiOdmor) throws Exception
 	{
 		if((this.stvarniRad+this.bolovanje+this.godisnjiOdmor)>31) throw new Exception("Zbir stvarnog rada, bolovanja i godisnjeg odmora u jednom mjesecu ne moze biti >31");
+		this.setZaposlenik(zaposlenik);
 		this.setDatum(datum);
 		this.setDnevniTopliObrok(dnevniTopliObrok);
 		this.setFaktor(faktor);
