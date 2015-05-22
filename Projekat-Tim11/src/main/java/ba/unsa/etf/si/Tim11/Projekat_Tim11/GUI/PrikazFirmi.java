@@ -188,8 +188,8 @@ public class PrikazFirmi extends JFrame{
 			public void actionPerformed(ActionEvent arg0){
 			
 					frmPrikazFirmi.dispose();
-					PodaciOperatera po = new PodaciOperatera();
-					po.main(null);
+					DodavanjeFirmi df = new DodavanjeFirmi();
+					df.main(null);
 				}
 			});
 		btnDodaj.setBounds(340, 67, 89, 23);

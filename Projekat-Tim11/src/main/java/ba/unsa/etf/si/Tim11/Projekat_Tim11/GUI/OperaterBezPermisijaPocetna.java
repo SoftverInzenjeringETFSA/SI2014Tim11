@@ -11,12 +11,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Operater;
+
 import java.awt.Font;
 
 public class OperaterBezPermisijaPocetna {
 
 	private JFrame frame;
-
+private static Operater _o;
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +42,10 @@ public class OperaterBezPermisijaPocetna {
 	public OperaterBezPermisijaPocetna() {
 		initialize();
 	}
-
+	public OperaterBezPermisijaPocetna(Operater o) {
+		initialize();
+		_o = o;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -54,6 +60,9 @@ public class OperaterBezPermisijaPocetna {
 		
 		JLabel lblDobrodosli = new JLabel("Dobrodošli,  ");
 		lblDobrodosli.setBounds(48, 11, 200, 35);
+		if(_o != null) {
+			lblDobrodosli.setText("Dobrodošli, " + _o.getUsername());
+		}
 		frame.getContentPane().add(lblDobrodosli);
 		
 		JLabel lblSlika = new JLabel("");
@@ -62,6 +71,13 @@ public class OperaterBezPermisijaPocetna {
 		lblSlika.setIcon(new ImageIcon("icons/user_icon.png"));
 		
 		JButton btnMojRacun = new JButton("Moj račun");
+		btnMojRacun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			PodaciOperatera po = new PodaciOperatera(_o);
+			po.main(null);
+		}
+	});
 		btnMojRacun.setBounds(48, 212, 137, 23);
 		frame.getContentPane().add(btnMojRacun);
 		
@@ -96,10 +112,18 @@ public class OperaterBezPermisijaPocetna {
 		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+			public void actionPerformed(ActionEvent e) {frame.dispose();
+			Login l;
+			try {
+				l = new Login();
+				l.main(null);
 			}
-		});
+			catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	});
 		btnIzlaz.setBounds(263, 212, 113, 23);
 		frame.getContentPane().add(btnIzlaz);
 		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnMojRacun, btnObracun, btnIzvjestaji, btnKorisnickiRacuni, btnIzlaz, frame.getContentPane(), lblDobrodosli, lblSlika}));
