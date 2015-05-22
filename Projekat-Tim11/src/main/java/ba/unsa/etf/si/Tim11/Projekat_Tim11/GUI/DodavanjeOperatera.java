@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Operater;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
+
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
@@ -23,11 +26,7 @@ public class DodavanjeOperatera {
 	private JTextField txtAdresa;
 	private JTextField txtPozicija;
 	private JTextField txtIme;
-<<<<<<< HEAD
-	
 
-=======
->>>>>>> 8467ad35d85bb6485952654e8e481fb308d18248
 
 	/**
 	 * Launch the application.
@@ -36,10 +35,6 @@ public class DodavanjeOperatera {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-<<<<<<< HEAD
-					
-=======
->>>>>>> 8467ad35d85bb6485952654e8e481fb308d18248
 					DodavanjeOperatera window = new DodavanjeOperatera();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -56,12 +51,12 @@ public class DodavanjeOperatera {
 		initialize();
 	}
 
-<<<<<<< HEAD
+
 	Operater _op=new Operater();
 
 
-=======
->>>>>>> 8467ad35d85bb6485952654e8e481fb308d18248
+
+
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws Exception 
@@ -125,21 +120,22 @@ public class DodavanjeOperatera {
 		lblSlika.setIcon(new ImageIcon("icons/uposlenik_icon.png"));
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
-<<<<<<< HEAD
+
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
 				frame.dispose();
 			}
 		});
-=======
->>>>>>> 8467ad35d85bb6485952654e8e481fb308d18248
+
+
 		btnPotvrdi.setBounds(329, 266, 118, 23);
 		frame.getContentPane().add(btnPotvrdi);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Sistem.Operateri.dodaj(_op);
 				frame.dispose();
 			}
 		});
