@@ -33,6 +33,7 @@ public class UposleniciPrikaz {
 	private static Operater _o;
 	private List<Zaposlenik> _zaposlenici;
 	private List<Firma> _firme;
+	private Firma _f;
 	private JTable table;
 
 	/**
@@ -94,7 +95,7 @@ public class UposleniciPrikaz {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		String[] kolone = {"ID",
+		/*String[] kolone = {"ID",
 		        "Ime",
 		        "Prezime",
 		        "Odjel"};
@@ -109,7 +110,7 @@ public class UposleniciPrikaz {
 			  o[2] = z.getPrezime();
 			  o[3] = z.getPozicija();
 			  model.addRow(o);
-		}
+		}*/
 		
 		class ItemChangeListener implements ItemListener{
 		    public void itemStateChanged(ItemEvent event) {
@@ -117,54 +118,35 @@ public class UposleniciPrikaz {
 		          Object item = event.getItem();
 		          if(_firme.size() != 0) {
 		        	  for(Firma f : _firme) {
-		        		  if(f != null) {
-		        			  if(f.toString().equals(item)) {
-							 		for(Zaposlenik z : _zaposlenici) {
-							 			if(z != null) {
-							 				if(f.equals(z.getFirma())) {
-							 					String[] kolone = {"ID",
-							 					        "Ime",
-							 					        "Prezime",
-							 					        "Odjel"};
+		        		  if(f.toString().equals(item)) {
+							 for(Zaposlenik z : _zaposlenici) {
+							 	if(z != null) {
+							 		if(f.equals(z.getFirma())) {
+							 			_f = f;
+							 			String[] kolone = {"ID",
+							 					           "Ime",
+							 					           "Prezime",
+							 					           "Odjel"};
 							 					
-							 					DefaultTableModel model = new DefaultTableModel();
-							 					table.setModel(model);
-							 					model.setColumnIdentifiers(kolone);
+							 			DefaultTableModel model = new DefaultTableModel();
+							 			table.setModel(model);
+							 			model.setColumnIdentifiers(kolone);
 							 					
-							 					Object[] o = new Object[4];
-							 					  o[0] = z.getId();
-							 					  o[1] = z.getIme();
-							 					  o[2] = z.getPrezime();
-							 					  o[3] = z.getPozicija();
-							 					  model.addRow(o);
-							 				}
-							 			}
+							 			Object[] o = new Object[4];
+							 				     o[0] = z.getId();
+							 					 o[1] = z.getIme();
+							 					 o[2] = z.getPrezime();
+							 					 o[3] = z.getPozicija();
+							 			model.addRow(o);
 							 		}
-				        	  }
-		        		  }
+							 	}
+							 }
+				          }
 			          }
 			       }
 		        }		          
 		    }       
 		}
-		
-		JComboBox<String> comboFirma = new JComboBox<String>();
-		comboFirma.setBounds(81, 36, 124, 20);
-		comboFirma.addItemListener(new ItemChangeListener());
-		frame.getContentPane().add(comboFirma);
-		
-		if(_firme.size() != 0) {
-			for(Firma f : _firme) {
-				if(f != null) {
-					comboFirma.addItem(f.toString());
-				}
-			}
-		}
-		
-		JLabel lblId = new JLabel("ID:");
-		lblId.setBounds(215, 39, 70, 14);
-		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
-		frame.getContentPane().add(lblId);
 		
 		txtID = new JTextField();
 		txtID.setBounds(295, 36, 124, 20);
@@ -181,7 +163,7 @@ public class UposleniciPrikaz {
 			 		DefaultTableModel model = new DefaultTableModel();
 			 		table.setModel(model);
 			 		model.setColumnIdentifiers(kolone);
-			 		for(Zaposlenik z : _zaposlenici) {
+			 		for(Zaposlenik z : _f.getZaposlenici()) {
 			 			if(z != null) {
 			 				if(z.getId().toString().contains(txtID.getText())) {
 			 					Object[] o = new Object[4];
@@ -205,7 +187,7 @@ public class UposleniciPrikaz {
 		 		DefaultTableModel model = new DefaultTableModel();
 		 		table.setModel(model);
 		 		model.setColumnIdentifiers(kolone);
-		 		for(Zaposlenik z : _zaposlenici) {
+		 		for(Zaposlenik z : _f.getZaposlenici()) {
 		 			if(z != null) {
 		 				if(z.getId().toString().contains(txtID.getText())) {
 		 					Object[] o = new Object[4];
@@ -224,6 +206,24 @@ public class UposleniciPrikaz {
 
 		     }
 		  });
+		
+		JComboBox<String> comboFirma = new JComboBox<String>();
+		comboFirma.setBounds(81, 36, 124, 20);
+		comboFirma.addItemListener(new ItemChangeListener());
+		frame.getContentPane().add(comboFirma);
+		
+		if(_firme.size() != 0) {
+			for(Firma f : _firme) {
+				if(f != null) {
+					comboFirma.addItem(f.toString());
+				}
+			}
+		}
+		
+		JLabel lblId = new JLabel("ID:");
+		lblId.setBounds(215, 39, 70, 14);
+		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
+		frame.getContentPane().add(lblId);
 		
 		JButton btnDodavanje = new JButton("Dodavanje");
 		btnDodavanje.setBounds(355, 126, 124, 23);
