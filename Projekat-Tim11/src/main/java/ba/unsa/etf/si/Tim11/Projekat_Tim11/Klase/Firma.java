@@ -144,7 +144,7 @@ if (!pattern.matcher(sjediste).matches())
 		{
 			if(o.getId().equals(id))
 			{
-				zaposlenici.remove(o);
+				operateri.remove(o);
 				return true;
 			}
 				

@@ -243,7 +243,7 @@ public class FirmaTest extends TestCase{
 				}		
 			}
 
-	/*//Test brisanja operatera i provjera duzine liste operatera da potvrdimo brisanje
+	//Test brisanja operatera i provjera duzine liste operatera da potvrdimo brisanje
 	@Test 
 	public void testBrisanjaOperateraDuzinaListeProvjera(){
 				
@@ -282,7 +282,7 @@ public class FirmaTest extends TestCase{
 					System.err.println(e.getMessage());				
 				}		
 			}
-		*/
+		
 		//testiranje toString metode
 		@Test 
 		public void testToString() {
