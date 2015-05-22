@@ -30,6 +30,10 @@ public class Plata implements Serializable  {
 	private int godineStaza;		 //ovo mozemo dobiti iz klase zaposlenika preko metode
 	private int godisnjiOdmor;		//broj dana godisnjeg odmora
 	
+	//dodana dva atributa
+	private double nocniRad;        //predstavlja zaradu za nocni rad(broj_sati_nocnog_rada*satnica_za_nocni_Rad)
+	private int prazniciRad;         //broj dana koliko se radilo za praznike
+	
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "zaposlenik")
@@ -55,6 +59,32 @@ public class Plata implements Serializable  {
 		this.setGodisnjiOdmor(godisnjiOdmor);
 		
 	}
+	
+	//konstruktor sa dva dodatna parametra: nocniRad i radPraznici
+	
+	
+	public Plata(Zaposlenik zaposlenik,Date datum, double dnevniTopliObrok,
+			double faktor,double koeficijent,double osnovica,
+			int stvarniRad, int bolovanje, int brojRadnihDana,
+           int godineStaza, int godisnjiOdmor, double nocniRad,int prazniciRad) throws Exception
+{
+	if((stvarniRad+bolovanje+godisnjiOdmor)>brojRadnihDana) throw new Exception("Zbir stvarnog rada, bolovanja i godisnjeg odmora u jednom mjesecu ne moze biti >31");
+	
+	this.setZaposlenik(zaposlenik);
+	this.setDatum(datum);
+	this.setDnevniTopliObrok(dnevniTopliObrok);
+	this.setFaktor(faktor);
+	this.setKoeficijent(koeficijent);
+	this.setOsnovica(osnovica);
+	this.setStvarniRad(stvarniRad);
+	this.setBolovanje(bolovanje);
+	this.setBrojRadnihDana(brojRadnihDana);
+	this.setGodineStaza(godineStaza);
+	this.setGodisnjiOdmor(godisnjiOdmor);
+	this.setNocniRad(nocniRad);
+	this.setPrazniciRad(prazniciRad);
+	
+}
 
 	public Plata(){};
 	public Zaposlenik getZaposlenik() {
@@ -66,7 +96,7 @@ public class Plata implements Serializable  {
 		this.zaposlenik = zaposlenik;
 	}
 
-
+	
 	public long getId() {
 		return id;
 	}
@@ -182,7 +212,25 @@ public class Plata implements Serializable  {
 		return godisnjiOdmor;
 	}
 
-
+	public double getNocniRad()
+	{
+		return this.nocniRad;
+	}
+	public void  setNocniRad(double nocniRad)
+	{	
+		//trebalo bi neku provjeru ubaciti da se ne moze unijeti nesto previse nocnog rada, to uraditi mozda u formi
+		
+		this.nocniRad=nocniRad;
+	}
+	public int getPrazniciRad()
+	{
+		return this.prazniciRad;
+	}
+	public void setPrazniciRad(int prazniciRad) throws Exception
+	{
+		if(this.prazniciRad>10) throw new Exception("Max broj radnih dana praznika je 10!");
+		this.prazniciRad=prazniciRad;
+	}
 	public void setGodisnjiOdmor(int godisnjiOdmor)throws Exception { //nisam imao kad pogledat koliko smije biti dana godisnjeg
 		if(godisnjiOdmor<0 || godisnjiOdmor>31)  throw new Exception("Godisnji odmor mora biti izmedju 0 i 30 dana");
 		this.godisnjiOdmor = godisnjiOdmor;
@@ -248,7 +296,15 @@ public class Plata implements Serializable  {
 		neto+=netoBolovanje;         //neto je zarada kada je zap. radio dok je netoBolovanje zarada kad je zaposlenik bio na bolovanju
 		}
 		double ukupanTopli=this.stvarniRad*this.dnevniTopliObrok; //ukupan topli obrok* broj dana koje je zaposlenik radio
-																  //sto znaci da nam u sustini godisnji odmor znaci 
+												          		  //sto znaci da nam u sustini godisnji odmor znaci 
+		
+		if(this.prazniciRad !=0)	
+		{ 
+			//15% vise na satnicu za praznike
+			double netoPraznici=((satnica*115)/100)*(this.prazniciRad*8);
+			neto+=netoPraznici;
+		}
+		neto+=this.nocniRad;       //samo sam ovako dodao posto je nocniRad dodatak na platu
 		neto+=ukupanTopli;
 		neto-=izracunajPorezNaDohodak();
 		return neto;
