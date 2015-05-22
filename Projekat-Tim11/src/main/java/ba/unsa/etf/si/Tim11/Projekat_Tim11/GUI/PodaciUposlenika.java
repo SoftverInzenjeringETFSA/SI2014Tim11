@@ -164,9 +164,20 @@ public class PodaciUposlenika {
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				UposleniciPrikaz up = new UposleniciPrikaz(_o);
+				up.main(null);
 			}
 		});
 		btnIzlaz.setBounds(329, 300, 118, 23);
 		frame.getContentPane().add(btnIzlaz);
+		
+		if(_z != null) {
+			txtIme.setText(_z.getIme());
+			txtPrezime.setText(_z.getPrezime());
+			txtJmbg.setText(_z.getJmbg());
+			txtAdresa.setText(_z.getAdresa());
+			txtPozicija.setText(_z.getPozicija());
+			calZaposlen.setDate(_z.getDatumZaposlenja());
+		}
 	}
 }
