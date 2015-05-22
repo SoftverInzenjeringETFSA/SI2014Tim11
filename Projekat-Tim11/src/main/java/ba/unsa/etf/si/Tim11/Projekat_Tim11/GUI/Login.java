@@ -114,7 +114,7 @@ public class Login {
 				for(Admin a : _administratori) {
 					if(a.getUsername().equals(txtKorisnickoIme.getText()) && a.ispravanPassword(passString)) {
 						frame.dispose();
-						AdministratorPocetna ap = new AdministratorPocetna();
+						AdministratorPocetna ap = new AdministratorPocetna(a);
 						ap.main(null);
 						jeAdministrator = true;
 						break;

@@ -90,7 +90,7 @@ public class AdministratorPocetna {
 
 		
 	JLabel lblDobrodoliIme = new JLabel("Dobrodošli ,");
-		lblDobrodoliIme.setBounds(48, 26, 97, 14);
+		lblDobrodoliIme.setBounds(25, 26, 137, 14);
 		if(_a != null) {
 			lblDobrodoliIme.setText("Dobrodošli, " + _a.getUsername());
 		}
