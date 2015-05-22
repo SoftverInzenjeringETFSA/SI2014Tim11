@@ -7,9 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
+import java.util.*;
+
 import com.toedter.calendar.JCalendar;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -21,6 +28,9 @@ public class PodaciUposlenika {
 	private JTextField txtJmbg;
 	private JTextField txtAdresa;
 	private JTextField txtPozicija;
+	private static Operater _o;
+	private static Zaposlenik _z;
+	private static Firma _f;
 
 	/**
 	 * Launch the application.
@@ -29,7 +39,18 @@ public class PodaciUposlenika {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PodaciUposlenika window = new PodaciUposlenika();
+					PodaciUposlenika window;
+					if(_f != null & _o != null) {
+						if(_z != null) {
+							window = new PodaciUposlenika(_f, _o, _z);
+						}
+						else {
+							window = new PodaciUposlenika(_f, _o);
+						}
+					}
+					else {
+						window = new PodaciUposlenika();
+					}
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,6 +64,20 @@ public class PodaciUposlenika {
 	 */
 	public PodaciUposlenika() {
 		initialize();
+	}
+	
+	public PodaciUposlenika(Firma f, Operater o) {
+		initialize();
+		_f = f;
+		_o = o;
+		_z = null;
+	}
+	
+	public PodaciUposlenika(Firma f, Operater o, Zaposlenik z) {
+		initialize();
+		_f = f;
+		_o = o;
+		_z = z;
 	}
 
 	/**
@@ -129,9 +164,20 @@ public class PodaciUposlenika {
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				UposleniciPrikaz up = new UposleniciPrikaz(_o);
+				up.main(null);
 			}
 		});
 		btnIzlaz.setBounds(329, 300, 118, 23);
 		frame.getContentPane().add(btnIzlaz);
+		
+		if(_z != null) {
+			txtIme.setText(_z.getIme());
+			txtPrezime.setText(_z.getPrezime());
+			txtJmbg.setText(_z.getJmbg());
+			txtAdresa.setText(_z.getAdresa());
+			txtPozicija.setText(_z.getPozicija());
+			calZaposlen.setDate(_z.getDatumZaposlenja());
+		}
 	}
 }
