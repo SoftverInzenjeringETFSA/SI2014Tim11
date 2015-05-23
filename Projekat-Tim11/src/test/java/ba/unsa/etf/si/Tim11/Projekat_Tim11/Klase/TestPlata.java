@@ -5,7 +5,7 @@ import junit.framework.JUnit4TestAdapter;
 
 import org.junit.Test;
 import org.junit.Ignore;
-import java.util.Date;
+
 
 public class TestPlata extends TestCase {
 
@@ -138,18 +138,15 @@ public class TestPlata extends TestCase {
 
 
 	@Test (expected=Exception.class) public void testSetGodisnjiOdmor() {
-			 try {
-				 Firma _f = new Firma();
-				 Zaposlenik _z= new Zaposlenik(_f,"Adnan","Muslija","1502994190023","Džamijska 4","+38761508633",new Date(),"zaposlenik",10.0,1.0,2.7,300.0);				
-				 Plata p=new Plata(_z,new Date(),14.5, 1.0, 0.7,300,120,2,55,4,0);	
-				 p.setGodisnjiOdmor(31);
-					
-			        }
-			        catch(Exception e) {
-			        	System.err.println(e.getMessage());	
-			        }
-			
-		
+		 try {
+				Plata p=new Plata();
+				p.setGodisnjiOdmor(31);
+				fail("Nije bacen izuzetak");
+		        }
+		        catch(Exception e) {
+		        	assertTrue(true);
+		        }
 		
 	}
+
 }
