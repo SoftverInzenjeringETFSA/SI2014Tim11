@@ -92,8 +92,10 @@ public class Zaposlenik extends Osoba implements Serializable{
 		if(satnica<=0) throw new Exception("satnica ne moze biti manja od 0");
 		this.satnica = satnica;
 	}*/
-
 	
+	public void dodajPlatu(Plata p) {
+		plate.add(p);
+	}
 
 	public List<Plata> getPlate() {
 		 return this.plate;

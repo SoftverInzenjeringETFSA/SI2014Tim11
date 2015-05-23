@@ -247,7 +247,7 @@ public class Plata implements Serializable  {
 	}
 	
 	public double izracunajDohodak() {     //podijelio sam racun da je lakse za razumjeti
-		double dohodak1=osnovica*koeficijent;
+		double dohodak1=zaposlenik.getOsnovica()*zaposlenik.getKoeficijent();
 		double dohodak2=dohodak1+izracunajMinuliRad(dohodak1);
 		return dohodak2;
 	}
@@ -270,7 +270,7 @@ public class Plata implements Serializable  {
 	public double izracunajPorezNaDohodak()
 	{
 		double licniOdbitak=300;   //osnovni licni odbitak
-		licniOdbitak=licniOdbitak*faktor;
+		licniOdbitak=licniOdbitak*zaposlenik.getFaktor();
 		double osnovicaZaPorez=this.izracunajDohodak()-licniOdbitak;
 		double porezNaDohodak=(osnovicaZaPorez*10)/100;    // izracunavanje poreza od 10% na osnovicaZaPorez
 		return porezNaDohodak;
@@ -295,7 +295,7 @@ public class Plata implements Serializable  {
 		double netoBolovanje=((satnica*80)/100)*(this.bolovanje*8);   //uzeo sam 80% satnice valjda je to ok
 		neto+=netoBolovanje;         //neto je zarada kada je zap. radio dok je netoBolovanje zarada kad je zaposlenik bio na bolovanju
 		}
-		double ukupanTopli=this.stvarniRad*this.dnevniTopliObrok; //ukupan topli obrok* broj dana koje je zaposlenik radio
+		double ukupanTopli=this.stvarniRad*this.zaposlenik.getDnevniTopliObrok(); //ukupan topli obrok* broj dana koje je zaposlenik radio
 												          		  //sto znaci da nam u sustini godisnji odmor znaci 
 		
 		if(this.prazniciRad !=0)	
@@ -312,6 +312,6 @@ public class Plata implements Serializable  {
 	}			
 	public String toString()
 	{
-		return Long.toString(id)+" "+Double.toString(osnovica);
+		return Long.toString(id)+" "+Double.toString(zaposlenik.getOsnovica());
 	}
 }
