@@ -145,8 +145,15 @@ public class UposleniciPrikaz {
 		scrollPane.setBounds(10, 126, 335, 155);
 		frame.getContentPane().add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable() {
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
 		scrollPane.setViewportView(table);
+		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 	        public void valueChanged(ListSelectionEvent event) {
 	            btnAzuriranje.setEnabled(true);

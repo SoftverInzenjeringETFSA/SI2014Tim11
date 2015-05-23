@@ -21,6 +21,8 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class PodaciUposlenika {
 
@@ -33,6 +35,9 @@ public class PodaciUposlenika {
 	private static Operater _o;
 	private static Zaposlenik _z;
 	private static Firma _f;
+	private JTextField txtOsnovica;
+	private JTextField txtFaktor;
+	private JTextField txtTopliObrok;
 
 	/**
 	 * Launch the application.
@@ -96,51 +101,51 @@ public class PodaciUposlenika {
 		
 		JLabel lblIme = new JLabel("Ime:");
 		lblIme.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblIme.setBounds(10, 32, 78, 14);
+		lblIme.setBounds(10, 11, 78, 14);
 		frame.getContentPane().add(lblIme);
 		
 		txtIme = new JTextField();
-		txtIme.setBounds(98, 29, 200, 20);
+		txtIme.setBounds(98, 8, 200, 20);
 		frame.getContentPane().add(txtIme);
 		txtIme.setColumns(10);
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
 		lblPrezime.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrezime.setBounds(0, 67, 88, 14);
+		lblPrezime.setBounds(0, 36, 88, 14);
 		frame.getContentPane().add(lblPrezime);
 		
 		txtPrezime = new JTextField();
-		txtPrezime.setBounds(98, 64, 200, 20);
+		txtPrezime.setBounds(98, 33, 200, 20);
 		frame.getContentPane().add(txtPrezime);
 		txtPrezime.setColumns(10);
 		
 		JLabel lblJmbg = new JLabel("JMBG:");
 		lblJmbg.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblJmbg.setBounds(10, 108, 78, 14);
+		lblJmbg.setBounds(10, 61, 78, 14);
 		frame.getContentPane().add(lblJmbg);
 		
 		txtJmbg = new JTextField();
-		txtJmbg.setBounds(98, 105, 200, 20);
+		txtJmbg.setBounds(98, 58, 200, 20);
 		frame.getContentPane().add(txtJmbg);
 		txtJmbg.setColumns(10);
 		
 		JLabel lblAdresa = new JLabel("Adresa:");
 		lblAdresa.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAdresa.setBounds(10, 151, 78, 14);
+		lblAdresa.setBounds(10, 86, 78, 14);
 		frame.getContentPane().add(lblAdresa);
 		
 		txtAdresa = new JTextField();
-		txtAdresa.setBounds(98, 148, 200, 20);
+		txtAdresa.setBounds(98, 83, 200, 20);
 		frame.getContentPane().add(txtAdresa);
 		txtAdresa.setColumns(10);
 		
 		JLabel lblPozicija = new JLabel("Pozicija u firmi:");
 		lblPozicija.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPozicija.setBounds(-26, 196, 114, 14);
+		lblPozicija.setBounds(-26, 111, 114, 14);
 		frame.getContentPane().add(lblPozicija);
 		
 		txtPozicija = new JTextField();
-		txtPozicija.setBounds(98, 193, 200, 20);
+		txtPozicija.setBounds(98, 108, 200, 20);
 		frame.getContentPane().add(txtPozicija);
 		txtPozicija.setColumns(10);
 		
@@ -158,6 +163,47 @@ public class PodaciUposlenika {
 		frame.getContentPane().add(lblSlika);
 		lblSlika.setIcon(new ImageIcon("icons/uposlenik_icon.png"));
 		
+		JLabel lblOsnovica = new JLabel("Osnovica:");
+		lblOsnovica.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblOsnovica.setBounds(10, 136, 78, 14);
+		frame.getContentPane().add(lblOsnovica);
+		
+		txtOsnovica = new JTextField();
+		txtOsnovica.setBounds(98, 133, 200, 20);
+		frame.getContentPane().add(txtOsnovica);
+		txtOsnovica.setColumns(10);
+		
+		JLabel lblFaktor = new JLabel("Faktor:");
+		lblFaktor.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFaktor.setBounds(10, 161, 78, 14);
+		frame.getContentPane().add(lblFaktor);
+		
+		txtFaktor = new JTextField();
+		txtFaktor.setBounds(98, 158, 200, 20);
+		txtFaktor.setText("1");
+		frame.getContentPane().add(txtFaktor);
+		txtFaktor.setColumns(10);
+		
+		JLabel lblKoeficijent = new JLabel("Koeficijent:");
+		lblKoeficijent.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblKoeficijent.setBounds(10, 186, 78, 14);
+		frame.getContentPane().add(lblKoeficijent);
+		
+		final JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(new Double(0.0), new Double(0.0), null, new Double(0.1)));
+		spinner.setBounds(98, 183, 200, 20);
+		frame.getContentPane().add(spinner);
+		
+		JLabel lblTopliObrok = new JLabel("Topli obrok:");
+		lblTopliObrok.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTopliObrok.setBounds(10, 211, 78, 14);
+		frame.getContentPane().add(lblTopliObrok);
+		
+		txtTopliObrok = new JTextField();
+		txtTopliObrok.setBounds(98, 208, 200, 20);
+		frame.getContentPane().add(txtTopliObrok);
+		txtTopliObrok.setColumns(10);
+		
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -170,6 +216,11 @@ public class PodaciUposlenika {
 						_z.setAdresa(txtAdresa.getText());
 						_z.setPozicija(txtPozicija.getText());
 						_z.setDatumZaposlenja(calZaposlen.getDate());
+						_z.setDnevniTopliObrok(Double.parseDouble(txtTopliObrok.getText()));
+						_z.setFaktor(Double.parseDouble(txtFaktor.getText()));
+						_z.setKoeficijent((Double) spinner.getValue());
+						_z.setOsnovica(Double.parseDouble(txtOsnovica.getText()));
+						_z.setFirma(_f);
 						Sistem.Zaposlenici.dodaj(_z);
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novog zaposlenika");
 						frame.dispose();
@@ -189,6 +240,11 @@ public class PodaciUposlenika {
 						_z.setAdresa(txtAdresa.getText());
 						_z.setPozicija(txtPozicija.getText());
 						_z.setDatumZaposlenja(calZaposlen.getDate());
+						_z.setDnevniTopliObrok(Double.parseDouble(txtTopliObrok.getText()));
+						_z.setFaktor(Double.parseDouble(txtFaktor.getText()));
+						_z.setKoeficijent((Double) spinner.getValue());
+						_z.setOsnovica(Double.parseDouble(txtOsnovica.getText()));
+						_z.setFirma(_f);
 						Sistem.Zaposlenici.izmijeni(_z);
 						JOptionPane.showMessageDialog(frame, "Uspješno ste izmijenili zaposlenika");
 						frame.dispose();
@@ -223,6 +279,10 @@ public class PodaciUposlenika {
 			txtAdresa.setText(_z.getAdresa());
 			txtPozicija.setText(_z.getPozicija());
 			calZaposlen.setDate(_z.getDatumZaposlenja());
+			txtTopliObrok.setText(String.valueOf(_z.getDnevniTopliObrok()));
+			txtFaktor.setText(String.valueOf(_z.getFaktor()));
+			txtOsnovica.setText(String.valueOf(_z.getOsnovica()));
+			spinner.setValue(_z.getKoeficijent());
 		}
 	}
 }

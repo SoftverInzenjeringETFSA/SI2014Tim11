@@ -114,7 +114,13 @@ public class Obracun {
 		scrollPane.setBounds(10, 50, 414, 152);
 		frame.getContentPane().add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable() {
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
 		scrollPane.setViewportView(table);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
