@@ -201,13 +201,5 @@ public class IzmjenaObracuna {
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.setBounds(198, 319, 99, 23);
 		frame.getContentPane().add(btnPotvrdi);
-		
-		if(_z != null) {
-			if(_z.getPlate().size() == 0) {
-				for(int i = 1; i < tabbedPane.getTabCount(); i++) {
-					tabbedPane.setEnabledAt(i, false);
-				}
-			}
-		}
 	}
 }
