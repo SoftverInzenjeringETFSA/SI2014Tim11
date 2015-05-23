@@ -305,8 +305,8 @@ public class Plata implements Serializable  {
 			neto+=netoPraznici;
 		}
 		neto+=this.nocniRad;       //samo sam ovako dodao posto je nocniRad dodatak na platu
-		neto+=ukupanTopli;
 		neto-=izracunajPorezNaDohodak();
+		neto+=ukupanTopli;
 		return neto;
 	
 	}			
