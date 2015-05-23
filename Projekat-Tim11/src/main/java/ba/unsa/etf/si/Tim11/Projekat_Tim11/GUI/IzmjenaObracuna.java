@@ -36,6 +36,7 @@ import javax.swing.SpinnerNumberModel;
 
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
+import com.toedter.calendar.JDateChooser;
 
 public class IzmjenaObracuna {
 
@@ -85,7 +86,7 @@ public class IzmjenaObracuna {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 435, 391);
+		frame.setBounds(100, 100, 582, 391);
 		frame.setTitle("Izmjena obračuna");
 		ImageIcon img = new ImageIcon("icons/calculator_icon.png");
 		frame.setIconImage(img.getImage());
@@ -93,7 +94,7 @@ public class IzmjenaObracuna {
 		frame.getContentPane().setLayout(null);
 		
 		final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 415, 353);
+		tabbedPane.setBounds(0, 0, 566, 353);
 		frame.getContentPane().add(tabbedPane);
 		
 		JPanel panel = new JPanel();
@@ -101,7 +102,7 @@ public class IzmjenaObracuna {
 		panel.setLayout(null);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
-		btnIzlaz.setBounds(302, 291, 98, 23);
+		btnIzlaz.setBounds(453, 291, 98, 23);
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
@@ -126,22 +127,14 @@ public class IzmjenaObracuna {
 		lblMjesecIGodina.setBounds(34, 34, 155, 14);
 		panel.add(lblMjesecIGodina);
 		
-		final JMonthChooser monthChooser = new JMonthChooser();
-		monthChooser.setBounds(199, 28, 109, 20);
-		panel.add(monthChooser);
-		
-		final JYearChooser yearChooser = new JYearChooser();
-		yearChooser.setBounds(319, 28, 47, 20);
-		panel.add(yearChooser);
-		
 		JLabel lblBolovanje = new JLabel("Bolovanje:");
 		lblBolovanje.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblBolovanje.setBounds(80, 261, 109, 14);
+		lblBolovanje.setBounds(80, 228, 109, 14);
 		panel.add(lblBolovanje);
 		
 		final JSpinner spinBolovanje = new JSpinner();
 		spinBolovanje.setModel(new SpinnerNumberModel(0, 0, 31, 1));
-		spinBolovanje.setBounds(199, 258, 98, 20);
+		spinBolovanje.setBounds(199, 225, 98, 20);
 		panel.add(spinBolovanje);
 		
 		JLabel lblGodinjiOdmor = new JLabel("Godišnji odmor:");
@@ -154,34 +147,24 @@ public class IzmjenaObracuna {
 		spinGodisnjiOdmor.setBounds(199, 128, 98, 20);
 		panel.add(spinGodisnjiOdmor);
 		
-		JLabel lblGodineStaza = new JLabel("Godine staza:");
-		lblGodineStaza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblGodineStaza.setBounds(70, 161, 119, 14);
-		panel.add(lblGodineStaza);
-		
-		final JSpinner spinGodineStaza = new JSpinner();
-		spinGodineStaza.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-		spinGodineStaza.setBounds(199, 158, 98, 20);
-		panel.add(spinGodineStaza);
-		
 		JLabel lblPraznici = new JLabel("Praznici:");
 		lblPraznici.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPraznici.setBounds(80, 197, 109, 14);
+		lblPraznici.setBounds(80, 162, 109, 14);
 		panel.add(lblPraznici);
 		
 		final JSpinner spinPraznici = new JSpinner();
 		spinPraznici.setModel(new SpinnerNumberModel(0, 0, 10, 1));
-		spinPraznici.setBounds(199, 194, 98, 20);
+		spinPraznici.setBounds(199, 159, 98, 20);
 		panel.add(spinPraznici);
 		
 		JLabel lblNocniRad = new JLabel("Noćni rad (u danima):");
 		lblNocniRad.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNocniRad.setBounds(47, 230, 142, 14);
+		lblNocniRad.setBounds(47, 195, 142, 14);
 		panel.add(lblNocniRad);
 		
 		final JSpinner spinNocniRad = new JSpinner();
 		spinNocniRad.setModel(new SpinnerNumberModel(0, 0, 31, 1));
-		spinNocniRad.setBounds(199, 227, 98, 20);
+		spinNocniRad.setBounds(199, 192, 98, 20);
 		panel.add(spinNocniRad);
 		
 		JLabel lblBrojRadnihDana = new JLabel("Broj radnih dana:");
@@ -206,11 +189,15 @@ public class IzmjenaObracuna {
 				o.main(null);
 			}
 		});
-		btnIzlaz_1.setBounds(311, 291, 89, 23);
+		btnIzlaz_1.setBounds(425, 291, 126, 23);
 		panel_1.add(btnIzlaz_1);
 		
+		final JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(199, 28, 98, 20);
+		panel.add(dateChooser);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 50, 390, 221);
+		scrollPane.setBounds(10, 50, 541, 221);
 		panel_1.add(scrollPane);
 		
 		table = new JTable() {
@@ -239,24 +226,23 @@ public class IzmjenaObracuna {
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((Integer) spinBrojRadnihDana.getValue() == 0 || (Integer) spinStvarniRad.getValue() == 0
-						|| (Integer) spinGodineStaza.getValue() == 0) {
+				if((Integer) spinBrojRadnihDana.getValue() == 0 || (Integer) spinStvarniRad.getValue() == 0) {
 					JOptionPane.showMessageDialog(frame, "Morate unijeti broj radnih dana, stvarni rad i godine staza");
 					return;
 				}
 				try {
 					_p = new Plata();
-					_p.getDatum().setMonth(monthChooser.getMonth());
-					_p.getDatum().setYear(yearChooser.getYear());
+					_p.setDatum(dateChooser.getDate());
 					_p.setBrojRadnihDana((Integer) spinBrojRadnihDana.getValue());
 					_p.setStvarniRad((Integer) spinStvarniRad.getValue());
 					_p.setBolovanje((Integer) spinBolovanje.getValue());
-					_p.setGodineStaza((Integer) spinGodineStaza.getValue());
+					_p.setGodineStaza(_z.radniStaz());
 					_p.setGodisnjiOdmor((Integer) spinGodisnjiOdmor.getValue());
 					_p.setPrazniciRad((Integer) spinPraznici.getValue());
 					_p.setNocniRad((Integer) spinNocniRad.getValue());
 					_p.setZaposlenik(_z);
 					_z.dodajPlatu(_p);
+					JOptionPane.showMessageDialog(frame, _z.radniStaz());
 				}
 				catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -267,22 +253,21 @@ public class IzmjenaObracuna {
 					for (Plata p : _z.getPlate()) {
 						if(p != null) {
 							double dohodak = p.izracunajDohodak();
-							  Object[] o = new Object[8];
-							  o[0] = p.getDatum().getMonth();
-							  o[1] = p.getDatum().getYear();
-							  o[2] = p.izracunajDohodak();
-							  o[3] = p.izracunajMinuliRad(dohodak);
-							  o[4] = p.izracunajStopuPoreza();
-							  o[5] = p.izracunajPorezNaDohodak();
-							  o[6] = p.izracunajNetoPlatu();
-							  o[7] = p.izracunajBrutoPlatu();
+							  Object[] o = new Object[7];
+							  o[0] = p.getDatum();
+							  o[1] = p.izracunajDohodak();
+							  o[2] = p.izracunajMinuliRad(dohodak);
+							  o[3] = p.izracunajStopuPoreza();
+							  o[4] = p.izracunajPorezNaDohodak();
+							  o[5] = p.izracunajNetoPlatu();
+							  o[6] = p.izracunajBrutoPlatu();
 							  model.addRow(o);
 						}
 					}
 				}//test
 			}
 		});
-		btnPotvrdi.setBounds(198, 291, 99, 23);
+		btnPotvrdi.setBounds(344, 291, 99, 23);
 		panel.add(btnPotvrdi);
 		
 		tabbedPane.setEnabledAt(1, false);
