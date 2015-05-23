@@ -45,7 +45,7 @@
 			<configuration>
 				<archive>
 					<manifest>
-						<mainClass>ba.unsa.etf.si.Tim11.Projekat_Tim11.GUI.MainWindow</mainClass>
+						<mainClass>ba.unsa.etf.si.Tim11.Projekat_Tim11.GUI.Login</mainClass>
 					</manifest>
 				</archive>
 				<descriptorRefs>
