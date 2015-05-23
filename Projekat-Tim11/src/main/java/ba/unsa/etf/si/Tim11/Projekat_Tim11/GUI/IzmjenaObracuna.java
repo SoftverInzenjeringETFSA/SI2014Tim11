@@ -279,7 +279,7 @@ public class IzmjenaObracuna {
 							  model.addRow(o);
 						}
 					}
-				}
+				}//test
 			}
 		});
 		btnPotvrdi.setBounds(198, 291, 99, 23);
