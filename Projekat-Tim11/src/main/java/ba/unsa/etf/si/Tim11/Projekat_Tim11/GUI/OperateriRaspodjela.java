@@ -120,21 +120,20 @@ private static Admin _a;
 			 		model.setColumnIdentifiers(kolone);
 			 		for(Operater o : _f.getOperateri()) {
 			 			if(o != null) {
+			 				if(o.getId().toString().contains(txtID.getText()) && txtID.getText().length() != 0) {
+			 					Object[] o1 = new Object[3];
+			 					  o1[0] = o.getId();
+			 					  o1[1] = o.getIme();
+			 					  o1[2] = o.getPrezime();
+			 			
+			 					  model.addRow(o1);
+			 				}
 			 				if(txtID.getText().length() == 0) {
 			 					Object[] o1 = new Object[3];
 			 					  o1[0] = o.getId();
 			 					  o1[1] = o.getIme();
 			 					  o1[2] = o.getPrezime();
 			 					 
-			 					  model.addRow(o1);
-			 					  break;
-			 				}
-			 				if(o.getId().toString().contains(txtID.getText())) {
-			 					Object[] o1 = new Object[3];
-			 					  o1[0] = o.getId();
-			 					  o1[1] = o.getIme();
-			 					  o1[2] = o.getPrezime();
-			 			
 			 					  model.addRow(o1);
 			 				}
 			 			}
@@ -197,23 +196,25 @@ private static Admin _a;
 		    public void itemStateChanged(ItemEvent event) {
 		       if (event.getStateChange() == ItemEvent.SELECTED) {
 		          Object item = event.getItem();
+		          _operateri = Sistem.Operateri.lista();
 		          if(_firme.size() != 0) {
 		        	  for(Firma f : _firme) {
 		        		  if(f != null) {
 		        			  if(f.toString().equals(item)) {
+		        				  String[] kolone = {"ID",
+				 					        "Ime",
+				 					        "Prezime"
+				 					       };
+				 					
+				 					DefaultTableModel model = new DefaultTableModel();
+				 					table.setModel(model);
+				 					model.setColumnIdentifiers(kolone);
+				 					
 							 		for(Operater o : _operateri) {
 							 			if(o != null) {
 							 				if(o.equals(o.getFirma())) {
 							 					_f = f;
-							 					String[] kolone = {"ID",
-							 					        "Ime",
-							 					        "Prezime",
-							 					       };
-							 					
-							 					DefaultTableModel model = new DefaultTableModel();
-							 					table.setModel(model);
-							 					model.setColumnIdentifiers(kolone);
-							 					
+							 
 							 					Object[] o1 = new Object[3];
 							 					  o1[0] =o.getId();
 							 					  o1[1] =o.getIme();
