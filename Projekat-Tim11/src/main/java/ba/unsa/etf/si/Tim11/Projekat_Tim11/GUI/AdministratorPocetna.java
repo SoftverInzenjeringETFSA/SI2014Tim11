@@ -30,9 +30,6 @@ public class AdministratorPocetna {
 
 	private JFrame frame;
 
-	private static int _id;
-	
-	public String Username;
 	private static Admin _a;
 
 	/**

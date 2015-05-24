@@ -12,22 +12,21 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Admin;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Firma;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.Font;
+import java.util.List;
 
 public class PodaciAdministrator {
 
 	private JFrame frame;
-	private JTextField txtIme;
-	private JTextField txtprezime;
-	private JTextField txtJmbg;
-	private JTextField txtAdresa;
-	private JTextField txtKontakt;
-	private JTextField txtPozicija;
 	private static Admin _a;
+	private List<Firma> _firme;
+
 	
 	/**
 	 * Launch the application.
@@ -71,17 +70,18 @@ public class PodaciAdministrator {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 503, 398);
+		frame.setBounds(100, 100, 400, 255);
 		frame.setTitle("Podaci o administratoru");
 		ImageIcon img = new ImageIcon("icons/login_icon.png");
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		_firme = Sistem.Firme.lista();
 		
 		JLabel lblIme = new JLabel("Ime:");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblIme.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblIme.setBounds(10, 33, 78, 14);
+		lblIme.setBounds(10, 11, 78, 14);
 		frame.getContentPane().add(lblIme);
 		
 		
@@ -89,14 +89,14 @@ public class PodaciAdministrator {
 		JLabel lblPrezime = new JLabel("Prezime:");
 		lblPrezime.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblPrezime.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrezime.setBounds(0, 58, 88, 14);
+		lblPrezime.setBounds(0, 36, 88, 14);
 		frame.getContentPane().add(lblPrezime);
 		
 		
 		JLabel lblJmbg = new JLabel("JMBG:");
 		lblJmbg.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblJmbg.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblJmbg.setBounds(10, 83, 78, 14);
+		lblJmbg.setBounds(10, 61, 78, 14);
 		frame.getContentPane().add(lblJmbg);
 		
 		
@@ -104,7 +104,7 @@ public class PodaciAdministrator {
 		JLabel lblAdresa = new JLabel("Adresa:");
 		lblAdresa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblAdresa.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAdresa.setBounds(10, 108, 78, 14);
+		lblAdresa.setBounds(10, 86, 78, 14);
 		frame.getContentPane().add(lblAdresa);
 		
 		
@@ -112,80 +112,63 @@ public class PodaciAdministrator {
 		JLabel lblPozicija = new JLabel("Pozicija u firmi:");
 		lblPozicija.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblPozicija.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPozicija.setBounds(-22, 158, 114, 14);
+		lblPozicija.setBounds(-26, 136, 114, 14);
 		frame.getContentPane().add(lblPozicija);
 		
 		
-		JLabel lblZaposlen = new JLabel("Zaposlen:");
-		lblZaposlen.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblZaposlen.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblZaposlen.setBounds(10, 183, 78, 14);
-		frame.getContentPane().add(lblZaposlen);
-		
-		
 		JLabel lblSlika = new JLabel("");
-		lblSlika.setBounds(329, 32, 148, 183);
+		lblSlika.setBounds(216, 11, 148, 162);
 		frame.getContentPane().add(lblSlika);
 		lblSlika.setIcon(new ImageIcon("icons/uposlenik_icon.png"));
 		
-		JButton btnPotvrdi = new JButton("Potvrdi");
-		btnPotvrdi.setBounds(329, 266, 118, 23);
-		frame.getContentPane().add(btnPotvrdi);
-		
 		JButton btnIzlaz = new JButton("Izlaz");
-		btnIzlaz.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-			}
-		});
-		btnIzlaz.setBounds(329, 300, 118, 23);
+		 btnIzlaz.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					frame.dispose();
+					AdministratorPocetna ap = new AdministratorPocetna(_a);
+					ap.main(null);
+				}
+			});
+	
+		btnIzlaz.setBounds(239, 184, 118, 23);
 		frame.getContentPane().add(btnIzlaz);
 		
 		JLabel lblKontaktTelefon = new JLabel("Kontakt telefon:");
 		lblKontaktTelefon.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblKontaktTelefon.setBounds(10, 133, 78, 14);
+		lblKontaktTelefon.setBounds(10, 111, 78, 14);
 		frame.getContentPane().add(lblKontaktTelefon);
 		
-		txtIme = new JTextField();
-		txtIme.setBounds(98, 30, 86, 20);
-		frame.getContentPane().add(txtIme);
-		txtIme.setColumns(10);
-		txtIme.setText(_a.getIme());
+		JLabel lblImeadmin = new JLabel("");
+		lblImeadmin.setBounds(111, 11, 95, 14);
+		frame.getContentPane().add(lblImeadmin);
 		
-		txtprezime = new JTextField();
-		txtprezime.setBounds(98, 55, 86, 20);
-		frame.getContentPane().add(txtprezime);
-		txtprezime.setColumns(10);
-		txtprezime.setText(_a.getPrezime());
+		JLabel lblPrezimeadmin = new JLabel("");
+		lblPrezimeadmin.setBounds(98, 36, 95, 14);
+		frame.getContentPane().add(lblPrezimeadmin);
 		
-		txtJmbg = new JTextField();
-		txtJmbg.setBounds(98, 80, 86, 20);
-		frame.getContentPane().add(txtJmbg);
-		txtJmbg.setColumns(10);
-		txtJmbg.setText(_a.getJmbg());
+		JLabel lblJmbgadmin = new JLabel("");
+		lblJmbgadmin.setBounds(98, 61, 95, 14);
+		frame.getContentPane().add(lblJmbgadmin);
 		
-		txtAdresa = new JTextField();
-		txtAdresa.setBounds(98, 105, 86, 20);
-		frame.getContentPane().add(txtAdresa);
-		txtAdresa.setColumns(10);
-		txtAdresa.setText(_a.getAdresa());
+		JLabel lblAdresaadmin = new JLabel("");
+		lblAdresaadmin.setBounds(111, 86, 95, 14);
+		frame.getContentPane().add(lblAdresaadmin);
 		
-		txtKontakt = new JTextField();
-		txtKontakt.setBounds(98, 127, 86, 20);
-		frame.getContentPane().add(txtKontakt);
-		txtKontakt.setColumns(10);
-		txtKontakt.setText(_a.getTelefon());
+		JLabel lblKontaktadmin = new JLabel("");
+		lblKontaktadmin.setBounds(98, 111, 95, 14);
+		frame.getContentPane().add(lblKontaktadmin);
 		
-		txtPozicija = new JTextField();
-		txtPozicija.setText("Administrator");
-		txtPozicija.setBounds(98, 155, 86, 20);
-		frame.getContentPane().add(txtPozicija);
-		txtPozicija.setColumns(10);
-		txtPozicija.setText("Administrator");		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(93, 183, 91, 20);
-	
+		JLabel lblAdministrator = new JLabel("Administrator");
+		lblAdministrator.setBounds(98, 136, 95, 14);
+		frame.getContentPane().add(lblAdministrator);
 		
-		frame.getContentPane().add(dateChooser);
+		if(_a != null) {
+			lblImeadmin.setText(_a.getIme());
+			lblPrezimeadmin.setText(_a.getPrezime());
+			lblJmbgadmin.setText(_a.getJmbg());
+			lblAdresaadmin.setText(_a.getAdresa());
+			lblKontaktadmin.setText(_a.getTelefon());
+			
+		}
 	}
 }
