@@ -243,7 +243,7 @@ public class Plata implements Serializable  {
 		double procenat= godineStaza*0.6;        
 		double minuliRad=(dohodak*procenat)/100;
 		return minuliRad;
-		
+		//test
 		
 	}
 	
