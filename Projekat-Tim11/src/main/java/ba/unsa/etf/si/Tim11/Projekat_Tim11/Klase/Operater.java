@@ -15,7 +15,7 @@ public class Operater extends Osoba implements Account,Serializable{
 	@Column(unique=true)
 	private String username;
 	private String password;
-	private boolean privilegije;
+	private boolean privilegije=true;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "firma")
@@ -70,6 +70,8 @@ public class Operater extends Osoba implements Account,Serializable{
 	public boolean ispravanPassword(String pass){
 		return this.password.equals(pass);
 	}
+	
+	
 	
 	
 

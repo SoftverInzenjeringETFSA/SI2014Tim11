@@ -125,10 +125,20 @@ public class Login {
 				boolean jeAdministrator = false;
 				char[] pass = passSifra.getPassword();
 				String passString = new String(pass);
+			
 				for(Operater o : _operateri) {
-					if(o.getUsername().equals(txtKorisnickoIme.getText()) && o.ispravanPassword(passString)) {
+					if(o.getUsername().equals(txtKorisnickoIme.getText()) && o.ispravanPassword(passString) && o.getPrivilegije()==true )
+					{
 						frame.dispose();
 						OperaterPocetna op = new OperaterPocetna(o);
+						op.main(null);
+						jeOperater = true;
+						break;
+					}
+					else if(o.getUsername().equals(txtKorisnickoIme.getText()) && o.ispravanPassword(passString) && o.getPrivilegije()==false )
+					{
+						frame.dispose();
+						OperaterBezPermisijaPocetna op = new OperaterBezPermisijaPocetna(o);
 						op.main(null);
 						jeOperater = true;
 						break;
