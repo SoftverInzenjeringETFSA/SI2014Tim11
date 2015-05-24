@@ -35,6 +35,7 @@ import java.awt.Color;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import java.awt.Component;
+import java.io.*;
 
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
@@ -107,21 +108,8 @@ public class Izvjestaji {
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		final JButton btnObrisi = new JButton("Obriši");
-		btnObrisi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int selectedRowIndex = table.getSelectedRow();
-					if (table.isRowSelected(selectedRowIndex)) {
-						table.remove(selectedRowIndex);
-						btnObrisi.setEnabled(false);
-					}
-			}
-		});
-		btnObrisi.setBounds(420, 23, 89, 61);
-		panel_1.add(btnObrisi);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 414, 109);
+		scrollPane.setBounds(0, 0, 519, 109);
 		panel_1.add(scrollPane);
 		
 		table = new JTable() {
@@ -135,12 +123,6 @@ public class Izvjestaji {
 		
 		final DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
-		
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-	        public void valueChanged(ListSelectionEvent event) {
-	            btnObrisi.setEnabled(true);
-	        }
-	    });
 		
 		JLabel lblId = new JLabel("ID uposlenika:");
 		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -284,6 +266,18 @@ public class Izvjestaji {
 		  });
 		
 		JButton btnPrintanje = new JButton("Printanje");
+		btnPrintanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+			        BufferedWriter out = new BufferedWriter(new FileWriter("izvjestaj.txt"));
+			            for (int i = 0; i < 4; i++) {
+			                out.write("test " + "\n");
+			                out.newLine();
+			            }
+			            out.close();
+			        } catch (IOException e) {}
+			}
+		});
 		btnPrintanje.setBounds(341, 337, 89, 23);
 		frame.getContentPane().add(btnPrintanje);
 		
@@ -299,6 +293,5 @@ public class Izvjestaji {
 		frame.getContentPane().add(btnIzlaz);
 		
 		btnKreirajIzvjestaj.setEnabled(false);
-		btnObrisi.setEnabled(false);
 	}
 }
