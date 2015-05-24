@@ -231,7 +231,7 @@ public class IzmjenaObracuna {
 					int selectedRowIndex = table.getSelectedRow();
 					for (Plata p : _z.getPlate()) {
 						if (table.isRowSelected(selectedRowIndex) && p.getId() == (Long) table.getModel().getValueAt(selectedRowIndex, 0)) {
-							_z.getPlate().remove(p);
+							_z.izbrisiPlatu(p);
 							Sistem.Zaposlenici.izmijeni(_z);
 							JOptionPane.showMessageDialog(frame, "Uspješno ste obrisali platu");
 							break;

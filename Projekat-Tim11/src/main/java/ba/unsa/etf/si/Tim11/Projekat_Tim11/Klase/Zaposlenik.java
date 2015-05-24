@@ -96,6 +96,10 @@ public class Zaposlenik extends Osoba implements Serializable{
 	public void dodajPlatu(Plata p) {
 		plate.add(p);
 	}
+	
+	public void izbrisiPlatu(Plata p) {
+		plate.remove(p);
+	}
 
 	public List<Plata> getPlate() {
 		 return this.plate;
