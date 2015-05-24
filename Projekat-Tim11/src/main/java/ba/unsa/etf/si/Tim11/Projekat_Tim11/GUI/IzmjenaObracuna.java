@@ -289,6 +289,7 @@ public class IzmjenaObracuna {
 					_p.setZaposlenik(_z);
 					_z.dodajPlatu(_p);
 					Sistem.Zaposlenici.izmijeni(_z);
+					_z=Sistem.Zaposlenici.nadji(Integer.parseInt(_z.getId().toString()));
 				}
 				catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -296,6 +297,7 @@ public class IzmjenaObracuna {
 				}
 				tabbedPane.setEnabledAt(1, true);
 				if(_z.getPlate().size() != 0) {
+				 model.setRowCount(0);
 					for (Plata p : _z.getPlate()) {
 						if(p != null) {
 							double dohodak;
@@ -318,7 +320,7 @@ public class IzmjenaObracuna {
 							}
 						}
 					}
-				}
+				}	
 			}
 		});
 		btnPotvrdi.setBounds(462, 291, 99, 23);

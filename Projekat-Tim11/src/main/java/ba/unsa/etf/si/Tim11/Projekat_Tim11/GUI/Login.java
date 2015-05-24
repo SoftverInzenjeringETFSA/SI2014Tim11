@@ -98,8 +98,6 @@ public class Login {
 		_operateri = Sistem.Operateri.lista();
 		_administratori = Sistem.Admini.lista();
 		
-
-		
 		
 		JLabel lblKorisnikoIme = new JLabel("Korisničko ime:");
 		lblKorisnikoIme.setHorizontalAlignment(SwingConstants.RIGHT);
