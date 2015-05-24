@@ -62,6 +62,7 @@ public class PodaciAdministrator {
 	}
 
 	public PodaciAdministrator(Admin _a2) {
+		initialize();
 		_a=_a2;// TODO Auto-generated constructor stub
 	}
 
@@ -164,11 +165,11 @@ public class PodaciAdministrator {
 		frame.getContentPane().add(lblAdministrator);
 
 		if(_a != null) {
-			lblImeadmin.setText("Temp");
-			lblPrezimeadmin.setText("Tempić");
-			lblJmbgadmin.setText("1505991170272");
-			lblAdresaadmin.setText("Dolina 15");
-			lblKontaktadmin.setText("+38761566311");
+			lblImeadmin.setText(_a.getIme());
+			lblPrezimeadmin.setText(_a.getPrezime());
+			lblJmbgadmin.setText(_a.getJmbg());
+			lblAdresaadmin.setText(_a.getAdresa());
+			lblKontaktadmin.setText(_a.getTelefon());
 			
 		}
 	}
