@@ -249,10 +249,21 @@ public class OperatoriPrikazAdmin {
 		frame.getContentPane().add(btnDodavanje);
 		
 		JButton btnAzuriranje = new JButton("Ažuriranje");
+		btnAzuriranje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				DodavanjeEditovanjeOperatera oke = new DodavanjeEditovanjeOperatera(_f,_a,_o);
+				oke.main(null);
+			}
+		});
 		btnAzuriranje.setBounds(355, 160, 124, 23);
 		frame.getContentPane().add(btnAzuriranje);
 		
 		JButton btnDodajPermisiju = new JButton("Dodaj Permisiju");
+		btnDodajPermisiju.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnDodajPermisiju.setBounds(355, 194, 124, 23);
 		
 		frame.getContentPane().add(btnDodajPermisiju);
