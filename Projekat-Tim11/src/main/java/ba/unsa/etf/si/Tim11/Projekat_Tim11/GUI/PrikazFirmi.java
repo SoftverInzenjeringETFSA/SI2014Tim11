@@ -169,7 +169,13 @@ public class PrikazFirmi extends JFrame{
 		scrollPane.setBounds(10, 67, 302, 193);
 		frmPrikazFirmi.getContentPane().add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable(){
+		private static final long serialVersionUID = 1L;
+
+        public boolean isCellEditable(int row, int column) {                
+                return false;               
+        };
+    };
 		scrollPane.setViewportView(table);
 		
 		
@@ -271,9 +277,10 @@ public class PrikazFirmi extends JFrame{
 					for (Firma f : _firme) {
 						if (table.isRowSelected(selectedRowIndex) && f.getId() ==(Long) table.getModel().getValueAt(selectedRowIndex, 0)) {
 							String ispis = "Uspješno ste obrisali firmu ID: " + f.getId();
-							
-			Sistem.Firme.izbrisi((int)f.getId());
+						Sistem.Firme.izbrisi((int)f.getId());
+				_firme.remove(f);
 							JOptionPane.showMessageDialog(frmPrikazFirmi, ispis);
+							break;
 						}
 					}
 				}

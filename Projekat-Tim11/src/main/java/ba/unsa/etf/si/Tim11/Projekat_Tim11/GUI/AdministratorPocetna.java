@@ -107,7 +107,7 @@ public class AdministratorPocetna {
 		btnMojRaun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				PodaciAdministrator p = new PodaciAdministrator();
+				PodaciAdministrator p = new PodaciAdministrator(_a);
 				p.main(null);
 			}
 		});

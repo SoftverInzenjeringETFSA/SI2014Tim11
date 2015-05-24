@@ -78,7 +78,8 @@ private static Admin _a;
 	_a=a;
 	}
 
-	
+
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -183,7 +184,12 @@ private static Admin _a;
 		frame.getContentPane().add(scrollPane);
 		
 
-		table = new JTable();
+		table = new JTable(){ private static final long serialVersionUID = 1L;
+
+        public boolean isCellEditable(int row, int column) {                
+                return false;               
+        };
+    };
 		scrollPane.setViewportView(table);
 		
 		

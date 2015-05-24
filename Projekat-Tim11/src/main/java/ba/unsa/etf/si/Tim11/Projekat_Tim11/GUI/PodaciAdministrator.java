@@ -11,8 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Admin;
+
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+
 import java.awt.Font;
 
 public class PodaciAdministrator {
@@ -24,22 +27,32 @@ public class PodaciAdministrator {
 	private JTextField txtAdresa;
 	private JTextField txtKontakt;
 	private JTextField txtPozicija;
-
+	private static Admin _a;
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					PodaciAdministrator window = new PodaciAdministrator();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				
+			try {
+				PodaciAdministrator window;
+				if(_a != null) {
+					window = new PodaciAdministrator(_a);
 				}
+				else {
+					window = new PodaciAdministrator();
+				}
+				window.frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		});
-	}
+		}
+	});
+}
+
 
 	/**
 	 * Create the application.
@@ -47,6 +60,11 @@ public class PodaciAdministrator {
 	public PodaciAdministrator() {
 		initialize();
 	}
+
+	public PodaciAdministrator(Admin _a2) {
+		_a=_a2;// TODO Auto-generated constructor stub
+	}
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -132,35 +150,42 @@ public class PodaciAdministrator {
 		txtIme.setBounds(98, 30, 86, 20);
 		frame.getContentPane().add(txtIme);
 		txtIme.setColumns(10);
+		txtIme.setText(_a.getIme());
 		
 		txtprezime = new JTextField();
 		txtprezime.setBounds(98, 55, 86, 20);
 		frame.getContentPane().add(txtprezime);
 		txtprezime.setColumns(10);
+		txtprezime.setText(_a.getPrezime());
 		
 		txtJmbg = new JTextField();
 		txtJmbg.setBounds(98, 80, 86, 20);
 		frame.getContentPane().add(txtJmbg);
 		txtJmbg.setColumns(10);
+		txtJmbg.setText(_a.getJmbg());
 		
 		txtAdresa = new JTextField();
 		txtAdresa.setBounds(98, 105, 86, 20);
 		frame.getContentPane().add(txtAdresa);
 		txtAdresa.setColumns(10);
+		txtAdresa.setText(_a.getAdresa());
 		
 		txtKontakt = new JTextField();
 		txtKontakt.setBounds(98, 127, 86, 20);
 		frame.getContentPane().add(txtKontakt);
 		txtKontakt.setColumns(10);
+		txtKontakt.setText(_a.getTelefon());
 		
 		txtPozicija = new JTextField();
 		txtPozicija.setText("Administrator");
 		txtPozicija.setBounds(98, 155, 86, 20);
 		frame.getContentPane().add(txtPozicija);
 		txtPozicija.setColumns(10);
-		
+		txtPozicija.setText("Administrator");		
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBounds(93, 183, 91, 20);
+	
+		
 		frame.getContentPane().add(dateChooser);
 	}
 }

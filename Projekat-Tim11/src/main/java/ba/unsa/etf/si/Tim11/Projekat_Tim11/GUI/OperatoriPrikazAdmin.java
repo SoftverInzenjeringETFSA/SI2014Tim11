@@ -93,7 +93,13 @@ public class OperatoriPrikazAdmin {
 		scrollPane.setBounds(10, 126, 335, 155);
 		frame.getContentPane().add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable(){private static final long serialVersionUID = 1L;
+
+        public boolean isCellEditable(int row, int column) {                
+                return false;               
+        };
+    };
+    
 		scrollPane.setViewportView(table);
 		String[] kolone = {"ID",
 		        "Ime",
@@ -242,7 +248,7 @@ public class OperatoriPrikazAdmin {
 		btnAzuriranje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				PodaciUposlenika pu = new PodaciUposlenika();
+				PodaciOperatera pu = new PodaciOperatera();
 				pu.main(null);
 			}
 		});
