@@ -131,7 +131,7 @@ public class AdministratorPocetna {
 		btnAuriranjeOperatera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				RadnjeOperateri ro = new RadnjeOperateri(_a);
+				OperatoriPrikazAdmin ro = new OperatoriPrikazAdmin(_a);
 				ro.main(null);
 				
 			}
