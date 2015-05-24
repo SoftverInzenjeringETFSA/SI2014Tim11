@@ -1,5 +1,8 @@
 package ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -136,5 +139,28 @@ public class TestZaposlenik extends TestCase {
 		
 	}
 	
+	
+	public void testRadniStaz()
+	{
+		
+		try{
+			Date d=new Date();
+		
+		
+			Zaposlenik z=new Zaposlenik();
+			z.setDatumZaposlenja(d);
+			assertEquals(0, z.radniStaz()) ;
+		
+		}
+		catch(Exception e)
+		{
+			
+			
+			
+		}
+		
+		
+		
+	}
 
 }

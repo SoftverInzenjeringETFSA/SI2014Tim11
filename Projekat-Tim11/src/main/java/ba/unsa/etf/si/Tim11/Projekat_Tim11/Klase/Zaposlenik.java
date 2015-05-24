@@ -111,8 +111,10 @@ public class Zaposlenik extends Osoba implements Serializable{
 	public int radniStaz()
 	{
 		Calendar trenutni= Calendar.getInstance();
-		//nisam imao zivaca porediti jel prosla citava godina :D (ensar). Za staz se oduzima godina zaposlenja od trenutne godine
-		int staz= trenutni.get(Calendar.YEAR)-this.getDatumZaposlenja().getYear();
+		
+		int staz= trenutni.get(Calendar.YEAR)-(this.getDatumZaposlenja().getYear()+1900);
+		
+		
 		return staz;
 	}
 	
