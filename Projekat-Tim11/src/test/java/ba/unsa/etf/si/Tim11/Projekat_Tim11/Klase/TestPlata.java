@@ -23,49 +23,17 @@ public class TestPlata extends TestCase {
 
 	
 
-/*
-	@Test (expected=Exception.class) public void testSetDnevniTopliObrok()  {
-		
-	
-        try {
-		Plata p=new Plata();
-		p.setDnevniTopliObrok(-0.5);
-		fail("Nije bacen izuzetak");
-        }
-        catch(Exception e) {
-        	assertTrue(true);
-        }
-	}
 
 	
 
-	@Test (expected=Exception.class) public void testSetFaktor() {
-		 try {
-				Plata p=new Plata();
-				p.setFaktor(-1);
-				fail("Nije bacen izuzetak");
-		        }
-		        catch(Exception e) {
-		        	assertTrue(true);
-		        }
-	}
+	
 
 	
 
-	@Test (expected=Exception.class) public void testSetOsnovica() {
-		 try {
-				Plata p=new Plata();
-				p.setOsnovica(-2);
-				fail("Nije bacen izuzetak");
-		        }
-		        catch(Exception e) {
-		        	assertTrue(true);
-		        }
-	}
-
+	
 	
 
-	*/
+	
 
 	@Test (expected=Exception.class) public void testSetStvarniRad() {
 		 try {
@@ -77,7 +45,7 @@ public class TestPlata extends TestCase {
 		        	assertTrue(true);
 		        }
 	}
-/*
+
 	@Test (expected=Exception.class) public void testSetStvarniRad2() {
 		 try {
 				Plata p=new Plata();
@@ -180,8 +148,10 @@ public class TestPlata extends TestCase {
 	 try{
 			Plata p=new Plata();
 			p.setGodineStaza(100);
-			p.setOsnovica(1);
-			p.setKoeficijent(1);
+			Zaposlenik z=new Zaposlenik();
+			z.setOsnovica(1);
+			z.setKoeficijent(1);
+			p.setZaposlenik(z);
 		    p.izracunajMinuliRad(100);
 		   double dohodak= p.izracunajDohodak();
 		    assertEquals(1.6, dohodak);
@@ -216,9 +186,12 @@ public class TestPlata extends TestCase {
 	 try{
 		 Plata p=new Plata();
 			p.setGodineStaza(1);
-			p.setOsnovica(400);
-			p.setKoeficijent(1);
-			p.setFaktor(1);
+			Zaposlenik z=new Zaposlenik();
+			z.setOsnovica(400);
+			z.setKoeficijent(1);
+			z.setFaktor(1);
+			p.setZaposlenik(z);
+			
 			double roundOff = Math.round(p.izracunajPorezNaDohodak() * 100.0) / 100.0;
 	        assertEquals(10.24, roundOff) ;
 		}
@@ -236,9 +209,12 @@ public class TestPlata extends TestCase {
 	 try{
 	 Plata p=new Plata();
 	p.setGodineStaza(1);
-	p.setOsnovica(400);
-	p.setKoeficijent(1);
-	p.setFaktor(1);
+	Zaposlenik z=new Zaposlenik();
+	z.setOsnovica(400);
+	z.setKoeficijent(1);
+	z.setFaktor(1);
+	p.setZaposlenik(z);
+	
 	double roundOff = Math.round(p.izracunajBrutoPlatu() * 100.0) / 100.0;
 	assertEquals(583.19,roundOff) ;
 	 }
@@ -255,16 +231,18 @@ public class TestPlata extends TestCase {
  {
 	 try{
 		 Plata p=new Plata() ;
-		 p.setOsnovica(300);
-		 p.setKoeficijent(1);
+		 Zaposlenik z=new Zaposlenik();
+		 z.setOsnovica(300);
+		 z.setKoeficijent(1);
 		 p.setGodineStaza(1); //301.8
 		 p.setBrojRadnihDana(25);
 		 p.setStvarniRad(25);
 		 p.setBolovanje(0);
 		 p.setPrazniciRad(0);
 		 p.setNocniRad(0);
-		 p.setDnevniTopliObrok(10);
-		 p.setFaktor(1);
+		 z.setDnevniTopliObrok(10);
+		 z.setFaktor(1);
+		 p.setZaposlenik(z);
 		 assertEquals(301.8,p.izracunajDohodak()  ) ;
 		 assertEquals(551.62, p.izracunajNetoPlatu());
 		 
@@ -279,16 +257,18 @@ public class TestPlata extends TestCase {
 	 {
 		 try{
 			 Plata p=new Plata() ;
-			 p.setOsnovica(300);
-			 p.setKoeficijent(1);
+			 Zaposlenik z=new Zaposlenik();
+			 z.setOsnovica(300);
+			 z.setKoeficijent(1);
 			 p.setGodineStaza(1); //301.8
 			 p.setBrojRadnihDana(25);
 			 p.setStvarniRad(25);
 			 p.setBolovanje(10);
 			 p.setPrazniciRad(0);
 			 p.setNocniRad(0);
-			 p.setDnevniTopliObrok(10);
-			 p.setFaktor(1);
+			 z.setDnevniTopliObrok(10);
+			 z.setFaktor(1);
+			 p.setZaposlenik(z);
 			 assertEquals(301.8,p.izracunajDohodak()  ) ;
 			 assertEquals(648.196, p.izracunajNetoPlatu());
 			 
@@ -305,16 +285,18 @@ public class TestPlata extends TestCase {
 	 {
 		 try{
 			 Plata p=new Plata() ;
-			 p.setOsnovica(300);
-			 p.setKoeficijent(1);
+			 Zaposlenik z=new Zaposlenik();
+			 z.setOsnovica(300);
+			 z.setKoeficijent(1);
 			 p.setGodineStaza(1); //301.8
 			 p.setBrojRadnihDana(25);
 			 p.setStvarniRad(25);
 			 p.setBolovanje(0);
 			 p.setPrazniciRad(10);
 			 p.setNocniRad(0);
-			 p.setDnevniTopliObrok(10);
-			 p.setFaktor(1);
+			 z.setDnevniTopliObrok(10);
+			 z.setFaktor(1);
+			 p.setZaposlenik(z);
 			 assertEquals(301.8,p.izracunajDohodak()  ) ;
 			 double roundOff = Math.round(p.izracunajNetoPlatu()    * 1000.0) / 1000.0;
 			 assertEquals(690.448, roundOff);
@@ -332,16 +314,18 @@ public class TestPlata extends TestCase {
 	 {
 		 try{
 			 Plata p=new Plata() ;
-			 p.setOsnovica(300);
-			 p.setKoeficijent(1);
+			 Zaposlenik z=new Zaposlenik();
+			 z.setOsnovica(300);
+			 z.setKoeficijent(1);
 			 p.setGodineStaza(1); //301.8
 			 p.setBrojRadnihDana(25);
 			 p.setStvarniRad(25);
 			 p.setBolovanje(0);
 			 p.setPrazniciRad(10);
 			 p.setNocniRad(5);
-			 p.setDnevniTopliObrok(10);
-			 p.setFaktor(1);
+			 z.setDnevniTopliObrok(10);
+			 z.setFaktor(1);
+			 p.setZaposlenik(z);
 			 assertEquals(301.8,p.izracunajDohodak()  ) ;
 			 double roundOff = Math.round(p.izracunajNetoPlatu()    * 1000.0) / 1000.0;
 			 assertEquals(695.448, roundOff);
@@ -353,7 +337,7 @@ public class TestPlata extends TestCase {
 			 
 		 }
 		 
-	 }*/
+	 }
  
 
  

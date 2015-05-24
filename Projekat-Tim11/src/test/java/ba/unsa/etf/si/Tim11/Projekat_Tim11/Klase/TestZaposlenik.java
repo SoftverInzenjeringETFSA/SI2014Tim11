@@ -162,5 +162,49 @@ public class TestZaposlenik extends TestCase {
 		
 		
 	}
+  
+	@Test (expected=Exception.class) public void testSetDnevniTopliObrok()  {
+		
+		
+        try {
+	
+		Zaposlenik z=new Zaposlenik();
+		z.setDnevniTopliObrok(-0.5);
+	
+		fail("Nije bacen izuzetak");
+        }
+        catch(Exception e) {
+        	assertTrue(true);
+        }
+	}
+	
+	
 
+	@Test (expected=Exception.class) public void testSetFaktor() {
+		 try {
+				Zaposlenik z=new Zaposlenik();
+				z.setFaktor(-1);
+				fail("Nije bacen izuzetak");
+		        }
+		        catch(Exception e) {
+		        	assertTrue(true);
+		        }
+	}
+
+	@Test (expected=Exception.class) public void testSetOsnovica() {
+		 try {
+
+				Zaposlenik z=new Zaposlenik();
+				z.setOsnovica(-2);
+				fail("Nije bacen izuzetak");
+		        }
+		        catch(Exception e) {
+		        	assertTrue(true);
+		        }
+	}
+
+	
+	
+	
 }
+
