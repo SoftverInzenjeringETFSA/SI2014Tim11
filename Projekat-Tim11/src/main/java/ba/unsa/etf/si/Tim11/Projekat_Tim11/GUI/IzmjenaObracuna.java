@@ -233,6 +233,7 @@ public class IzmjenaObracuna {
 						if (table.isRowSelected(selectedRowIndex) && p.getId() == (Long) table.getModel().getValueAt(selectedRowIndex, 0)) {
 							_z.izbrisiPlatu(p);
 							Sistem.Zaposlenici.izmijeni(_z);
+							_z=Sistem.Zaposlenici.nadji(Integer.parseInt(_z.getId().toString()));
 							JOptionPane.showMessageDialog(frame, "Uspješno ste obrisali platu");
 							break;
 						}
