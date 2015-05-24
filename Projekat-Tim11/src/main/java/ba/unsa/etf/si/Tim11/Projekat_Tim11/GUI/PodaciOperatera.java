@@ -23,12 +23,6 @@ import javax.swing.JComboBox;
 public class PodaciOperatera {
 
 	private JFrame frame;
-	private JTextField txtIme;
-	private JTextField txtPrezime;
-	private JTextField txtJmbg;
-	private JTextField txtAdresa;
-	private JTextField txtPozicija;
-	private JTextField txtTelefon;
 	private static Operater _o;
 	private List<Firma> _firme;
 
@@ -81,62 +75,33 @@ public class PodaciOperatera {
 		
 		JLabel lblIme = new JLabel("Ime:");
 		lblIme.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblIme.setBounds(10, 23, 78, 14);
+		lblIme.setBounds(57, 40, 78, 14);
 		frame.getContentPane().add(lblIme);
-		
-		txtIme = new JTextField();
-		txtIme.setBounds(98, 20, 200, 20);
-		frame.getContentPane().add(txtIme);
-		txtIme.setColumns(10);
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
 		lblPrezime.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrezime.setBounds(0, 54, 88, 14);
+		lblPrezime.setBounds(47, 75, 88, 14);
 		frame.getContentPane().add(lblPrezime);
-		
-		txtPrezime = new JTextField();
-		txtPrezime.setBounds(98, 51, 200, 20);
-		frame.getContentPane().add(txtPrezime);
-		txtPrezime.setColumns(10);
 		
 		JLabel lblJmbg = new JLabel("JMBG:");
 		lblJmbg.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblJmbg.setBounds(10, 85, 78, 14);
+		lblJmbg.setBounds(57, 111, 78, 14);
 		frame.getContentPane().add(lblJmbg);
-		
-		txtJmbg = new JTextField();
-		txtJmbg.setBounds(98, 82, 200, 20);
-		frame.getContentPane().add(txtJmbg);
-		txtJmbg.setColumns(10);
 		
 		JLabel lblAdresa = new JLabel("Adresa:");
 		lblAdresa.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAdresa.setBounds(10, 116, 78, 14);
+		lblAdresa.setBounds(57, 145, 78, 14);
 		frame.getContentPane().add(lblAdresa);
-		
-		txtAdresa = new JTextField();
-		txtAdresa.setBounds(98, 113, 200, 20);
-		frame.getContentPane().add(txtAdresa);
-		txtAdresa.setColumns(10);
 		
 		JLabel lblPozicija = new JLabel("Pozicija u firmi:");
 		lblPozicija.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPozicija.setBounds(-26, 209, 114, 14);
+		lblPozicija.setBounds(21, 254, 114, 14);
 		frame.getContentPane().add(lblPozicija);
-		
-		txtPozicija = new JTextField();
-		txtPozicija.setBounds(98, 206, 200, 20);
-		frame.getContentPane().add(txtPozicija);
-		txtPozicija.setColumns(10);
 		
 		JLabel lblZaposlen = new JLabel("Zaposlen:");
 		lblZaposlen.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblZaposlen.setBounds(10, 237, 78, 14);
+		lblZaposlen.setBounds(57, 289, 78, 14);
 		frame.getContentPane().add(lblZaposlen);
-		
-		final JCalendar calZaposlen = new JCalendar();
-		calZaposlen.setBounds(98, 237, 200, 112);
-		frame.getContentPane().add(calZaposlen);
 		
 		JLabel lblSlika = new JLabel("");
 		lblSlika.setBounds(329, 23, 148, 183);
@@ -151,75 +116,60 @@ public class PodaciOperatera {
 				op.main(null);
 			}
 		});
-		btnIzlaz.setBounds(329, 300, 118, 23);
+		btnIzlaz.setBounds(329, 326, 118, 23);
 		frame.getContentPane().add(btnIzlaz);
 		
 		JLabel lblTelefon = new JLabel("Telefon:");
 		lblTelefon.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTelefon.setBounds(10, 147, 80, 14);
+		lblTelefon.setBounds(55, 183, 80, 14);
 		frame.getContentPane().add(lblTelefon);
-		
-		txtTelefon = new JTextField();
-		txtTelefon.setBounds(98, 144, 200, 20);
-		frame.getContentPane().add(txtTelefon);
-		txtTelefon.setColumns(10);
 		
 		JLabel lblFirma = new JLabel("Firma:");
 		lblFirma.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblFirma.setBounds(10, 178, 78, 14);
+		lblFirma.setBounds(57, 219, 78, 14);
 		frame.getContentPane().add(lblFirma);
 		
-		final JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(98, 175, 200, 20);
-		frame.getContentPane().add(comboBox);
+		JLabel lblImeOdgovor = new JLabel("");
+		lblImeOdgovor.setBounds(145, 40, 174, 14);
+		frame.getContentPane().add(lblImeOdgovor);
+		
+		JLabel lblPrezimeOdgovor = new JLabel("");
+		lblPrezimeOdgovor.setBounds(145, 75, 174, 14);
+		frame.getContentPane().add(lblPrezimeOdgovor);
+		
+		JLabel lblJmbgOdgovor = new JLabel("");
+		lblJmbgOdgovor.setBounds(145, 111, 174, 14);
+		frame.getContentPane().add(lblJmbgOdgovor);
+		
+		JLabel lblAdresaOdgovor = new JLabel("");
+		lblAdresaOdgovor.setBounds(145, 145, 174, 14);
+		frame.getContentPane().add(lblAdresaOdgovor);
+		
+		JLabel lblTelefonOdgovor = new JLabel("");
+		lblTelefonOdgovor.setBounds(145, 183, 174, 14);
+		frame.getContentPane().add(lblTelefonOdgovor);
+		
+		JLabel lblFirmaOdgovor = new JLabel("");
+		lblFirmaOdgovor.setBounds(145, 219, 174, 14);
+		frame.getContentPane().add(lblFirmaOdgovor);
+		
+		JLabel lblPozicijaOdgovor = new JLabel("");
+		lblPozicijaOdgovor.setBounds(145, 254, 174, 14);
+		frame.getContentPane().add(lblPozicijaOdgovor);
+		
+		JLabel lblZaposlenOdgovor = new JLabel("");
+		lblZaposlenOdgovor.setBounds(145, 289, 174, 14);
+		frame.getContentPane().add(lblZaposlenOdgovor);
 		
 		if(_o != null) {
-			txtIme.setText(_o.getIme());
-			txtPrezime.setText(_o.getPrezime());
-			txtJmbg.setText(_o.getJmbg());
-			txtAdresa.setText(_o.getAdresa());
-			txtTelefon.setText(_o.getTelefon());
-			txtPozicija.setText(_o.getPozicija());
-			calZaposlen.setDate(_o.getDatumZaposlenja());
+			lblImeOdgovor.setText(_o.getIme());
+			lblPrezimeOdgovor.setText(_o.getPrezime());
+			lblJmbgOdgovor.setText(_o.getJmbg());
+			lblAdresaOdgovor.setText(_o.getAdresa());
+			lblTelefonOdgovor.setText(_o.getTelefon());
+			lblPozicijaOdgovor.setText(_o.getPozicija());
+			lblZaposlenOdgovor.setText(_o.getDatumZaposlenja().toString());
+			lblFirmaOdgovor.setText(_o.getFirma().toString());
 		}
-		if(_firme.size() != 0) {
-			for(Firma f : _firme) {
-				comboBox.addItem(f.toString());
-			}
-		}
-		
-		JButton btnPotvrdi = new JButton("Potvrdi");
-		btnPotvrdi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Date datum = calZaposlen.getDate();
-				String firma = (String) comboBox.getSelectedItem();
-				try {
-					if (_o != null) {
-						_o.setIme(txtIme.getText());
-						_o.setPrezime(txtPrezime.getText());
-						_o.setJmbg(txtJmbg.getText());
-						_o.setAdresa(txtAdresa.getText());
-						_o.setTelefon(txtTelefon.getText());
-						_o.setPozicija(txtPozicija.getText());
-						_o.setDatumZaposlenja(datum);
-						for (Firma f : _firme) {
-							if (f.toString().equals(firma)) {
-								_o.setFirma(f);
-							}
-						}
-						JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali podatke");
-						frame.dispose();
-						OperaterPocetna op = new OperaterPocetna(_o);
-						op.main(null);
-					}
-				}
-				catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		btnPotvrdi.setBounds(329, 266, 118, 23);
-		frame.getContentPane().add(btnPotvrdi);
 	}
 }
