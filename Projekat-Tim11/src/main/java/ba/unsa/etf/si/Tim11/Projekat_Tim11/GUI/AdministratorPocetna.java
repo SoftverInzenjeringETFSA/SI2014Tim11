@@ -143,7 +143,7 @@ public class AdministratorPocetna {
 		btnRaspodjelaOperatera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				OperateriRaspodjela or = new OperateriRaspodjela();
+				OperateriRaspodjela or = new OperateriRaspodjela(_a);
 				or.main(null);
 				
 			}
