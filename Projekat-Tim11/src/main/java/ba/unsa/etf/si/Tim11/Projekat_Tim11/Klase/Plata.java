@@ -247,7 +247,7 @@ public class Plata implements Serializable  {
 		
 	}
 	
-	public double izracunajDohodak() {     //podijelio sam racun da je lakse za razumjeti
+	public double izracunajDohodak() throws Exception {     //podijelio sam racun da je lakse za razumjeti
 		double dohodak1=zaposlenik.getOsnovica()*zaposlenik.getKoeficijent();
 		double dohodak2=dohodak1+izracunajMinuliRad(dohodak1);
 		return dohodak2;
@@ -268,7 +268,7 @@ public class Plata implements Serializable  {
 	}
 	
 	
-	public double izracunajPorezNaDohodak()
+	public double izracunajPorezNaDohodak() throws Exception
 	{
 		double licniOdbitak=300;   //osnovni licni odbitak
 		licniOdbitak=licniOdbitak*zaposlenik.getFaktor();
@@ -276,11 +276,11 @@ public class Plata implements Serializable  {
 		double porezNaDohodak=(osnovicaZaPorez*10)/100;    // izracunavanje poreza od 10% na osnovicaZaPorez
 		return porezNaDohodak;
 	}
-	public double izracunajBrutoPlatu(){
+	public double izracunajBrutoPlatu() throws Exception{
 		double bruto= izracunajDohodak()*izracunajStopuPoreza();
 		return bruto;
 	}
-	public double izracunajNetoPlatu()
+	public double izracunajNetoPlatu() throws Exception
 	{
 		/*
 			Posto nam neto zavisi od stvarnog rada(koliko je stvarno sati zaposlenik radio),
