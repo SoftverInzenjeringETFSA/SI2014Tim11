@@ -155,6 +155,20 @@ public class AdministratorPocetna {
 		
 		
 		JButton btnIzlaz = new JButton("Izlaz");
+	btnIzlaz.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			frame.dispose();
+			Login l;
+			try {
+				l = new Login();
+				l.main(null);
+			}
+			catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	});
 		btnIzlaz.setBounds(331, 227, 75, 23);
 		frame.getContentPane().add(btnIzlaz);
 		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnRaspodjelaOperatera, btnAuriranjeOperatera, btnAuriranjeFirmi, btnIzlaz, frame.getContentPane(), lblDobrodoliIme, lblSlika,btnMojRaun}));
