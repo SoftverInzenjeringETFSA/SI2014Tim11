@@ -148,9 +148,25 @@ public class Izvjestaji {
 		panel.add(calDatumKreiranja);
 		
 		final JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Platna lista", "Specifikacija 2001", "Mjesečni izvještaj", "Godišnji izvještaj"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Platna lista", "Mjesečni izvještaj", "Doprinosi"}));
 		comboBox.setBounds(117, 129, 134, 23);
 		panel.add(comboBox);
+		
+		final JButton btnPrintanje = new JButton("Printanje");
+		btnPrintanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+			        BufferedWriter out = new BufferedWriter(new FileWriter("izvjestaj.txt"));
+			            for (int i = 0; i < 4; i++) {
+			                out.write("test " + "\n");
+			                out.newLine();
+			            }
+			            out.close();
+			        } catch (IOException e) {}
+			}
+		});
+		btnPrintanje.setBounds(341, 337, 89, 23);
+		frame.getContentPane().add(btnPrintanje);
 		
 		final JButton btnKreirajIzvjestaj = new JButton("Kreiraj izvještaj");
 		btnKreirajIzvjestaj.addActionListener(new ActionListener() {
@@ -161,64 +177,148 @@ public class Izvjestaji {
 						return;
 					}
 				}
-				if(comboBox.getSelectedIndex() == 3) {
+				
+				final DefaultTableModel model = new DefaultTableModel();
+				table.setModel(model);
+				
+				double d1=17;          //doprinos za PIO/MIo
+				double d2=12.5;        //doprinos za zdravstveno osiguranje
+				double d3=1.5;         //doprinos za osiguranje od nezaposlenosti
+				
+				double d4=6;		   //doprinos za PIO na teret poslodavca
+				double d5=4;           //doprinos za zdravstveno osiguranje na teret poslodavca
+				double d6=0.5;         //doprinos za osiguranje od nezaposlenosti na teret poslodavca
+				
+				if(comboBox.getSelectedIndex() == 0) {
+					String[] kolone = {"Ime uposlenika",
+							"Prezime uposlenika",
+							"JMBG uposlenika",
+							"Neto plata",
+							"Lični odbici",
+							"Doprinos za PIO",
+							"Doprinos za zdravsteno",
+							"Doprinos za osiguranje od nezaposlenosti",
+							"Doprinos za PIO na teret poslodavca",
+							"Doprinos za zdravstveno na teret poslodavca",
+							"Doprinos za osiguranje od nezaposlenosti na teret poslodavca",
+							"Osnovica za porez na dohodak",
+							"Porez na dohodak",
+							"Bruto plata"};
+
+					model.setColumnIdentifiers(kolone);
+					for(Zaposlenik z : _zaposlenici) {
+						if(z.getId() == Long.parseLong(txtId.getText())) {
+							double licniodbitak = 300 * z.getFaktor();
+							for(Plata p : z.getPlate()) {
+								  try {
+									  double osnovicaZaPorez=p.izracunajDohodak()-licniodbitak;
+										Object[] o = new Object[14];
+										  o[0] = z.getIme();
+										  o[1] = z.getPrezime();
+										  o[2] = z.getJmbg();
+										  o[3] = p.izracunajNetoPlatu();
+										  o[4] = licniodbitak;
+										  o[5] = d1;
+										  o[6] = d2;
+										  o[7] = d3;
+										  o[8] = d4;
+										  o[9] = d5;
+										  o[10] = d6;
+										  o[11] = osnovicaZaPorez;
+										  o[12] = p.izracunajPorezNaDohodak();
+										  o[13] = p.izracunajBrutoPlatu();
+										  model.addRow(o);
+								  }
+								  catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								  }
+							}
+						}
+					}
+				}
+				
+				if(comboBox.getSelectedIndex() == 1) {
 					String[] kolone = {"ID uposlenika",
 							"Ime uposlenika",
 							"Prezime uposlenika",
-							"ID plate",
+							"JMBG uposlenika",
 							"Neto plata",
+							"Doprinosi na platu",
+							"Porez",
 							"Bruto plata"};
 
 					model.setColumnIdentifiers(kolone);
 					for(Zaposlenik z : _zaposlenici) {
 						for(Plata p : z.getPlate()) {
-							Object[] o = new Object[6];
-							  o[0] = z.getId();
-							  o[1] = z.getIme();
-							  o[2] = z.getPrezime();
-							  o[3] = p.getId();
 							  try {
-								o[4] = p.izracunajNetoPlatu();
-								o[5] = p.izracunajBrutoPlatu();
+								  Object[] o = new Object[8];
+								  o[0] = z.getId();
+								  o[1] = z.getIme();
+								  o[2] = z.getPrezime();
+								  o[3] = z.getJmbg();
+								  o[4] = p.izracunajNetoPlatu();
+								  o[5] = d1+d2+d3+d4+d5+d6;
+								  o[6] = p.izracunajPorezNaDohodak();
+								  o[7] = p.izracunajBrutoPlatu();
+								  model.addRow(o);
 							  }
 							  catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							  }
-							  model.addRow(o);
 						}
 					}
 				}
 				if(comboBox.getSelectedIndex() == 2) {
-					String[] kolone = {"Datum",
-							"ID uposlenika",
-							"Ime uposlenika",
-							"Prezime uposlenika",
-							"ID plate",
-							"Neto plata",
-							"Bruto plata"};
+					String[] kolone = {"Doprinosi",
+							"Broj računa",
+							"Iznos"};
 
 					model.setColumnIdentifiers(kolone);
 					for(Zaposlenik z : _zaposlenici) {
-						for(Plata p : z.getPlate()) {
-							Object[] o = new Object[7];
-							  o[0] = p.getDatum();
-							  o[1] = z.getId();
-							  o[2] = z.getIme();
-							  o[3] = z.getPrezime();
-							  o[4] = p.getId();
-							  try {
-								o[5] = p.izracunajNetoPlatu();
-								o[6] = p.izracunajBrutoPlatu();
-							  }
-							  catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							  }
-							  model.addRow(o);
+						Plata p = z.getPlate().get(z.getPlate().size()-1);
+						Object[] o = new Object[3];
+						o[0] = "Penziono i invalidsko osiguranje";
+						o[1] = "1610200035700075";
+						o[2] = d1;
+						model.addRow(o);
+						o[0] = "Zdravstveno osiguranje, Kanton";
+						o[1] = "1375006001679472";
+						o[2] = (d2*89.8) / 100;
+						model.addRow(o);
+						o[0] = "Zdravstveno osiguranje, FBiH";
+						o[1] = "1020500000064018";
+						o[2] = (d2*10.2) / 100;
+						model.addRow(o);
+						o[0] = "Osiguranje od nezaposlenosti, FBiH";
+						o[1] = "16100000028570003";
+						o[2] = (d3*30) / 100;
+						model.addRow(o);
+						o[0] = "Osiguranje od nezaposlenosti, HNK";
+						o[1] = "1610200013800191";
+						o[2] = (d3*70) / 100;
+						model.addRow(o);
+						o[0] = "Porez na dohodak";
+						o[1] = "3380002200005953";
+						try {
+							o[2] = p.izracunajPorezNaDohodak();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
+						model.addRow(o);
+						o[0] = "Ukupne obaveze";
+						try {
+							o[2] = d1+(d2*89.8)/100+(d2*10.2)/100+(d3*30)/100+(d3*70)/100+p.izracunajPorezNaDohodak();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+ 						model.addRow(o);
 					}
 				}
+				btnPrintanje.setEnabled(true);
 			}
 		});
 		btnKreirajIzvjestaj.setBounds(358, 161, 151, 23);
@@ -265,22 +365,6 @@ public class Izvjestaji {
 		     }
 		  });
 		
-		JButton btnPrintanje = new JButton("Printanje");
-		btnPrintanje.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-			        BufferedWriter out = new BufferedWriter(new FileWriter("izvjestaj.txt"));
-			            for (int i = 0; i < 4; i++) {
-			                out.write("test " + "\n");
-			                out.newLine();
-			            }
-			            out.close();
-			        } catch (IOException e) {}
-			}
-		});
-		btnPrintanje.setBounds(341, 337, 89, 23);
-		frame.getContentPane().add(btnPrintanje);
-		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -293,5 +377,6 @@ public class Izvjestaji {
 		frame.getContentPane().add(btnIzlaz);
 		
 		btnKreirajIzvjestaj.setEnabled(false);
+		btnPrintanje.setEnabled(false);
 	}
 }
