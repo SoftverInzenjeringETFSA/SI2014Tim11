@@ -102,6 +102,7 @@ public class Login {
 		ImageIcon img = new ImageIcon("icons/login_icon.png");
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
+		generateDB();
 		_operateri = Sistem.Operateri.lista();
 		_administratori = Sistem.Admini.lista();
 		
