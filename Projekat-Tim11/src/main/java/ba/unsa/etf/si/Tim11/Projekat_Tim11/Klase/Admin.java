@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 import javax.naming.OperationNotSupportedException;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 
 @Entity
@@ -37,6 +37,7 @@ public class Admin extends Osoba implements Account, Serializable {
 		this.password = password;
 	}
 
+	@Column(unique=true)
 	String username;
 	String password;
 	

@@ -12,6 +12,7 @@ public class Operater extends Osoba implements Account,Serializable{
 	
 	private static final long serialVersionUID = -5250987363270323512L;
 	
+	@Column(unique=true)
 	private String username;
 	private String password;
 	private String privilegije;
