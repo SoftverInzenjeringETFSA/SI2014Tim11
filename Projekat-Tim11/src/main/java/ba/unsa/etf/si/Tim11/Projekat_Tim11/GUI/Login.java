@@ -88,7 +88,7 @@ public class Login {
 			
 		}
 		catch(Exception ex){
-			
+			System.out.println(ex.getMessage());
 		}
 	}
 	
@@ -102,9 +102,13 @@ public class Login {
 		ImageIcon img = new ImageIcon("icons/login_icon.png");
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
-		generateDB();
 		_operateri = Sistem.Operateri.lista();
 		_administratori = Sistem.Admini.lista();
+		if(_operateri.size()==0 || _administratori.size()==0){
+			generateDB();
+			_operateri = Sistem.Operateri.lista();
+			_administratori = Sistem.Admini.lista();
+		}
 		
 		
 		JLabel lblKorisnikoIme = new JLabel("Korisničko ime:");
