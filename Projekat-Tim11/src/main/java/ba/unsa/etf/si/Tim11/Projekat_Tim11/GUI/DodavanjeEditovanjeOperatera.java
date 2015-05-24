@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.*;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem.Firme;
 
 import java.util.*;
 
@@ -37,6 +38,8 @@ public class DodavanjeEditovanjeOperatera {
 	private static Zaposlenik _z;
 	private static Firma _f;
 	private static Admin _a;
+	private static List<Operater>_operateri;
+	private static List<Firma>_firme;
 
 	/**
 	 * Launch the application.
@@ -98,6 +101,10 @@ public class DodavanjeEditovanjeOperatera {
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		_operateri = Sistem.Operateri.lista();
+		_firme = Sistem.Firme.lista();
+		
+	
 		
 		JLabel lblIme = new JLabel("Ime:");
 		lblIme.setBounds(10, 11, 78, 14);

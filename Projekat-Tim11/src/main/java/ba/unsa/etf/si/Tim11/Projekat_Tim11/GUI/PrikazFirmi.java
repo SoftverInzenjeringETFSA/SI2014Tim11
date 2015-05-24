@@ -92,6 +92,7 @@ public class PrikazFirmi extends JFrame{
 		frmPrikazFirmi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrikazFirmi.getContentPane().setLayout(null);
 		_firme = Sistem.Firme.lista();
+		
 
 
 		
@@ -184,7 +185,7 @@ public class PrikazFirmi extends JFrame{
 		        "Sjedište",
 		        };
 
-		DefaultTableModel model = new DefaultTableModel();
+		final DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
 		model.setColumnIdentifiers(kolone);
 		for (Firma f : _firme) {
@@ -279,6 +280,7 @@ public class PrikazFirmi extends JFrame{
 							String ispis = "Uspješno ste obrisali firmu ID: " + f.getId();
 						Sistem.Firme.izbrisi((int)f.getId());
 				_firme.remove(f);
+				model.removeRow(selectedRowIndex);
 							JOptionPane.showMessageDialog(frmPrikazFirmi, ispis);
 							break;
 						}

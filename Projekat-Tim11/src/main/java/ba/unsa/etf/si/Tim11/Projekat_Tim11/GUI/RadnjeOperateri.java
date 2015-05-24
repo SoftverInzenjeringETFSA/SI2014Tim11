@@ -195,6 +195,13 @@ private Firma _f;
 		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnIzlaz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				AdministratorPocetna ap = new AdministratorPocetna(_a);
+				ap.main(null);
+			}
+		});
 		btnIzlaz.setBounds(380, 227, 72, 23);
 		frame.getContentPane().add(btnIzlaz);
 		
@@ -258,7 +265,7 @@ private Firma _f;
 		
 		JComboBox<String> comboFirma = new JComboBox<String>();
 		
-		comboFirma.setBounds(20, 25, 79, 20);
+		comboFirma.setBounds(20, 25, 106, 20);
 		comboFirma.addItemListener(new ItemChangeListener());
 		frame.getContentPane().add(comboFirma);
 		
