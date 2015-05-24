@@ -32,8 +32,11 @@ public class OperatoriPrikazAdmin {
 	private JTextField txtID;
 	private static Operater _o;
 	private List<Zaposlenik> _zaposlenici;
+	private List<Operater>_operateri;
 	private List<Firma> _firme;
 	private JTable table;
+	private static Admin _a;
+	private static Firma _f;
 
 
 	/**
@@ -45,7 +48,7 @@ public class OperatoriPrikazAdmin {
 				try {
 					OperatoriPrikazAdmin window;
 					if(_o != null) {
-						window = new OperatoriPrikazAdmin(_o);
+						window = new OperatoriPrikazAdmin(_a);
 					}
 					else {
 						window = new OperatoriPrikazAdmin();
@@ -60,14 +63,16 @@ public class OperatoriPrikazAdmin {
 
 	/**
 	 * Create the application.
+	 * @param _a 
 	 */
-	public OperatoriPrikazAdmin() {
+	public OperatoriPrikazAdmin(Admin a) {
 		initialize();
+		_a=a;
 	}
 	
-	public OperatoriPrikazAdmin(Operater o) {
-		initialize();
-		_o = o;
+	
+	public OperatoriPrikazAdmin() {
+	initialize();
 	}
 
 	/**
@@ -80,7 +85,7 @@ public class OperatoriPrikazAdmin {
 		ImageIcon img = new ImageIcon("icons/staff_icon.png");
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		_zaposlenici = Sistem.Zaposlenici.lista();
+		_operateri = Sistem.Operateri.lista();
 		_firme = Sistem.Firme.lista();
 		frame.getContentPane().setLayout(null);
 		
@@ -109,13 +114,13 @@ public class OperatoriPrikazAdmin {
 		DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
 		model.setColumnIdentifiers(kolone);
-		for (Zaposlenik z : _zaposlenici) {
-			  Object[] o = new Object[4];
-			  o[0] = z.getId();
-			  o[1] = z.getIme();
-			  o[2] = z.getPrezime();
-			  o[3] = z.getPozicija();
-			  model.addRow(o);
+		for (Operater o : _operateri) {
+			  Object[] o1 = new Object[3];
+			  o1[0] = o.getId();
+			  o1[1] = o.getIme();
+			  o1[2] = o.getPrezime();
+			 
+			  model.addRow(o1);
 		}
 		
 		class ItemChangeListener implements ItemListener{
@@ -126,24 +131,24 @@ public class OperatoriPrikazAdmin {
 		        	  for(Firma f : _firme) {
 		        		  if(f != null) {
 		        			  if(f.toString().equals(item)) {
-							 		for(Zaposlenik z : _zaposlenici) {
-							 			if(z != null) {
-							 				if(f.equals(z.getFirma())) {
+							 		for(Operater o : _operateri) {
+							 			if(o != null) {
+							 				if(f.equals(o.getFirma())) {
 							 					String[] kolone = {"ID",
 							 					        "Ime",
-							 					        "Prezime",
-							 					        "Odjel"};
+							 					        "Prezime"
+							 					        };
 							 					
 							 					DefaultTableModel model = new DefaultTableModel();
 							 					table.setModel(model);
 							 					model.setColumnIdentifiers(kolone);
 							 					
-							 					Object[] o = new Object[4];
-							 					  o[0] = z.getId();
-							 					  o[1] = z.getIme();
-							 					  o[2] = z.getPrezime();
-							 					  o[3] = z.getPozicija();
-							 					  model.addRow(o);
+							 					Object[] o1 = new Object[3];
+							 					  o1[0] = o.getId();
+							 					  o1[1] = o.getIme();
+							 					  o1[2] = o.getPrezime();
+							 					
+							 					  model.addRow(o1);
 							 				}
 							 			}
 							 		}
@@ -182,21 +187,21 @@ public class OperatoriPrikazAdmin {
 		     public void removeUpdate(DocumentEvent e) {
 		    	 String[] kolone = {"ID",
 			 		        "Ime",
-			 		        "Prezime",
-			 		        "Odjel"};
+			 		        "Prezime"
+			 		      };
 
 			 		DefaultTableModel model = new DefaultTableModel();
 			 		table.setModel(model);
 			 		model.setColumnIdentifiers(kolone);
-			 		for(Zaposlenik z : _zaposlenici) {
-			 			if(z != null) {
-			 				if(z.getId().toString().contains(txtID.getText())) {
-			 					Object[] o = new Object[4];
-			 					  o[0] = z.getId();
-			 					  o[1] = z.getIme();
-			 					  o[2] = z.getPrezime();
-			 					  o[3] = z.getPozicija();
-			 					  model.addRow(o);
+			 		for(Operater o : _operateri) {
+			 			if(o != null) {
+			 				if(o.getId().toString().contains(txtID.getText())) {
+			 					Object[] o1 = new Object[3];
+			 					  o1[0] = o.getId();
+			 					  o1[1] = o.getIme();
+			 					  o1[2] = o.getPrezime();
+			 				
+			 					  model.addRow(o1);
 			 				}
 			 			}
 			 		}
@@ -212,15 +217,15 @@ public class OperatoriPrikazAdmin {
 		 		DefaultTableModel model = new DefaultTableModel();
 		 		table.setModel(model);
 		 		model.setColumnIdentifiers(kolone);
-		 		for(Zaposlenik z : _zaposlenici) {
-		 			if(z != null) {
-		 				if(z.getId().toString().contains(txtID.getText())) {
-		 					Object[] o = new Object[4];
-		 					  o[0] = z.getId();
-		 					  o[1] = z.getIme();
-		 					  o[2] = z.getPrezime();
-		 					  o[3] = z.getPozicija();
-		 					  model.addRow(o);
+		 		for(Operater o : _operateri) {
+		 			if(o != null) {
+		 				if(o.getId().toString().contains(txtID.getText())) {
+		 					Object[] o1 = new Object[3];
+		 					  o1[0] = o.getId();
+		 					  o1[1] = o.getIme();
+		 					  o1[2] = o.getPrezime();
+		 					
+		 					  model.addRow(o1);
 		 				}
 		 			}
 		 		}
@@ -237,36 +242,19 @@ public class OperatoriPrikazAdmin {
 		btnDodavanje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				PodaciUposlenika pu = new PodaciUposlenika();
-				pu.main(null);
+				DodavanjeEditovanjeOperatera ooe = new DodavanjeEditovanjeOperatera(_f,_a);
+				ooe.main(null);
 			}
 		});
 		frame.getContentPane().add(btnDodavanje);
 		
 		JButton btnAzuriranje = new JButton("Ažuriranje");
 		btnAzuriranje.setBounds(355, 160, 124, 23);
-		btnAzuriranje.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				PodaciOperatera pu = new PodaciOperatera();
-				pu.main(null);
-			}
-		});
 		frame.getContentPane().add(btnAzuriranje);
 		
 		JButton btnDodajPermisiju = new JButton("Dodaj Permisiju");
 		btnDodajPermisiju.setBounds(355, 194, 124, 23);
-		btnDodajPermisiju.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
-				if(dialogResult == JOptionPane.YES_OPTION) {
-					
-				}
-				if(dialogResult == JOptionPane.NO_OPTION) {
-					
-				}
-			}
-		});
+		
 		frame.getContentPane().add(btnDodajPermisiju);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
@@ -274,8 +262,8 @@ public class OperatoriPrikazAdmin {
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				OperaterPocetna op = new OperaterPocetna(_o);
-				op.main(null);
+				AdministratorPocetna ap = new AdministratorPocetna(_a);
+				ap.main(null);
 			}
 		});
 		frame.getContentPane().add(btnIzlaz);

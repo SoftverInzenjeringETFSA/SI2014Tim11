@@ -198,7 +198,7 @@ public class DodavanjeEditovanjeOperatera {
 						
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novog operatera");
 						frame.dispose();
-						RadnjeOperateri ro = new RadnjeOperateri(_a);
+						OperatoriPrikazAdmin ro = new OperatoriPrikazAdmin(_a);
 						ro.main(null);
 					}
 					catch (Exception e1) {
@@ -229,7 +229,7 @@ public class DodavanjeEditovanjeOperatera {
 		
 		
 						frame.dispose();
-						RadnjeOperateri rp = new RadnjeOperateri(_a);
+						OperatoriPrikazAdmin rp = new OperatoriPrikazAdmin(_a);
 						rp.main(null);
 					}
 					catch (Exception e1) {
@@ -247,7 +247,7 @@ public class DodavanjeEditovanjeOperatera {
 			btnIzlaz.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					frame.dispose();
-				RadnjeOperateri up = new RadnjeOperateri(_a);
+				OperatoriPrikazAdmin up = new OperatoriPrikazAdmin(_a);
 					up.main(null);
 				}
 			});
