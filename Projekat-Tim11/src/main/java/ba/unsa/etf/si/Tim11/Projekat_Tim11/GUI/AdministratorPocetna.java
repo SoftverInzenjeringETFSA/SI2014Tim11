@@ -137,7 +137,7 @@ public class AdministratorPocetna {
 			}
 		});
 		btnAuriranjeOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnAuriranjeOperatera.setBounds(252, 151, 154, 33);
+		btnAuriranjeOperatera.setBounds(252, 106, 154, 33);
 		frame.getContentPane().add(btnAuriranjeOperatera);
 		
 		JButton btnRaspodjelaOperatera = new JButton("Raspodjela operatera");
@@ -150,7 +150,7 @@ public class AdministratorPocetna {
 			}
 		});
 		btnRaspodjelaOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnRaspodjelaOperatera.setBounds(252, 107, 154, 33);
+		btnRaspodjelaOperatera.setBounds(252, 150, 154, 33);
 		frame.getContentPane().add(btnRaspodjelaOperatera);
 		
 		

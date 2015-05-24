@@ -15,7 +15,7 @@ public class Operater extends Osoba implements Account,Serializable{
 	@Column(unique=true)
 	private String username;
 	private String password;
-	private String privilegije;
+	private boolean privilegije;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "firma")
@@ -57,17 +57,12 @@ public class Operater extends Osoba implements Account,Serializable{
 		this.password = password;
 	}
 
-	public String getPrivilegije() {
-		return privilegije;
+	public boolean getPrivilegije() {
+		return this.privilegije;
 	}
 
-	public void setPrivilegije(String privilegije) {
+	public void setPrivilegije(Boolean privilegije) {
 		
-		//trebamo se dogovoriti nazive za privilegije, npr. obracuni, izvjestaji
-		/*Pattern pattern = Pattern.compile("obračuni|zaposlenici|izvještaji"); //npr moguce privilegije,tj podjela sta moze koji operater radit
-	    if (!pattern.matcher(username).matches()) {
-	        throw new Exception("Password mora imati minimalno 3 karaktera(velika i mala slova i brojevi(minimalno 3 karaktera)");
-	    }*/
 		
 		this.privilegije = privilegije;
 	}
