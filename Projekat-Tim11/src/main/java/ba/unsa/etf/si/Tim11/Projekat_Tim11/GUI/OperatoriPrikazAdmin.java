@@ -262,6 +262,8 @@ public class OperatoriPrikazAdmin {
 		JButton btnDodajPermisiju = new JButton("Dodaj Permisiju");
 		btnDodajPermisiju.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				_o.setPrivilegije(true);
 			}
 		});
 		btnDodajPermisiju.setBounds(355, 194, 124, 23);
