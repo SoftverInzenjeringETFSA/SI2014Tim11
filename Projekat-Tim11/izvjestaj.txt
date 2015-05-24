@@ -1,2 +1,0 @@
-Ime uposlenika	Prezime uposlenika	JMBG uposlenika	Neto plata	Lični odbici	Doprinos za PIO	Doprinos za zdravsteno	Doprinos za osiguranje od nezaposlenosti	Doprinos za PIO na teret poslodavca	Doprinos za zdravstveno na teret poslodavca	Doprinos za osiguranje od nezaposlenosti na teret poslodavca	Osnovica za porez na dohodak	Porez na dohodak	Bruto plata	
-Temp	Tempi?	1505991170272	31.349999999999998	300.0	17.0	12.5	1.5	6.0	4.0	0.5	-299.0	-29.9	1.4492753623188406	

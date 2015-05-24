@@ -14,6 +14,7 @@ import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem.Firme;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 import com.toedter.calendar.JCalendar;
 
@@ -176,6 +177,16 @@ public class DodavanjeEditovanjeOperatera {
 		btnPotvrdi.setBounds(359, 199, 118, 23);
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(txtIme.getText().length() < 4 || txtPrezime.getText().length() < 4 || txtJmbg.getText().length() < 14
+						|| txtAdresa.getText().length() < 6 || txtPozicija.getText().length() < 1
+						|| calZaposlen.getDate().after(new Date())) return;
+				Pattern patternIme = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+				Pattern patternJmbg = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$");
+				Pattern patternAdresa = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}");
+				if (!patternIme.matcher(txtIme.getText()).matches() || !patternIme.matcher(txtPrezime.getText()).matches()
+						|| !patternJmbg.matcher(txtJmbg.getText()).matches() || !patternAdresa.matcher(txtAdresa.getText()).matches()) {
+			        return;
+			    }
 				if(_o == null) {
 					try {
 						_o = new Operater();
