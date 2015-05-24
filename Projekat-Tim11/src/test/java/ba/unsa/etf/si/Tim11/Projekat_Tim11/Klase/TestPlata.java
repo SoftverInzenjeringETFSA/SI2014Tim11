@@ -6,6 +6,15 @@ import junit.framework.TestCase;
 
 
 
+
+
+
+
+
+
+
+
+
 import org.junit.Test;
 
 
@@ -164,7 +173,7 @@ public class TestPlata extends TestCase {
 	}
 	catch(Exception e)
 	{
-		assertTrue(true);
+		System.err.println(e.getMessage());
 	}
 	}
  public void testizracunajDohodak(){
@@ -179,7 +188,7 @@ public class TestPlata extends TestCase {
 		}
 		catch(Exception e)
 		{
-			assertTrue(true);
+			System.err.println(e.getMessage());
 		}
 	 
 	 
@@ -194,8 +203,7 @@ public class TestPlata extends TestCase {
 		}
 		catch(Exception e)
 		{
-			assertTrue(true);
-		}
+			System.err.println(e.getMessage());		}
 	 
 	 
 	 
@@ -216,7 +224,7 @@ public class TestPlata extends TestCase {
 		}
 		catch(Exception e)
 		{
-			assertTrue(true);
+			System.err.println(e.getMessage());
 		}
 	 
 	 
@@ -236,7 +244,7 @@ public class TestPlata extends TestCase {
 	 }
 	 catch(Exception e)
 		{
-			assertTrue(true);
+		 System.err.println(e.getMessage());
 		}
 	 
 	 
@@ -263,8 +271,7 @@ public class TestPlata extends TestCase {
 	 }
 	 catch(Exception e)
 	 {
-		 assertTrue(true);
-		 
+		 System.err.println(e.getMessage());
 	 }
  }
 	 
@@ -288,7 +295,7 @@ public class TestPlata extends TestCase {
 		 }
 		 catch(Exception e)
 		 {
-			 assertTrue(true);
+			 System.err.println(e.getMessage());
 			 
 		 }
 		 
@@ -315,7 +322,7 @@ public class TestPlata extends TestCase {
 		 }
 		 catch(Exception e)
 		 {
-			 assertTrue(true);
+			 System.err.println(e.getMessage());
 			 
 		 }
 		 
@@ -342,7 +349,7 @@ public class TestPlata extends TestCase {
 		 }
 		 catch(Exception e)
 		 {
-			 assertTrue(true);
+			 System.err.println(e.getMessage());
 			 
 		 }
 		 

@@ -155,7 +155,7 @@ public class TestZaposlenik extends TestCase {
 		catch(Exception e)
 		{
 			
-			
+			System.err.println(e.getMessage());
 			
 		}
 		
