@@ -226,7 +226,7 @@ public class IzmjenaObracuna {
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if((Integer) spinBrojRadnihDana.getValue() == 0 || (Integer) spinStvarniRad.getValue() == 0) {
-					JOptionPane.showMessageDialog(frame, "Morate unijeti broj radnih dana, stvarni rad i godine staza");
+					JOptionPane.showMessageDialog(frame, "Morate unijeti broj radnih dana i stvarni rad");
 					return;
 				}
 				try {
@@ -239,10 +239,10 @@ public class IzmjenaObracuna {
 					_p.setGodisnjiOdmor((Integer) spinGodisnjiOdmor.getValue());
 					_p.setPrazniciRad((Integer) spinPraznici.getValue());
 					_p.setNocniRad((Integer) spinNocniRad.getValue());
+					JOptionPane.showMessageDialog(frame, _p.getStvarniRad());
 					_p.setZaposlenik(_z);
 					_z.dodajPlatu(_p);
 					Sistem.Zaposlenici.izmijeni(_z);
-					JOptionPane.showMessageDialog(frame, _z.radniStaz());
 				}
 				catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -271,12 +271,16 @@ public class IzmjenaObracuna {
 							}
 						}
 					}
-				}//test
+				}
 			}
 		});
 		btnPotvrdi.setBounds(462, 291, 99, 23);
 		panel.add(btnPotvrdi);
 		
 		tabbedPane.setEnabledAt(1, false);
+		if(_z != null) {
+			JOptionPane.showMessageDialog(frame, _z.getId());
+			if(_z.getPlate().size() > 0) tabbedPane.setEnabledAt(1, true);
+		}
 	}
 }

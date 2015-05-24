@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import java.awt.Color;
 
@@ -105,6 +107,19 @@ public class Izvjestaji {
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
+		final JButton btnObrisi = new JButton("Obriši");
+		btnObrisi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int selectedRowIndex = table.getSelectedRow();
+					if (table.isRowSelected(selectedRowIndex)) {
+						table.remove(selectedRowIndex);
+						btnObrisi.setEnabled(false);
+					}
+			}
+		});
+		btnObrisi.setBounds(420, 23, 89, 61);
+		panel_1.add(btnObrisi);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, 414, 109);
 		panel_1.add(scrollPane);
@@ -120,6 +135,12 @@ public class Izvjestaji {
 		
 		final DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
+		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+	        public void valueChanged(ListSelectionEvent event) {
+	            btnObrisi.setEnabled(true);
+	        }
+	    });
 		
 		JLabel lblId = new JLabel("ID uposlenika:");
 		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -266,14 +287,6 @@ public class Izvjestaji {
 		     }
 		  });
 		
-		JButton btnPrikazi = new JButton("Prikaži");
-		btnPrikazi.setBounds(420, 24, 89, 23);
-		panel_1.add(btnPrikazi);
-		
-		JButton btnObrisi = new JButton("Obriši");
-		btnObrisi.setBounds(420, 61, 89, 23);
-		panel_1.add(btnObrisi);
-		
 		JButton btnPrintanje = new JButton("Printanje");
 		btnPrintanje.setBounds(341, 337, 89, 23);
 		frame.getContentPane().add(btnPrintanje);
@@ -289,5 +302,6 @@ public class Izvjestaji {
 		frame.getContentPane().add(btnIzlaz);
 		
 		btnKreirajIzvjestaj.setEnabled(false);
+		btnObrisi.setEnabled(false);
 	}
 }

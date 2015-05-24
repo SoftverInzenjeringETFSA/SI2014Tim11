@@ -71,6 +71,7 @@ public class Login {
 			o.setPassword("pass");
 			Zaposlenik z=new Zaposlenik(f, "Temp","Tempić","1505991170272","Dolina 15","+38761566311",new Date(),"zaposlenik", 1, 1, 1, 1);
 			Plata p=new Plata(z, new Date(), 1, 1, 1, 1, 1, 1, 4, 1, 1);
+			p.setZaposlenik(z);
 			z.dodajPlatu(p);
 			o.setFirma(f);
 			f.dodajZaposlenika(z);
