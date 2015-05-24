@@ -131,7 +131,7 @@ public class UposleniciPrikaz {
 							String ispis = "Uspješno ste obrisali zaposlenika ID: " + z.getId();
 							Sistem.Zaposlenici.izbrisi((int) (long) z.getId());
 							_f.getZaposlenici().remove(z);
-							_zaposlenici.remove(z);
+							_zaposlenici = Sistem.Zaposlenici.lista();
 							JOptionPane.showMessageDialog(frame, ispis);
 							break;
 						}
@@ -184,6 +184,7 @@ public class UposleniciPrikaz {
 		    public void itemStateChanged(ItemEvent event) {
 		       if (event.getStateChange() == ItemEvent.SELECTED) {
 		          Object item = event.getItem();
+		          JOptionPane.showMessageDialog(frame, _zaposlenici.size());
 		          if(_firme.size() != 0) {
 		        	  for(Firma f : _firme) {
 		        		  if(f != null) {
@@ -196,7 +197,7 @@ public class UposleniciPrikaz {
 				 					DefaultTableModel model = new DefaultTableModel();
 				 					table.setModel(model);
 				 					model.setColumnIdentifiers(kolone);
-							 		for(Zaposlenik z : _f.getZaposlenici()) {
+							 		for(Zaposlenik z : _zaposlenici) {
 							 			if(z != null) {
 							 				if(f.equals(z.getFirma())) {
 							 					_f = f;
