@@ -264,6 +264,7 @@ public class OperatoriPrikazAdmin {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 				_o.setPrivilegije(true);
+				String ispis = "Uspješno ste dodali permisiju";
 			}
 		});
 		btnDodajPermisiju.setBounds(355, 194, 124, 23);
