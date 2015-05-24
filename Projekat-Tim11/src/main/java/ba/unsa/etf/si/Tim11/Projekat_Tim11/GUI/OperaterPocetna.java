@@ -140,6 +140,7 @@ public class OperaterPocetna {
 			}
 		});
 		btnIzlaz.setBounds(263, 212, 137, 23);
+		btnKorisnickiRacuni.setEnabled(true);
 		frame.getContentPane().add(btnIzlaz);
 		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnMojRacun, btnObracun, btnIzvjestaji, btnKorisnickiRacuni, btnIzlaz, frame.getContentPane(), lblDobrodosli, lblSlika}));
 	}

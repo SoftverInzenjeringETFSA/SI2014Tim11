@@ -15,7 +15,7 @@ public class Operater extends Osoba implements Account,Serializable{
 	@Column(unique=true)
 	private String username;
 	private String password;
-	private boolean privilegije=true;
+	private boolean privilegije;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "firma")
@@ -29,11 +29,11 @@ public class Operater extends Osoba implements Account,Serializable{
 		this.firma = firma;
 	}
 
-	public Operater(){}
+	public Operater(){this.privilegije = true;}
 
 	public Operater(String ime, String prezime, String jmbg,String adresa, String telefon, Date datumZaposlenja, String pozicija) throws Exception {
 		super(ime,prezime,jmbg,adresa,telefon,datumZaposlenja,pozicija);
-
+		this.privilegije = true;
 	}
 	public String getUsername() {
 		return username;

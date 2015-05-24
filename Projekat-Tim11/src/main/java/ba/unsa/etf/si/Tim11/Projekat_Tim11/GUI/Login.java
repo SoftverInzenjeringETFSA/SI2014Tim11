@@ -69,6 +69,7 @@ public class Login {
 			Operater o=new Operater("Temp","Tempić","1505991170272","Dolina 15","+38761566311",new Date(),"operater");
 			o.setUsername("operater");
 			o.setPassword("pass");
+			o.setPrivilegije(true);
 			Zaposlenik z=new Zaposlenik(f, "Temp","Tempić","1505991170272","Dolina 15","+38761566311",new Date(),"zaposlenik", 1, 1, 1, 1);
 			Plata p=new Plata(z, new Date(), 1, 1, 1, 1, 1, 1, 4, 1, 1);
 			p.setZaposlenik(z);
@@ -127,7 +128,7 @@ public class Login {
 				String passString = new String(pass);
 			
 				for(Operater o : _operateri) {
-					if(o.getUsername().equals(txtKorisnickoIme.getText()) && o.ispravanPassword(passString) && o.getPrivilegije()==true )
+					if(o.getUsername().equals(txtKorisnickoIme.getText()) && o.ispravanPassword(passString) && o.getPrivilegije())
 					{
 						frame.dispose();
 						OperaterPocetna op = new OperaterPocetna(o);
@@ -135,7 +136,7 @@ public class Login {
 						jeOperater = true;
 						break;
 					}
-					else if(o.getUsername().equals(txtKorisnickoIme.getText()) && o.ispravanPassword(passString) && o.getPrivilegije()==false )
+					else if(o.getUsername().equals(txtKorisnickoIme.getText()) && o.ispravanPassword(passString) && !o.getPrivilegije())
 					{
 						frame.dispose();
 						OperaterBezPermisijaPocetna op = new OperaterBezPermisijaPocetna(o);

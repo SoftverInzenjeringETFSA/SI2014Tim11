@@ -50,6 +50,7 @@ public class OperaterBezPermisijaPocetna {
 	}
 
 	public OperaterBezPermisijaPocetna(Operater _o2) {
+		initialize();
 		_o=_o2;
 		// TODO Auto-generated constructor stub
 	}
