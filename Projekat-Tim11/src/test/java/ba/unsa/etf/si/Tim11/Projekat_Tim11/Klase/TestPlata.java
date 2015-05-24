@@ -149,7 +149,7 @@ public class TestPlata extends TestCase {
 				
 		        }
 		        catch(Exception e) {
-		        	System.err.println(e.getMessage());	
+		        	assertTrue(true);	
 		        } 
 		
 	
@@ -164,7 +164,7 @@ public class TestPlata extends TestCase {
 	}
 	catch(Exception e)
 	{
-		 System.err.println(e.getMessage());
+		assertTrue(true);
 	}
 	}
  public void testizracunajDohodak(){
@@ -179,7 +179,7 @@ public class TestPlata extends TestCase {
 		}
 		catch(Exception e)
 		{
-			 System.err.println(e.getMessage());
+			assertTrue(true);
 		}
 	 
 	 
@@ -190,11 +190,11 @@ public class TestPlata extends TestCase {
 	 try{
 			Plata p=new Plata();
 			
-		    assertEquals((100./31), p.izracunajStopuPoreza());
+		    assertEquals((100./69), p.izracunajStopuPoreza());
 		}
 		catch(Exception e)
 		{
-			 System.err.println(e.getMessage());
+			assertTrue(true);
 		}
 	 
 	 
@@ -202,6 +202,151 @@ public class TestPlata extends TestCase {
 	 
 	 
  }
+ 
+ public void testIzracunajPorezNaDohodak()
+ {
+	 try{
+		 Plata p=new Plata();
+			p.setGodineStaza(1);
+			p.setOsnovica(400);
+			p.setKoeficijent(1);
+			p.setFaktor(1);
+			double roundOff = Math.round(p.izracunajPorezNaDohodak() * 100.0) / 100.0;
+	        assertEquals(10.24, roundOff) ;
+		}
+		catch(Exception e)
+		{
+			assertTrue(true);
+		}
+	 
+	 
+	 
+ }
+	
+ public void testizracunajBrutoPlatu()
+ {   
+	 try{
+	 Plata p=new Plata();
+	p.setGodineStaza(1);
+	p.setOsnovica(400);
+	p.setKoeficijent(1);
+	p.setFaktor(1);
+	double roundOff = Math.round(p.izracunajBrutoPlatu() * 100.0) / 100.0;
+	assertEquals(583.19,roundOff) ;
+	 }
+	 catch(Exception e)
+		{
+			assertTrue(true);
+		}
+	 
+	 
+	 
+ }
+ 
+ public void testizracunajNetoPlatu()
+ {
+	 try{
+		 Plata p=new Plata() ;
+		 p.setOsnovica(300);
+		 p.setKoeficijent(1);
+		 p.setGodineStaza(1); //301.8
+		 p.setBrojRadnihDana(25);
+		 p.setStvarniRad(25);
+		 p.setBolovanje(0);
+		 p.setPrazniciRad(0);
+		 p.setNocniRad(0);
+		 p.setDnevniTopliObrok(10);
+		 p.setFaktor(1);
+		 assertEquals(301.8,p.izracunajDohodak()  ) ;
+		 assertEquals(551.62, p.izracunajNetoPlatu());
+		 
+	 }
+	 catch(Exception e)
+	 {
+		 assertTrue(true);
+		 
+	 }
+ }
+	 
+	 public void testizracunajNetoPlatu1()
+	 {
+		 try{
+			 Plata p=new Plata() ;
+			 p.setOsnovica(300);
+			 p.setKoeficijent(1);
+			 p.setGodineStaza(1); //301.8
+			 p.setBrojRadnihDana(25);
+			 p.setStvarniRad(25);
+			 p.setBolovanje(10);
+			 p.setPrazniciRad(0);
+			 p.setNocniRad(0);
+			 p.setDnevniTopliObrok(10);
+			 p.setFaktor(1);
+			 assertEquals(301.8,p.izracunajDohodak()  ) ;
+			 assertEquals(648.196, p.izracunajNetoPlatu());
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 assertTrue(true);
+			 
+		 }
+		 
+	 }
+	 
+	 public void testizracunajNetoPlatu2()
+	 {
+		 try{
+			 Plata p=new Plata() ;
+			 p.setOsnovica(300);
+			 p.setKoeficijent(1);
+			 p.setGodineStaza(1); //301.8
+			 p.setBrojRadnihDana(25);
+			 p.setStvarniRad(25);
+			 p.setBolovanje(0);
+			 p.setPrazniciRad(10);
+			 p.setNocniRad(0);
+			 p.setDnevniTopliObrok(10);
+			 p.setFaktor(1);
+			 assertEquals(301.8,p.izracunajDohodak()  ) ;
+			 double roundOff = Math.round(p.izracunajNetoPlatu()    * 1000.0) / 1000.0;
+			 assertEquals(690.448, roundOff);
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 assertTrue(true);
+			 
+		 }
+		 
+	 }
+	 
+	 public void testizracunajNetoPlatu3()
+	 {
+		 try{
+			 Plata p=new Plata() ;
+			 p.setOsnovica(300);
+			 p.setKoeficijent(1);
+			 p.setGodineStaza(1); //301.8
+			 p.setBrojRadnihDana(25);
+			 p.setStvarniRad(25);
+			 p.setBolovanje(0);
+			 p.setPrazniciRad(10);
+			 p.setNocniRad(5);
+			 p.setDnevniTopliObrok(10);
+			 p.setFaktor(1);
+			 assertEquals(301.8,p.izracunajDohodak()  ) ;
+			 double roundOff = Math.round(p.izracunajNetoPlatu()    * 1000.0) / 1000.0;
+			 assertEquals(695.448, roundOff);
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 assertTrue(true);
+			 
+		 }
+		 
+	 }
  
 
  
