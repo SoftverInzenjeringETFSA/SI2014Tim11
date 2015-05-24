@@ -252,16 +252,23 @@ public class IzmjenaObracuna {
 				if(_z.getPlate().size() != 0) {
 					for (Plata p : _z.getPlate()) {
 						if(p != null) {
-							double dohodak = p.izracunajDohodak();
-							  Object[] o = new Object[7];
-							  o[0] = p.getDatum();
-							  o[1] = p.izracunajDohodak();
-							  o[2] = p.izracunajMinuliRad(dohodak);
-							  o[3] = p.izracunajStopuPoreza();
-							  o[4] = p.izracunajPorezNaDohodak();
-							  o[5] = p.izracunajNetoPlatu();
-							  o[6] = p.izracunajBrutoPlatu();
-							  model.addRow(o);
+							double dohodak;
+							try {
+								dohodak = p.izracunajDohodak();
+								Object[] o = new Object[7];
+								  o[0] = p.getDatum();
+								  o[1] = p.izracunajDohodak();
+								  o[2] = p.izracunajMinuliRad(dohodak);
+								  o[3] = p.izracunajStopuPoreza();
+								  o[4] = p.izracunajPorezNaDohodak();
+								  o[5] = p.izracunajNetoPlatu();
+								  o[6] = p.izracunajBrutoPlatu();
+								  model.addRow(o);
+							}
+							catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 						}
 					}
 				}//test

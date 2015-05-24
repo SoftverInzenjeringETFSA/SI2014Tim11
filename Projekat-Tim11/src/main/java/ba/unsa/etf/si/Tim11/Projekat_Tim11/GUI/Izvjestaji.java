@@ -176,8 +176,14 @@ public class Izvjestaji {
 							  o[1] = z.getIme();
 							  o[2] = z.getPrezime();
 							  o[3] = p.getId();
-							  o[4] = p.izracunajNetoPlatu();
-							  o[5] = p.izracunajBrutoPlatu();
+							  try {
+								o[4] = p.izracunajNetoPlatu();
+								o[5] = p.izracunajBrutoPlatu();
+							  }
+							  catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							  }
 							  model.addRow(o);
 						}
 					}
@@ -202,8 +208,14 @@ public class Izvjestaji {
 							  o[2] = z.getIme();
 							  o[3] = z.getPrezime();
 							  o[4] = p.getId();
-							  o[5] = p.izracunajNetoPlatu();
-							  o[6] = p.izracunajBrutoPlatu();
+							  try {
+								o[5] = p.izracunajNetoPlatu();
+								o[6] = p.izracunajBrutoPlatu();
+							  }
+							  catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							  }
 							  model.addRow(o);
 						}
 					}

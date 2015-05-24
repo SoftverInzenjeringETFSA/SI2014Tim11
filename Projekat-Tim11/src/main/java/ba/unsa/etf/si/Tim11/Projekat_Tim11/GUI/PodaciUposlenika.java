@@ -222,6 +222,7 @@ public class PodaciUposlenika {
 						_z.setOsnovica(Double.parseDouble(txtOsnovica.getText()));
 						_z.setFirma(_f);
 						Sistem.Zaposlenici.dodaj(_z);
+						_f.dodajZaposlenika(_z);
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novog zaposlenika");
 						frame.dispose();
 						UposleniciPrikaz up = new UposleniciPrikaz(_o);
@@ -234,6 +235,8 @@ public class PodaciUposlenika {
 				}
 				else {
 					try {
+						int indeks = _f.getZaposlenici().indexOf(_z);
+						_f.getZaposlenici().remove(indeks);
 						_z.setIme(txtIme.getText());
 						_z.setPrezime(txtPrezime.getText());
 						_z.setJmbg(txtJmbg.getText());
@@ -246,6 +249,7 @@ public class PodaciUposlenika {
 						_z.setOsnovica(Double.parseDouble(txtOsnovica.getText()));
 						_z.setFirma(_f);
 						Sistem.Zaposlenici.izmijeni(_z);
+						_f.getZaposlenici().add(indeks, _z);
 						JOptionPane.showMessageDialog(frame, "Uspješno ste izmijenili zaposlenika");
 						frame.dispose();
 						UposleniciPrikaz up = new UposleniciPrikaz(_o);

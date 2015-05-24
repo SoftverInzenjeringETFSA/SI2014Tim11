@@ -132,7 +132,12 @@ public class MainWindow {
 		btnIzracunaj.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				textField.setText(Double.toString(plata.izracunajNetoPlatu()));
+				try {
+					textField.setText(Double.toString(plata.izracunajNetoPlatu()));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		});

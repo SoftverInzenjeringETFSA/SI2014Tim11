@@ -131,7 +131,13 @@ public class UposleniciPrikaz {
 							String ispis = "Uspješno ste obrisali zaposlenika ID: " + z.getId();
 							Sistem.Zaposlenici.izbrisi((int) (long) z.getId());
 							_f.getZaposlenici().remove(z);
-							_zaposlenici.remove(z);
+							try {
+								Thread.sleep(4000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							_zaposlenici = Sistem.Zaposlenici.lista();
 							JOptionPane.showMessageDialog(frame, ispis);
 							break;
 						}
@@ -198,7 +204,6 @@ public class UposleniciPrikaz {
 				 					model.setColumnIdentifiers(kolone);
 							 		for(Zaposlenik z : _f.getZaposlenici()) {
 							 			if(z != null) {
-							 				if(f.equals(z.getFirma())) {
 							 					_f = f;
 							 					
 							 					Object[] o = new Object[4];
@@ -207,7 +212,6 @@ public class UposleniciPrikaz {
 							 					  o[2] = z.getPrezime();
 							 					  o[3] = z.getPozicija();
 							 					  model.addRow(o);
-							 				}
 							 			}
 							 		}
 				        	  }
