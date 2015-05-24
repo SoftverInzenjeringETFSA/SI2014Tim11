@@ -210,7 +210,8 @@ public class IzmjenaObracuna {
 	    
 	    scrollPane.setViewportView(table);
 		
-		String[] kolone = {"Datum obračuna",
+		final String[] kolone = {"ID plate",
+				"Datum obračuna",
 				"Dohodak",
 		        "Minuli rad",
 		        "Stopa poreza",
@@ -221,6 +222,52 @@ public class IzmjenaObracuna {
 		final DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
 		model.setColumnIdentifiers(kolone);
+		
+		JButton btnObrisi = new JButton("Obriši");
+		btnObrisi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
+				if(dialogResult == JOptionPane.YES_OPTION) {
+					int selectedRowIndex = table.getSelectedRow();
+					for (Plata p : _z.getPlate()) {
+						if (table.isRowSelected(selectedRowIndex) && p.getId() == (Long) table.getModel().getValueAt(selectedRowIndex, 0)) {
+							_z.getPlate().remove(p);
+							Sistem.Zaposlenici.izmijeni(_z);
+							JOptionPane.showMessageDialog(frame, "Uspješno ste obrisali platu");
+							break;
+						}
+					}
+					for (Plata p : _z.getPlate()) {	
+						double dohodak;
+						try {
+							final DefaultTableModel model = new DefaultTableModel();
+							table.setModel(model);
+							model.setColumnIdentifiers(kolone);
+							dohodak = p.izracunajDohodak();
+							Object[] o = new Object[8];
+							  o[0] = p.getId();
+							  o[1] = p.getDatum();
+							  o[2] = p.izracunajDohodak();
+							  o[3] = p.izracunajMinuliRad(dohodak);
+							  o[4] = p.izracunajStopuPoreza();
+							  o[5] = p.izracunajPorezNaDohodak();
+							  o[6] = p.izracunajNetoPlatu();
+							  o[7] = p.izracunajBrutoPlatu();
+							  model.addRow(o);
+						}
+						catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				}
+				if(dialogResult == JOptionPane.NO_OPTION) {
+					
+				}
+			}
+		});
+		btnObrisi.setBounds(407, 291, 126, 23);
+		panel_1.add(btnObrisi);		
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.addActionListener(new ActionListener() {
@@ -239,7 +286,6 @@ public class IzmjenaObracuna {
 					_p.setGodisnjiOdmor((Integer) spinGodisnjiOdmor.getValue());
 					_p.setPrazniciRad((Integer) spinPraznici.getValue());
 					_p.setNocniRad((Integer) spinNocniRad.getValue());
-					JOptionPane.showMessageDialog(frame, _p.getStvarniRad());
 					_p.setZaposlenik(_z);
 					_z.dodajPlatu(_p);
 					Sistem.Zaposlenici.izmijeni(_z);
@@ -255,14 +301,15 @@ public class IzmjenaObracuna {
 							double dohodak;
 							try {
 								dohodak = p.izracunajDohodak();
-								Object[] o = new Object[7];
-								  o[0] = p.getDatum();
-								  o[1] = p.izracunajDohodak();
-								  o[2] = p.izracunajMinuliRad(dohodak);
-								  o[3] = p.izracunajStopuPoreza();
-								  o[4] = p.izracunajPorezNaDohodak();
-								  o[5] = p.izracunajNetoPlatu();
-								  o[6] = p.izracunajBrutoPlatu();
+								Object[] o = new Object[8];
+								  o[0] = p.getId();
+								  o[1] = p.getDatum();
+								  o[2] = p.izracunajDohodak();
+								  o[3] = p.izracunajMinuliRad(dohodak);
+								  o[4] = p.izracunajStopuPoreza();
+								  o[5] = p.izracunajPorezNaDohodak();
+								  o[6] = p.izracunajNetoPlatu();
+								  o[7] = p.izracunajBrutoPlatu();
 								  model.addRow(o);
 							}
 							catch (Exception e1) {
@@ -279,8 +326,31 @@ public class IzmjenaObracuna {
 		
 		tabbedPane.setEnabledAt(1, false);
 		if(_z != null) {
-			JOptionPane.showMessageDialog(frame, _z.getId());
-			if(_z.getPlate().size() > 0) tabbedPane.setEnabledAt(1, true);
+			if(_z.getPlate().size() > 0) {
+				tabbedPane.setEnabledAt(1, true);
+				for (Plata p : _z.getPlate()) {
+					if(p != null) {
+						double dohodak;
+						try {
+							dohodak = p.izracunajDohodak();
+							Object[] o = new Object[8];
+							  o[0] = p.getId();
+							  o[1] = p.getDatum();
+							  o[2] = p.izracunajDohodak();
+							  o[3] = p.izracunajMinuliRad(dohodak);
+							  o[4] = p.izracunajStopuPoreza();
+							  o[5] = p.izracunajPorezNaDohodak();
+							  o[6] = p.izracunajNetoPlatu();
+							  o[7] = p.izracunajBrutoPlatu();
+							  model.addRow(o);
+						}
+						catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				}
+			}
 		}
 	}
 }

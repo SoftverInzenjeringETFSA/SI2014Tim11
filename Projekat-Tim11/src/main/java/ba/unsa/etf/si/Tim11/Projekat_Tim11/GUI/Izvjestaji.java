@@ -187,8 +187,6 @@ public class Izvjestaji {
 							"Neto plata",
 							"Bruto plata"};
 
-					final DefaultTableModel model = new DefaultTableModel();
-					table.setModel(model);
 					model.setColumnIdentifiers(kolone);
 					for(Zaposlenik z : _zaposlenici) {
 						for(Plata p : z.getPlate()) {
@@ -218,8 +216,6 @@ public class Izvjestaji {
 							"Neto plata",
 							"Bruto plata"};
 
-					final DefaultTableModel model = new DefaultTableModel();
-					table.setModel(model);
 					model.setColumnIdentifiers(kolone);
 					for(Zaposlenik z : _zaposlenici) {
 						for(Plata p : z.getPlate()) {
@@ -295,7 +291,8 @@ public class Izvjestaji {
 		btnIzlaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				
+				OperaterPocetna op = new OperaterPocetna(_o);
+				op.main(null);
 			}
 		});
 		btnIzlaz.setBounds(440, 337, 89, 23);

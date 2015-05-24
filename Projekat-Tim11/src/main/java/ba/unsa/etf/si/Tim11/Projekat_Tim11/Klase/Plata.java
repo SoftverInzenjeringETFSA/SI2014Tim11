@@ -55,7 +55,7 @@ public class Plata implements Serializable  {
 		this.setStvarniRad(stvarniRad);
 		this.setBolovanje(bolovanje);
 		this.setBrojRadnihDana(brojRadnihDana);
-		this.setGodineStaza(godineStaza);
+		this.setGodineStaza(zaposlenik.radniStaz());
 		this.setGodisnjiOdmor(godisnjiOdmor);
 		
 	}
@@ -79,7 +79,7 @@ public class Plata implements Serializable  {
 	this.setStvarniRad(stvarniRad);
 	this.setBolovanje(bolovanje);
 	this.setBrojRadnihDana(brojRadnihDana);
-	this.setGodineStaza(godineStaza);
+	this.setGodineStaza(zaposlenik.radniStaz());
 	this.setGodisnjiOdmor(godisnjiOdmor);
 	this.setNocniRad(nocniRad);
 	this.setPrazniciRad(prazniciRad);
