@@ -133,6 +133,10 @@ public class AdministratorPocetna {
 		JButton btnAuriranjeOperatera = new JButton("Ažuriranje operatera");
 		btnAuriranjeOperatera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				RadnjeOperateri ro = new RadnjeOperateri(_a);
+				ro.main(null);
+				
 			}
 		});
 		btnAuriranjeOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
