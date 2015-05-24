@@ -186,7 +186,6 @@ public class UposleniciPrikaz {
 		       if (event.getStateChange() == ItemEvent.SELECTED) {
 		          Object item = event.getItem();
 		          _zaposlenici = Sistem.Zaposlenici.lista();
-		          JOptionPane.showMessageDialog(frame, _zaposlenici.size());
 		          if(_firme.size() != 0) {
 		        	  for(Firma f : _firme) {
 		        		  if(f != null) {

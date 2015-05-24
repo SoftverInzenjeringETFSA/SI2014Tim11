@@ -242,6 +242,7 @@ public class IzmjenaObracuna {
 					_p.setNocniRad((Integer) spinNocniRad.getValue());
 					_p.setZaposlenik(_z);
 					_z.dodajPlatu(_p);
+					Sistem.Zaposlenici.izmijeni(_z);
 					JOptionPane.showMessageDialog(frame, _z.radniStaz());
 				}
 				catch (Exception e1) {
