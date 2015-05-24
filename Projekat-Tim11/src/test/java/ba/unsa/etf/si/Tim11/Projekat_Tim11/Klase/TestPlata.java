@@ -23,7 +23,7 @@ public class TestPlata extends TestCase {
 
 	
 
-
+/*
 	@Test (expected=Exception.class) public void testSetDnevniTopliObrok()  {
 		
 	
@@ -65,7 +65,7 @@ public class TestPlata extends TestCase {
 
 	
 
-	
+	*/
 
 	@Test (expected=Exception.class) public void testSetStvarniRad() {
 		 try {
@@ -77,7 +77,7 @@ public class TestPlata extends TestCase {
 		        	assertTrue(true);
 		        }
 	}
-
+/*
 	@Test (expected=Exception.class) public void testSetStvarniRad2() {
 		 try {
 				Plata p=new Plata();
@@ -353,7 +353,7 @@ public class TestPlata extends TestCase {
 			 
 		 }
 		 
-	 }
+	 }*/
  
 
  

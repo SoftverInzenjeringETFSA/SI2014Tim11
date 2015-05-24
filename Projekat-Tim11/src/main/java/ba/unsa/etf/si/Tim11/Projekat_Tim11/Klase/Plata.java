@@ -17,12 +17,12 @@ public class Plata implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private Date datum;
-	
+	/*
 	private double dnevniTopliObrok;
 	private double faktor;			//faktor za licni odbitak(djeca ovo ono :D)
 	private double koeficijent;    //koeficijent slozenosti za razlicite stepene stručnosti(nekvalifikovani radnik << doktor)
 	private double osnovica;	   // fiksna za svaku firmu posebno
-	
+	*/
 	
 	private int stvarniRad;				//broj radnih dana  koliko je zaposlenih radio u nekom mjesecu
 	private int bolovanje;				//broj dana bolovanja
@@ -48,10 +48,10 @@ public class Plata implements Serializable  {
 		
 		this.setZaposlenik(zaposlenik);
 		this.setDatum(datum);
-		this.setDnevniTopliObrok(dnevniTopliObrok);
-		this.setFaktor(faktor);
-		this.setKoeficijent(koeficijent);
-		this.setOsnovica(osnovica);
+		zaposlenik.setDnevniTopliObrok(dnevniTopliObrok);
+		zaposlenik.setFaktor(faktor);
+		zaposlenik.setKoeficijent(koeficijent);
+		zaposlenik.setOsnovica(osnovica);
 		this.setStvarniRad(stvarniRad);
 		this.setBolovanje(bolovanje);
 		this.setBrojRadnihDana(brojRadnihDana);
@@ -72,10 +72,10 @@ public class Plata implements Serializable  {
 	
 	this.setZaposlenik(zaposlenik);
 	this.setDatum(datum);
-	this.setDnevniTopliObrok(dnevniTopliObrok);
-	this.setFaktor(faktor);
-	this.setKoeficijent(koeficijent);
-	this.setOsnovica(osnovica);
+	zaposlenik.setDnevniTopliObrok(dnevniTopliObrok);
+	zaposlenik.setFaktor(faktor);
+	zaposlenik.setKoeficijent(koeficijent);
+	zaposlenik.setOsnovica(osnovica);
 	this.setStvarniRad(stvarniRad);
 	this.setBolovanje(bolovanje);
 	this.setBrojRadnihDana(brojRadnihDana);
@@ -116,7 +116,7 @@ public class Plata implements Serializable  {
 		this.datum = datum;
 	}
 
-
+/*
 	public double getDnevniTopliObrok() {
 		return dnevniTopliObrok;
 	}
@@ -158,7 +158,7 @@ public class Plata implements Serializable  {
 		this.osnovica = osnovica;
 	}
 
-
+*/
 	
 
 
