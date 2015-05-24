@@ -275,10 +275,13 @@ public class Plata implements Serializable  {
 		double porezNaDohodak=(osnovicaZaPorez*10)/100;    // izracunavanje poreza od 10% na osnovicaZaPorez
 		return porezNaDohodak;
 	}
+	
 	public double izracunajBrutoPlatu(){
 		double bruto= izracunajDohodak()*izracunajStopuPoreza();
 		return bruto;
 	}
+	
+	
 	public double izracunajNetoPlatu()
 	{
 		/*
