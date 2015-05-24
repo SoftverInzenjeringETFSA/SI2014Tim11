@@ -237,12 +237,12 @@ public class IzmjenaObracuna {
 							break;
 						}
 					}
+					final DefaultTableModel model = new DefaultTableModel();
+					table.setModel(model);
+					model.setColumnIdentifiers(kolone);
 					for (Plata p : _z.getPlate()) {	
 						double dohodak;
 						try {
-							final DefaultTableModel model = new DefaultTableModel();
-							table.setModel(model);
-							model.setColumnIdentifiers(kolone);
 							dohodak = p.izracunajDohodak();
 							Object[] o = new Object[8];
 							  o[0] = p.getId();
