@@ -45,6 +45,8 @@ public class Firma implements Serializable {
 	
 	this.setIme(ime);
 	this.setSjediste(sjediste);
+	zaposlenici=new ArrayList<Zaposlenik>();
+	operateri=new ArrayList<Operater>();
 	}
 	
 	public long getId() {

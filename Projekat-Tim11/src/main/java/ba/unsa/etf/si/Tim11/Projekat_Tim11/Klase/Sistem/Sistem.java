@@ -65,7 +65,7 @@ public final class Sistem {
 		
 		public static Osoba izmijeni(Osoba o){
 			openSession();
-			s.update(o);
+			s.merge(o);
 			t.commit();
 			closeSession();
 			long l=o.getId();
@@ -116,7 +116,7 @@ public final class Sistem {
 		
 		public static Zaposlenik izmijeni(Zaposlenik o){
 			openSession();
-			s.update(o);
+			s.merge(o);
 			t.commit();
 			closeSession();
 			long l=o.getId();
@@ -167,7 +167,7 @@ public final class Sistem {
 		
 		public static Operater izmijeni(Operater o){
 			openSession();
-			s.update(o);
+			s.merge(o);
 			t.commit();
 			closeSession();
 			long l=o.getId();
@@ -219,7 +219,7 @@ public final class Sistem {
 		
 		public static Firma izmijeni(Firma o){
 			openSession();
-			s.update(o);
+			s.merge(o);
 			t.commit();
 			closeSession();
 			long l=o.getId();
@@ -270,7 +270,7 @@ public final class Sistem {
 		
 		public static Admin izmijeni(Admin o){
 			openSession();
-			s.update(o);
+			s.merge(o);
 			t.commit();
 			closeSession();
 			long l=o.getId();

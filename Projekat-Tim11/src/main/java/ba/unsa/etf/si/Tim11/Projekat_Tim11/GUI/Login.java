@@ -59,6 +59,32 @@ public class Login {
 	 * Initialize the contents of the frame.
 	 * @throws Exception 
 	 */
+	
+	private void generateDB(){
+		try{
+			Admin a= new Admin("Temp","Tempić","1505991170272","Dolina 15","+38761566311",new Date(),"administrator");
+			a.setUsername("admin");
+			a.setPassword("pass");
+			Firma f=new Firma("Temp","Temp");
+			Operater o=new Operater("Temp","Tempić","1505991170272","Dolina 15","+38761566311",new Date(),"operater");
+			o.setUsername("operater");
+			o.setPassword("pass");
+			Zaposlenik z=new Zaposlenik(f, "Temp","Tempić","1505991170272","Dolina 15","+38761566311",new Date(),"zaposlenik", 1, 1, 1, 1);
+			Plata p=new Plata(z, new Date(), 1, 1, 1, 1, 1, 1, 4, 1, 1);
+			z.dodajPlatu(p);
+			o.setFirma(f);
+			f.dodajZaposlenika(z);
+			f.dodajOperatera(o);
+			Sistem.Admini.dodaj(a);
+			Sistem.Firme.dodaj(f);
+			
+		}
+		catch(Exception ex){
+			
+		}
+	}
+	
+
 	private void initialize() throws Exception {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -70,7 +96,7 @@ public class Login {
 		_operateri = Sistem.Operateri.lista();
 		_administratori = Sistem.Admini.lista();
 		
-	
+
 		
 		
 		JLabel lblKorisnikoIme = new JLabel("Korisničko ime:");
