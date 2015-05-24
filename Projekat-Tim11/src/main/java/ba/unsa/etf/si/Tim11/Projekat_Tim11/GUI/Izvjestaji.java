@@ -171,6 +171,9 @@ public class Izvjestaji {
 			        	  if(table.getValueAt(i,j) instanceof Double) {
 							out.write(Double.toString((Double) table.getValueAt(i,j)));
 			        	  }
+			        	  else if(table.getValueAt(i,j) instanceof Long) {
+								out.write(Long.toString((Long) table.getValueAt(i,j)));
+			        	  }
 			        	  else {
 			        		  out.write((String)(table.getValueAt(i,j)));  
 			        	  }
