@@ -74,8 +74,8 @@ private static Admin _a;
 	}
 
 	public OperateriRaspodjela(Admin a) {
-		
-	_a=a;
+		initialize();
+		_a=a;
 	}
 
 
