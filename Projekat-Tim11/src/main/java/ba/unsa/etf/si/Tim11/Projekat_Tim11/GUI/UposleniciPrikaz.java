@@ -130,8 +130,27 @@ public class UposleniciPrikaz {
 						if (table.isRowSelected(selectedRowIndex) && z.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
 							String ispis = "Uspješno ste obrisali zaposlenika ID: " + z.getId();
 							Sistem.Zaposlenici.izbrisi((int) (long) z.getId());
+							_f.getZaposlenici().remove(z);
+							_zaposlenici.remove(z);
 							JOptionPane.showMessageDialog(frame, ispis);
+							break;
 						}
+					}
+					for (Zaposlenik z : _f.getZaposlenici()) {	
+						String[] kolone = {"ID",
+	 					        "Ime",
+	 					        "Prezime",
+	 					        "Odjel"};
+	 					
+	 					DefaultTableModel model = new DefaultTableModel();
+	 					table.setModel(model);
+	 					model.setColumnIdentifiers(kolone);
+	 					Object[] o = new Object[4];
+	 					  o[0] = z.getId();
+	 					  o[1] = z.getIme();
+	 					  o[2] = z.getPrezime();
+	 					  o[3] = z.getPozicija();
+	 					  model.addRow(o);
 					}
 				}
 				if(dialogResult == JOptionPane.NO_OPTION) {
@@ -177,7 +196,7 @@ public class UposleniciPrikaz {
 				 					DefaultTableModel model = new DefaultTableModel();
 				 					table.setModel(model);
 				 					model.setColumnIdentifiers(kolone);
-							 		for(Zaposlenik z : _zaposlenici) {
+							 		for(Zaposlenik z : _f.getZaposlenici()) {
 							 			if(z != null) {
 							 				if(f.equals(z.getFirma())) {
 							 					_f = f;

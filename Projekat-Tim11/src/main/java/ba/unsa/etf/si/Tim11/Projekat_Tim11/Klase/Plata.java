@@ -238,7 +238,8 @@ public class Plata implements Serializable  {
 	
 	
 	
-	public double izracunajMinuliRad(double dohodak) {
+	public double izracunajMinuliRad(double dohodak) throws Exception {
+		if(dohodak < 0) throw new Exception("Dohodak ne može biti negativan!");
 		double procenat= godineStaza*0.6;        
 		double minuliRad=(dohodak*procenat)/100;
 		return minuliRad;
