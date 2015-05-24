@@ -128,6 +128,7 @@ public class DodavanjeEditovanjeFirmi {
 					Sistem.Firme.dodaj(_f);
 				JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novu firmu");
 						frame.dispose();
+				
 						PrikazFirmi pf = new PrikazFirmi(_a);
 						pf.main(null);
 					}
@@ -153,6 +154,7 @@ public class DodavanjeEditovanjeFirmi {
 					}
 				}
 			}
+			
 		});
 		btnPotvrdi.setBounds(109, 228, 77, 19);
 		frame.getContentPane().add(btnPotvrdi);
@@ -179,12 +181,10 @@ public class DodavanjeEditovanjeFirmi {
 
 		dateChooser.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{dateChooser.getCalendarButton()}));
 		
-		if(_f != null) {
+		if(_f != null) 
+		{
 			textNaziv.setText(_f.getIme());
 			txtSjediste.setText(_f.getSjediste());
-		
-		
-		
-		
+	
 	}
 	}}

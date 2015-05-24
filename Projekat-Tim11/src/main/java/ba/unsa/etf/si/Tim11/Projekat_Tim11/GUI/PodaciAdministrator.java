@@ -19,6 +19,7 @@ import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.Font;
+import java.util.Date;
 import java.util.List;
 
 public class PodaciAdministrator {
@@ -161,13 +162,13 @@ public class PodaciAdministrator {
 		JLabel lblAdministrator = new JLabel("Administrator");
 		lblAdministrator.setBounds(98, 136, 95, 14);
 		frame.getContentPane().add(lblAdministrator);
-		
+
 		if(_a != null) {
-			lblImeadmin.setText(_a.getIme());
-			lblPrezimeadmin.setText(_a.getPrezime());
-			lblJmbgadmin.setText(_a.getJmbg());
-			lblAdresaadmin.setText(_a.getAdresa());
-			lblKontaktadmin.setText(_a.getTelefon());
+			lblImeadmin.setText("Temp");
+			lblPrezimeadmin.setText("Tempić");
+			lblJmbgadmin.setText("1505991170272");
+			lblAdresaadmin.setText("Dolina 15");
+			lblKontaktadmin.setText("+38761566311");
 			
 		}
 	}

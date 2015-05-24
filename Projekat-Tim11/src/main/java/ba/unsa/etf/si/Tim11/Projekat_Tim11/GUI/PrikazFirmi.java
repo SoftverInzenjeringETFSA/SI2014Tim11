@@ -277,10 +277,13 @@ public class PrikazFirmi extends JFrame{
 					int selectedRowIndex = table.getSelectedRow();
 					for (Firma f : _firme) {
 						if (table.isRowSelected(selectedRowIndex) && f.getId() ==(Long) table.getModel().getValueAt(selectedRowIndex, 0)) {
-							String ispis = "Uspješno ste obrisali firmu ID: " + f.getId();
+							String ispis = "Uspješno ste obrisali firmu: " + f.getIme();
 						Sistem.Firme.izbrisi((int)f.getId());
 				_firme.remove(f);
+				table.clearSelection();
 				model.removeRow(selectedRowIndex);
+				
+		
 							JOptionPane.showMessageDialog(frmPrikazFirmi, ispis);
 							break;
 						}

@@ -187,7 +187,13 @@ public class DodavanjeEditovanjeOperatera {
 						_o.setDatumZaposlenja(calZaposlen.getDate());
 				
 						_o.setFirma(_f);
+					
+					
+						Sistem.Firme.izmijeni(_f);
+						
+					
 						Sistem.Operateri.dodaj(_o);
+						Sistem.Operateri.lista().add(_o);
 						_f.dodajOperatera(_o);
 						
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novog operatera");
@@ -215,8 +221,13 @@ public class DodavanjeEditovanjeOperatera {
 						_o.setFirma(_f);
 						Sistem.Operateri.izmijeni(_o);
 						_f.getOperateri().add(indeks,_o);
+						JOptionPane.showMessageDialog(frame, indeks);
+						
+					
+						frame.dispose()		;	
+					
 		
-						JOptionPane.showMessageDialog(frame, "Uspješno ste izmijenili operatera");
+		
 						frame.dispose();
 						RadnjeOperateri rp = new RadnjeOperateri(_a);
 						rp.main(null);
