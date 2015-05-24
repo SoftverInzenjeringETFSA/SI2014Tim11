@@ -71,16 +71,18 @@ public class Login {
 			o.setPassword("pass");
 			o.setPrivilegije(true);
 			Operater obp = new Operater("Bez", "Permisija", "1010993178690", "Dalmatinska 11", "+38733444865", new Date(), "operater bez permisija");
-			o.setUsername("operater2");
-			o.setPassword("pass2");
-			o.setPrivilegije(false);
+			obp.setUsername("operater2");
+			obp.setPassword("pass2");
+			obp.setPrivilegije(false);
 			Zaposlenik z=new Zaposlenik(f, "Temp","Tempić","1505991170272","Dolina 15","+38761566311",new Date(),"zaposlenik", 1, 1, 1, 1);
 			Plata p=new Plata(z, new Date(), 1, 1, 1, 1, 1, 1, 4, 1, 1);
 			p.setZaposlenik(z);
 			z.dodajPlatu(p);
+			obp.setFirma(f);
 			o.setFirma(f);
 			f.dodajZaposlenika(z);
 			f.dodajOperatera(o);
+			f.dodajOperatera(obp);
 			Sistem.Admini.dodaj(a);
 			Sistem.Firme.dodaj(f);
 			
