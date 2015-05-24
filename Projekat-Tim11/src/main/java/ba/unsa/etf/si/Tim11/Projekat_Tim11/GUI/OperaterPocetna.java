@@ -106,7 +106,7 @@ public class OperaterPocetna {
 		btnIzvjestaji.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				Izvjestaji i = new Izvjestaji();
+				Izvjestaji i = new Izvjestaji(_o);
 				i.main(null);
 			}
 		});

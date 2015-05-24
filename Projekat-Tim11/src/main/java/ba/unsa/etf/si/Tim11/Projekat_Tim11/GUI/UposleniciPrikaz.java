@@ -169,18 +169,18 @@ public class UposleniciPrikaz {
 		        	  for(Firma f : _firme) {
 		        		  if(f != null) {
 		        			  if(f.toString().equals(item)) {
+		        				  String[] kolone = {"ID",
+				 					        "Ime",
+				 					        "Prezime",
+				 					        "Odjel"};
+				 					
+				 					DefaultTableModel model = new DefaultTableModel();
+				 					table.setModel(model);
+				 					model.setColumnIdentifiers(kolone);
 							 		for(Zaposlenik z : _zaposlenici) {
 							 			if(z != null) {
 							 				if(f.equals(z.getFirma())) {
 							 					_f = f;
-							 					String[] kolone = {"ID",
-							 					        "Ime",
-							 					        "Prezime",
-							 					        "Odjel"};
-							 					
-							 					DefaultTableModel model = new DefaultTableModel();
-							 					table.setModel(model);
-							 					model.setColumnIdentifiers(kolone);
 							 					
 							 					Object[] o = new Object[4];
 							 					  o[0] = z.getId();
@@ -234,16 +234,15 @@ public class UposleniciPrikaz {
 			 		model.setColumnIdentifiers(kolone);
 			 		for(Zaposlenik z : _f.getZaposlenici()) {
 			 			if(z != null) {
-			 				if(txtID.getText().length() == 0) {
+			 				if(z.getId().toString().contains(txtID.getText()) && txtID.getText().length() != 0) {
 			 					Object[] o = new Object[4];
 			 					  o[0] = z.getId();
 			 					  o[1] = z.getIme();
 			 					  o[2] = z.getPrezime();
 			 					  o[3] = z.getPozicija();
 			 					  model.addRow(o);
-			 					  break;
 			 				}
-			 				if(z.getId().toString().contains(txtID.getText())) {
+			 				if(txtID.getText().length() == 0) {
 			 					Object[] o = new Object[4];
 			 					  o[0] = z.getId();
 			 					  o[1] = z.getIme();
