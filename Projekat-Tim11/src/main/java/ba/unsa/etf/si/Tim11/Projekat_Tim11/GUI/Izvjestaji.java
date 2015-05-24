@@ -152,21 +152,38 @@ public class Izvjestaji {
 		comboBox.setBounds(117, 129, 134, 23);
 		panel.add(comboBox);
 		
-		final JButton btnPrintanje = new JButton("Printanje");
-		btnPrintanje.addActionListener(new ActionListener() {
+		final JButton btnSpasi = new JButton("Spasi");
+		btnSpasi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 			        BufferedWriter out = new BufferedWriter(new FileWriter("izvjestaj.txt"));
-			            for (int i = 0; i < 4; i++) {
-			                out.write("test " + "\n");
-			                out.newLine();
-			            }
+			        for(int i = 0 ; i < table.getColumnCount() ; i++)
+			        {
+			          out.write(table.getColumnName(i));
+			          out.write("\t");
+			        }
+
+			        for (int i = 0 ; i < table.getRowCount(); i++)
+			        {
+			          out.newLine();
+			          for(int j = 0 ; j < table.getColumnCount();j++)
+			          {
+			        	  if(table.getValueAt(i,j) instanceof Double) {
+							out.write(Double.toString((Double) table.getValueAt(i,j)));
+			        	  }
+			        	  else {
+			        		  out.write((String)(table.getValueAt(i,j)));  
+			        	  }
+			            out.write("\t");;
+			          }
+			        }
 			            out.close();
+			            JOptionPane.showMessageDialog(frame, "Uspješno ste spasili izvještaj");
 			        } catch (IOException e) {}
 			}
 		});
-		btnPrintanje.setBounds(341, 337, 89, 23);
-		frame.getContentPane().add(btnPrintanje);
+		btnSpasi.setBounds(341, 337, 89, 23);
+		frame.getContentPane().add(btnSpasi);
 		
 		final JButton btnKreirajIzvjestaj = new JButton("Kreiraj izvještaj");
 		btnKreirajIzvjestaj.addActionListener(new ActionListener() {
@@ -318,7 +335,7 @@ public class Izvjestaji {
  						model.addRow(o);
 					}
 				}
-				btnPrintanje.setEnabled(true);
+				btnSpasi.setEnabled(true);
 			}
 		});
 		btnKreirajIzvjestaj.setBounds(358, 161, 151, 23);
@@ -377,6 +394,6 @@ public class Izvjestaji {
 		frame.getContentPane().add(btnIzlaz);
 		
 		btnKreirajIzvjestaj.setEnabled(false);
-		btnPrintanje.setEnabled(false);
+		btnSpasi.setEnabled(false);
 	}
 }
