@@ -10,6 +10,7 @@ import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.*;
 import java.util.*;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,8 +23,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.JButton;
+
+
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
@@ -218,6 +219,7 @@ public class PrikazFirmi extends JFrame{
 							frmPrikazFirmi.dispose();
 						DodavanjeEditovanjeFirmi ef = new DodavanjeEditovanjeFirmi(f,_a);
 						ef.main(null);
+						table.clearSelection();
 						break;
 					}
 				}

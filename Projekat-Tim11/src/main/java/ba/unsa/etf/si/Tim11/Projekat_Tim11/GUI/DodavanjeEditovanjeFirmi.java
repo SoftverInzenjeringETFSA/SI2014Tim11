@@ -26,7 +26,9 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class DodavanjeEditovanjeFirmi {
 
@@ -36,7 +38,7 @@ public class DodavanjeEditovanjeFirmi {
 	private JTextField textAdministrator;
 	private static Admin _a;
 	private static Firma _f;
-	private static List<Firma>firme;
+	private static List<Firma>_firme;
 
 	/**
 	 * Launch the application.
@@ -72,12 +74,14 @@ public class DodavanjeEditovanjeFirmi {
 	}
 
 	public DodavanjeEditovanjeFirmi(Firma f, Admin a) {
+		initialize();
 		_a=a;
 		_f=f;
 	
 	}
 
 	public DodavanjeEditovanjeFirmi(Admin _a2) {
+		initialize();
 	_a=_a2;
 	}
 	/**
@@ -90,8 +94,10 @@ public class DodavanjeEditovanjeFirmi {
 		ImageIcon img = new ImageIcon("icons/firma.png");
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
+
+		_firme = Sistem.Firme.lista();
 	
-				List<Firma>firme=Sistem.Firme.lista();
+		
 		
 		JLabel lblNaziv = new JLabel("Naziv");
 		lblNaziv.setBounds(25, 11, 33, 14);
@@ -106,8 +112,13 @@ public class DodavanjeEditovanjeFirmi {
 		frame.getContentPane().add(lblAdministrator);
 		
 		JLabel lblDatumDodavanja = new JLabel("Datum dodavanja");
-		lblDatumDodavanja.setBounds(25, 163, 93, 14);
+		lblDatumDodavanja.setBounds(145, 11, 93, 14);
 		frame.getContentPane().add(lblDatumDodavanja);
+		
+		final JCalendar calDatum = new JCalendar();
+		calDatum.setBounds(145, 24, 165, 91);
+		frame.getContentPane().add(calDatum);
+		
 		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.addActionListener(new ActionListener() {
@@ -124,6 +135,27 @@ public class DodavanjeEditovanjeFirmi {
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
+				if(textNaziv.getText().length() == 0 || txtSjediste.getText().length() == 0 ) {
+					JOptionPane.showMessageDialog(frame, "Morate popuniti sva polja");
+					return;
+				}
+				if(calDatum.getDate().after(new Date())) {
+					JOptionPane.showMessageDialog(frame, "Pogresan datum");
+					return;
+				}
+				Pattern patternIme = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); 
+			//	Pattern patternJmbg = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$");
+				Pattern patternAdresa = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}");
+				if (!patternIme.matcher(textNaziv.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos imena");
+			        return;
+			    }
+				
+				else if(!patternAdresa.matcher(txtSjediste.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos adrese");
+			        return;
+				}
+				
 				
 					if(_f == null) 
 					{
@@ -145,32 +177,33 @@ public class DodavanjeEditovanjeFirmi {
 					}
 				}
 				
-				else {
-					try {
-						_f.setIme(textNaziv.getText());
-						_f.setSjediste(txtSjediste.getText());
-						Sistem.Firme.izmijeni(_f);
-				
-						JOptionPane.showMessageDialog(frame, "Uspješno ste izmijenili firmu");
-						frame.dispose();
-						PrikazFirmi pf = new PrikazFirmi(_a);
-						pf.main(null);
-					}
-					catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					else {
+						try {
+							int indeks =_firme.indexOf(_f);
+					_firme.remove(_f);
+							_f.setIme(textNaziv.getText());
+							_f.setIme(txtSjediste.getText());
+							Sistem.Firme.izmijeni(_f);
+						_firme.add(indeks, _f);
+				JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali firmu: " + _f.getIme());
+							frame.dispose();
+						PrikazFirmi pff=new PrikazFirmi(_a);
+							pff.main(null);
+						}
+						catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				}
 				}
 				
-			
-			
-				
-			
-			
+		
 		});
 		btnPotvrdi.setBounds(109, 228, 77, 19);
 		frame.getContentPane().add(btnPotvrdi);
+		
+		
+
 		
 		textNaziv = new JTextField();
 		textNaziv.setBounds(25, 24, 86, 20);
@@ -188,12 +221,6 @@ public class DodavanjeEditovanjeFirmi {
 		frame.getContentPane().add(textAdministrator);
 		textAdministrator.setText("Admin");
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(25, 188, 88, 21);
-		frame.getContentPane().add(dateChooser);
-
-		dateChooser.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{dateChooser.getCalendarButton()}));
-		
 		if(_f != null) 
 		{
 			textNaziv.setText(_f.getIme());
@@ -202,6 +229,7 @@ public class DodavanjeEditovanjeFirmi {
 	}
 		textNaziv.setText(" ");
 		txtSjediste.setText(""); 
+	
 		
 	}
 		}
