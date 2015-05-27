@@ -101,6 +101,26 @@ private static Admin _a;
 		JLabel lblId = new JLabel("ID");
 		lblId.setBounds(168, 11, 46, 14);
 		frame.getContentPane().add(lblId);
+		
+		JLabel lblSlika = new JLabel("Pretraži");
+		lblSlika.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSlika.setBounds(249, 33, 73, 23);
+		frame.getContentPane().add(lblSlika);
+		lblSlika.setIcon(new ImageIcon("icons/search16.png"));
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 67, 302, 183);
+		frame.getContentPane().add(scrollPane);
+		
+
+		table = new JTable(){ private static final long serialVersionUID = 1L;
+
+        public boolean isCellEditable(int row, int column) {                
+                return false;               
+        };
+    };
+		scrollPane.setViewportView(table);
 	
 		
 		txtID = new JTextField();
@@ -171,27 +191,6 @@ private static Admin _a;
 		  });
 		
 		
-		JLabel lblSlika = new JLabel("Pretraži");
-		lblSlika.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblSlika.setBounds(249, 33, 73, 23);
-		frame.getContentPane().add(lblSlika);
-		lblSlika.setIcon(new ImageIcon("icons/search16.png"));
-		
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 67, 302, 183);
-		frame.getContentPane().add(scrollPane);
-		
-
-		table = new JTable(){ private static final long serialVersionUID = 1L;
-
-        public boolean isCellEditable(int row, int column) {                
-                return false;               
-        };
-    };
-		scrollPane.setViewportView(table);
-		
-		
 		class ItemChangeListener implements ItemListener{
 		    public void itemStateChanged(ItemEvent event) {
 		       if (event.getStateChange() == ItemEvent.SELECTED) {
@@ -251,7 +250,7 @@ private static Admin _a;
 		
 		JButton btnUredi = new JButton("Uredi");
 		btnUredi.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnUredi.setBounds(322, 91, 89, 23);
+		btnUredi.setBounds(335, 146, 89, 23);
 		frame.getContentPane().add(btnUredi);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
@@ -262,7 +261,7 @@ private static Admin _a;
 				op.main(null);
 			}
 		});
-		btnIzlaz.setBounds(335, 255, 89, 20);
+		btnIzlaz.setBounds(335, 255, 89, 22);
 		frame.getContentPane().add(btnIzlaz);
 		
 		
