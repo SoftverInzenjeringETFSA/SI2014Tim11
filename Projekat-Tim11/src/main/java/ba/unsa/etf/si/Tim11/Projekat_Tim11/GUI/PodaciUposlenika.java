@@ -178,7 +178,7 @@ public class PodaciUposlenika {
 		frame.getContentPane().add(lblKoeficijent);
 		
 		final JSpinner spinKoeficijent = new JSpinner();
-		spinKoeficijent.setModel(new SpinnerNumberModel(new Double(0.0), new Double(0.0), null, new Double(0.1)));
+		spinKoeficijent.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
 		spinKoeficijent.setBounds(98, 183, 200, 20);
 		frame.getContentPane().add(spinKoeficijent);
 		
@@ -188,33 +188,51 @@ public class PodaciUposlenika {
 		frame.getContentPane().add(lblTopliObrok);
 		
 		final JSpinner spinOsnovica = new JSpinner();
-		spinOsnovica.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+		spinOsnovica.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
 		spinOsnovica.setBounds(98, 133, 200, 20);
 		frame.getContentPane().add(spinOsnovica);
 		
 		final JSpinner spinFaktor = new JSpinner();
-		spinFaktor.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spinFaktor.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
 		spinFaktor.setBounds(98, 158, 200, 20);
 		frame.getContentPane().add(spinFaktor);
 		
 		final JSpinner spinTopliObrok = new JSpinner();
-		spinTopliObrok.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+		spinTopliObrok.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
 		spinTopliObrok.setBounds(98, 208, 200, 20);
 		frame.getContentPane().add(spinTopliObrok);
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txtIme.getText().length() < 4 || txtPrezime.getText().length() < 4 || txtJmbg.getText().length() < 14
-						|| txtAdresa.getText().length() < 6 || txtPozicija.getText().length() < 1
-						|| calZaposlen.getDate().after(new Date())) return;
+				if(txtIme.getText().length() == 0 || txtPrezime.getText().length() == 0 || txtJmbg.getText().length() == 0
+						|| txtAdresa.getText().length() == 0 || txtPozicija.getText().length() == 0) {
+					JOptionPane.showMessageDialog(frame, "Morate popuniti sva polja");
+					return;
+				}
+				if(calZaposlen.getDate().after(new Date())) {
+					JOptionPane.showMessageDialog(frame, "Pogresan datum");
+					return;
+				}
 				Pattern patternIme = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
 				Pattern patternJmbg = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$");
 				Pattern patternAdresa = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}");
-				if (!patternIme.matcher(txtIme.getText()).matches() || !patternIme.matcher(txtPrezime.getText()).matches()
-						|| !patternJmbg.matcher(txtJmbg.getText()).matches() || !patternAdresa.matcher(txtAdresa.getText()).matches()) {
+				if (!patternIme.matcher(txtIme.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos imena");
 			        return;
 			    }
+				else if(!patternIme.matcher(txtPrezime.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos prezimena");
+			        return;
+				}
+				else if(!patternJmbg.matcher(txtJmbg.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos jmbga");
+			        return;
+				}
+				else if(!patternAdresa.matcher(txtAdresa.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos adrese");
+			        return;
+				}
 				if(_z == null) {
 					try {
 						_z = new Zaposlenik();
@@ -258,8 +276,8 @@ public class PodaciUposlenika {
 						_z.setOsnovica((Double) spinOsnovica.getValue());
 						_z.setFirma(_f);
 						Sistem.Zaposlenici.izmijeni(_z);
-						JOptionPane.showMessageDialog(frame, indeks);
 						_f.getZaposlenici().add(indeks, _z);
+						JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali zaposlenika ID: " + _z.getId());
 						frame.dispose();
 						UposleniciPrikaz up = new UposleniciPrikaz(_o);
 						up.main(null);
