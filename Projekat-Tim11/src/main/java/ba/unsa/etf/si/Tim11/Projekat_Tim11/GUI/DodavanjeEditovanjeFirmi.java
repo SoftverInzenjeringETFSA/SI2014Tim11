@@ -26,6 +26,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class DodavanjeEditovanjeFirmi {
 
@@ -35,6 +36,7 @@ public class DodavanjeEditovanjeFirmi {
 	private JTextField textAdministrator;
 	private static Admin _a;
 	private static Firma _f;
+	private static List<Firma>firme;
 
 	/**
 	 * Launch the application.
@@ -88,6 +90,8 @@ public class DodavanjeEditovanjeFirmi {
 		ImageIcon img = new ImageIcon("icons/firma.png");
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
+	
+				List<Firma>firme=Sistem.Firme.lista();
 		
 		JLabel lblNaziv = new JLabel("Naziv");
 		lblNaziv.setBounds(25, 11, 33, 14);
@@ -120,8 +124,11 @@ public class DodavanjeEditovanjeFirmi {
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
-				if(_f == null) {
-					try {
+				
+					if(_f == null) 
+					{
+					try 
+					{
 						_f = new Firma();
 						_f.setIme(textNaziv.getText());
 						_f.setSjediste(txtSjediste.getText());
@@ -137,6 +144,7 @@ public class DodavanjeEditovanjeFirmi {
 						e1.printStackTrace();
 					}
 				}
+				
 				else {
 					try {
 						_f.setIme(textNaziv.getText());
@@ -153,7 +161,12 @@ public class DodavanjeEditovanjeFirmi {
 						e1.printStackTrace();
 					}
 				}
-			}
+				}
+				
+			
+			
+				
+			
 			
 		});
 		btnPotvrdi.setBounds(109, 228, 77, 19);
@@ -187,4 +200,8 @@ public class DodavanjeEditovanjeFirmi {
 			txtSjediste.setText(_f.getSjediste());
 	
 	}
-	}}
+		textNaziv.setText(" ");
+		txtSjediste.setText(""); 
+		
+	}
+		}
