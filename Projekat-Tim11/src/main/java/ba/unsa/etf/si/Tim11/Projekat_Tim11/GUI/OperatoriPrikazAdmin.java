@@ -47,7 +47,7 @@ public class OperatoriPrikazAdmin {
 			public void run() {
 				try {
 					OperatoriPrikazAdmin window;
-					if(_o != null) {
+					if(_a != null) {
 						window = new OperatoriPrikazAdmin(_a);
 					}
 					else {

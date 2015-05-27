@@ -86,7 +86,7 @@ public class AdministratorPocetna {
 	
 
 		
-	JLabel lblDobrodoliIme = new JLabel("Dobrodošli ,");
+	JLabel lblDobrodoliIme = new JLabel("Dobrodošli,");
 		lblDobrodoliIme.setBounds(25, 26, 137, 14);
 		if(_a != null) {
 			lblDobrodoliIme.setText("Dobrodošli, " + _a.getUsername());
@@ -118,11 +118,11 @@ public class AdministratorPocetna {
 		btnAuriranjeFirmi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				PrikazFirmi pf = new PrikazFirmi();
+				PrikazFirmi pf = new PrikazFirmi(_a);
 				pf.main(null);
 			}
 		});
-		btnAuriranjeFirmi.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAuriranjeFirmi.setFont(UIManager.getFont("Button.font"));
 		btnAuriranjeFirmi.setBounds(252, 63, 154, 33);
 
 		frame.getContentPane().add(btnAuriranjeFirmi);
@@ -136,7 +136,7 @@ public class AdministratorPocetna {
 				
 			}
 		});
-		btnAuriranjeOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAuriranjeOperatera.setFont(UIManager.getFont("Button.font"));
 		btnAuriranjeOperatera.setBounds(252, 106, 154, 33);
 		frame.getContentPane().add(btnAuriranjeOperatera);
 		
@@ -149,12 +149,13 @@ public class AdministratorPocetna {
 				
 			}
 		});
-		btnRaspodjelaOperatera.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnRaspodjelaOperatera.setFont(UIManager.getFont("Button.font"));
 		btnRaspodjelaOperatera.setBounds(252, 150, 154, 33);
 		frame.getContentPane().add(btnRaspodjelaOperatera);
 		
 		
 		JButton btnIzlaz = new JButton("Izlaz");
+		btnIzlaz.setFont(UIManager.getFont("Button.font"));
 	btnIzlaz.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose();
@@ -169,7 +170,7 @@ public class AdministratorPocetna {
 			}
 		}
 	});
-		btnIzlaz.setBounds(331, 227, 75, 23);
+		btnIzlaz.setBounds(252, 214, 154, 23);
 		frame.getContentPane().add(btnIzlaz);
 		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnRaspodjelaOperatera, btnAuriranjeOperatera, btnAuriranjeFirmi, btnIzlaz, frame.getContentPane(), lblDobrodoliIme, lblSlika,btnMojRaun}));
 
