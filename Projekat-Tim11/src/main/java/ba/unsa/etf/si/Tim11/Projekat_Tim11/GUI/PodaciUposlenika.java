@@ -250,6 +250,7 @@ public class PodaciUposlenika {
 						Sistem.Zaposlenici.dodaj(_z);
 						_f.dodajZaposlenika(_z);
 						Sistem.Firme.izmijeni(_f);
+						
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novog zaposlenika");
 						frame.dispose();
 						UposleniciPrikaz up = new UposleniciPrikaz(_o);

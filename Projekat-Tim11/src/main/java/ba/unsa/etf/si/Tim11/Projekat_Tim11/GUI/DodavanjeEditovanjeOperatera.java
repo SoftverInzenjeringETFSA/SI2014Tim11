@@ -39,8 +39,6 @@ public class DodavanjeEditovanjeOperatera {
 	private static Operater _o;
 	private static Firma _f;
 	private static Admin _a;
-	private List<Operater>_operateri;
-	private List<Firma>_firme;
 	private JPasswordField txtSifra;
 	private JTextField txtUsername;
 
@@ -105,8 +103,6 @@ public class DodavanjeEditovanjeOperatera {
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		_operateri = Sistem.Operateri.lista();
-		_firme = Sistem.Firme.lista();
 		
 	
 		
@@ -247,7 +243,7 @@ public class DodavanjeEditovanjeOperatera {
 						_o.setFirma(_f);	
 						Sistem.Operateri.dodaj(_o);
 						_f.dodajOperatera(_o);
-						Sistem.Firme.izmijeni(_f);					
+						Sistem.Firme.izmijeni(_f);		
 						
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novog operatera");
 						frame.dispose();
@@ -276,6 +272,7 @@ public class DodavanjeEditovanjeOperatera {
 						Sistem.Operateri.izmijeni(_o);
 						_f.getOperateri().add(indeks,_o);
 						Sistem.Firme.izmijeni(_f);	
+						
 						frame.dispose();
 						OperatoriPrikazAdmin rp = new OperatoriPrikazAdmin(_a);
 						rp.main(null);
