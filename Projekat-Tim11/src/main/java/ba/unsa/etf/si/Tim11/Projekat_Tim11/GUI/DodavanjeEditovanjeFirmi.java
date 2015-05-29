@@ -38,7 +38,7 @@ public class DodavanjeEditovanjeFirmi {
 	private JTextField textAdministrator;
 	private static Admin _a;
 	private static Firma _f;
-	private static List<Firma>_firme;
+	private List<Firma>_firme;
 
 	/**
 	 * Launch the application.
@@ -145,15 +145,13 @@ public class DodavanjeEditovanjeFirmi {
 				}
 
 				
-					if(_f == null) 
-					{
-					try 
-					{
+				if(_f == null) {
+					try {
 						_f = new Firma();
 						_f.setIme(textNaziv.getText());
 						_f.setSjediste(txtSjediste.getText());
-					Sistem.Firme.dodaj(_f);
-				JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novu firmu");
+						Sistem.Firme.dodaj(_f);
+						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novu firmu");
 						frame.dispose();
 				
 						PrikazFirmi pf = new PrikazFirmi(_a);
@@ -168,12 +166,12 @@ public class DodavanjeEditovanjeFirmi {
 					else {
 						try {
 							int indeks =_firme.indexOf(_f);
-					_firme.remove(_f);
+							_firme.remove(_f);
 							_f.setIme(textNaziv.getText());
 							_f.setIme(txtSjediste.getText());
 							Sistem.Firme.izmijeni(_f);
-						_firme.add(indeks, _f);
-				JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali firmu: " + _f.getIme());
+							_firme.add(indeks, _f);
+							JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali firmu: " + _f.getIme());
 							frame.dispose();
 						PrikazFirmi pff=new PrikazFirmi(_a);
 							pff.main(null);
@@ -182,7 +180,7 @@ public class DodavanjeEditovanjeFirmi {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-				}
+					}
 				}
 				
 		
@@ -214,8 +212,8 @@ public class DodavanjeEditovanjeFirmi {
 			textNaziv.setText(_f.getIme());
 			txtSjediste.setText(_f.getSjediste());
 	
-	}
-		textNaziv.setText(" ");
+		}
+		textNaziv.setText("");
 		txtSjediste.setText(""); 
 	
 		

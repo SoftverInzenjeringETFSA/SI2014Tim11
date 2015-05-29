@@ -41,7 +41,6 @@ public class PrikazFirmi extends JFrame{
 	private JTable table;
 	private List<Firma>_firme;
 	private static Admin  _a;
-	private static Firma _f;
 	
 
 	
@@ -219,7 +218,6 @@ public class PrikazFirmi extends JFrame{
 							frmPrikazFirmi.dispose();
 						DodavanjeEditovanjeFirmi ef = new DodavanjeEditovanjeFirmi(f,_a);
 						ef.main(null);
-						table.clearSelection();
 						break;
 					}
 				}
@@ -240,18 +238,17 @@ public class PrikazFirmi extends JFrame{
 		        	  for(Firma f : _firme) {
 		        		  if(f != null) {
 		        			  if(f.toString().equals(item)) {
+		        				  String[] kolone = {"ID",
+				 					        "Naziv",
+				 					        "Sjediste",
+				 					        };
+				 					
+				 					DefaultTableModel model = new DefaultTableModel();
+				 					table.setModel(model);
+				 					model.setColumnIdentifiers(kolone);
 							 		for(Firma f1 : _firme) {
 							 			if(f1 != null) {
-							 				if(f1.getIme().equals(f)) {
-							 					String[] kolone = {"ID",
-							 					        "Naziv",
-							 					        "Sjediste",
-							 					        };
-							 					
-							 					DefaultTableModel model = new DefaultTableModel();
-							 					table.setModel(model);
-							 					model.setColumnIdentifiers(kolone);
-							 					
+							 				if(f1.getIme().equals(f)) {							 					
 							 					Object[] o = new Object[4];
 							 					  o[0] = f.getId();
 							 					  o[1] = f.getIme();
