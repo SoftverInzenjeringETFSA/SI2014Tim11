@@ -37,6 +37,7 @@ public class PodaciUposlenika {
 	private static Operater _o;
 	private static Zaposlenik _z;
 	private static Firma _f;
+	private JTextField txtTelefon;
 
 	/**
 	 * Launch the application.
@@ -91,7 +92,7 @@ public class PodaciUposlenika {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 503, 398);
+		frame.setBounds(100, 100, 503, 433);
 		frame.setTitle("Podaci o uposleniku");
 		ImageIcon img = new ImageIcon("icons/login_icon.png");
 		frame.setIconImage(img.getImage());
@@ -150,11 +151,11 @@ public class PodaciUposlenika {
 		
 		JLabel lblZaposlen = new JLabel("Zaposlen:");
 		lblZaposlen.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblZaposlen.setBounds(10, 237, 78, 14);
+		lblZaposlen.setBounds(10, 275, 78, 14);
 		frame.getContentPane().add(lblZaposlen);
 		
 		final JCalendar calZaposlen = new JCalendar();
-		calZaposlen.setBounds(98, 237, 200, 112);
+		calZaposlen.setBounds(98, 272, 200, 112);
 		frame.getContentPane().add(calZaposlen);
 		
 		JLabel lblSlika = new JLabel("");
@@ -164,49 +165,50 @@ public class PodaciUposlenika {
 		
 		JLabel lblOsnovica = new JLabel("Osnovica:");
 		lblOsnovica.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOsnovica.setBounds(10, 136, 78, 14);
+		lblOsnovica.setBounds(10, 165, 78, 14);
 		frame.getContentPane().add(lblOsnovica);
 		
 		JLabel lblFaktor = new JLabel("Faktor:");
 		lblFaktor.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblFaktor.setBounds(10, 161, 78, 14);
+		lblFaktor.setBounds(10, 190, 78, 14);
 		frame.getContentPane().add(lblFaktor);
 		
 		JLabel lblKoeficijent = new JLabel("Koeficijent:");
 		lblKoeficijent.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblKoeficijent.setBounds(10, 186, 78, 14);
+		lblKoeficijent.setBounds(10, 216, 78, 14);
 		frame.getContentPane().add(lblKoeficijent);
 		
 		final JSpinner spinKoeficijent = new JSpinner();
 		spinKoeficijent.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
-		spinKoeficijent.setBounds(98, 183, 200, 20);
+		spinKoeficijent.setBounds(98, 213, 200, 20);
 		frame.getContentPane().add(spinKoeficijent);
 		
 		JLabel lblTopliObrok = new JLabel("Topli obrok:");
 		lblTopliObrok.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTopliObrok.setBounds(10, 211, 78, 14);
+		lblTopliObrok.setBounds(10, 244, 78, 14);
 		frame.getContentPane().add(lblTopliObrok);
 		
 		final JSpinner spinOsnovica = new JSpinner();
 		spinOsnovica.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
-		spinOsnovica.setBounds(98, 133, 200, 20);
+		spinOsnovica.setBounds(98, 162, 200, 20);
 		frame.getContentPane().add(spinOsnovica);
 		
 		final JSpinner spinFaktor = new JSpinner();
 		spinFaktor.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
-		spinFaktor.setBounds(98, 158, 200, 20);
+		spinFaktor.setBounds(98, 187, 200, 20);
 		frame.getContentPane().add(spinFaktor);
 		
 		final JSpinner spinTopliObrok = new JSpinner();
 		spinTopliObrok.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
-		spinTopliObrok.setBounds(98, 208, 200, 20);
+		spinTopliObrok.setBounds(98, 241, 200, 20);
 		frame.getContentPane().add(spinTopliObrok);
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(txtIme.getText().length() == 0 || txtPrezime.getText().length() == 0 || txtJmbg.getText().length() == 0
-						|| txtAdresa.getText().length() == 0 || txtPozicija.getText().length() == 0) {
+						|| txtAdresa.getText().length() == 0 || txtPozicija.getText().length() == 0
+						 || txtTelefon.getText().length() == 0) {
 					JOptionPane.showMessageDialog(frame, "Morate popuniti sva polja");
 					return;
 				}
@@ -217,6 +219,7 @@ public class PodaciUposlenika {
 				Pattern patternIme = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
 				Pattern patternJmbg = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$");
 				Pattern patternAdresa = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}");
+				Pattern patternTelefon = Pattern.compile("(\\+|00)?387\\d{2}\\-?\\d{3,4}\\-?\\d{3,4}");
 				if (!patternIme.matcher(txtIme.getText()).matches()) {
 					JOptionPane.showMessageDialog(frame, "Neispravan unos imena");
 			        return;
@@ -233,6 +236,10 @@ public class PodaciUposlenika {
 					JOptionPane.showMessageDialog(frame, "Neispravan unos adrese");
 			        return;
 				}
+				else if(!patternTelefon.matcher(txtTelefon.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos telefona");
+			        return;
+				}
 				if(_z == null) {
 					try {
 						_z = new Zaposlenik();
@@ -240,6 +247,7 @@ public class PodaciUposlenika {
 						_z.setPrezime(txtPrezime.getText());
 						_z.setJmbg(txtJmbg.getText());
 						_z.setAdresa(txtAdresa.getText());
+						_z.setTelefon(txtTelefon.getText());
 						_z.setPozicija(txtPozicija.getText());
 						_z.setDatumZaposlenja(calZaposlen.getDate());
 						_z.setDnevniTopliObrok((Double) spinTopliObrok.getValue());
@@ -269,6 +277,7 @@ public class PodaciUposlenika {
 						_z.setPrezime(txtPrezime.getText());
 						_z.setJmbg(txtJmbg.getText());
 						_z.setAdresa(txtAdresa.getText());
+						_z.setTelefon(txtTelefon.getText());
 						_z.setPozicija(txtPozicija.getText());
 						_z.setDatumZaposlenja(calZaposlen.getDate());
 						_z.setDnevniTopliObrok((Double) spinTopliObrok.getValue());
@@ -305,11 +314,22 @@ public class PodaciUposlenika {
 		btnIzlaz.setBounds(329, 300, 118, 23);
 		frame.getContentPane().add(btnIzlaz);
 		
+		JLabel lblTelefon = new JLabel("Telefon:");
+		lblTelefon.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTelefon.setBounds(10, 140, 78, 14);
+		frame.getContentPane().add(lblTelefon);
+		
+		txtTelefon = new JTextField();
+		txtTelefon.setBounds(98, 137, 200, 20);
+		frame.getContentPane().add(txtTelefon);
+		txtTelefon.setColumns(10);
+		
 		if(_z != null) {
 			txtIme.setText(_z.getIme());
 			txtPrezime.setText(_z.getPrezime());
 			txtJmbg.setText(_z.getJmbg());
 			txtAdresa.setText(_z.getAdresa());
+			txtTelefon.setText(_z.getTelefon());
 			txtPozicija.setText(_z.getPozicija());
 			calZaposlen.setDate(_z.getDatumZaposlenja());
 			spinKoeficijent.setValue(_z.getKoeficijent());
