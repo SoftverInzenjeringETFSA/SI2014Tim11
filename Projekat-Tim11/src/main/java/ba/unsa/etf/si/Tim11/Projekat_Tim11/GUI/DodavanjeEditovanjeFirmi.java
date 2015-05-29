@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Admin;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Firma;
+import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Operater;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Zaposlenik;
 import ba.unsa.etf.si.Tim11.Projekat_Tim11.Klase.Sistem.Sistem;
 
@@ -29,7 +30,9 @@ import java.awt.event.ActionEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 
 public class DodavanjeEditovanjeFirmi {
@@ -143,6 +146,12 @@ public class DodavanjeEditovanjeFirmi {
 				if(calDatum.getDate().after(new Date())) {
 					JOptionPane.showMessageDialog(frame, "Pogresan datum");
 					return;
+				}
+				for(Firma f : Sistem.Firme.lista()) {
+					if( (textNaziv.getText().equals(f.getIme()))&&(txtSjediste.getText().equals(f.getSjediste()))) {
+						JOptionPane.showMessageDialog(frame, "Postoji već firma sa tim sjedištem istog naziva");
+						return;
+					}
 				}
 
 				
