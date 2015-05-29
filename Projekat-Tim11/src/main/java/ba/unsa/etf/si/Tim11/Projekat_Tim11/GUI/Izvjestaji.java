@@ -192,9 +192,11 @@ public class Izvjestaji {
 		btnKreirajIzvjestaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				for(Zaposlenik z : _zaposlenici) {
-					if(z.getPlate().size() == 0) {
-						JOptionPane.showMessageDialog(frame, "Morate prvo dodati platu");
-						return;
+					if(z.getId() == Long.parseLong(txtId.getText())) {
+						if(z.getPlate().size() == 0) {
+							JOptionPane.showMessageDialog(frame, "Morate prvo dodati platu");
+							return;
+						}
 					}
 				}
 				
@@ -270,23 +272,25 @@ public class Izvjestaji {
 
 					model.setColumnIdentifiers(kolone);
 					for(Zaposlenik z : _zaposlenici) {
-						for(Plata p : z.getPlate()) {
-							  try {
-								  Object[] o = new Object[8];
-								  o[0] = z.getId();
-								  o[1] = z.getIme();
-								  o[2] = z.getPrezime();
-								  o[3] = z.getJmbg();
-								  o[4] = p.izracunajNetoPlatu();
-								  o[5] = d1+d2+d3+d4+d5+d6;
-								  o[6] = p.izracunajPorezNaDohodak();
-								  o[7] = p.izracunajBrutoPlatu();
-								  model.addRow(o);
-							  }
-							  catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							  }
+						if(z.getId() == Long.parseLong(txtId.getText())) {
+							for(Plata p : z.getPlate()) {
+								  try {
+									  Object[] o = new Object[8];
+									  o[0] = z.getId();
+									  o[1] = z.getIme();
+									  o[2] = z.getPrezime();
+									  o[3] = z.getJmbg();
+									  o[4] = p.izracunajNetoPlatu();
+									  o[5] = d1+d2+d3+d4+d5+d6;
+									  o[6] = p.izracunajPorezNaDohodak();
+									  o[7] = p.izracunajBrutoPlatu();
+									  model.addRow(o);
+								  }
+								  catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								  }
+							}
 						}
 					}
 				}
@@ -297,45 +301,47 @@ public class Izvjestaji {
 
 					model.setColumnIdentifiers(kolone);
 					for(Zaposlenik z : _zaposlenici) {
-						Plata p = z.getPlate().get(z.getPlate().size()-1);
-						Object[] o = new Object[3];
-						o[0] = "Penziono i invalidsko osiguranje";
-						o[1] = "1610200035700075";
-						o[2] = d1;
-						model.addRow(o);
-						o[0] = "Zdravstveno osiguranje, Kanton";
-						o[1] = "1375006001679472";
-						o[2] = (d2*89.8) / 100;
-						model.addRow(o);
-						o[0] = "Zdravstveno osiguranje, FBiH";
-						o[1] = "1020500000064018";
-						o[2] = (d2*10.2) / 100;
-						model.addRow(o);
-						o[0] = "Osiguranje od nezaposlenosti, FBiH";
-						o[1] = "16100000028570003";
-						o[2] = (d3*30) / 100;
-						model.addRow(o);
-						o[0] = "Osiguranje od nezaposlenosti, HNK";
-						o[1] = "1610200013800191";
-						o[2] = (d3*70) / 100;
-						model.addRow(o);
-						o[0] = "Porez na dohodak";
-						o[1] = "3380002200005953";
-						try {
-							o[2] = p.izracunajPorezNaDohodak();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						model.addRow(o);
-						o[0] = "Ukupne obaveze";
-						try {
-							o[2] = d1+(d2*89.8)/100+(d2*10.2)/100+(d3*30)/100+(d3*70)/100+p.izracunajPorezNaDohodak();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
- 						model.addRow(o);
+						if(z.getId() == Long.parseLong(txtId.getText())) {
+							Plata p = z.getPlate().get(z.getPlate().size()-1);
+							Object[] o = new Object[3];
+							o[0] = "Penziono i invalidsko osiguranje";
+							o[1] = "1610200035700075";
+							o[2] = d1;
+							model.addRow(o);
+							o[0] = "Zdravstveno osiguranje, Kanton";
+							o[1] = "1375006001679472";
+							o[2] = (d2*89.8) / 100;
+							model.addRow(o);
+							o[0] = "Zdravstveno osiguranje, FBiH";
+							o[1] = "1020500000064018";
+							o[2] = (d2*10.2) / 100;
+							model.addRow(o);
+							o[0] = "Osiguranje od nezaposlenosti, FBiH";
+							o[1] = "16100000028570003";
+							o[2] = (d3*30) / 100;
+							model.addRow(o);
+							o[0] = "Osiguranje od nezaposlenosti, HNK";
+							o[1] = "1610200013800191";
+							o[2] = (d3*70) / 100;
+							model.addRow(o);
+							o[0] = "Porez na dohodak";
+							o[1] = "3380002200005953";
+							try {
+								o[2] = p.izracunajPorezNaDohodak();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							model.addRow(o);
+							o[0] = "Ukupne obaveze";
+							try {
+								o[2] = d1+(d2*89.8)/100+(d2*10.2)/100+(d3*30)/100+(d3*70)/100+p.izracunajPorezNaDohodak();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+	 						model.addRow(o);
+						}						
 					}
 				}
 				btnSpasi.setEnabled(true);
