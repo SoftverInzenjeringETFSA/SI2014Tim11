@@ -278,7 +278,9 @@ public class PrikazFirmi extends JFrame{
 				if(dialogResult == JOptionPane.YES_OPTION) {
 					int selectedRowIndex = table.getSelectedRow();
 					for (Firma f : _firme) {
-						if (table.isRowSelected(selectedRowIndex) && f.getId() ==(Long) table.getModel().getValueAt(selectedRowIndex, 0)) {
+					
+						if (table.isRowSelected(selectedRowIndex) &&
+								f.getId() ==(Long) table.getModel().getValueAt(selectedRowIndex, 0)) {
 							String ispis = "Uspješno ste obrisali firmu: " + f.getIme();
 						Sistem.Firme.izbrisi((int)f.getId());
 				_firme.remove(f);
@@ -294,6 +296,10 @@ public class PrikazFirmi extends JFrame{
 				if(dialogResult == JOptionPane.NO_OPTION) {
 					
 				}
+				
+	
+				
+					
 			}
 		});
 		frmPrikazFirmi.getContentPane().add(btnBrii);
