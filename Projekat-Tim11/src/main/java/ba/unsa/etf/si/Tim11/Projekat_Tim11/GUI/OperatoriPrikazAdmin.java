@@ -36,7 +36,7 @@ public class OperatoriPrikazAdmin {
 	private List<Operater>_operateri;
 	private List<Firma> _firme;
 	private static Admin _a;
-	private static Firma _f;
+	private Firma _f;
 
 
 	/**
@@ -130,9 +130,49 @@ public class OperatoriPrikazAdmin {
 				}
 			}
 		});
-		btnDodajPermisiju.setBounds(355, 194, 124, 23);
-		
+		btnDodajPermisiju.setBounds(355, 224, 124, 23);		
 		frame.getContentPane().add(btnDodajPermisiju);
+		
+		final JButton btnBrisanje = new JButton("Brisanje");
+		btnBrisanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {				
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
+				if(dialogResult == JOptionPane.YES_OPTION) {
+					int selectedRowIndex = table.getSelectedRow();
+					for (Operater o : _f.getOperateri()) {
+						if (table.isRowSelected(selectedRowIndex) && o.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
+							String ispis = "Uspješno ste obrisali zaposlenika ID: " + o.getId();
+							Sistem.Operateri.izbrisi((int) (long) o.getId());
+							_f.getOperateri().remove(o);
+							_operateri = Sistem.Operateri.lista();
+							_firme = Sistem.Firme.lista();
+							JOptionPane.showMessageDialog(frame, ispis);
+							break;
+						}
+					}
+					for (Operater o : _f.getOperateri()) {	
+						String[] kolone = {"ID",
+	 					        "Ime",
+	 					        "Prezime"};
+	 					
+	 					DefaultTableModel model = new DefaultTableModel();
+	 					table.setModel(model);
+	 					model.setColumnIdentifiers(kolone);
+	 					Object[] o1 = new Object[4];
+	 					  o1[0] = o.getId();
+	 					  o1[1] = o.getIme();
+	 					  o1[2] = o.getPrezime();
+	 					  o1[3] = o.getPozicija();
+	 					  model.addRow(o1);
+					}
+				}
+				if(dialogResult == JOptionPane.NO_OPTION) {
+					
+				}
+			}
+		});
+		btnBrisanje.setBounds(355, 190, 124, 23);
+		frame.getContentPane().add(btnBrisanje);
 		
 		table = new JTable(){
 			private static final long serialVersionUID = 1L;
@@ -145,6 +185,7 @@ public class OperatoriPrikazAdmin {
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 	        public void valueChanged(ListSelectionEvent event) {
 	            btnAzuriranje.setEnabled(true);
+	            btnBrisanje.setEnabled(true);
 	            btnDodajPermisiju.setEnabled(true);
 	        }
 	    });
@@ -306,6 +347,7 @@ public class OperatoriPrikazAdmin {
 		
 		if(table.getSelectedRow() == -1) {
 			btnAzuriranje.setEnabled(false);
+			btnBrisanje.setEnabled(false);
 			btnDodajPermisiju.setEnabled(false);
 		}
 	}

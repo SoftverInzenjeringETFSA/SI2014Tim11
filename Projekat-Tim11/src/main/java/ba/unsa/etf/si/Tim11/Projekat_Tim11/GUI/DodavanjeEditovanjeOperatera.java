@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JPasswordField;
 
 public class DodavanjeEditovanjeOperatera {
 
@@ -36,11 +37,12 @@ public class DodavanjeEditovanjeOperatera {
 	private JTextField txtAdresa;
 	private JTextField txtPozicija;
 	private static Operater _o;
-	private static Zaposlenik _z;
 	private static Firma _f;
 	private static Admin _a;
-	private static List<Operater>_operateri;
-	private static List<Firma>_firme;
+	private List<Operater>_operateri;
+	private List<Firma>_firme;
+	private JPasswordField txtSifra;
+	private JTextField txtUsername;
 
 	/**
 	 * Launch the application.
@@ -97,7 +99,7 @@ public class DodavanjeEditovanjeOperatera {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 503, 323);
+		frame.setBounds(100, 100, 503, 382);
 		frame.setTitle("Podaci o operateru");
 		ImageIcon img = new ImageIcon("icons/login_icon.png");
 		frame.setIconImage(img.getImage());
@@ -119,54 +121,72 @@ public class DodavanjeEditovanjeOperatera {
 		txtIme.setColumns(10);
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
-		lblPrezime.setBounds(0, 36, 88, 14);
+		lblPrezime.setBounds(0, 42, 88, 14);
 		lblPrezime.setHorizontalAlignment(SwingConstants.RIGHT);
 		frame.getContentPane().add(lblPrezime);
 		
 		txtPrezime = new JTextField();
-		txtPrezime.setBounds(98, 33, 200, 20);
+		txtPrezime.setBounds(98, 39, 200, 20);
 		frame.getContentPane().add(txtPrezime);
 		txtPrezime.setColumns(10);
 		
 		JLabel lblJmbg = new JLabel("JMBG:");
-		lblJmbg.setBounds(10, 61, 78, 14);
+		lblJmbg.setBounds(10, 72, 78, 14);
 		lblJmbg.setHorizontalAlignment(SwingConstants.RIGHT);
 		frame.getContentPane().add(lblJmbg);
 		
 		txtJmbg = new JTextField();
-		txtJmbg.setBounds(98, 58, 200, 20);
+		txtJmbg.setBounds(98, 69, 200, 20);
 		frame.getContentPane().add(txtJmbg);
 		txtJmbg.setColumns(10);
 		
 		JLabel lblAdresa = new JLabel("Adresa:");
-		lblAdresa.setBounds(10, 86, 78, 14);
+		lblAdresa.setBounds(10, 103, 78, 14);
 		lblAdresa.setHorizontalAlignment(SwingConstants.RIGHT);
 		frame.getContentPane().add(lblAdresa);
 		
 		txtAdresa = new JTextField();
-		txtAdresa.setBounds(98, 83, 200, 20);
+		txtAdresa.setBounds(98, 100, 200, 20);
 		frame.getContentPane().add(txtAdresa);
 		txtAdresa.setColumns(10);
 		
 		JLabel lblPozicija = new JLabel("Pozicija u firmi:");
-		lblPozicija.setBounds(-26, 111, 114, 14);
+		lblPozicija.setBounds(-26, 134, 114, 14);
 		lblPozicija.setHorizontalAlignment(SwingConstants.RIGHT);
 		frame.getContentPane().add(lblPozicija);
-
 		
 		txtPozicija = new JTextField();
-		txtPozicija.setBounds(98, 108, 200, 20);
+		txtPozicija.setBounds(98, 131, 200, 20);
 		frame.getContentPane().add(txtPozicija);
 		txtPozicija.setColumns(10);
 		txtPozicija.setText("Operater");
 		
+		JLabel lblSifra = new JLabel("Sifra:");
+		lblSifra.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSifra.setBounds(10, 193, 78, 14);
+		frame.getContentPane().add(lblSifra);
+		
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblUsername.setBounds(10, 165, 78, 14);
+		frame.getContentPane().add(lblUsername);
+		
+		txtSifra = new JPasswordField();
+		txtSifra.setBounds(98, 190, 200, 20);
+		frame.getContentPane().add(txtSifra);
+		
+		txtUsername = new JTextField();
+		txtUsername.setBounds(98, 162, 200, 20);
+		frame.getContentPane().add(txtUsername);
+		txtUsername.setColumns(10);
+		
 		JLabel lblZaposlen = new JLabel("Zaposlen:");
-		lblZaposlen.setBounds(10, 175, 78, 14);
+		lblZaposlen.setBounds(10, 223, 78, 14);
 		lblZaposlen.setHorizontalAlignment(SwingConstants.RIGHT);
 		frame.getContentPane().add(lblZaposlen);
 		
 		final JCalendar calZaposlen = new JCalendar();
-		calZaposlen.setBounds(98, 155, 200, 112);
+		calZaposlen.setBounds(98, 221, 200, 112);
 		frame.getContentPane().add(calZaposlen);
 		
 		JLabel lblSlika = new JLabel("");
@@ -178,35 +198,56 @@ public class DodavanjeEditovanjeOperatera {
 		btnPotvrdi.setBounds(359, 199, 118, 23);
 		btnPotvrdi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txtIme.getText().length() < 4 || txtPrezime.getText().length() < 4 || txtJmbg.getText().length() < 14
-						|| txtAdresa.getText().length() < 6 || txtPozicija.getText().length() < 1
-						|| calZaposlen.getDate().after(new Date())) return;
+				char[] pass = txtSifra.getPassword();
+				String passString = new String(pass);
+				if(txtIme.getText().length() == 0 || txtPrezime.getText().length() == 0 || txtJmbg.getText().length() == 0
+						|| txtAdresa.getText().length() == 0 || txtPozicija.getText().length() == 0
+						|| txtUsername.getText().length() == 0 || passString.length() == 0) {
+					JOptionPane.showMessageDialog(frame, "Morate popuniti sva polja");
+					return;
+				}
+				if(calZaposlen.getDate().after(new Date())) {
+					JOptionPane.showMessageDialog(frame, "Pogresan datum");
+					return;
+				}
 				Pattern patternIme = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
 				Pattern patternJmbg = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$");
 				Pattern patternAdresa = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}");
-				if (!patternIme.matcher(txtIme.getText()).matches() || !patternIme.matcher(txtPrezime.getText()).matches()
-						|| !patternJmbg.matcher(txtJmbg.getText()).matches() || !patternAdresa.matcher(txtAdresa.getText()).matches()) {
+				if (!patternIme.matcher(txtIme.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos imena");
 			        return;
 			    }
+				else if(!patternIme.matcher(txtPrezime.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos prezimena");
+			        return;
+				}
+				else if(!patternJmbg.matcher(txtJmbg.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos jmbga");
+			        return;
+				}
+				else if(!patternAdresa.matcher(txtAdresa.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos adrese");
+			        return;
+				}
+				else if(txtUsername.getText().length() < 5 || passString.length() < 5) {
+					JOptionPane.showMessageDialog(frame, "Username i sifra moraju imati minimalno 5 karaktera");
+			        return;
+				}
 				if(_o == null) {
 					try {
 						_o = new Operater();
 						_o.setIme(txtIme.getText());
 						_o.setPrezime(txtPrezime.getText());
 						_o.setJmbg(txtJmbg.getText());
-						_o.setAdresa(txtAdresa.getText());
-					
-						_o.setDatumZaposlenja(calZaposlen.getDate());
-				
-						_o.setFirma(_f);
-					
-					
-						Sistem.Firme.izmijeni(_f);
-						
-					
+						_o.setAdresa(txtAdresa.getText());	
+						_o.setPozicija(txtPozicija.getText());
+						_o.setUsername(txtUsername.getText());
+						_o.setPassword(passString);
+						_o.setDatumZaposlenja(calZaposlen.getDate());				
+						_o.setFirma(_f);	
 						Sistem.Operateri.dodaj(_o);
-						Sistem.Operateri.lista().add(_o);
 						_f.dodajOperatera(_o);
+						Sistem.Firme.izmijeni(_f);					
 						
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali novog operatera");
 						frame.dispose();
@@ -225,21 +266,16 @@ public class DodavanjeEditovanjeOperatera {
 						_o.setIme(txtIme.getText());
 						_o.setPrezime(txtPrezime.getText());
 						_o.setJmbg(txtJmbg.getText());
-						_o.setAdresa(txtAdresa.getText());
-				
-						_o.setDatumZaposlenja(calZaposlen.getDate());
-					
+						_o.setAdresa(txtAdresa.getText());	
+						_o.setPozicija(txtPozicija.getText());
+						_o.setUsername(txtUsername.getText());
+						_o.setPassword(passString);
+						_o.setDatumZaposlenja(calZaposlen.getDate());				
 					
 						_o.setFirma(_f);
 						Sistem.Operateri.izmijeni(_o);
 						_f.getOperateri().add(indeks,_o);
-						JOptionPane.showMessageDialog(frame, indeks);
-						
-					
-						frame.dispose()		;	
-					
-		
-		
+						Sistem.Firme.izmijeni(_f);	
 						frame.dispose();
 						OperatoriPrikazAdmin rp = new OperatoriPrikazAdmin(_a);
 						rp.main(null);
@@ -271,6 +307,7 @@ public class DodavanjeEditovanjeOperatera {
 			txtJmbg.setText(_o.getJmbg());
 			txtAdresa.setText(_o.getAdresa());
 			txtPozicija.setText(_o.getPozicija());
+			txtUsername.setText(_o.getUsername());
 			calZaposlen.setDate(_o.getDatumZaposlenja());
 		}
 	}

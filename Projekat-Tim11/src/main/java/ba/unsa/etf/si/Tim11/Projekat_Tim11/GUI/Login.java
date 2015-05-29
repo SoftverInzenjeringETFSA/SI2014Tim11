@@ -106,10 +106,9 @@ public class Login {
 		_administratori = Sistem.Admini.lista();
 		if(_operateri.size()==0 || _administratori.size()==0){
 			generateDB();
-			_operateri = Sistem.Operateri.lista();
-			_administratori = Sistem.Admini.lista();
 		}
-		
+		_operateri = Sistem.Operateri.lista();
+		_administratori = Sistem.Admini.lista();
 		
 		JLabel lblKorisnikoIme = new JLabel("Korisničko ime:");
 		lblKorisnikoIme.setHorizontalAlignment(SwingConstants.RIGHT);

@@ -277,6 +277,7 @@ public class PodaciUposlenika {
 						_z.setFirma(_f);
 						Sistem.Zaposlenici.izmijeni(_z);
 						_f.getZaposlenici().add(indeks, _z);
+						Sistem.Firme.izmijeni(_f);
 						JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali zaposlenika ID: " + _z.getId());
 						frame.dispose();
 						UposleniciPrikaz up = new UposleniciPrikaz(_o);
