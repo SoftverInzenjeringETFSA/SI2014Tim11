@@ -12,6 +12,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
@@ -30,11 +32,9 @@ public class OperatoriPrikazAdmin {
 
 	private JFrame frame;
 	private JTextField txtID;
-	private static Operater _o;
-	private List<Zaposlenik> _zaposlenici;
+	private JTable table;
 	private List<Operater>_operateri;
 	private List<Firma> _firme;
-	private JTable table;
 	private static Admin _a;
 	private static Firma _f;
 
@@ -72,7 +72,7 @@ public class OperatoriPrikazAdmin {
 	
 	
 	public OperatoriPrikazAdmin() {
-	initialize();
+		initialize();
 	}
 
 	/**
@@ -98,14 +98,57 @@ public class OperatoriPrikazAdmin {
 		scrollPane.setBounds(10, 126, 335, 155);
 		frame.getContentPane().add(scrollPane);
 		
-		table = new JTable(){private static final long serialVersionUID = 1L;
-
-        public boolean isCellEditable(int row, int column) {                
-                return false;               
-        };
-    };
+		final JButton btnAzuriranje = new JButton("Ažuriranje");
+		btnAzuriranje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRowIndex = table.getSelectedRow();
+				for (Operater o : _f.getOperateri()) {
+					if (table.isRowSelected(selectedRowIndex) && o.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
+						frame.dispose();
+						DodavanjeEditovanjeOperatera oke = new DodavanjeEditovanjeOperatera(_f,_a,o);
+						oke.main(null);
+					}
+				}
+			}
+		});
+		btnAzuriranje.setBounds(355, 160, 124, 23);
+		frame.getContentPane().add(btnAzuriranje);
+		
+		final JButton btnDodajPermisiju = new JButton("Dodaj Permisiju");
+		btnDodajPermisiju.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int selectedRowIndex = table.getSelectedRow();
+				for (Operater o : _f.getOperateri()) {
+					if(o.getPrivilegije()) {
+						JOptionPane.showMessageDialog(frame, "Operater: " + o.getId() + " već ima permisiju");
+						return;
+					}
+					if (table.isRowSelected(selectedRowIndex) && o.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
+						o.setPrivilegije(true);
+						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali permisiju");
+					}
+				}
+			}
+		});
+		btnDodajPermisiju.setBounds(355, 194, 124, 23);
+		
+		frame.getContentPane().add(btnDodajPermisiju);
+		
+		table = new JTable(){
+			private static final long serialVersionUID = 1L;
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+		};
     
 		scrollPane.setViewportView(table);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+	        public void valueChanged(ListSelectionEvent event) {
+	            btnAzuriranje.setEnabled(true);
+	            btnDodajPermisiju.setEnabled(true);
+	        }
+	    });
+		
 		String[] kolone = {"ID",
 		        "Ime",
 		        "Prezime",
@@ -127,22 +170,23 @@ public class OperatoriPrikazAdmin {
 		    public void itemStateChanged(ItemEvent event) {
 		       if (event.getStateChange() == ItemEvent.SELECTED) {
 		          Object item = event.getItem();
+		          _operateri = Sistem.Operateri.lista();
 		          if(_firme.size() != 0) {
 		        	  for(Firma f : _firme) {
 		        		  if(f != null) {
 		        			  if(f.toString().equals(item)) {
+		        				  String[] kolone = {"ID",
+				 					        "Ime",
+				 					        "Prezime"
+				 					        };
+				 					
+				 					DefaultTableModel model = new DefaultTableModel();
+				 					table.setModel(model);
+				 					model.setColumnIdentifiers(kolone);
 							 		for(Operater o : _operateri) {
 							 			if(o != null) {
 							 				if(f.equals(o.getFirma())) {
-							 					String[] kolone = {"ID",
-							 					        "Ime",
-							 					        "Prezime"
-							 					        };
-							 					
-							 					DefaultTableModel model = new DefaultTableModel();
-							 					table.setModel(model);
-							 					model.setColumnIdentifiers(kolone);
-							 					
+							 					_f = f;
 							 					Object[] o1 = new Object[3];
 							 					  o1[0] = o.getId();
 							 					  o1[1] = o.getIme();
@@ -211,8 +255,7 @@ public class OperatoriPrikazAdmin {
 		     public void insertUpdate(DocumentEvent e) {
 		    	 String[] kolone = {"ID",
 		 		        "Ime",
-		 		        "Prezime",
-		 		        "Odjel"};
+		 		        "Prezime"};
 
 		 		DefaultTableModel model = new DefaultTableModel();
 		 		table.setModel(model);
@@ -248,28 +291,7 @@ public class OperatoriPrikazAdmin {
 		});
 		frame.getContentPane().add(btnDodavanje);
 		
-		JButton btnAzuriranje = new JButton("Ažuriranje");
-		btnAzuriranje.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				DodavanjeEditovanjeOperatera oke = new DodavanjeEditovanjeOperatera(_f,_a,_o);
-				oke.main(null);
-			}
-		});
-		btnAzuriranje.setBounds(355, 160, 124, 23);
-		frame.getContentPane().add(btnAzuriranje);
 		
-		JButton btnDodajPermisiju = new JButton("Dodaj Permisiju");
-		btnDodajPermisiju.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
-				_o.setPrivilegije(true);
-				String ispis = "Uspješno ste dodali permisiju";
-			}
-		});
-		btnDodajPermisiju.setBounds(355, 194, 124, 23);
-		
-		frame.getContentPane().add(btnDodajPermisiju);
 		
 		JButton btnIzlaz = new JButton("Izlaz");
 		btnIzlaz.setBounds(355, 258, 124, 23);
@@ -281,5 +303,10 @@ public class OperatoriPrikazAdmin {
 			}
 		});
 		frame.getContentPane().add(btnIzlaz);
+		
+		if(table.getSelectedRow() == -1) {
+			btnAzuriranje.setEnabled(false);
+			btnDodajPermisiju.setEnabled(false);
+		}
 	}
 }

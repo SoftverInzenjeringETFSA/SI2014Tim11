@@ -50,8 +50,8 @@ public class DodavanjeEditovanjeOperatera {
 			public void run() {
 				try {
 					DodavanjeEditovanjeOperatera window;
-					if(_f != null & _o != null) {
-						if(_z != null) {
+					if(_f != null & _a != null) {
+						if(_o != null) {
 							window = new DodavanjeEditovanjeOperatera(_f, _a, _o);
 						}
 						else {
@@ -86,6 +86,7 @@ public class DodavanjeEditovanjeOperatera {
 	
 
 	public DodavanjeEditovanjeOperatera(Firma f, Admin a, Operater o) {
+		initialize();
 		_f=f;
 		_o=o;
 		_a=a;
@@ -271,7 +272,6 @@ public class DodavanjeEditovanjeOperatera {
 			txtAdresa.setText(_o.getAdresa());
 			txtPozicija.setText(_o.getPozicija());
 			calZaposlen.setDate(_o.getDatumZaposlenja());
-
 		}
 	}
 }
