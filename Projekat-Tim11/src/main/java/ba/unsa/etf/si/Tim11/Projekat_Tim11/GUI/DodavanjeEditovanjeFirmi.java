@@ -143,19 +143,7 @@ public class DodavanjeEditovanjeFirmi {
 					JOptionPane.showMessageDialog(frame, "Pogresan datum");
 					return;
 				}
-				Pattern patternIme = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); 
-			//	Pattern patternJmbg = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$");
-				Pattern patternAdresa = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}");
-				if (!patternIme.matcher(textNaziv.getText()).matches()) {
-					JOptionPane.showMessageDialog(frame, "Neispravan unos imena");
-			        return;
-			    }
-				
-				else if(!patternAdresa.matcher(txtSjediste.getText()).matches()) {
-					JOptionPane.showMessageDialog(frame, "Neispravan unos adrese");
-			        return;
-				}
-				
+
 				
 					if(_f == null) 
 					{
