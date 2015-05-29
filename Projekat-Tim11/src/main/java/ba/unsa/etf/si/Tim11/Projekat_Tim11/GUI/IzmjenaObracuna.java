@@ -163,7 +163,7 @@ public class IzmjenaObracuna {
 		panel.add(lblNocniRad);
 		
 		final JSpinner spinNocniRad = new JSpinner();
-		spinNocniRad.setModel(new SpinnerNumberModel(0, 0, 31, 1));
+		spinNocniRad.setModel(new SpinnerNumberModel(0, 0, 15, 1));
 		spinNocniRad.setBounds(300, 192, 98, 20);
 		panel.add(spinNocniRad);
 		
@@ -277,6 +277,13 @@ public class IzmjenaObracuna {
 					JOptionPane.showMessageDialog(frame, "Morate unijeti broj radnih dana i stvarni rad");
 					return;
 				}
+				if((Integer) spinBrojRadnihDana.getValue() != ((Integer) spinStvarniRad.getValue() +
+						(Integer) spinBolovanje.getValue() + (Integer) spinGodisnjiOdmor.getValue()
+						+ (Integer) spinPraznici.getValue())) {
+					JOptionPane.showMessageDialog(frame, "Suma stvarnog rada, bolovanja, godišnjeg odmora"
+							+ " i praznika mora biti jednaka broju radnih dana");
+					return;
+				}
 				try {
 					_p = new Plata();
 					_p.setDatum(dateChooser.getDate());
@@ -291,6 +298,7 @@ public class IzmjenaObracuna {
 					_z.dodajPlatu(_p);
 					Sistem.Zaposlenici.izmijeni(_z);
 					_z=Sistem.Zaposlenici.nadji(Integer.parseInt(_z.getId().toString()));
+					JOptionPane.showMessageDialog(frame, "Uspješno ste dodali platu");
 				}
 				catch (Exception e1) {
 					// TODO Auto-generated catch block
