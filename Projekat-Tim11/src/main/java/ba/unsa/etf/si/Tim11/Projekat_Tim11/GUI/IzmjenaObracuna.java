@@ -283,6 +283,10 @@ public class IzmjenaObracuna {
 					JOptionPane.showMessageDialog(frame, "Suma stvarnog rada, bolovanja, godišnjeg odmora"
 							+ " i praznika mora biti jednaka broju radnih dana");
 					return;
+				}				
+				if(dateChooser.getDate().after(new Date())) {
+					JOptionPane.showMessageDialog(frame, "Pogresan datum");
+					return;
 				}
 				try {
 					_p = new Plata();
