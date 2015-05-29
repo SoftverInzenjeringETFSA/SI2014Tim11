@@ -235,6 +235,12 @@ public class DodavanjeEditovanjeOperatera {
 					JOptionPane.showMessageDialog(frame, "Username i sifra moraju imati minimalno 5 karaktera");
 			        return;
 				}
+				for(Operater o : _f.getOperateri()) {
+					if(txtUsername.getText().equals(o.getUsername())) {
+						JOptionPane.showMessageDialog(frame, "Postoji već operater sa tim korisničkim imenom");
+						return;
+					}
+				}
 				if(_o == null) {
 					try {
 						_o = new Operater();
