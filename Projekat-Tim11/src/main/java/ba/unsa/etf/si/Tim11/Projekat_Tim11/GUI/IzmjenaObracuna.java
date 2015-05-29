@@ -279,9 +279,8 @@ public class IzmjenaObracuna {
 				}
 				if((Integer) spinBrojRadnihDana.getValue() != ((Integer) spinStvarniRad.getValue() +
 						(Integer) spinBolovanje.getValue() + (Integer) spinGodisnjiOdmor.getValue()
-						+ (Integer) spinPraznici.getValue())) {
-					JOptionPane.showMessageDialog(frame, "Suma stvarnog rada, bolovanja, godišnjeg odmora"
-							+ " i praznika mora biti jednaka broju radnih dana");
+						+ (Integer) spinPraznici.getValue() + (Integer) spinNocniRad.getValue())) {
+					JOptionPane.showMessageDialog(frame, "Suma ostalih vrijednosti mora biti jednaka broju radnih dana");
 					return;
 				}				
 				if(dateChooser.getDate().after(new Date())) {
