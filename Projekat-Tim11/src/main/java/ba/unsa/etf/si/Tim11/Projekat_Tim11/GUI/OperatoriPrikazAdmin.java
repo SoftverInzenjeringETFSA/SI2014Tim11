@@ -119,11 +119,11 @@ public class OperatoriPrikazAdmin {
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedRowIndex = table.getSelectedRow();
 				for (Operater o : _f.getOperateri()) {
-					if(o.getPrivilegije()) {
-						JOptionPane.showMessageDialog(frame, "Operater: " + o.getId() + " već ima permisiju");
-						return;
-					}
 					if (table.isRowSelected(selectedRowIndex) && o.getId() == table.getModel().getValueAt(selectedRowIndex, 0)) {
+						if(o.getPrivilegije()) {
+							JOptionPane.showMessageDialog(frame, "Operater: " + o.getId() + " već ima permisiju");
+							return;
+						}
 						o.setPrivilegije(true);
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali permisiju");
 					}
@@ -150,21 +150,23 @@ public class OperatoriPrikazAdmin {
 							break;
 						}
 					}
+					String[] kolone = {"ID",
+ 					        "Ime",
+ 					        "Prezime"};
+ 					
+ 					DefaultTableModel model = new DefaultTableModel();
+ 					table.setModel(model);
+ 					model.setColumnIdentifiers(kolone);
 					for (Operater o : _f.getOperateri()) {	
-						String[] kolone = {"ID",
-	 					        "Ime",
-	 					        "Prezime"};
-	 					
-	 					DefaultTableModel model = new DefaultTableModel();
-	 					table.setModel(model);
-	 					model.setColumnIdentifiers(kolone);
 	 					Object[] o1 = new Object[4];
 	 					  o1[0] = o.getId();
 	 					  o1[1] = o.getIme();
 	 					  o1[2] = o.getPrezime();
-	 					  o1[3] = o.getPozicija();
 	 					  model.addRow(o1);
 					}
+					btnBrisanje.setEnabled(false);
+					btnAzuriranje.setEnabled(false);
+					btnDodajPermisiju.setEnabled(false);
 				}
 				if(dialogResult == JOptionPane.NO_OPTION) {
 					

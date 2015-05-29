@@ -29,11 +29,11 @@ public class Operater extends Osoba implements Account,Serializable{
 		this.firma = firma;
 	}
 
-	public Operater(){this.privilegije = true;}
+	public Operater(){this.privilegije = false;}
 
 	public Operater(String ime, String prezime, String jmbg,String adresa, String telefon, Date datumZaposlenja, String pozicija) throws Exception {
 		super(ime,prezime,jmbg,adresa,telefon,datumZaposlenja,pozicija);
-		this.privilegije = true;
+		this.privilegije = false;
 	}
 	public String getUsername() {
 		return username;

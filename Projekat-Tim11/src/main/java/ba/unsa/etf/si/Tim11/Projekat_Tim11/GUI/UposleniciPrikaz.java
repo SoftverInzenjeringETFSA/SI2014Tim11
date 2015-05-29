@@ -137,15 +137,15 @@ public class UposleniciPrikaz {
 							break;
 						}
 					}
+					String[] kolone = {"ID",
+ 					        "Ime",
+ 					        "Prezime",
+ 					        "Odjel"};
+ 					
+ 					DefaultTableModel model = new DefaultTableModel();
+ 					table.setModel(model);
+ 					model.setColumnIdentifiers(kolone);
 					for (Zaposlenik z : _f.getZaposlenici()) {	
-						String[] kolone = {"ID",
-	 					        "Ime",
-	 					        "Prezime",
-	 					        "Odjel"};
-	 					
-	 					DefaultTableModel model = new DefaultTableModel();
-	 					table.setModel(model);
-	 					model.setColumnIdentifiers(kolone);
 	 					Object[] o = new Object[4];
 	 					  o[0] = z.getId();
 	 					  o[1] = z.getIme();
