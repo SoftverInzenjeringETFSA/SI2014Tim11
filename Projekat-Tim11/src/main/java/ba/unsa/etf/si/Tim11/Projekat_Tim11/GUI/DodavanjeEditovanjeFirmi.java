@@ -29,16 +29,17 @@ import java.awt.event.ActionEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class DodavanjeEditovanjeFirmi {
 
 	private JFrame frame;
 	private JTextField textNaziv;
 	private JTextField txtSjediste;
-	private JTextField textAdministrator;
 	private static Admin _a;
 	private static Firma _f;
-	private List<Firma>_firme;
+
 
 	/**
 	 * Launch the application.
@@ -89,13 +90,13 @@ public class DodavanjeEditovanjeFirmi {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 329, 297);
+		frame.setBounds(100, 100, 437, 297);
 		frame.setTitle("Dodavanje firme");
 		ImageIcon img = new ImageIcon("icons/firma.png");
 		frame.setIconImage(img.getImage());
 		frame.getContentPane().setLayout(null);
 
-		_firme = Sistem.Firme.lista();
+	
 	
 		
 		
@@ -107,16 +108,16 @@ public class DodavanjeEditovanjeFirmi {
 		lbSjediste.setBounds(25, 55, 48, 14);
 		frame.getContentPane().add(lbSjediste);
 		
-		JLabel lblAdministrator = new JLabel("Administrator");
-		lblAdministrator.setBounds(25, 100, 93, 14);
+		JLabel lblAdministrator = new JLabel("Administrator:");
+		lblAdministrator.setBounds(25, 110, 93, 14);
 		frame.getContentPane().add(lblAdministrator);
 		
 		JLabel lblDatumDodavanja = new JLabel("Datum dodavanja");
-		lblDatumDodavanja.setBounds(145, 11, 93, 14);
+		lblDatumDodavanja.setBounds(206, 11, 93, 14);
 		frame.getContentPane().add(lblDatumDodavanja);
 		
 		final JCalendar calDatum = new JCalendar();
-		calDatum.setBounds(145, 24, 165, 91);
+		calDatum.setBounds(206, 24, 188, 121);
 		frame.getContentPane().add(calDatum);
 		
 		
@@ -129,7 +130,7 @@ public class DodavanjeEditovanjeFirmi {
 					pf.main(null);
 				}
 			});
-		btnIzlaz.setBounds(224, 227, 77, 21);
+		btnIzlaz.setBounds(296, 218, 77, 21);
 		frame.getContentPane().add(btnIzlaz);
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
@@ -165,12 +166,11 @@ public class DodavanjeEditovanjeFirmi {
 				
 					else {
 						try {
-							int indeks =_firme.indexOf(_f);
-							_firme.remove(_f);
+							
 							_f.setIme(textNaziv.getText());
 							_f.setIme(txtSjediste.getText());
 							Sistem.Firme.izmijeni(_f);
-							_firme.add(indeks, _f);
+						
 							JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali firmu: " + _f.getIme());
 							frame.dispose();
 						PrikazFirmi pff=new PrikazFirmi(_a);
@@ -185,7 +185,7 @@ public class DodavanjeEditovanjeFirmi {
 				
 		
 		});
-		btnPotvrdi.setBounds(109, 228, 77, 19);
+		btnPotvrdi.setBounds(181, 219, 77, 19);
 		frame.getContentPane().add(btnPotvrdi);
 		
 		
@@ -201,12 +201,6 @@ public class DodavanjeEditovanjeFirmi {
 		txtSjediste.setBounds(25, 69, 86, 20);
 		frame.getContentPane().add(txtSjediste);
 		
-		textAdministrator = new JTextField();
-		textAdministrator.setColumns(10);
-		textAdministrator.setBounds(25, 125, 86, 20);
-		frame.getContentPane().add(textAdministrator);
-		textAdministrator.setText("Admin");
-		
 		if(_f != null) 
 		{
 			textNaziv.setText(_f.getIme());
@@ -215,6 +209,12 @@ public class DodavanjeEditovanjeFirmi {
 		}
 		textNaziv.setText("");
 		txtSjediste.setText(""); 
+		
+		JLabel lblAdmin = new JLabel("Admin");
+		lblAdmin.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblAdmin.setLabelFor(lblAdministrator);
+		lblAdmin.setBounds(25, 125, 46, 14);
+		frame.getContentPane().add(lblAdmin);
 	
 		
 	}
