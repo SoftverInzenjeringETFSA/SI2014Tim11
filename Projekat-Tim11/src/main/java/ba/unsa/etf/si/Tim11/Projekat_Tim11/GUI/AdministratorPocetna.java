@@ -123,7 +123,7 @@ public class AdministratorPocetna {
 			}
 		});
 		btnAuriranjeFirmi.setFont(UIManager.getFont("Button.font"));
-		btnAuriranjeFirmi.setBounds(252, 63, 154, 33);
+		btnAuriranjeFirmi.setBounds(252, 63, 172, 33);
 
 		frame.getContentPane().add(btnAuriranjeFirmi);
 		
@@ -137,7 +137,7 @@ public class AdministratorPocetna {
 			}
 		});
 		btnAuriranjeOperatera.setFont(UIManager.getFont("Button.font"));
-		btnAuriranjeOperatera.setBounds(252, 106, 154, 33);
+		btnAuriranjeOperatera.setBounds(252, 106, 172, 33);
 		frame.getContentPane().add(btnAuriranjeOperatera);
 		
 		JButton btnRaspodjelaOperatera = new JButton("Raspodjela operatera");
@@ -150,7 +150,7 @@ public class AdministratorPocetna {
 			}
 		});
 		btnRaspodjelaOperatera.setFont(UIManager.getFont("Button.font"));
-		btnRaspodjelaOperatera.setBounds(252, 150, 154, 33);
+		btnRaspodjelaOperatera.setBounds(252, 150, 172, 33);
 		frame.getContentPane().add(btnRaspodjelaOperatera);
 		
 		
@@ -170,7 +170,7 @@ public class AdministratorPocetna {
 			}
 		}
 	});
-		btnIzlaz.setBounds(252, 214, 154, 23);
+		btnIzlaz.setBounds(252, 214, 172, 23);
 		frame.getContentPane().add(btnIzlaz);
 		frame.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnRaspodjelaOperatera, btnAuriranjeOperatera, btnAuriranjeFirmi, btnIzlaz, frame.getContentPane(), lblDobrodoliIme, lblSlika,btnMojRaun}));
 
