@@ -139,7 +139,7 @@ public class Izvjestaji {
 		lblVrstaIzvjestaja.setBounds(-21, 133, 128, 14);
 		panel.add(lblVrstaIzvjestaja);
 		
-		JLabel lblDatumKreiranjaIzvjestaja = new JLabel("Datum kreiranja izvještaja:");
+		JLabel lblDatumKreiranjaIzvjestaja = new JLabel("Datum za koji se pravi izvještaj:");
 		lblDatumKreiranjaIzvjestaja.setBounds(274, 22, 235, 14);
 		panel.add(lblDatumKreiranjaIzvjestaja);
 		
