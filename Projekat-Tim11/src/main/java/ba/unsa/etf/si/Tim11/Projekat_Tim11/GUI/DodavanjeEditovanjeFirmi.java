@@ -143,10 +143,27 @@ public class DodavanjeEditovanjeFirmi {
 					JOptionPane.showMessageDialog(frame, "Morate popuniti sva polja");
 					return;
 				}
+				
 				if(calDatum.getDate().after(new Date())) {
 					JOptionPane.showMessageDialog(frame, "Pogresan datum");
 					return;
 				}
+				Pattern patternIme = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž0-9\\s\\.]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+			
+				Pattern patternSjediste = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž0-9\\s\\.]{3,}");
+				
+				if (!patternIme.matcher(textNaziv.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos imena, mora sadrzavati min 3 znaka");
+			        return;
+			    }
+				
+				
+				else if(!patternSjediste.matcher(txtSjediste.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos sjedišta, mora sadržavati min 3 znaka");
+			        return;
+				}
+				
+				
 				for(Firma f : Sistem.Firme.lista()) {
 					if( (textNaziv.getText().equals(f.getIme()))&&(txtSjediste.getText().equals(f.getSjediste()))) {
 						JOptionPane.showMessageDialog(frame, "Postoji već firma sa tim sjedištem istog naziva");
