@@ -68,7 +68,7 @@ public class Plata implements Serializable  {
 			int stvarniRad, int bolovanje, int brojRadnihDana,
            int godineStaza, int godisnjiOdmor, double nocniRad,int prazniciRad) throws Exception
 {
-	if((stvarniRad+bolovanje+godisnjiOdmor)>brojRadnihDana) throw new Exception("Zbir stvarnog rada, bolovanja i godisnjeg odmora u jednom mjesecu ne moze biti >31");
+	if((stvarniRad+bolovanje+godisnjiOdmor+nocniRad+prazniciRad)>brojRadnihDana) throw new Exception("Zbir stvarnog rada, bolovanja i godisnjeg odmora u jednom mjesecu ne moze biti >31");
 	
 	this.setZaposlenik(zaposlenik);
 	this.setDatum(datum);
@@ -301,11 +301,16 @@ public class Plata implements Serializable  {
 		
 		if(this.prazniciRad !=0)	
 		{ 
-			//15% vise na satnicu za praznike
-			double netoPraznici=((satnica*115)/100)*(this.prazniciRad*8);
+			//50% vise na satnicu za praznike
+			double netoPraznici=((satnica*150)/100)*(this.prazniciRad*8);
 			neto+=netoPraznici;
 		}
-		neto+=this.nocniRad;       //samo sam ovako dodao posto je nocniRad dodatak na platu
+		if(this.nocniRad !=0)
+		{
+			//30% vise na satnicu za nocni rad
+			double netoNocni=((satnica*130)/100)*(this.nocniRad*8);
+			neto+=netoNocni;
+		}
 		neto-=izracunajPorezNaDohodak();
 		neto+=ukupanTopli;
 		return neto;
