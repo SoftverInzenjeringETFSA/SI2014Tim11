@@ -220,7 +220,7 @@ public class IzmjenaObracuna {
 		        "Bruto plata",
 		        "Neto plata"};
 
-		final DefaultTableModel model = new DefaultTableModel();
+		DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
 		model.setColumnIdentifiers(kolone);
 		
@@ -239,7 +239,7 @@ public class IzmjenaObracuna {
 							break;
 						}
 					}
-					final DefaultTableModel model = new DefaultTableModel();
+					DefaultTableModel model = new DefaultTableModel();
 					table.setModel(model);
 					model.setColumnIdentifiers(kolone);
 					for (Plata p : _z.getPlate()) {	
@@ -289,6 +289,10 @@ public class IzmjenaObracuna {
 					JOptionPane.showMessageDialog(frame, "Pogresan datum");
 					return;
 				}
+				if(dateChooser.getDate().getMonth() == 1 && (Integer) spinBrojRadnihDana.getValue() > 28) {
+					JOptionPane.showMessageDialog(frame, "Februar nema toliko dana");
+					return;
+				}
 				try {
 					_p = new Plata();
 					_p.setDatum(dateChooser.getDate());
@@ -311,6 +315,9 @@ public class IzmjenaObracuna {
 				}
 				tabbedPane.setEnabledAt(1, true);
 				if(_z.getPlate().size() != 0) {
+					DefaultTableModel model = new DefaultTableModel();
+					table.setModel(model);
+					model.setColumnIdentifiers(kolone);
 					for (Plata p : _z.getPlate()) {
 						if(p != null) {
 							double dohodak;
