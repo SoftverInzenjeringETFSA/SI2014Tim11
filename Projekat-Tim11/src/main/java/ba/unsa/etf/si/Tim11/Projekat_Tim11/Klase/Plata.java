@@ -296,8 +296,7 @@ public class Plata implements Serializable  {
 		double netoBolovanje=((satnica*80)/100)*(this.bolovanje*8);   //uzeo sam 80% satnice valjda je to ok
 		neto+=netoBolovanje;         //neto je zarada kada je zap. radio dok je netoBolovanje zarada kad je zaposlenik bio na bolovanju
 		}
-		double ukupanTopli=this.stvarniRad*this.zaposlenik.getDnevniTopliObrok(); //ukupan topli obrok* broj dana koje je zaposlenik radio
-												          		  //sto znaci da nam u sustini godisnji odmor znaci 
+		
 		
 		if(this.prazniciRad !=0)	
 		{ 
@@ -312,7 +311,6 @@ public class Plata implements Serializable  {
 			neto+=netoNocni;
 		}
 		neto-=izracunajPorezNaDohodak();
-		neto+=ukupanTopli;
 		return neto;
 	
 	}			
