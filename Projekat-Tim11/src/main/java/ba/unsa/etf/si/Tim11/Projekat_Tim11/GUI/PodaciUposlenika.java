@@ -240,6 +240,10 @@ public class PodaciUposlenika {
 					JOptionPane.showMessageDialog(frame, "Neispravan unos telefona");
 			        return;
 				}
+				if(((Double) spinKoeficijent.getValue() * (Double) spinOsnovica.getValue()) < 326.77){
+					JOptionPane.showMessageDialog(frame, "Proizvod koeficijenta i osnovice ne smije biti manji od 326.77KM");
+			        return;
+				}
 				if(_z == null) {
 					try {
 						_z = new Zaposlenik();

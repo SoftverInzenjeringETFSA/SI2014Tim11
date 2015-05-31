@@ -254,7 +254,6 @@ public class DodavanjeEditovanjeOperatera {
 						_o.setPassword(passString);
 						_o.setDatumZaposlenja(calZaposlen.getDate());				
 						_o.setFirma(_f);	
-						Sistem.Operateri.dodaj(_o);
 						_f.dodajOperatera(_o);
 						Sistem.Firme.izmijeni(_f);		
 						

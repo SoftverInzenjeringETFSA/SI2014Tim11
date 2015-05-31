@@ -200,9 +200,8 @@ public class UposleniciPrikaz {
 				 					model.setColumnIdentifiers(kolone);
 							 		for(Zaposlenik z : _zaposlenici) {
 							 			if(z != null) {
-							 				if(f.equals(z.getFirma())) {
-							 					_f = f;
-							 					
+							 				_f = f;
+							 				if(f.getId() == z.getFirma().getId()) {							 					
 							 					Object[] o = new Object[4];
 							 					  o[0] = z.getId();
 							 					  o[1] = z.getIme();

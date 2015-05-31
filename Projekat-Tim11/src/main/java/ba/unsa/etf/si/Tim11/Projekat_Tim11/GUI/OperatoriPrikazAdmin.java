@@ -125,6 +125,7 @@ public class OperatoriPrikazAdmin {
 							return;
 						}
 						o.setPrivilegije(true);
+						Sistem.Operateri.izmijeni(o);
 						JOptionPane.showMessageDialog(frame, "Uspješno ste dodali permisiju");
 					}
 				}
@@ -228,8 +229,8 @@ public class OperatoriPrikazAdmin {
 				 					model.setColumnIdentifiers(kolone);
 							 		for(Operater o : _operateri) {
 							 			if(o != null) {
+							 				_f = f;
 							 				if(f.equals(o.getFirma())) {
-							 					_f = f;
 							 					Object[] o1 = new Object[3];
 							 					  o1[0] = o.getId();
 							 					  o1[1] = o.getIme();
@@ -280,7 +281,7 @@ public class OperatoriPrikazAdmin {
 			 		DefaultTableModel model = new DefaultTableModel();
 			 		table.setModel(model);
 			 		model.setColumnIdentifiers(kolone);
-			 		for(Operater o : _operateri) {
+			 		for(Operater o : _f.getOperateri()) {
 			 			if(o != null) {
 			 				if(o.getId().toString().contains(txtID.getText())) {
 			 					Object[] o1 = new Object[3];
@@ -303,7 +304,7 @@ public class OperatoriPrikazAdmin {
 		 		DefaultTableModel model = new DefaultTableModel();
 		 		table.setModel(model);
 		 		model.setColumnIdentifiers(kolone);
-		 		for(Operater o : _operateri) {
+		 		for(Operater o : _f.getOperateri()) {
 		 			if(o != null) {
 		 				if(o.getId().toString().contains(txtID.getText())) {
 		 					Object[] o1 = new Object[3];
