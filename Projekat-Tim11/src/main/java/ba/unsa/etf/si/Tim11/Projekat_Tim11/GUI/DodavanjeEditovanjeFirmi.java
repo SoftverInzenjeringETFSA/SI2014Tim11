@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class DodavanjeEditovanjeFirmi {
 
@@ -87,6 +88,7 @@ public class DodavanjeEditovanjeFirmi {
 	public DodavanjeEditovanjeFirmi(Admin _a2) {
 		initialize();
 	_a=_a2;
+	_f = null;
 	}
 	/**
 	 * Initialize the contents of the frame.
@@ -103,16 +105,19 @@ public class DodavanjeEditovanjeFirmi {
 	
 		
 		
-		JLabel lblNaziv = new JLabel("Naziv");
-		lblNaziv.setBounds(25, 11, 33, 14);
+		JLabel lblNaziv = new JLabel("Naziv:");
+		lblNaziv.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNaziv.setBounds(15, 45, 58, 14);
 		frame.getContentPane().add(lblNaziv);
 		
-		JLabel lbSjediste = new JLabel("Sjediste");
-		lbSjediste.setBounds(25, 55, 48, 14);
+		JLabel lbSjediste = new JLabel("Sjediste:");
+		lbSjediste.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbSjediste.setBounds(15, 105, 58, 14);
 		frame.getContentPane().add(lbSjediste);
 		
 		JLabel lblAdministrator = new JLabel("Administrator:");
-		lblAdministrator.setBounds(25, 110, 93, 14);
+		lblAdministrator.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAdministrator.setBounds(7, 161, 93, 14);
 		frame.getContentPane().add(lblAdministrator);
 		
 		JLabel lblDatumDodavanja = new JLabel("Datum dodavanja");
@@ -133,7 +138,7 @@ public class DodavanjeEditovanjeFirmi {
 					pf.main(null);
 				}
 			});
-		btnIzlaz.setBounds(296, 218, 77, 21);
+		btnIzlaz.setBounds(308, 218, 86, 21);
 		frame.getContentPane().add(btnIzlaz);
 		
 		JButton btnPotvrdi = new JButton("Potvrdi");
@@ -194,7 +199,7 @@ public class DodavanjeEditovanjeFirmi {
 						try {
 							
 							_f.setIme(textNaziv.getText());
-							_f.setIme(txtSjediste.getText());
+							_f.setSjediste(txtSjediste.getText());
 							Sistem.Firme.izmijeni(_f);
 						
 							JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali firmu: " + _f.getIme());
@@ -211,37 +216,30 @@ public class DodavanjeEditovanjeFirmi {
 				
 		
 		});
-		btnPotvrdi.setBounds(181, 219, 77, 19);
+		btnPotvrdi.setBounds(206, 218, 93, 21);
 		frame.getContentPane().add(btnPotvrdi);
 		
-		
-
-		
 		textNaziv = new JTextField();
-		textNaziv.setBounds(25, 24, 86, 20);
+		textNaziv.setBounds(78, 42, 118, 20);
 		frame.getContentPane().add(textNaziv);
 		textNaziv.setColumns(10);
 		
 		txtSjediste = new JTextField();
 		txtSjediste.setColumns(10);
-		txtSjediste.setBounds(25, 69, 86, 20);
+		txtSjediste.setBounds(78, 102, 118, 20);
 		frame.getContentPane().add(txtSjediste);
 		
 		if(_f != null) 
 		{
 			textNaziv.setText(_f.getIme());
-			txtSjediste.setText(_f.getSjediste());
-	
+			txtSjediste.setText(_f.getSjediste());	
 		}
-		textNaziv.setText("");
-		txtSjediste.setText(""); 
 		
 		JLabel lblAdmin = new JLabel("Admin");
-		lblAdmin.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblAdmin.setLabelFor(lblAdministrator);
-		lblAdmin.setBounds(25, 125, 46, 14);
+		lblAdmin.setBounds(110, 161, 118, 14);
 		frame.getContentPane().add(lblAdmin);
 	
 		
 	}
-		}
+}
