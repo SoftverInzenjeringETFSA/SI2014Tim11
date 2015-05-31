@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -21,12 +22,17 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class PodaciAdministrator {
 
 	private JFrame frame;
 	private static Admin _a;
-	private List<Firma> _firme;
+	private JTextField txtIme;
+	private JTextField txtPrezime;
+	private JTextField txtJmbg;
+	private JTextField txtAdresa;
+	private JTextField txtTelefon;
 
 	
 	/**
@@ -78,7 +84,6 @@ public class PodaciAdministrator {
 		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		_firme = Sistem.Firme.lista();
 		
 		JLabel lblIme = new JLabel("Ime:");
 		lblIme.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -119,7 +124,7 @@ public class PodaciAdministrator {
 		
 		
 		JLabel lblSlika = new JLabel("");
-		lblSlika.setBounds(216, 11, 148, 162);
+		lblSlika.setBounds(226, 11, 148, 162);
 		frame.getContentPane().add(lblSlika);
 		lblSlika.setIcon(new ImageIcon("icons/uposlenik_icon.png"));
 		
@@ -132,7 +137,7 @@ public class PodaciAdministrator {
 				}
 			});
 	
-		btnIzlaz.setBounds(216, 184, 118, 23);
+		btnIzlaz.setBounds(269, 184, 105, 23);
 		frame.getContentPane().add(btnIzlaz);
 		
 		JLabel lblKontaktTelefon = new JLabel("Kontakt telefon:");
@@ -140,38 +145,95 @@ public class PodaciAdministrator {
 		lblKontaktTelefon.setBounds(23, 134, 78, 14);
 		frame.getContentPane().add(lblKontaktTelefon);
 		
-		JLabel lblImeadmin = new JLabel("");
-		lblImeadmin.setBounds(111, 34, 95, 14);
-		frame.getContentPane().add(lblImeadmin);
-		
-		JLabel lblPrezimeadmin = new JLabel("");
-		lblPrezimeadmin.setBounds(111, 59, 95, 14);
-		frame.getContentPane().add(lblPrezimeadmin);
-		
-		JLabel lblJmbgadmin = new JLabel("");
-		lblJmbgadmin.setBounds(111, 84, 95, 14);
-		frame.getContentPane().add(lblJmbgadmin);
-		
-		JLabel lblAdresaadmin = new JLabel("");
-		lblAdresaadmin.setBounds(111, 109, 95, 14);
-		frame.getContentPane().add(lblAdresaadmin);
-		
-		JLabel lblKontaktadmin = new JLabel("");
-		lblKontaktadmin.setBounds(111, 134, 95, 14);
-		frame.getContentPane().add(lblKontaktadmin);
-		
 		JLabel lblAdministrator = new JLabel("Administrator");
-		lblAdministrator.setBounds(111, 159, 95, 14);
+		lblAdministrator.setBounds(111, 159, 105, 14);
 		frame.getContentPane().add(lblAdministrator);
-
+		
+		txtIme = new JTextField();
+		txtIme.setBounds(111, 31, 105, 20);
+		frame.getContentPane().add(txtIme);
+		txtIme.setColumns(10);
+		
+		txtPrezime = new JTextField();
+		txtPrezime.setBounds(111, 56, 105, 20);
+		frame.getContentPane().add(txtPrezime);
+		txtPrezime.setColumns(10);
+		
+		txtJmbg = new JTextField();
+		txtJmbg.setBounds(111, 81, 105, 20);
+		frame.getContentPane().add(txtJmbg);
+		txtJmbg.setColumns(10);
+		
+		txtAdresa = new JTextField();
+		txtAdresa.setBounds(111, 106, 105, 20);
+		frame.getContentPane().add(txtAdresa);
+		txtAdresa.setColumns(10);
+		
+		txtTelefon = new JTextField();
+		txtTelefon.setBounds(111, 131, 105, 20);
+		frame.getContentPane().add(txtTelefon);
+		txtTelefon.setColumns(10);
+		
+		JButton btnSpasi = new JButton("Spasi");
+		btnSpasi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(txtIme.getText().length() == 0 || txtPrezime.getText().length() == 0 || txtJmbg.getText().length() == 0
+						|| txtAdresa.getText().length() == 0 || txtTelefon.getText().length() == 0) {
+					JOptionPane.showMessageDialog(frame, "Morate popuniti sva polja");
+					return;
+				}
+				Pattern patternIme = Pattern.compile("[a-zA-ZĐđŠšČčĆćŽž]{3,}"); //mogu se unijeti velika,mala slova,brojevi
+				Pattern patternJmbg = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$");
+				Pattern patternAdresa = Pattern.compile("[a-zA-Z0-9\\,\\sĐđŠšČčĆćŽž]{5,}");
+				Pattern patternTelefon = Pattern.compile("(\\+|00)?387\\d{2}\\-?\\d{3,4}\\-?\\d{3,4}");
+				if (!patternIme.matcher(txtIme.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos imena");
+			        return;
+			    }
+				else if(!patternIme.matcher(txtPrezime.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos prezimena");
+			        return;
+				}
+				else if(!patternJmbg.matcher(txtJmbg.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos jmbga");
+			        return;
+				}
+				else if(!patternAdresa.matcher(txtAdresa.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos adrese");
+			        return;
+				}
+				else if(!patternTelefon.matcher(txtTelefon.getText()).matches()) {
+					JOptionPane.showMessageDialog(frame, "Neispravan unos telefona");
+			        return;
+				}
+				if(_a != null) {
+					try {
+						_a.setIme(txtIme.getText());
+						_a.setPrezime(txtPrezime.getText());
+						_a.setJmbg(txtJmbg.getText());
+						_a.setAdresa(txtAdresa.getText());
+						_a.setTelefon(txtTelefon.getText());
+						Sistem.Admini.izmijeni(_a);
+						JOptionPane.showMessageDialog(frame, "Uspješno ste ažurirali admina");
+						frame.dispose();
+						AdministratorPocetna ap = new AdministratorPocetna(_a);
+						ap.main(null);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		btnSpasi.setBounds(111, 184, 105, 23);
+		frame.getContentPane().add(btnSpasi);
+		
 		if(_a != null) {
-			lblImeadmin.setText("Temp");
-			lblPrezimeadmin.setText("Tempic");
-			lblJmbgadmin.setText("1505991170272");
-			lblAdresaadmin.setText("Dolina 15");
-			lblKontaktadmin.setText("+38761566311");
-
-			
+			txtIme.setText(_a.getIme());
+			txtPrezime.setText(_a.getPrezime());
+			txtJmbg.setText(_a.getJmbg());
+			txtAdresa.setText(_a.getAdresa());
+			txtTelefon.setText(_a.getTelefon());
 		}
 	}
 }
