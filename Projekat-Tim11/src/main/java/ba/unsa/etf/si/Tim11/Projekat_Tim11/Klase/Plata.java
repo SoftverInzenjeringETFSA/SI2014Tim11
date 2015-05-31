@@ -267,6 +267,10 @@ public class Plata implements Serializable  {
 		return stopa;
 	}
 	
+	public double izracunajTopliObrok() {
+		double topli = zaposlenik.getDnevniTopliObrok() * stvarniRad;
+		return topli;
+	}
 	
 	public double izracunajPorezNaDohodak() throws Exception
 	{

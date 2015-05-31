@@ -213,11 +213,12 @@ public class IzmjenaObracuna {
 		final String[] kolone = {"ID plate",
 				"Datum obračuna",
 				"Dohodak",
+				"Topli obrok",
 		        "Minuli rad",
 		        "Stopa poreza",
 		        "Porez na dohodak",
-		        "Neto plata",
-		        "Bruto plata"};
+		        "Bruto plata",
+		        "Neto plata"};
 
 		final DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
@@ -245,15 +246,16 @@ public class IzmjenaObracuna {
 						double dohodak;
 						try {
 							dohodak = p.izracunajDohodak();
-							Object[] o = new Object[8];
+							Object[] o = new Object[9];
 							  o[0] = p.getId();
 							  o[1] = p.getDatum();
 							  o[2] = p.izracunajDohodak();
-							  o[3] = p.izracunajMinuliRad(dohodak);
-							  o[4] = p.izracunajStopuPoreza();
-							  o[5] = p.izracunajPorezNaDohodak();
-							  o[6] = p.izracunajNetoPlatu();
+							  o[3] = p.izracunajTopliObrok();
+							  o[4] = p.izracunajMinuliRad(dohodak);
+							  o[5] = p.izracunajStopuPoreza();
+							  o[6] = p.izracunajPorezNaDohodak();
 							  o[7] = p.izracunajBrutoPlatu();
+							  o[8] = p.izracunajNetoPlatu();
 							  model.addRow(o);
 						}
 						catch (Exception e1) {
@@ -309,21 +311,21 @@ public class IzmjenaObracuna {
 				}
 				tabbedPane.setEnabledAt(1, true);
 				if(_z.getPlate().size() != 0) {
-				 model.setRowCount(0);
 					for (Plata p : _z.getPlate()) {
 						if(p != null) {
 							double dohodak;
 							try {
 								dohodak = p.izracunajDohodak();
-								Object[] o = new Object[8];
+								Object[] o = new Object[9];
 								  o[0] = p.getId();
 								  o[1] = p.getDatum();
 								  o[2] = p.izracunajDohodak();
-								  o[3] = p.izracunajMinuliRad(dohodak);
-								  o[4] = p.izracunajStopuPoreza();
-								  o[5] = p.izracunajPorezNaDohodak();
-								  o[6] = p.izracunajNetoPlatu();
+								  o[3] = p.izracunajTopliObrok();
+								  o[4] = p.izracunajMinuliRad(dohodak);
+								  o[5] = p.izracunajStopuPoreza();
+								  o[6] = p.izracunajPorezNaDohodak();
 								  o[7] = p.izracunajBrutoPlatu();
+								  o[8] = p.izracunajNetoPlatu();
 								  model.addRow(o);
 							}
 							catch (Exception e1) {
@@ -347,15 +349,16 @@ public class IzmjenaObracuna {
 						double dohodak;
 						try {
 							dohodak = p.izracunajDohodak();
-							Object[] o = new Object[8];
+							Object[] o = new Object[9];
 							  o[0] = p.getId();
 							  o[1] = p.getDatum();
 							  o[2] = p.izracunajDohodak();
-							  o[3] = p.izracunajMinuliRad(dohodak);
-							  o[4] = p.izracunajStopuPoreza();
-							  o[5] = p.izracunajPorezNaDohodak();
-							  o[6] = p.izracunajNetoPlatu();
+							  o[3] = p.izracunajTopliObrok();
+							  o[4] = p.izracunajMinuliRad(dohodak);
+							  o[5] = p.izracunajStopuPoreza();
+							  o[6] = p.izracunajPorezNaDohodak();
 							  o[7] = p.izracunajBrutoPlatu();
+							  o[8] = p.izracunajNetoPlatu();
 							  model.addRow(o);
 						}
 						catch (Exception e1) {
