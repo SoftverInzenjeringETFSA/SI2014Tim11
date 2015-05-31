@@ -19,7 +19,7 @@ public class Zaposlenik extends Osoba implements Serializable{
 	
 	private static final long serialVersionUID = 9221881616260285723L;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "zaposlenik", orphanRemoval=true)
+	@OneToMany(cascade = { CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "zaposlenik", orphanRemoval=true)
 	private List<Plata> plate;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)

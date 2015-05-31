@@ -27,10 +27,10 @@ public class Firma implements Serializable {
 	public String ime;
 	public String sjediste;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "firma", orphanRemoval=true)
+	@OneToMany(cascade = { CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "firma", orphanRemoval=true)
 	private List<Zaposlenik> zaposlenici;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "firma", orphanRemoval=true)
+	@OneToMany(cascade = { CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "firma", orphanRemoval=true)
 	private List<Operater> operateri;
 	
 	public Firma(){

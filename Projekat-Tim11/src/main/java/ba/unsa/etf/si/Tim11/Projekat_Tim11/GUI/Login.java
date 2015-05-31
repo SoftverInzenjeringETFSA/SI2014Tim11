@@ -62,6 +62,7 @@ public class Login {
 	
 	private void generateDB(){
 		try{
+	
 			Admin a= new Admin("Temp","Tempić","1505991170272","Dolina 15","+38761566311",new Date(),"administrator");
 			a.setUsername("admin");
 			a.setPassword("pass");
@@ -84,7 +85,9 @@ public class Login {
 			f.dodajOperatera(o);
 			f.dodajOperatera(obp);
 			Sistem.Admini.dodaj(a);
+			System.out.println("I'm Here");
 			Sistem.Firme.dodaj(f);
+			System.out.println("I'm Here");
 			
 		}
 		catch(Exception ex){
