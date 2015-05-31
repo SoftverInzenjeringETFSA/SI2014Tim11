@@ -31,7 +31,7 @@ public class TestPlata extends TestCase {
 	
 
 	
-	
+
 
 	
 
@@ -244,15 +244,17 @@ public class TestPlata extends TestCase {
 		 z.setFaktor(1);
 		 p.setZaposlenik(z);
 		 assertEquals(301.8,p.izracunajDohodak()  ) ;
-		 assertEquals(551.62, p.izracunajNetoPlatu());
-		 
+		 assertEquals(301.62, p.izracunajNetoPlatu());
+	
+	
+			
 	 }
 	 catch(Exception e)
 	 {
 		 System.err.println(e.getMessage());
 	 }
  }
-	 
+	
 	 public void testizracunajNetoPlatu1()
 	 {
 		 try{
@@ -270,7 +272,7 @@ public class TestPlata extends TestCase {
 			 z.setFaktor(1);
 			 p.setZaposlenik(z);
 			 assertEquals(301.8,p.izracunajDohodak()  ) ;
-			 assertEquals(648.196, p.izracunajNetoPlatu());
+			 assertEquals(398.196, p.izracunajNetoPlatu());
 			 
 		 }
 		 catch(Exception e)
@@ -299,7 +301,7 @@ public class TestPlata extends TestCase {
 			 p.setZaposlenik(z);
 			 assertEquals(301.8,p.izracunajDohodak()  ) ;
 			 double roundOff = Math.round(p.izracunajNetoPlatu()    * 1000.0) / 1000.0;
-			 assertEquals(690.448, roundOff);
+			 assertEquals(482.7, roundOff);
 			 
 		 }
 		 catch(Exception e)
@@ -328,7 +330,7 @@ public class TestPlata extends TestCase {
 			 p.setZaposlenik(z);
 			 assertEquals(301.8,p.izracunajDohodak()  ) ;
 			 double roundOff = Math.round(p.izracunajNetoPlatu()    * 1000.0) / 1000.0;
-			 assertEquals(695.448, roundOff);
+			 assertEquals(561.168, roundOff);
 			 
 		 }
 		 catch(Exception e)
@@ -338,7 +340,6 @@ public class TestPlata extends TestCase {
 		 }
 		 
 	 }
- 
 
  
 }
